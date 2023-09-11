@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface-bg: #f9f9f9;
+  --lines: #e6e6e6;
+  --text-brand: #8d4000;
+  --text-secondary: #1a374d;
+  --placeholder: #9f9f9f;
+  --text-danger: #ff0000;
+  --color-brand: #8d4000;
+  --color-brand-hover: #9e5200;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@layer components {
+  .transitioning {
+    @apply transition-all duration-[400];
+  }
+
+  .rounded-brand {
+    @apply rounded-[16px];
+  }
+
+  .field-1 {
+    @apply rounded-[8px] focus:border-[#8d4000]/40 transition-colors duration-[400]  border bg-[--surface-bg] outline-none  pl-3 py-2 text-sm pr-3 placeholder:text-[--placeholder] w-full border-[--lines];
+  }
+
+  .btn-1 {
+    @apply bg-[--color-brand] transition-colors duration-[400] hover:bg-[--color-brand-hover] text-white rounded-[4px] p-2 w-full;
+  }
+}
