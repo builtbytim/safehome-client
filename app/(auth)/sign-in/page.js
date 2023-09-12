@@ -25,7 +25,7 @@ export default function Page() {
           </Link>
         </p>
 
-        <p className="text-center underline lg:no-underline hover:underline cursor-pointer text-sm text-white ">
+        <p className="text-center  lg:no-underline hover:underline cursor-pointer text-sm text-white ">
           Forgot password?
         </p>
       </div>
