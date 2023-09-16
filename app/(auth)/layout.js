@@ -5,7 +5,6 @@ import Zigzag2 from "../../assets/images/zigzag2.png";
 import UnionImage from "../../assets/images/union.png";
 import Ellipse from "../../assets/images/ellipse.png";
 import Polygon from "../../assets/images/polygon.png";
-import config from "../utils/config";
 import Pattern from "../../assets/images/pattern.png";
 
 export default function Layout({ children }) {

@@ -1,4 +1,5 @@
 import config from "../../utils/config";
+import VerifiyEmail from "../../components/forms/VerifiyEmail";
 
 export const metadata = {
   name: "Verify email",
@@ -7,16 +8,20 @@ export const metadata = {
 
 function EmailVerify() {
   return (
-    <div>
-      <h1 className="font-semibold  text-xl lg:text-2xl text-left text-[--color-brand]">
-        {" "}
-        Email Verification
-      </h1>
+    <div className="">
+      <div className="space-y-6 ">
+        <h1 className="font-semibold  text-xl lg:text-2xl text-left text-[--color-brand]">
+          {" "}
+          Email Verification
+        </h1>
 
-      <p>
-        A code has been sent to Example gmail com, kindly input the code to
-        confirm Signup.
-      </p>
+        <p className="text-[--text-secondary]">
+          A code has been sent to johdoe@gmail, kindly input the code to confirm
+          your account.
+        </p>
+      </div>
+
+      <VerifiyEmail />
     </div>
   );
 }

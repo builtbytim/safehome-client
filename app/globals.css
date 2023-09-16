@@ -11,6 +11,7 @@
   --text-danger: #ff0000;
   --color-brand: #8d4000;
   --color-brand-hover: #9e5200;
+  --b1: #f9f9f9;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,6 +20,19 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+}
+
+.dbg {
+  @apply border border-red-500;
+}
+
+.custom-number-input::-webkit-inner-spin-button,
+.custom-number-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.custom-number-input {
+  -moz-appearance: textfield;
 }
 
 @layer components {
@@ -35,6 +49,6 @@
   }
 
   .btn-1 {
-    @apply bg-[--color-brand] transition-colors duration-[400] hover:bg-[--color-brand-hover] text-white rounded-[4px] p-2 w-full;
+    @apply bg-[--color-brand] disabled:pointer-events-none disabled:opacity-60  transition-colors duration-[400] hover:bg-[--color-brand-hover] text-white rounded-[4px] p-2 w-full;
   }
 }
