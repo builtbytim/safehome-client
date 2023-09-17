@@ -46,8 +46,12 @@ function SignUp() {
   return (
     <Formik
       initialValues={{
+        firstName: "",
+        surname: "",
+        phone: "",
         email: "",
         password: "",
+        cpassword: "",
       }}
       validationSchema={yupSchema}
       onSubmit={(values, { setSubmitting }) => {
@@ -57,10 +61,10 @@ function SignUp() {
         }, 400);
       }}
     >
-      {({ errors, touched }) => (
+      {({ isValid }) => (
         <Form className="flex flex-col justify-center items-center space-y-4">
           <div>
-            <legend className="font-bold text-center lg:text-xl text-[--text-brand]">
+            <legend className="font-bold text-center text-lg lg:text-xl text-[--text-brand]">
               Create a new account
             </legend>
             <p className="text-center text-xs text-[--text-secondary] ">
@@ -254,7 +258,12 @@ function SignUp() {
               >
                 <BsArrowLeftShort className="text-[--color-brand] hover:text-[--color-brand-hover] text-2xl transitioning border rounded-full" />
               </button>
-              <button role="form" type="submit" className="btn-1 transitioning">
+              <button
+                disabled={!isValid}
+                role="form"
+                type="submit"
+                className="btn-1 "
+              >
                 Create Account
               </button>
             </div>

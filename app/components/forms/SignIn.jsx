@@ -23,10 +23,10 @@ function SignIn() {
         }, 400);
       }}
     >
-      {({ errors, touched }) => (
+      {({ isValid }) => (
         <Form className="flex flex-col justify-center items-center space-y-4">
           <div>
-            <legend className="font-bold text-center lg:text-xl text-[--text-brand]">
+            <legend className="font-bold text-center text-lg lg:text-xl text-[--text-brand]">
               Log in to your account
             </legend>
             <p className="text-center text-xs text-[--text-secondary] ">
@@ -82,7 +82,7 @@ function SignIn() {
           </div>
 
           <div className="flex flex-col justify-center items-center w-full pt-8 space-y-4 ">
-            <button type="submit" className="btn-1">
+            <button disabled={!isValid} type="submit" className="btn-1">
               Log in
             </button>
           </div>
