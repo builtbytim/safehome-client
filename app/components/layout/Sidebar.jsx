@@ -1,9 +1,12 @@
-import React from "react";
+"use client";
+
 import LogoBrand from "../../../assets/images/logo_brand.png";
 import Image from "next/image";
 import Link from "next/link";
-import { BiLogOut } from "react-icons/bi";
+import { BiLogOut, BiX } from "react-icons/bi";
 import cn from "classnames";
+import { useUiStore } from "../../utils/store";
+import Overlay from "../Overlay";
 import {
   AccountSVG,
   HomeSVG,
@@ -101,6 +104,29 @@ function Sidebar() {
         <span className="text-[--text-danger] font-medium"> Log Out </span>
       </div>
     </div>
+  );
+}
+
+export function MobileSidebar({ ...props }) {
+  const showMe = useUiStore((state) => state.showSidebar);
+  const toggleSidebar = useUiStore((state) => state.toggleSidebar);
+
+  if (!showMe) return null;
+
+  return (
+    <Overlay
+      ClickBack={() => {
+        return (
+          <div onClick={toggleSidebar}>
+            <BiX className="text-4xl text-[--invert]" />
+          </div>
+        );
+      }}
+    >
+      <aside className="bg-white   fixed z-20 left-0 inset-y-0 w-[227px] md:hidden md:w-[20%] lg:w-[20%] xl:w-[15%] self-stretch  ">
+        <Sidebar />
+      </aside>
+    </Overlay>
   );
 }
 

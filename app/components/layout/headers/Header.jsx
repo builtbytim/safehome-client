@@ -1,9 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import BellImage from "../../../../assets/images/icons/bell.svg";
-import { BiMenuAltLeft } from "react-icons/bi";
+import { BiMenuAltLeft, BiX } from "react-icons/bi";
+import { useUiStore } from "../../../utils/store";
 
 function Header() {
+  const toggleSidebar = useUiStore((state) => state.toggleSidebar);
+  const showSidebar = useUiStore((state) => state.showSidebar);
+
   return (
     <header className="w-full  ">
       <div className="w-full flex flex-row justify-between items-center ">
@@ -43,7 +49,17 @@ function Header() {
           </div>
 
           <div className="self-center p-1 ">
-            <BiMenuAltLeft className="text-[--text-secondary]   text-4xl md:hidden " />
+            {showSidebar ? (
+              <BiX
+                onClick={toggleSidebar}
+                className="text-[--text-secondary]   text-4xl md:hidden "
+              />
+            ) : (
+              <BiMenuAltLeft
+                onClick={toggleSidebar}
+                className="text-[--text-secondary]   text-4xl md:hidden "
+              />
+            )}
           </div>
         </div>
       </div>

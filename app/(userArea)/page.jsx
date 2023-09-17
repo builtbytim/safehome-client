@@ -12,10 +12,10 @@ import { PiDotsThreeOutlineVertical } from "react-icons/pi";
 
 export default function Home() {
   return (
-    <main className="space-y-10">
+    <main className=" space-y-8 lg:space-y-10">
       <OverviewCard />
 
-      <section className="bg-white rounded-brand p-4 lg:p-8 space-y-8">
+      <section className="bg-white rounded-brand p-8 lg:p-8 space-y-8">
         <div className="flex flex-row justify-between items-center">
           <div className="flex justify-start items-center space-x-16">
             <h1 className="text-[--text-secondary] capitalize text-2xl sm:text-2xl md:text-3xl lg:text-3xl  font-medium">
@@ -50,29 +50,40 @@ export default function Home() {
 
         {/* Transaction history table goes here */}
 
-        <table>
-          <thead>
-            <tr>
-              <th>Transaction ID</th>
-              <th>Transaction Type</th>
-              <th>Amount</th>
-              <th>Transaction Date</th>
-            </tr>
-          </thead>
+        <div className="overflow-auto max-h-[482px]">
+          <table className="w-full table text-[--text-secondary] font-normal ">
+            <thead className="w-full">
+              <tr className="table-row w-full ">
+                <th className=" text-left  whitespace-nowrap"> Date & Time </th>
+                <th className=" text-left  px-6 whitespace-nowrap">
+                  Transaction Type
+                </th>
+                <th className=" text-left  px-6 whitespace-nowrap">Amount</th>
+                <th className=" text-left  px-6 whitespace-nowrap">
+                  Reference{" "}
+                </th>
+              </tr>
+            </thead>
 
-          <tbody>
-            {Array(10)
-              .fill()
-              .map((_, i) => (
-                <tr key={i}>
-                  <td>1</td>
-                  <td>Deposit</td>
-                  <td>₦1,000,000</td>
-                  <td>12/12/2021</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+            <tbody>
+              {Array(10)
+                .fill()
+                .map((_, i) => (
+                  <tr key={i} className="table-row text-left">
+                    <td className="py-4  text-left">
+                      10 January 2023, 09:20:58
+                    </td>
+                    <td className="text-left px-6"> Withdraw </td>
+                    <td className="text-left px-6">₦1,000,000</td>
+                    <td className="text-left px-6">
+                      {" "}
+                      UYUUGEVUVYVTYFYU#UGEYF&*YG#YUVEYVYU{" "}
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       </section>
     </main>
   );

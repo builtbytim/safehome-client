@@ -39,7 +39,7 @@ export default function LastNTime() {
         );
       })}
       Itemizer={forwardRef(function A(
-        { _itemProps, _isOpen, _selectdItem, _highlightedIndex, ...props },
+        { _itemProps, _isOpen, _selectedItem, _highlightedIndex, ...props },
         ref
       ) {
         return (

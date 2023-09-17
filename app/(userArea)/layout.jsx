@@ -1,4 +1,4 @@
-import Sidebar from "../components/layout/Sidebar";
+import Sidebar, { MobileSidebar } from "../components/layout/Sidebar";
 import Header from "../components/layout/headers/Header";
 import config from "../utils/config";
 
@@ -13,8 +13,11 @@ export default function Layout({ children }) {
       <aside className="bg-white hidden  fixed z-20 left-0 inset-y-0 w-[227px] md:flex md:w-[20%] lg:w-[20%] xl:w-[15%] self-stretch  ">
         <Sidebar />
       </aside>
-      <section className="w-full min-h-screen pt-[20px] lg:pt-[40px] px-[20px] lg:px-[48px] bg-[--lines]">
-        <div className="space-y-16 w-full">
+
+      <MobileSidebar />
+
+      <section className="w-full min-h-screen pt-[12px] lg:pt-[40px] px-[12px] lg:px-[48px] bg-[--lines]">
+        <div className="space-y-6 lg:space-y-8 w-full">
           <Header />
           {children}
         </div>
