@@ -1,4 +1,9 @@
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import {
+  PiDotsThreeCircleVerticalThin,
+  PiDotsThreeOutlineVertical,
+} from "react-icons/pi";
+
 import Image from "next/image";
 import FundsImage from "../../../assets/images/icons/Funds.svg";
 import Savingsmage from "../../../assets/images/icons/SavingsLite.svg";
@@ -14,7 +19,11 @@ function OverviewCard() {
           Overview{" "}
         </h1>
 
-        <div className="flex justify-center items-center space-x-4">
+        <div className=" md:hidden self-center">
+          <PiDotsThreeOutlineVertical className="text-xl text-[--placeholder]" />
+        </div>
+
+        <div className="hidden self-center md:flex justify-center items-center space-x-4">
           <button className="btn-2 flex justify-center whitespace-nowrap text-sm lg:text-base space-x-2 items-center">
             <AiOutlineMinus className="" />
             <span>Withdraw</span>
@@ -27,7 +36,7 @@ function OverviewCard() {
         </div>
       </div>
       <div className="flex flex-row justify-between items-center overflow-x-auto whitespace-nowrap space-x-4 scrollbar-fix">
-        <div className="bg-[#8d4000]/10 min-w-[344px] max-w-[80%] rounded-brand p-6 flex flex-col justify-start itens-center space-y-6">
+        <div className="bg-[#8d4000]/10 min-w-[80%]  lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6">
           <div>
             <Image src={FundsImage} alt="my funds" width="48" />
           </div>
@@ -39,7 +48,7 @@ function OverviewCard() {
           </p>
         </div>
 
-        <div className="bg-[#ff6100]/10 min-w-[344px] max-w-[80%] rounded-brand p-6 flex flex-col justify-start itens-center space-y-6 ">
+        <div className="bg-[#ff6100]/10 min-w-[80%]  lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6 ">
           <div>
             <Image src={Savingsmage} alt="my funds" width="48" />
           </div>
@@ -54,7 +63,7 @@ function OverviewCard() {
           </p>
         </div>
 
-        <div className="bg-[#ff6100]/10 min-w-[344px] max-w-[80%] rounded-brand p-6 flex flex-col justify-start itens-center space-y-6">
+        <div className="bg-[#ff6100]/10 min-w-[80%]  lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6">
           <div>
             <Image src={TrendsImage} alt="my funds" width="48" />
           </div>
@@ -69,7 +78,7 @@ function OverviewCard() {
           </p>
         </div>
 
-        <div className="bg-[#ff6100]/10 min-w-[344px] max-w-[80%] rounded-brand p-6 flex flex-col justify-start itens-center space-y-6">
+        <div className="bg-[#ff6100]/10 min-w-[80%]  lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6">
           <div>
             <Image src={LoanImage} alt="my funds" width="48" />
           </div>
