@@ -1,8 +1,5 @@
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
-import {
-  PiDotsThreeCircleVerticalThin,
-  PiDotsThreeOutlineVertical,
-} from "react-icons/pi";
+import { PiDotsThreeOutlineVertical } from "react-icons/pi";
 
 import Image from "next/image";
 import FundsImage from "../../../assets/images/icons/Funds.svg";

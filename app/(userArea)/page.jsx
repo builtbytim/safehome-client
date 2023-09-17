@@ -8,6 +8,7 @@ import OverviewCard from "../components/home/OverviewCard";
 import SelectField from "../components/forms/branded/SelectField";
 import { forwardRef } from "react";
 import LastNTime from "../components/home/LastNTime";
+import { PiDotsThreeOutlineVertical } from "react-icons/pi";
 
 export default function Home() {
   return (
@@ -21,6 +22,10 @@ export default function Home() {
               Transactions
             </h1>
             <LastNTime />
+          </div>
+
+          <div className=" lg:hidden self-center">
+            <PiDotsThreeOutlineVertical className="text-xl text-[--placeholder]" />
           </div>
 
           <div className="hidden lg:flex justify-center items-center space-x-4 text-[--placeholder] font-semibold">
@@ -42,6 +47,32 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        {/* Transaction history table goes here */}
+
+        <table>
+          <thead>
+            <tr>
+              <th>Transaction ID</th>
+              <th>Transaction Type</th>
+              <th>Amount</th>
+              <th>Transaction Date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {Array(10)
+              .fill()
+              .map((_, i) => (
+                <tr key={i}>
+                  <td>1</td>
+                  <td>Deposit</td>
+                  <td>₦1,000,000</td>
+                  <td>12/12/2021</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </section>
     </main>
   );
