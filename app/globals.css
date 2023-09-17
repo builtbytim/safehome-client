@@ -5,12 +5,13 @@
 :root {
   --surface-bg: #f9f9f9;
   --lines: #e6e6e6;
-  --text-brand: #8d4000;
+  --text-brand: #ff6100;
   --text-secondary: #1a374d;
   --placeholder: #9f9f9f;
   --text-danger: #ff0000;
   --color-brand: #8d4000;
   --color-brand-hover: #9e5200;
+  --invert: #c7c7cd;
   --b1: #f9f9f9;
 }
 
@@ -26,6 +27,18 @@
   @apply border border-red-500;
 }
 
+.dbg1 {
+  @apply bg-red-500;
+}
+
+.dbg2 {
+  @apply bg-blue-500;
+}
+
+.dbg3 {
+  @apply bg-green-500;
+}
+
 .custom-number-input::-webkit-inner-spin-button,
 .custom-number-input::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -35,9 +48,32 @@
   -moz-appearance: textfield;
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  background-color: #f5f5f5;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #b8bed9;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #c7c7cd;
+}
+
+* {
+  @apply custom-scrollbar;
+}
+
+.scrollbar-fix {
+  @apply custom-scrollbar;
+}
+
 @layer components {
   .transitioning {
-    @apply transition-all duration-[400];
+    @apply transition  duration-[800];
   }
 
   .rounded-brand {
@@ -50,5 +86,9 @@
 
   .btn-1 {
     @apply bg-[--color-brand] disabled:pointer-events-none disabled:opacity-60  transition-colors duration-[400] hover:bg-[--color-brand-hover] text-white rounded-[4px] p-2 w-full;
+  }
+
+  .btn-2 {
+    @apply hover:bg-[#8d4000]/10 disabled:pointer-events-none disabled:opacity-60  transition-colors duration-[400] bg-white border border-[--color-brand] text-[--color-brand] rounded-[4px] p-2 w-full;
   }
 }

@@ -8,7 +8,6 @@ function Reviewing() {
         <Image
           src={KycSuccess}
           alt="KYC Success"
-          //   layout="responsive"
           objectFit="contain"
           width="300"
           height="300"
