@@ -10,6 +10,7 @@ const config = {
   apiPaths: {
     createUser: "/users",
     requestEmailOtp: "/users/emails/verify",
+    confirmEmailOtp: "/users/emails/confirm",
   },
 
   apiUrl: process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000/api/v1",

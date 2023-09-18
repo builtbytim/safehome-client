@@ -5,11 +5,11 @@ import * as Yup from "yup";
 import { useState } from "react";
 import cn from "classnames";
 import { BsArrowRight, BsArrowLeftShort } from "react-icons/bs";
-import LoadingBar from "../LoadingBar";
-import LocalOverlay from "../LocalOverlay";
+
 import useSignUp from "../../utils/hooks/useSignUp";
 import { useNotifyStore } from "../../utils/store";
 import { useRouter } from "next/navigation";
+import BarLoader from "../BarLoader";
 
 const yupSchema = Yup.object({
   firstName: Yup.string()
@@ -59,7 +59,7 @@ function SignUp() {
   }
 
   function onSuccess(data) {
-    router.push(`/email_verify/${data.uid}`);
+    router.push(`/email_verify/${data.email}`);
   }
 
   async function handleSubmit(values) {
@@ -99,7 +99,7 @@ function SignUp() {
     >
       {({ isValid }) => (
         <Form className="flex flex-col justify-center items-center space-y-4">
-          <Loader active={isLoading} />
+          <BarLoader active={isLoading} />
 
           <div>
             <legend className="font-bold text-center text-lg lg:text-xl text-[--text-brand]">
@@ -313,16 +313,3 @@ function SignUp() {
 }
 
 export default SignUp;
-
-function Loader({ active = false }) {
-  if (!active) return null;
-  return (
-    <>
-      <LocalOverlay className="border  rounded-brand z-10 ">
-        <div className="absolute top-0 z-10 flex flex-col justify-center items-center  inset-x-0 overflow-hidden">
-          <LoadingBar />
-        </div>
-      </LocalOverlay>
-    </>
-  );
-}

@@ -58,9 +58,11 @@ export default function Notify() {
             />
           </div>
 
-          <p className="text-white text-lg font-semibold">{title}</p>
+          <p className="text-white   uppercase">{title}</p>
 
-          <p className="text-white text-sm capitalize">{content}</p>
+          <p className="text-white  font-semibold first-letter:uppercase">
+            {content}
+          </p>
 
           <div className="mt-4 flex flex-row justify-end items-center w-full">
             {onReject && (
