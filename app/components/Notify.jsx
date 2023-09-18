@@ -7,6 +7,7 @@ import { Slide } from "react-reveal";
 import { useNotifyStore } from "../utils/store";
 
 export default function Notify() {
+  const props = useNotifyStore((state) => state.notifyState);
   const {
     content,
     title,
@@ -16,7 +17,9 @@ export default function Notify() {
     onAcceptText,
     onReject,
     onRejectText,
-  } = useNotifyStore((state) => state.notifyState);
+  } = props;
+
+  //   console.log(props);
 
   const hideMe = useNotifyStore((state) => state.hideNotify);
 
@@ -40,19 +43,13 @@ export default function Notify() {
     }
   }
 
-  console.log("SHOW:", show);
-
   if (!show) return null;
 
   return (
     <Overlay z={3}>
-      <Slide
-        top
-        className="flex w-full flex-row justify-center items-center"
-        duration={300}
-      >
+      <Slide top className="" duration={300}>
         {/* <Zoom top right duration="250" className="w-full"> */}
-        <div className="w-full bg-[--text-secondary] py-4 px-4">
+        <div className="w-full bg-[--color-brand] mt-4 py-4 px-4">
           <div className="flex flex-row justify-end items-center w-full">
             <BsX
               role="button"
@@ -63,7 +60,7 @@ export default function Notify() {
 
           <p className="text-white text-lg font-semibold">{title}</p>
 
-          <p className="text-white text-sm">{content}</p>
+          <p className="text-white text-sm capitalize">{content}</p>
 
           <div className="mt-4 flex flex-row justify-end items-center w-full">
             {onReject && (

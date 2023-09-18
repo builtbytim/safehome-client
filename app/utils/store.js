@@ -20,20 +20,18 @@ const useNotifyStore = create((set) => ({
 
   showNotify: () =>
     set((state) => ({
-      ...state.notifyState,
-      show: true,
+      notifyState: { ...state.notifyState, show: true },
     })),
 
   hideNotify: () =>
     set((state) => ({
-      ...state.notifyState,
-      show: false,
+      notifyState: { ...state.notifyState, show: false },
     })),
 
   setNotify: (obj) =>
     set((state) => ({
-      ...state.notifyState,
-      ...obj,
+        notifyState: { ...state.notifyState, ...obj },
+     
     })),
 }));
 

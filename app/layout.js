@@ -16,9 +16,10 @@ export default function RootLayout({ children }) {
   return (
     <DataClient>
       <html lang="en">
-        <body className={outfit.className}> {children}</body>
-
-        <Notify />
+        <body className={outfit.className}>
+          <Notify />
+          {children}
+        </body>
       </html>
     </DataClient>
   );

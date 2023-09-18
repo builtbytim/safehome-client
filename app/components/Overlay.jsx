@@ -1,6 +1,11 @@
 import cn from "classnames";
 
-export default function Overlay({ children, z = 1, ClickBack = null }) {
+export default function Overlay({
+  children,
+  z = 1,
+  pos = "start",
+  ClickBack = null,
+}) {
   return (
     <>
       <div
@@ -33,12 +38,15 @@ export default function Overlay({ children, z = 1, ClickBack = null }) {
 
         <div
           className={
-            "fixed  inset-y-0 mx-auto flex flex-col justify-center items-center w-[95%] lg:w-[80%] max-w-lg inset-x-0 " +
+            "fixed  inset-y-0 mx-auto flex flex-col lg:justify-center items-center w-[95%] lg:w-[80%] max-w-lg inset-x-0 " +
             cn({
               " z-20 ": z === 1,
               " z-30 ": z === 2,
               " z-40 ": z === 3,
               " z-50 ": z === 4,
+              " justify-start  ": pos === "start",
+              " justify-center  ": pos === "center",
+              " justify-end  ": pos === "end",
             })
           }
         >

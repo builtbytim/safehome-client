@@ -1,11 +1,22 @@
 "use client";
 
-import React from "react";
 import OTPField from "./branded/OTPField";
 import { useState } from "react";
 import useCountdown from "../../utils/hooks/useCountdown";
+import { fetchUtil, makeUrl } from "../../utils/fetchUtils";
+import config from "../../utils/config";
 
 const DELAY_MS = 30000;
+
+async function requestForOtp(body) {
+  const res = await fetchUtil({
+    body,
+    method: "POST",
+    url: makeUrl(config.apiPaths.requestEmailOtp),
+  });
+
+  return res;
+}
 
 function VerifyEmail() {
   const [otp, setOtp] = useState("");
@@ -22,6 +33,10 @@ function VerifyEmail() {
 
   return (
     <div className="">
+      <p className="text-[--text-secondary]">
+        A code has been sent to johdoe@gmail, kindly input the code to confirm
+        your account.
+      </p>
       <div className="py-8 lg:py-16 space-y-6">
         <h2 className="text-black text-center capitalize text-lg lg:text-xl">
           Enter 6 Digits Code{" "}

@@ -16,10 +16,12 @@ export async function fetchUtil({
   formEncoded = false,
   auth = null,
   headers = {},
+  opts = {},
 }) {
   const options = {
     credentials: "omit",
     method,
+    ...opts,
   };
 
   if (method === "POST" || method === "PUT") {

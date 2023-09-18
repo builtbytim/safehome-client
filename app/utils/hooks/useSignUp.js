@@ -45,6 +45,6 @@ async function req(params) {
     return res.data;
   } else {
     console.log(res.errorMessage, res.error);
-    throw new Error("Unable to create user, try again.");
+    throw new Error(res?.error?.detail || res.errorMessage);
   }
 }

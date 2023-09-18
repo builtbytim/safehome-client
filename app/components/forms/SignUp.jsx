@@ -8,7 +8,8 @@ import { BsArrowRight, BsArrowLeftShort } from "react-icons/bs";
 import LoadingBar from "../LoadingBar";
 import LocalOverlay from "../LocalOverlay";
 import useSignUp from "../../utils/hooks/useSignUp";
-import { useUiStore, useNotifyStore } from "../../utils/store";
+import { useNotifyStore } from "../../utils/store";
+import { useRouter } from "next/navigation";
 
 const yupSchema = Yup.object({
   firstName: Yup.string()
@@ -42,24 +43,24 @@ const yupSchema = Yup.object({
 });
 
 function SignUp() {
+  const router = useRouter();
   const [isFirstSlide, setIsFirstSlide] = useState(true);
 
   const setNotify = useNotifyStore((state) => state.setNotify);
 
+  const { mutate, isLoading, data, reset } = useSignUp(onError, onSuccess);
   function onError(err) {
     setNotify({
       show: true,
-      title: "Something went wrong",
+      title: "Unable to Sign Up",
       content: err?.message,
     });
+    reset();
   }
 
-  function onSuccess() {}
-
-  const { mutate, isLoading, data, isError, isSuccess } = useSignUp(
-    onError,
-    onSuccess
-  );
+  function onSuccess(data) {
+    router.push(`/email_verify/${data.uid}`);
+  }
 
   async function handleSubmit(values) {
     if (isLoading) return;
