@@ -1,5 +1,5 @@
 import config from "../../utils/config";
-import VerifiyEmail from "../../components/forms/VerifiyEmail";
+import VerifiyEmail from "../../components/forms/VerifyEmail";
 
 export const metadata = {
   name: "Verify email",

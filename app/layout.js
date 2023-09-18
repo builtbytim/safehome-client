@@ -1,6 +1,8 @@
 import "./globals.css";
 import { Outfit } from "next/font/google";
 import config from "./utils/config";
+import DataClient from "./utils/DataClient";
+import Notify from "./components/Notify";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -12,8 +14,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={outfit.className}> {children}</body>
-    </html>
+    <DataClient>
+      <html lang="en">
+        <body className={outfit.className}> {children}</body>
+
+        <Notify />
+      </html>
+    </DataClient>
   );
 }

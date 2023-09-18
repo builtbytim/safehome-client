@@ -7,7 +7,7 @@ import useCountdown from "../../utils/hooks/useCountdown";
 
 const DELAY_MS = 30000;
 
-function VerifiyEmail() {
+function VerifyEmail() {
   const [otp, setOtp] = useState("");
 
   const { remainingTime, setFutureTimestamp } = useCountdown(
@@ -56,4 +56,4 @@ function VerifiyEmail() {
   );
 }
 
-export default VerifiyEmail;
+export default VerifyEmail;

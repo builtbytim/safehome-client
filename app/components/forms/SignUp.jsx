@@ -5,6 +5,10 @@ import * as Yup from "yup";
 import { useState } from "react";
 import cn from "classnames";
 import { BsArrowRight, BsArrowLeftShort } from "react-icons/bs";
+import LoadingBar from "../LoadingBar";
+import LocalOverlay from "../LocalOverlay";
+import useSignUp from "../../utils/hooks/useSignUp";
+import { useUiStore, useNotifyStore } from "../../utils/store";
 
 const yupSchema = Yup.object({
   firstName: Yup.string()
@@ -25,15 +29,51 @@ const yupSchema = Yup.object({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string()
     .min(8, "Must be 8 characters or more")
+    .max(25, "Too long")
     .required("Required"),
 
   cpassword: Yup.string()
     .min(8, "Must be 8 characters or more")
-    .required("Required"),
+    .max(25, "Too long")
+    .required("Required")
+    .test("passwords-match", "Passwords must match", function (value) {
+      return this.parent.password === value;
+    }),
 });
 
 function SignUp() {
   const [isFirstSlide, setIsFirstSlide] = useState(true);
+
+  const setNotify = useNotifyStore((state) => state.setNotify);
+
+  function onError(err) {
+    setNotify({
+      show: true,
+      title: "Something went wrong",
+      content: err?.message,
+    });
+  }
+
+  function onSuccess() {}
+
+  const { mutate, isLoading, data, isError, isSuccess } = useSignUp(
+    onError,
+    onSuccess
+  );
+
+  async function handleSubmit(values) {
+    if (isLoading) return;
+
+    const body = {
+      firstName: values.firstName,
+      lastName: values.surname,
+      phone: values.phone,
+      email: values.email,
+      password: values.cpassword,
+    };
+
+    mutate(body);
+  }
 
   function toNext() {
     setIsFirstSlide(false);
@@ -54,15 +94,12 @@ function SignUp() {
         cpassword: "",
       }}
       validationSchema={yupSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
-      }}
+      onSubmit={handleSubmit}
     >
       {({ isValid }) => (
         <Form className="flex flex-col justify-center items-center space-y-4">
+          <Loader active={isLoading} />
+
           <div>
             <legend className="font-bold text-center text-lg lg:text-xl text-[--text-brand]">
               Create a new account
@@ -245,7 +282,7 @@ function SignUp() {
               >
                 <span>Next</span>
 
-                <BsArrowRight className="text-xl" />
+                <BsArrowRight className="text-xl lg:text-2xl" />
               </button>
             </div>
           ) : (
@@ -275,3 +312,16 @@ function SignUp() {
 }
 
 export default SignUp;
+
+function Loader({ active = false }) {
+  if (!active) return null;
+  return (
+    <>
+      <LocalOverlay className="border  rounded-brand z-10 ">
+        <div className="absolute top-0 z-10 flex flex-col justify-center items-center  inset-x-0 overflow-hidden">
+          <LoadingBar />
+        </div>
+      </LocalOverlay>
+    </>
+  );
+}

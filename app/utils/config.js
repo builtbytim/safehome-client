@@ -6,6 +6,12 @@ const config = {
     keywords:
       "real estate, housing, affordable housing, safehome estates, safehome",
   },
+
+  apiPaths: {
+    createUser: "/users",
+  },
+
+  apiUrl: process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000/api/v1",
 };
 
 export default config;
