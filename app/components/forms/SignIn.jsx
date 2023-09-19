@@ -12,7 +12,7 @@ function SignIn() {
   const { mutate, isLoading, data, reset } = useSignIn(onError, onSuccess);
   const router = useRouter();
 
-  function onError(err, vars, ctx) {
+  function onError(err, vars) {
     if (err.message === "VERIFY_EMAIL") {
       setNotify({
         show: true,
