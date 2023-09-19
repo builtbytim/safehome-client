@@ -11,6 +11,7 @@ const config = {
     createUser: "/users",
     requestEmailOtp: "/users/emails/verify",
     confirmEmailOtp: "/users/emails/confirm",
+    signIn: "/users/sign-in",
   },
 
   apiUrl: process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000/api/v1",

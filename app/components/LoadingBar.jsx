@@ -4,9 +4,9 @@ function LoadingBar({ v = 1 }) {
   return (
     <div
       className={
-        "w-full   bg-[#ff6100]/40   overflow-hidden relative" +
+        "w-full   bg-[#ff6100]/30   overflow-hidden absolute top-0 inset-x-0" +
         cn({
-          "  border rounded-t-[16px] h-4 ": v === 1,
+          "  border border-transparent rounded-t-[16px] h-3 ": v === 1,
           " h-2   ": v === 0,
         })
       }
@@ -15,7 +15,7 @@ function LoadingBar({ v = 1 }) {
         className={
           "h-full  bg-[--text-brand] absolute  " +
           cn({
-            "  border rounded-t-[16px] ": v === 1,
+            "  border border-transparent rounded-t-[16px] ": v === 1,
           })
         }
         style={{

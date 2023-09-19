@@ -51,7 +51,7 @@ export default function Layout({ children }) {
           <Image priority src={Logo} alt="logo" className="" />
         </div>
 
-        <div className="w-full flex flex-col justify-center items-center">
+        <div className="w-full  flex flex-col justify-start  items-center">
           {children}
         </div>
       </div>

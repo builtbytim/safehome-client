@@ -61,6 +61,7 @@ export async function fetchUtil({
         return {
           success: true,
           data: await res.json(),
+          headers: res.headers,
         };
       } else {
         const json = await res.json();
@@ -70,6 +71,7 @@ export async function fetchUtil({
           statusText: res.statusText,
           status: res.status,
           error: json,
+          headers: res.headers,
         };
       }
     } catch (err) {

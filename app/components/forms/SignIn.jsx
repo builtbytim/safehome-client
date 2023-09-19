@@ -2,8 +2,54 @@
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import BarLoader from "../BarLoader";
+import useSignIn from "../../utils/hooks/useSignIn";
+import { useNotifyStore } from "../../utils/store";
+import { useRouter } from "next/navigation";
 
 function SignIn() {
+  const setNotify = useNotifyStore((state) => state.setNotify);
+  const { mutate, isLoading, data, reset } = useSignIn(onError, onSuccess);
+  const router = useRouter();
+
+  function onError(err, vars, ctx) {
+    if (err.message === "VERIFY_EMAIL") {
+      setNotify({
+        show: true,
+        title: "Verify Email",
+        onAccept: () => {
+          router.push(`/verify-email/${vars.email}`);
+        },
+        onAcceptText: "Verify",
+
+        content: "Please verify your email address to continue",
+      });
+      return;
+    }
+
+    setNotify({
+      show: true,
+      title: "Unable to Sign In",
+      content: err?.message,
+    });
+    reset();
+  }
+
+  function onSuccess(data) {
+    router.push(`/`);
+  }
+
+  function handleSignIn(values) {
+    if (isLoading) return;
+
+    const body = {
+      email: values.email,
+      password: values.password,
+    };
+
+    mutate(body);
+  }
+
   return (
     <Formik
       initialValues={{
@@ -16,15 +62,12 @@ function SignIn() {
           .min(8, "Must be 8 characters or more")
           .required("Required"),
       })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
-      }}
+      onSubmit={handleSignIn}
     >
       {({ isValid }) => (
-        <Form className="flex flex-col justify-center items-center space-y-4">
+        <Form className="flex  flex-col border-0 justify-center items-center space-y-4">
+          <BarLoader active={isLoading} />
+
           <div>
             <legend className="font-bold text-center text-lg lg:text-xl text-[--text-brand]">
               Log in to your account
@@ -82,7 +125,11 @@ function SignIn() {
           </div>
 
           <div className="flex flex-col justify-center items-center w-full pt-8 space-y-4 ">
-            <button disabled={!isValid} type="submit" className="btn-1">
+            <button
+              disabled={!isValid || isLoading}
+              type="submit"
+              className="btn-1"
+            >
               Log in
             </button>
           </div>

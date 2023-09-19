@@ -4,7 +4,7 @@ export default function LocalOverlay({ children, depth = 1, className = "" }) {
   return (
     <div
       className={
-        "absolute w-full h-full inset-0  " +
+        "absolute w-full  inset-0 " +
         className +
         cn({
           "   backdrop-blur-sm ": depth === 1,

@@ -10,7 +10,7 @@ export const metadata = {
 export default function Page() {
   return (
     <>
-      <div className="bg-white w-[448px] max-w-[80%] lg:max-w-sm min-h-[300px] rounded-brand p-8 ">
+      <div className="bg-white w-[448px] max-w-[80%] lg:max-w-sm min-h-[300px] rounded-brand  border-0 relative p-8 ">
         <SignIn />
       </div>
 

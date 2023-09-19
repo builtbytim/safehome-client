@@ -31,7 +31,7 @@ const useNotifyStore = create((set) => ({
 
   setNotify: (obj) =>
     set((state) => ({
-      notifyState: { ...state.notifyState, ...obj },
+      notifyState: { allowClose: true, ...obj },
     })),
 }));
 
