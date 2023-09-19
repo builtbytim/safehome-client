@@ -1,17 +1,26 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import BellImage from "../../../../assets/images/icons/bell.svg";
 import { BiMenuAltLeft } from "react-icons/bi";
 
-function Header() {
+function Header({ pathname }) {
 	return (
-		<header className="w-full  ">
+		<header className="w-full">
 			<div className="w-full flex flex-row justify-between items-center ">
 				<div className="flex flex-row justify-start space-x-3">
 					<BiMenuAltLeft className="text-[--text-brand] self-center text-4xl md:hidden " />
-					<h1 className="self-center text-[--text-brand] capitalize text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold">
-						{" "}
-						Investment{" "}
+					<h1
+						className={`self-center capitalize text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold ${
+							pathname === "/investment"
+								? "text-[--text-brand]"
+								: pathname === "/account"
+								? "text-[--text-secondary]"
+								: "text-black"
+						}`}
+					>
+						{pathname.slice(1)}
 					</h1>
 				</div>
 
