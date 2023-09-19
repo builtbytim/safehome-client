@@ -6,6 +6,8 @@ import BarLoader from "../BarLoader";
 import useSignIn from "../../utils/hooks/useSignIn";
 import { useNotifyStore } from "../../utils/store";
 import { useRouter } from "next/navigation";
+import config from "../../utils/config";
+import { saveToLocalStorage } from "../../utils/security";
 
 function SignIn() {
   const setNotify = useNotifyStore((state) => state.setNotify);
@@ -36,6 +38,14 @@ function SignIn() {
   }
 
   function onSuccess(data) {
+    const tokenObj = {
+      ...data,
+
+      createdAt: Date.now(),
+    };
+
+    saveToLocalStorage(tokenObj, `${config.localStorageKey}:token`);
+
     router.push(`/`);
   }
 
@@ -43,7 +53,7 @@ function SignIn() {
     if (isLoading) return;
 
     const body = {
-      email: values.email,
+      username: values.email,
       password: values.password,
     };
 

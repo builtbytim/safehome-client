@@ -12,7 +12,7 @@ export const metadata = {
   themeColor: "#8d4000",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
   return (
     <DataClient>
       <html lang="en">

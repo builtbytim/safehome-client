@@ -5,7 +5,7 @@ import config from "../config";
 
 export default function useRequestOtp(onError = null, onSuccess = null) {
   const { mutate, isError, data, isSuccess, reset, isLoading } = useMutation({
-    mutationKey: [queryKeys.signUp],
+    mutationKey: [queryKeys.requestEmailOtp],
 
     mutationFn: req,
 

@@ -5,12 +5,11 @@ import Image from "next/image";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { FaRegCalendar } from "react-icons/fa";
 import OverviewCard from "../components/home/OverviewCard";
-import SelectField from "../components/forms/branded/SelectField";
-import { forwardRef } from "react";
 import LastNTime from "../components/home/LastNTime";
 import { PiDotsThreeOutlineVertical } from "react-icons/pi";
+import SecureRoute from "../components/SecureRoute";
 
-export default function Home() {
+function Page(props) {
   return (
     <main className=" space-y-8 lg:space-y-10">
       <OverviewCard />
@@ -87,4 +86,8 @@ export default function Home() {
       </section>
     </main>
   );
+}
+
+export default function ProtectedPage(props) {
+  return <SecureRoute offspring={Page} {...props} />;
 }

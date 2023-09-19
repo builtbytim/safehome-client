@@ -36,6 +36,7 @@ export async function fetchUtil({
     } else {
       options.body = JSON.stringify(body);
       options.headers = {
+        ...options.headers,
         "Content-Type": "application/json",
       };
     }

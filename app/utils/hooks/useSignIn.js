@@ -5,7 +5,7 @@ import config from "../config";
 
 export default function useSignIn(onError = null, onSuccess = null) {
   const { mutate, isError, data, isSuccess, reset, isLoading } = useMutation({
-    mutationKey: [queryKeys.signUp],
+    mutationKey: [queryKeys.signIn],
 
     mutationFn: req,
 
@@ -37,6 +37,7 @@ async function req(params) {
     url: makeUrl(config.apiPaths.signIn),
     method: "POST",
     body: params,
+    formEncoded: true,
   });
 
   // console.log(params);
@@ -44,6 +45,7 @@ async function req(params) {
   if (res.success) {
     return res.data;
   } else {
+    console.log(res.errorMessage, res.error);
     const ACTION = res.headers.get("X-ACTION") || "";
 
     throw new Error(ACTION || res.error?.detail || res.errorMessage);
