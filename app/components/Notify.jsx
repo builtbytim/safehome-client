@@ -17,6 +17,7 @@ export default function Notify() {
     onAcceptText,
     onReject,
     onRejectText,
+    allowClose,
   } = props;
 
   //   console.log(props);
@@ -50,14 +51,15 @@ export default function Notify() {
       <Slide top className="" duration={300}>
         {/* <Zoom top right duration="250" className="w-full"> */}
         <div className="w-full bg-[--color-brand] mt-4 py-4 px-4">
-          <div className="flex flex-row justify-end items-center w-full">
-            <BsX
-              role="button"
-              className="text-3xl text-white hover:text-white/80 transition-flow"
-              onClick={closeSelf}
-            />
-          </div>
-
+          {allowClose && (
+            <div className="flex flex-row justify-end items-center w-full">
+              <BsX
+                role="button"
+                className="text-3xl text-white hover:text-white/80 transition-flow"
+                onClick={closeSelf}
+              />
+            </div>
+          )}
           <p className="text-white   uppercase">{title}</p>
 
           <p className="text-white  font-semibold first-letter:uppercase">

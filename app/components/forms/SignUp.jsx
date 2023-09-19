@@ -59,7 +59,7 @@ function SignUp() {
   }
 
   function onSuccess(data) {
-    router.push(`/email_verify/${data.email}`);
+    router.push(`/verify-email/${data.email}`);
   }
 
   async function handleSubmit(values) {

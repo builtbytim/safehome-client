@@ -1,13 +1,15 @@
 "use client";
 
 import OTPField from "./branded/OTPField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useCountdown from "../../utils/hooks/useCountdown";
 import BarLoader from "../BarLoader";
 import useRequestOtp from "../../utils/hooks/useRequestOtp";
 import useConfirmOtp from "../../utils/hooks/useConfirmOtp";
 import { useNotifyStore } from "../../utils/store";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { decodeFromBase64 } from "../../utils/security";
+import cn from "classnames";
 
 const DELAY_MS = 30000;
 
@@ -16,10 +18,38 @@ function VerifyEmail({ email }) {
   const [codeSent, setCodeSent] = useState(false);
   const [resendCount, setResendCount] = useState(0);
   const router = useRouter();
+  const params = useSearchParams();
 
   const { remainingTime, setFutureTimestamp } = useCountdown(Date.now());
 
   const setNotify = useNotifyStore((state) => state.setNotify);
+
+  useEffect(() => {
+    if (params.get("uid") && params.get("token")) {
+      const uid = params.get("uid");
+      const token = decodeFromBase64(params.get("token"));
+
+      console.log({ uid, token });
+
+      if (uid && token) {
+        setOtp(token);
+        setCodeSent(true);
+
+        confirmOtpReq({
+          channel: "EMAIL",
+          token,
+          foreignKey: email,
+          uid,
+        });
+
+        return;
+      }
+    } else {
+      if (email) {
+        mutate({ email, channel: "EMAIL" });
+      }
+    }
+  }, []);
 
   function onError(err) {
     setNotify({
@@ -53,7 +83,7 @@ function VerifyEmail({ email }) {
       title: "OTP Confirmed",
       content:
         "Your account has been successfully verified. Proceed to sign in.",
-      acceptText: "Continue",
+      onAcceptText: "Continue",
       allowClose: false,
       onAccept: () => {
         router.replace("/sign-in");
@@ -74,6 +104,8 @@ function VerifyEmail({ email }) {
     if (disableResend) return;
 
     if (isLoading) return;
+
+    setOtp("");
     mutate({ email, channel: "EMAIL" });
   }
 
@@ -89,7 +121,7 @@ function VerifyEmail({ email }) {
       channel: "EMAIL",
       token: otp,
       foreignKey: email,
-      uid: data.uid,
+      uid: data?.uid || params.get("uid"),
     });
   }
 
@@ -101,7 +133,22 @@ function VerifyEmail({ email }) {
         A code will be sent to {email}, kindly input the code to confirm your
         account.
       </p>
-      <div className="py-8 lg:py-16 space-y-6">
+
+      {/* Code Sent Notification  */}
+
+      <p
+        className={
+          "text-[--color-brand] pt-2 text-sm " +
+          cn({
+            " visible ": codeSent,
+            " invisible ": !codeSent,
+          })
+        }
+      >
+        Code sent to {email}. Please check your inbox.
+      </p>
+
+      <div className="py-8 lg:py-12 space-y-6">
         <h2 className="text-black text-center capitalize text-lg lg:text-xl">
           Enter 6 Digits Code{" "}
         </h2>

@@ -13,6 +13,7 @@ const useNotifyStore = create((set) => ({
     title: "Hello!",
     working: false,
     onAccept: null,
+    allowClose: true,
     onAcceptText: "Ok",
     onReject: null,
     onRejectText: "Close",
@@ -30,8 +31,7 @@ const useNotifyStore = create((set) => ({
 
   setNotify: (obj) =>
     set((state) => ({
-        notifyState: { ...state.notifyState, ...obj },
-     
+      notifyState: { ...state.notifyState, ...obj },
     })),
 }));
 
