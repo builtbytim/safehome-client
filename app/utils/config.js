@@ -15,6 +15,7 @@ const config = {
     signIn: "/users/sign-in",
     uploadKycPicture: "/users/kyc/picture",
     uploadKycID: "/users/kyc/id",
+    signOut: "/users/sign-out",
   },
 
   redirectSearchParam: "redirect",

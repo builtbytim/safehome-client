@@ -10,7 +10,7 @@ import Header from "../components/layout/headers/Header";
 
 function Page({ authenticatedUser }) {
   return (
-    <div className="space-y-6 lg:space-y-8 w-full min-h-screen">
+    <div className="space-y-6  lg:space-y-8 w-full min-h-screen">
       <Header user={authenticatedUser} />
 
       <main className=" space-y-8 lg:space-y-10">
@@ -19,7 +19,7 @@ function Page({ authenticatedUser }) {
         <section className="bg-white rounded-brand p-8 lg:p-8 space-y-8">
           <div className="flex flex-row justify-between items-center">
             <div className="flex justify-start items-center space-x-16">
-              <h1 className="text-[--text-secondary] capitalize text-2xl sm:text-2xl md:text-3xl lg:text-3xl  font-medium">
+              <h1 className="text-[--text-secondary] capitalize text-xl sm:text-2xl md:text-3xl lg:text-3xl  font-medium">
                 Transactions
               </h1>
               <LastNTime />
@@ -73,7 +73,7 @@ function Page({ authenticatedUser }) {
                 {Array(10)
                   .fill()
                   .map((_, i) => (
-                    <tr key={i} className="table-row text-left">
+                    <tr key={i} className="table-row text-left text-sm">
                       <td className="py-4  text-left">
                         10 January 2023, 09:20:58
                       </td>

@@ -15,7 +15,7 @@ export default function Layout({ children }) {
 
       <MobileSidebar />
 
-      <section className="w-full min-h-screen pt-[12px] lg:pt-[40px] px-[12px] lg:px-[48px] bg-[--lines] ">
+      <section className="w-full min-h-screen pt-[24px] lg:pt-[40px] px-[12px] lg:px-[48px] bg-[--lines] ">
         <div className="">{children}</div>
       </section>
     </main>

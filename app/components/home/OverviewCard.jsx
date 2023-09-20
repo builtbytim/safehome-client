@@ -11,7 +11,7 @@ function OverviewCard() {
   return (
     <section className="bg-white rounded-brand p-4 lg:p-8 space-y-8">
       <div className="flex flex-row justify-between items-center">
-        <h1 className="text-[--text-secondary] capitalize text-2xl sm:text-2xl md:text-3xl lg:text-3xl  font-medium">
+        <h1 className="text-[--text-secondary] capitalize text-xl sm:text-2xl md:text-3xl lg:text-3xl  font-medium">
           {" "}
           Overview{" "}
         </h1>
@@ -32,7 +32,7 @@ function OverviewCard() {
           </button>
         </div>
       </div>
-      <div className="flex flex-row justify-between items-center overflow-x-auto whitespace-nowrap space-x-4 scrollbar-fix">
+      <div className="flex flex-row justify-between items-center overflow-x-auto whitespace-nowrap space-x-4 scrollbar-fix text-sm lg:text-lg">
         <div className="bg-[#8d4000]/10 min-w-[80%]  lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6">
           <div>
             <Image src={FundsImage} alt="my funds" width="48" />
@@ -41,7 +41,7 @@ function OverviewCard() {
           <h2 className=" text-[--text-secondary] font-medium"> My Funds </h2>
 
           <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
-            ₦1,000,000,000
+            ₦0
           </p>
         </div>
 
@@ -56,7 +56,7 @@ function OverviewCard() {
           </h2>
 
           <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
-            ₦2,200,000,000
+            ₦0
           </p>
         </div>
 
@@ -71,7 +71,7 @@ function OverviewCard() {
           </h2>
 
           <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
-            ₦2,200,500,000
+            ₦0
           </p>
         </div>
 
@@ -83,7 +83,7 @@ function OverviewCard() {
           <h2 className=" text-[--text-secondary] font-medium"> Total Loan</h2>
 
           <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
-            ₦5,000,500,000
+            ₦0
           </p>
         </div>
       </div>

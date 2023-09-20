@@ -4,10 +4,22 @@ import useRemoteSession from "../utils/hooks/useRemoteSession";
 import PageLoader from "./layout/PageLoader";
 import config from "../utils/config";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { retreiveFromLocalStorage } from "../utils/security";
+import { retreiveFromLocalStorage, clearLocalStorage } from "../utils/security";
+import { useEffect, useState } from "react";
 
 export default function SecureRoute(props) {
   const tokenObj = retreiveFromLocalStorage(`${config.localStorageKey}:token`);
+  const [proceed, setProceed] = useState(false);
+
+  useEffect(() => {
+    if (proceed) {
+      return;
+    }
+
+    if (window && window.location) {
+      setProceed(true);
+    }
+  }, [proceed]);
 
   const { offspring: SecureChild, autoLogin = true, ...remProps } = props;
   const {
@@ -25,7 +37,7 @@ export default function SecureRoute(props) {
 
   let targetUrl = searchParams.get(config.redirectSearchParam);
 
-  if (authenticating) {
+  if (authenticating || !proceed) {
     // console.log("Authenticating...");
     return <PageLoader />;
   }
@@ -43,10 +55,10 @@ export default function SecureRoute(props) {
 
         const destinationUrl = new URL(
           targetUrl || config.authenticatedHome,
-          location.origin
+          window.location.origin
         );
 
-        setLocation(destinationUrl.href, { replace: true });
+        router.replace(destinationUrl.href);
       }
     }
 
@@ -56,6 +68,10 @@ export default function SecureRoute(props) {
         authenticatedSession={authenticatedSession}
         authenticatedUser={authenticatedUser}
         authenticationToken={authenticationToken}
+        signOut={() => {
+          clearLocalStorage(`${config.localStorageKey}:token`);
+          router.replace(config.loginUrl);
+        }}
       />
     );
   }
@@ -70,13 +86,13 @@ export default function SecureRoute(props) {
 
     // * if the page is not  the log in page,  redirect
 
-    const redirectUrl = new URL(currentPathname, location.origin);
+    const redirectUrl = new URL(currentPathname, window.location.origin);
 
     // for (let name of searchParams.keys()) {
     //   redirectUrl.searchParams.append(name, searchParams.get(name));
     // }
 
-    const newUrl = new URL(config.loginUrl, location.origin);
+    const newUrl = new URL(config.loginUrl, window.location.origin);
 
     newUrl.searchParams.append("t", 3);
     newUrl.searchParams.append(

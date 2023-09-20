@@ -101,10 +101,13 @@ function Sidebar() {
           );
         })}
       </ul>
-      <div className="absolute left-0  px-6 py-2 bottom-[5vh] flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
-        <BiLogOut className="text-2xl text-[--text-danger]" />
-        <span className="text-[--text-danger] font-medium"> Log Out </span>
-      </div>
+
+      <Link href="/sign-out" as="/sign-out">
+        <div className="absolute left-0  px-6 py-2 bottom-[5vh] flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
+          <BiLogOut className="text-2xl text-[--text-danger]" />
+          <span className="text-[--text-danger] font-medium"> Log Out </span>
+        </div>
+      </Link>
     </div>
   );
 }

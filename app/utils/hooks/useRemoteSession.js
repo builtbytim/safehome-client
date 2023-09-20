@@ -12,7 +12,9 @@ export default function useRemoteSession(
 ) {
   const { isError, data, isSuccess, isLoading } = useQuery({
     queryKey: [queryKeys.getSession, tokenObj],
-    disable: !!!tokenObj,
+
+    enabled: !!tokenObj,
+
     queryFn: req,
 
     onSuccess(data) {
@@ -37,7 +39,7 @@ export default function useRemoteSession(
     authenticated: isSuccess,
     authenticatedUser: data?.user,
     authenticatedSession: data?.session,
-    authenticationFailed: isError,
+    authenticationFailed: isError || !!!tokenObj,
     authenticationToken: tokenObj,
   };
 }
