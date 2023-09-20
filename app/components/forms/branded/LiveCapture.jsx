@@ -56,8 +56,8 @@ export function CaptureView({ photo, reset }) {
       </div>
 
       <Image
-        height="64"
-        width="64"
+        height="200"
+        width="200"
         src={photo}
         alt="capture image"
         className="rounded-brand"

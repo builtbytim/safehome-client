@@ -16,7 +16,9 @@ function Header({ user }) {
         <div className="flex flex-row justify-center items-center  space-x-4 md:space-x-8">
           <div className="self-center">
             <Image
-              src="https://i.pravatar.cc/150?u=helios@g.com"
+              src={
+                user.avatarUrl || `https://i.pravatar.cc/150?u=${user.email}`
+              }
               width="52"
               height="52"
               alt="Avatar"
