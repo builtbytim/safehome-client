@@ -1,12 +1,9 @@
-import config from "../../../utils/config";
+"use client";
+
 import KYCImageUpload from "../../../components/forms/KYCImageUpload";
+import SecureRoute from "../../../components/SecureRoute";
 
-export const metadata = {
-  name: "Upload image",
-  description: config.app.description,
-};
-
-function ImageUpload() {
+function ImageUpload({ authenticatedUser, authenticationToken }) {
   return (
     <div className="">
       <div className="space-y-6 ">
@@ -24,10 +21,12 @@ function ImageUpload() {
           Make sure it is clear. Supported format JPG, PNG, PDF.
         </p>
 
-        <KYCImageUpload />
+        <KYCImageUpload user={authenticatedUser} token={authenticationToken} />
       </div>
     </div>
   );
 }
 
-export default ImageUpload;
+export default function ProtectedPage(props) {
+  return <SecureRoute offspring={ImageUpload} {...props} />;
+}

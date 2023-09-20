@@ -13,6 +13,8 @@ const config = {
     confirmEmailOtp: "/users/emails/confirm",
     getSession: "/users/session",
     signIn: "/users/sign-in",
+    uploadKycPicture: "/users/kyc/picture",
+    uploadKycID: "/users/kyc/id",
   },
 
   redirectSearchParam: "redirect",

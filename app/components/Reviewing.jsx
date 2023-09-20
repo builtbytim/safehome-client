@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function Reviewing() {
   return (
-    <section className="fixed inset-y-0 inset-x-0 bg-gradient-to-b from-[#8D4000]  to-[#1E0700] flex flex-col justify-center items-center  w-full min-h-screen space-y-16">
+    <section className="fixed inset-y-0 inset-x-0 bg-gradient-to-b from-[#8D4000]  to-[#1E0700] flex flex-col justify-center items-center  w-full min-h-screen space-y-16 z-20">
       <div>
         <Image
           src={KycSuccess}

@@ -14,6 +14,7 @@ export default function BarLoader({ active = false, v = 1 }) {
           "   z-10 " +
           cn({
             " border-0 rounded-brand ": v === 1,
+
             " hidden  ": !active,
             " block ": active,
           })

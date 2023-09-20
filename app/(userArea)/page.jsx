@@ -36,12 +36,12 @@ function Page({ authenticatedUser }) {
               </button>
 
               <div className="flex px-1 py-1  justify-center whitespace-nowrap text-sm lg:text-base space-x-2 items-center rounded border">
-                <button className="px-4 py-1 flex justify-center whitespace-nowrap text-sm lg:text-base space-x-2 items-center rounded border">
+                <button className="px-4 py-1 flex justify-center whitespace-nowrap text-sm lg:text-base space-x-2 items-center ">
                   <FaRegCalendar className=" self-center" />
                   <span className="self-center"> From DD/MM/YYYY </span>
                 </button>
 
-                <button className="px-4 py-1 flex justify-center whitespace-nowrap text-sm lg:text-base space-x-2 items-center rounded border">
+                <button className="px-4 py-1 flex justify-center whitespace-nowrap text-sm lg:text-base space-x-2 items-center ">
                   <FaRegCalendar className=" self-center" />
                   <span className="self-center"> To DD/MM/YYYY </span>
                 </button>

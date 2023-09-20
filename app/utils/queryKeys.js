@@ -5,6 +5,8 @@ const queryKeys = {
   signIn: "signIn",
   getSession: "getSession",
   signOut: "signOut",
+  kycIDPicture: "kycIDPicture",
+  kycPicture: "kycPicture",
 };
 
 export default queryKeys;

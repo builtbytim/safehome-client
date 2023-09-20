@@ -1,14 +1,10 @@
-import config from "../../../utils/config";
+"use client";
 import VisualCapture from "../../../components/forms/branded/VisualCapture";
+import SecureRoute from "../../../components/SecureRoute";
 
-export const metadata = {
-  name: "Visual verification",
-  description: config.app.description,
-};
-
-function Page() {
+function Page({ authenticatedUser, authenticationToken }) {
   return (
-    <div className="relative space-y-6 min-h-[500px] flex flex-col justify-start  items-center">
+    <div className=" space-y-6 min-h-[500px] flex flex-col justify-start  items-center">
       <div className="space-y-6 ">
         <h1 className="font-semibold  text-xl lg:text-2xl text-left text-[--color-brand]">
           {" "}
@@ -21,9 +17,11 @@ function Page() {
         </p>
       </div>
 
-      <VisualCapture />
+      <VisualCapture user={authenticatedUser} token={authenticationToken} />
     </div>
   );
 }
 
-export default Page;
+export default function ProtectedPage(props) {
+  return <SecureRoute offspring={Page} {...props} />;
+}

@@ -45,7 +45,9 @@ export async function fetchUtil({
   if (auth) {
     options.headers = {
       ...options.headers,
-      Authorization: `${auth.tokenType} ${auth.accessToken}`,
+      Authorization: `${auth.tokenType || auth.token_type} ${
+        auth.accessToken || auth.access_token
+      }`,
     };
   }
 

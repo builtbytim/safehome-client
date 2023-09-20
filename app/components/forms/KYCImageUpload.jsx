@@ -6,13 +6,52 @@ import { useCallback, useState } from "react";
 import Image from "next/image";
 import cn from "classnames";
 import { BsX } from "react-icons/bs";
+import BarLoader from "../BarLoader";
+import { useMutation } from "react-query";
+import { fetchUtil, makeUrl } from "../../utils/fetchUtils";
+import config from "../../utils/config";
+import queryKeys from "../../utils/queryKeys";
+import { useNotifyStore } from "../../utils/store";
+import Reviewing from "../Reviewing";
 
-function KYCImageUpload() {
+function KYCImageUpload({ user, token }) {
+  const setNotify = useNotifyStore((state) => state.setNotify);
   const [imageFile, setImageFile] = useState(null);
+  const [rawFile, setRawFile] = useState(null);
+  const { mutate, isLoading, isSuccess } = useMutation({
+    mutationKey: [queryKeys.kycIDPicture],
+
+    mutationFn: async function (body) {
+      const url = makeUrl(config.apiPaths.uploadKycID);
+      const res = await fetchUtil({
+        method: "POST",
+        formEncoded: true,
+        url,
+        body,
+        auth: token,
+      });
+
+      if (res.success) {
+        return res.data;
+      } else {
+        console.log(res.errorMessage, res.error);
+        throw new Error(res?.error?.detail || res.errorMessage);
+      }
+    },
+
+    onError: function (error) {
+      setNotify({
+        title: "Something went wrong",
+        content: error.message,
+        allowClose: true,
+        show: true,
+      });
+    },
+  });
 
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
-
+    setRawFile(file);
     setImageFile(URL.createObjectURL(file));
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -21,20 +60,35 @@ function KYCImageUpload() {
       "image/png": [".png"],
       "image/jpg": [".jpeg", ".jpg"],
     },
-
     maxFiles: 2,
     maxSize: 1024 * 1024 * 2,
   });
 
+  function handleSubmit() {
+    if (isLoading) return;
+
+    mutate({
+      file: rawFile,
+      documentType: "PASSPORT",
+    });
+  }
+
   return (
     <div className="space-y-10 flex flex-col justify-center items-center">
+      <BarLoader v={0} active={isLoading} />
+
+      {isSuccess && <Reviewing />}
+
       {!!imageFile && (
         <div
           className="bg-[--b1] relative w-full lg:w-[54
         3px] rounded-brand p-4 flex flex-col justify-center items-center"
         >
           <div
-            onClick={() => setImageFile(null)}
+            onClick={() => {
+              setRawFile(null);
+              setImageFile(null);
+            }}
             title="Remove"
             className="absolute right-0 bottom-0 p-2 hover:cursor-pointer  rounded-br rounded-tl opacity-60 hover:opacity-80 transitioning "
           >
@@ -69,7 +123,13 @@ function KYCImageUpload() {
         )}
       </div>
 
-      <button className="btn-1 max-w-[368px]">Continue</button>
+      <button
+        disabled={isLoading || !!!rawFile}
+        className="btn-1 max-w-[368px]"
+        onClick={handleSubmit}
+      >
+        Continue
+      </button>
     </div>
   );
 }
