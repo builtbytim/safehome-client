@@ -1,13 +1,18 @@
 import { BsX } from "react-icons/bs";
+import { useRouter } from "next/router";
 
 export default function Layout({ children }) {
+  const router = useRouter();
   return (
     <main className="relative bg-white flex flex-col justify-start items-center  w-full min-h-screen py-16 ">
       {/* Children goes here  */}
 
       <div className=" w-[607px]  max-w-[90%] lg:max-w-2xl shadow px-4 lg:px-8 py-4 lg:py-8 border rounded-brand border-[--lines] space-y-4 lg:space-y-8">
         <div className="flex flex-col justify-center items-end">
-          <BsX className="text-3xl transitioning hover:scale-[1.1] text-[#8D4000] cursor-pointer" />
+          <BsX
+            onClick={() => router.back()}
+            className="text-3xl transitioning hover:scale-[1.1] text-[#8D4000] cursor-pointer"
+          />
         </div>
 
         <div className="w-full  flex flex-col justify-center items-center">

@@ -6,7 +6,7 @@ import BellImage from "../../../../assets/images/icons/bell.svg";
 import { BiMenuAltLeft, BiX } from "react-icons/bi";
 import { useUiStore } from "../../../utils/store";
 
-function Header() {
+function Header({ user }) {
   const toggleSidebar = useUiStore((state) => state.toggleSidebar);
   const showSidebar = useUiStore((state) => state.showSidebar);
 
@@ -26,7 +26,8 @@ function Header() {
 
           <div className="self-center">
             <h1 className="self-center text-[--text-secondary] capitalize text-xl sm:text-2xl md:text-3xl lg:text-4xl  font-semibold">
-              <span className="font-normal">Hello</span> Adewale!
+              <span className="font-normal">Hello</span> {user.firstName}
+              {"!"}
             </h1>
 
             <span className="text-sm text-[--text-secondary]">

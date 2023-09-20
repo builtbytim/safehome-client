@@ -1,5 +1,4 @@
 import Sidebar, { MobileSidebar } from "../components/layout/Sidebar";
-import Header from "../components/layout/headers/Header";
 import config from "../utils/config";
 
 export const metadata = {
@@ -16,11 +15,8 @@ export default function Layout({ children }) {
 
       <MobileSidebar />
 
-      <section className="w-full min-h-screen pt-[12px] lg:pt-[40px] px-[12px] lg:px-[48px] bg-[--lines]">
-        <div className="space-y-6 lg:space-y-8 w-full">
-          <Header />
-          {children}
-        </div>
+      <section className="w-full min-h-screen pt-[12px] lg:pt-[40px] px-[12px] lg:px-[48px] bg-[--lines] ">
+        <div className="">{children}</div>
       </section>
     </main>
   );

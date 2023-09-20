@@ -3,7 +3,7 @@
 import useRemoteSession from "../utils/hooks/useRemoteSession";
 import PageLoader from "./layout/PageLoader";
 import config from "../utils/config";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { retreiveFromLocalStorage } from "../utils/security";
 
 export default function SecureRoute(props) {
@@ -21,7 +21,7 @@ export default function SecureRoute(props) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const currentPathname = location.pathname;
+  const currentPathname = usePathname();
 
   let targetUrl = searchParams.get(config.redirectSearchParam);
 

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { BiLogOut, BiX } from "react-icons/bi";
 import cn from "classnames";
 import { useUiStore } from "../../utils/store";
+import { usePathname } from "next/navigation";
 import Overlay from "../Overlay";
 import {
   AccountSVG,
@@ -45,6 +46,7 @@ const items = [
 ];
 
 function Sidebar() {
+  const currentPathname = usePathname();
   return (
     <div className="flex relative flex-col justify-start border-r  border-[--lines] items-center  border-b-[5vh] border-b-[--color-brand] w-full z-20 pt-[48px] pb-8 space-y-16 shadow h-full">
       <div>
@@ -63,9 +65,9 @@ function Sidebar() {
                       "flex flex-row justify-start items-center py-2 px-4 rounded-[8px] border border-white/0 group space-x-4 transitioning" +
                       cn({
                         " hover:bg-[--b1] hover:border-[--lines] cursor-pointer ":
-                          "/" !== item.link,
+                          currentPathname !== item.link,
                         " bg-[--color-brand] cursor-default ":
-                          "/" === item.link,
+                          currentPathname === item.link,
                       })
                     }
                   >
@@ -73,8 +75,8 @@ function Sidebar() {
                       <div className="text-xl">
                         <Icon
                           fill={cn({
-                            "#FFFFFF": "/" === item.link,
-                            "#c7c7cd": "/" !== item.link,
+                            "#FFFFFF": currentPathname === item.link,
+                            "#c7c7cd": currentPathname !== item.link,
                           })}
                         />
                       </div>
@@ -85,7 +87,7 @@ function Sidebar() {
                         className={
                           "text-[--invert] transitioning  text-base " +
                           cn({
-                            " text-white ": "/" === item.link,
+                            " text-white ": currentPathname === item.link,
                           })
                         }
                       >

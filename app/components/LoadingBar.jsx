@@ -4,10 +4,11 @@ function LoadingBar({ v = 1 }) {
   return (
     <div
       className={
-        "w-full   bg-[#ff6100]/30   overflow-hidden absolute top-0 inset-x-0" +
+        "w-full      overflow-hidden absolute top-0 inset-x-0" +
         cn({
-          "  border border-transparent rounded-t-[16px] h-3 ": v === 1,
-          " h-2   ": v === 0,
+          "  border border-transparent rounded-t-[16px] h-3  bg-[#ff6100]/30 ":
+            v === 1,
+          " h-2   bg-[#ff6100]/20 ": v === 0,
         })
       }
     >
@@ -19,7 +20,7 @@ function LoadingBar({ v = 1 }) {
           })
         }
         style={{
-          animation: "slideLeft 0.8s linear infinite",
+          animation: "slideLeft 0.9s linear infinite",
           width: "100%",
         }}
       ></div>

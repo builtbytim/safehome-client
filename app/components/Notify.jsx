@@ -60,9 +60,9 @@ export default function Notify() {
               />
             </div>
           )}
-          <p className="text-white text-lg   capitalize">{title}</p>
+          <p className="text-white text-base    capitalize">{title}</p>
 
-          <p className="text-white  font-semibold first-letter:uppercase">
+          <p className="text-white  text-sm first-letter:uppercase">
             {content}
           </p>
 
