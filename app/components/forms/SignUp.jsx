@@ -6,6 +6,7 @@ import { useState } from "react";
 import cn from "classnames";
 import { BsArrowRight, BsArrowLeftShort } from "react-icons/bs";
 import { parsePhoneNumber } from "awesome-phonenumber";
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 
 import useSignUp from "../../utils/hooks/useSignUp";
 import { useNotifyStore } from "../../utils/store";
@@ -49,6 +50,12 @@ function SignUp() {
   const [isFirstSlide, setIsFirstSlide] = useState(true);
 
   const setNotify = useNotifyStore((state) => state.setNotify);
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  function toggleShowPassword() {
+    setShowPassword(!showPassword);
+  }
 
   const { mutate, isLoading, reset } = useSignUp(onError, onSuccess);
   function onError(err) {
@@ -237,13 +244,25 @@ function SignUp() {
                     Password
                   </label>
 
-                  <Field
-                    name="password"
-                    type="password"
-                    className="field-1"
-                    placeholder="Password"
-                  />
+                  <div className="relative w-full">
+                    <Field
+                      name="password"
+                      type={showPassword ? "text" : "password"}
+                      className="field-1"
+                      placeholder="Password"
+                    />
 
+                    <div
+                      className="absolute top-[50%] -translate-y-[50%] right-[5%] text-[--text-secondary] text-xs text-right cursor-pointer"
+                      onClick={toggleShowPassword}
+                    >
+                      {showPassword ? (
+                        <AiOutlineEyeInvisible />
+                      ) : (
+                        <AiOutlineEye />
+                      )}
+                    </div>
+                  </div>
                   <ErrorMessage
                     name="password"
                     component="div"
@@ -258,13 +277,25 @@ function SignUp() {
                     Confirm Password
                   </label>
 
-                  <Field
-                    name="cpassword"
-                    type="password"
-                    className="field-1"
-                    placeholder="Confirm Password"
-                  />
+                  <div className="relative w-full">
+                    <Field
+                      name="cpassword"
+                      type={showPassword ? "text" : "password"}
+                      className="field-1"
+                      placeholder="Confirm Password"
+                    />
 
+                    <div
+                      className="absolute top-[50%] -translate-y-[50%] right-[5%] text-[--text-secondary] text-xs text-right cursor-pointer"
+                      onClick={toggleShowPassword}
+                    >
+                      {showPassword ? (
+                        <AiOutlineEyeInvisible />
+                      ) : (
+                        <AiOutlineEye />
+                      )}
+                    </div>
+                  </div>
                   <ErrorMessage
                     name="cpassword"
                     component="div"

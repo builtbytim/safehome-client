@@ -8,10 +8,18 @@ import { useNotifyStore } from "../../utils/store";
 import { useRouter } from "next/navigation";
 import config from "../../utils/config";
 import { saveToLocalStorage } from "../../utils/security";
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import { useState } from "react";
 
 function SignIn() {
   const setNotify = useNotifyStore((state) => state.setNotify);
   const { mutate, isLoading, data, reset } = useSignIn(onError, onSuccess);
+  const [showPassword, setShowPassword] = useState(false);
+
+  function toggleShowPassword() {
+    setShowPassword(!showPassword);
+  }
+
   const router = useRouter();
 
   function onError(err, vars) {
@@ -119,12 +127,21 @@ function SignIn() {
                 Password
               </label>
 
-              <Field
-                name="password"
-                type="password"
-                className="field-1"
-                placeholder="Password"
-              />
+              <div className="relative w-full">
+                <Field
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  className="field-1"
+                  placeholder="Password"
+                />
+
+                <div
+                  className="absolute top-[50%] -translate-y-[50%] right-[5%] text-[--text-secondary] text-xs text-right cursor-pointer"
+                  onClick={toggleShowPassword}
+                >
+                  {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                </div>
+              </div>
 
               <ErrorMessage
                 name="password"
