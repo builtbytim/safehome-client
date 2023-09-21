@@ -79,7 +79,7 @@ function BottomStickyNav() {
                     <div className="text-[--text-primary] text-sm self-center font-medium ">
                       <span
                         className={
-                          " transitioning text-center text-base " +
+                          " transitioning text-center text-sm " +
                           cn({
                             " text-[--color-brand] ":
                               currentPathname === item.link,

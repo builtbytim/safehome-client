@@ -5,6 +5,7 @@ import React from "react";
 import BellImage from "../../../../assets/images/icons/bell.svg";
 import { BiMenuAltLeft, BiX } from "react-icons/bi";
 import { useUiStore } from "../../../utils/store";
+import NotificationBell from "../../NotificationBell";
 
 function Header({ user }) {
   const toggleSidebar = useUiStore((state) => state.toggleSidebar);
@@ -43,19 +44,7 @@ function Header({ user }) {
         </div>
 
         <div className="flex flex-row justify-start space-x-4 lg:space-x-0">
-          <div
-            onClick={toggleNotifications}
-            className="self-center hover:cursor-pointer relative"
-          >
-            <Image
-              src={BellImage}
-              width="48"
-              height="48"
-              alt="Notification Logo"
-              className="w-[34px]  h-[34px] md:w-[48px] md:h-[48px] object-contain"
-            />
-            <span className="border rounded-full border-[--text-brand] bg-[--text-brand] p-[0.125rem] md:p-1 inline-block absolute top-0 right-0"></span>
-          </div>
+          <NotificationBell toggleNotifications={toggleNotifications} />
 
           <div className="self-center p-1 hidden md:block ">
             {showSidebar ? (

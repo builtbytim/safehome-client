@@ -1,14 +1,5 @@
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { PiDotsThreeOutlineVertical } from "react-icons/pi";
-import {
-  Link,
-  Button,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller,
-} from "react-scroll";
 import Image from "next/image";
 import FundsImage from "../../../assets/images/icons/Funds.svg";
 import Savingsmage from "../../../assets/images/icons/SavingsLite.svg";
