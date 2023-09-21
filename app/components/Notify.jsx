@@ -50,19 +50,22 @@ export default function Notify() {
     <Overlay z={3}>
       <Slide top className="" duration={300}>
         {/* <Zoom top right duration="250" className="w-full"> */}
-        <div className="w-full bg-[--color-brand] mt-4 py-4 px-4">
+        <div className="w-full bg-white mt-4 py-4 px-4">
           {allowClose && (
             <div className="flex flex-row justify-end items-center w-full">
               <BsX
                 role="button"
-                className="text-3xl text-white hover:text-white/80 transition-flow"
+                className="text-3xl text-[#8d4000] hover:text-[#8d4000]/80 transition-flow"
                 onClick={closeSelf}
               />
             </div>
           )}
-          <p className="text-white text-base    capitalize">{title}</p>
+          <p className="text-[--color-brand] font-bold text-lg    capitalize">
+            {" "}
+            Notification{" "}
+          </p>
 
-          <p className="text-white  text-sm first-letter:uppercase">
+          <p className="text-[--text-secondary] mt-2  text-sm first-letter:uppercase">
             {content}
           </p>
 
@@ -70,7 +73,7 @@ export default function Notify() {
             {onReject && (
               <button
                 className={cn(
-                  "px-4 py-2 rounded-md text-sm font-semibold text-white/80 hover:text-white/60 transition-flow",
+                  "px-4 py-2 rounded-md text-sm font-semibold text-[#8d4000]/80 hover:text-[#8d4000]/60 transition-flow",
                   {
                     "cursor-not-allowed": working,
                   }
@@ -85,7 +88,7 @@ export default function Notify() {
             {onAccept && (
               <button
                 className={cn(
-                  "px-4 py-2 rounded-md text-sm font-semibold text-white/80 hover:text-white/60 transition-flow ml-4",
+                  "px-4 py-2 rounded-md text-sm font-semibold text-[#8d4000]/80 hover:text-[#8d4000]/60 transition-flow ml-4",
                   {
                     "cursor-not-allowed": working,
                   }

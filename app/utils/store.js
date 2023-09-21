@@ -37,7 +37,12 @@ const useNotifyStore = create((set) => ({
 
 const useUiStore = create((set) => ({
   showSidebar: false,
-  toggleSidebar: () => set((state) => ({ showSidebar: !state.showSidebar })),
+  showNotifications: false,
+
+  toggleNotifications: () =>
+    set((state) => ({ ...state, showNotifications: !state.showNotifications })),
+  toggleSidebar: () =>
+    set((state) => ({ ...state, showSidebar: !state.showSidebar })),
 }));
 
 export { useBearStore, useUiStore, useNotifyStore };

@@ -9,6 +9,9 @@ import { useUiStore } from "../../../utils/store";
 function Header({ user }) {
   const toggleSidebar = useUiStore((state) => state.toggleSidebar);
   const showSidebar = useUiStore((state) => state.showSidebar);
+  const toggleNotifications = useUiStore((state) => state.toggleNotifications);
+
+  // console.log(toggleNotifications, toggleSidebar);
 
   return (
     <header className="w-full  ">
@@ -40,7 +43,10 @@ function Header({ user }) {
         </div>
 
         <div className="flex flex-row justify-start space-x-4 lg:space-x-0">
-          <div className="self-center relative">
+          <div
+            onClick={toggleNotifications}
+            className="self-center hover:cursor-pointer relative"
+          >
             <Image
               src={BellImage}
               width="48"
