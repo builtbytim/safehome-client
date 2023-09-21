@@ -46,13 +46,20 @@ function Page({ authenticatedUser }) {
         extraClasses="text-[--text-brand-2]"
       />
 
-      <main className=" space-y-2 lg:space-y-10">
+      <main className=" space-y-2 md:space-y-10">
         <section className="bg-white  rounded-brand  pt-8  md:p-8 space-y-4">
-          <TabSwitch
-            tabItems={tabItemsArr[0]}
-            extraClasses="text-[--text-brand-2]  border-[--text-brand-2]"
-          />
+          <div className="flex flex-row justify-between items-center space-x-8">
+            <TabSwitch
+              tabItems={tabItemsArr[0]}
+              extraClasses="text-[--text-brand-2]  border-[--text-brand-2]"
+            />
 
+            <div className="hidden md:block ">
+              <button className="btn-3 px-6 whitespace-nowrap ">
+                Create a goal
+              </button>
+            </div>
+          </div>
           <div className="grid grid-cols-5 gap-2 md:gap-4 lg:gap-6 xl:gap-8 justify-center items-center">
             <div className="col-span-5 self-stretch md:col-span-3 xl:col-span-4 rounded-[8px] md:rounded-[16px] border border-[--lines] p-6 flex flex-col justify-center items-start space-y-6">
               <div>
