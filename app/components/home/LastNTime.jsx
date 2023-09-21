@@ -25,7 +25,7 @@ export default function LastNTime() {
           <div
             ref={ref}
             {...props}
-            className="flex  cursor-pointer justify-start text-[--text-secondary] items-center space-x-4 text-sm"
+            className="lg:flex hidden  cursor-pointer justify-start text-[--text-secondary] items-center space-x-4 text-sm"
           >
             <span className="font-medium self-center">
               {_selectedItem?.name ?? timeMarks[0].name}

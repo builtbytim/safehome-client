@@ -51,7 +51,7 @@ function Header({ user }) {
             <span className="border rounded-full border-[--text-brand] bg-[--text-brand] p-[0.125rem] md:p-1 inline-block absolute top-0 right-0"></span>
           </div>
 
-          <div className="self-center p-1 ">
+          <div className="self-center p-1 hidden md:block ">
             {showSidebar ? (
               <BiX
                 onClick={toggleSidebar}

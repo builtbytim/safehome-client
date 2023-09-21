@@ -1,5 +1,6 @@
 import Sidebar, { MobileSidebar } from "../components/layout/Sidebar";
 import config from "../utils/config";
+import BottomStickyNav from "../components/layout/stickynavs/BottomStickyNav";
 
 export const metadata = {
   name: "SafeHome",
@@ -13,9 +14,11 @@ export default function Layout({ children }) {
         <Sidebar />
       </aside>
 
-      <MobileSidebar />
+      {/* <MobileSidebar /> */}
 
-      <section className="w-full min-h-screen pt-[24px] lg:pt-[40px] px-[12px] lg:px-[48px] bg-[--lines] ">
+      <BottomStickyNav />
+
+      <section className="w-full min-h-screen pt-[24px] lg:pt-[40px] px-[12px] lg:px-[48px] bg-white  md:bg-[--lines] ">
         <div className="">{children}</div>
       </section>
     </main>

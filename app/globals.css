@@ -10,10 +10,12 @@
   --placeholder: #9f9f9f;
   --text-danger: #ff0000;
   --color-brand: #8d4000;
+  --color-brand-2: #1e0700;
   --color-brand-hover: #9e5200;
   --color-success: #00ff00;
   --invert: #c7c7cd;
   --b1: #f9f9f9;
+  --platinum: #e6e6e6;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,6 +25,8 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+
+/* Pure ClassName CSS Fixes  */
 
 .dbg {
   @apply border border-red-500;
@@ -38,6 +42,14 @@
 
 .dbg3 {
   @apply bg-green-500;
+}
+.no-scrollbar {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* For WebKit-based browsers (Chrome, Safari, etc.) */
 }
 
 .custom-number-input::-webkit-inner-spin-button,
@@ -93,6 +105,8 @@
     @apply hover:bg-[#8d4000]/10 disabled:pointer-events-none disabled:opacity-60  transitioning  bg-white border border-[--color-brand] text-[--color-brand] rounded-[4px] p-2 w-full;
   }
 }
+
+/* CSS Animations  */
 
 @keyframes roundTrip {
   0% {

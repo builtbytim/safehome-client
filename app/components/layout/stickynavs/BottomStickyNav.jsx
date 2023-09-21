@@ -1,0 +1,105 @@
+"use client";
+
+import LogoBrand from "../../../../assets/images/logo_brand.png";
+import Image from "next/image";
+import Link from "next/link";
+import { BiLogOut, BiX } from "react-icons/bi";
+import cn from "classnames";
+import { useUiStore } from "../../../utils/store";
+import { usePathname } from "next/navigation";
+import Overlay from "../../Overlay";
+import {
+  AccountSVG,
+  HomeSVG,
+  InvestmentSVG,
+  LoanSVG,
+  SavingsSVG,
+} from "../../svg";
+
+const items = [
+  {
+    name: "Home",
+    icon: HomeSVG,
+    link: "/",
+  },
+  {
+    name: "Savings",
+    icon: SavingsSVG,
+    link: "/savings",
+  },
+  {
+    name: "Investment",
+    icon: InvestmentSVG,
+    link: "/investments",
+  },
+
+  {
+    name: "Loan",
+    icon: LoanSVG,
+    link: "/loans",
+  },
+  {
+    name: "Account",
+    icon: AccountSVG,
+    link: "/account",
+  },
+];
+
+function BottomStickyNav() {
+  const currentPathname = usePathname();
+  return (
+    <div className=" md:hidden flex fixed bottom-0 inset-x-0 flex-row justify-between  items-center  w-full z-20  shadow bg-white px-4">
+      <ul className=" flex flex-row justify-between items-center  w-full ">
+        {items.map((item, index) => {
+          const Icon = item.icon;
+          return (
+            <div className="self-center pb-1 pt-2" key={index}>
+              <li className="block">
+                <Link href={item.link} as={item.link}>
+                  <div
+                    className={
+                      "flex  flex-col justify-center items-center group  transitioning" +
+                      cn({
+                        " hover:bg-[--b1] hover:border-[--lines] cursor-pointer ":
+                          currentPathname !== item.link,
+                        "  cursor-default ": currentPathname === item.link,
+                      })
+                    }
+                  >
+                    <div className="self-center">
+                      <div className="text-xl">
+                        <Icon
+                          fill={cn({
+                            "#c7c7cd": currentPathname !== item.link,
+                            "#8d4000": currentPathname === item.link,
+                          })}
+                        />
+                      </div>
+                    </div>
+                    <div className="text-[--text-primary] text-sm self-center font-medium ">
+                      <span
+                        className={
+                          " transitioning text-center text-base " +
+                          cn({
+                            " text-[--color-brand] ":
+                              currentPathname === item.link,
+                            "  text-[--invert]  ":
+                              currentPathname !== item.link,
+                          })
+                        }
+                      >
+                        {item.name}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              </li>
+            </div>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
+export default BottomStickyNav;
