@@ -47,6 +47,12 @@ const items = [
 
 function Sidebar() {
   const currentPathname = usePathname();
+
+  const routeIsActive = (route) =>
+    ((currentPathname.includes(route) || currentPathname.startsWith(route)) &&
+      route.length > 1) ||
+    currentPathname === route;
+
   return (
     <div className="flex relative flex-col justify-start border-r  border-[--lines] items-center  border-b-[5vh] border-b-[--color-brand] w-full z-20 pt-[48px] pb-8 space-y-16 shadow h-full">
       <div>
@@ -65,9 +71,10 @@ function Sidebar() {
                       "flex flex-row justify-start items-center py-2 px-4 rounded-[8px] border border-white/0 group space-x-4 transitioning" +
                       cn({
                         " hover:bg-[--b1] hover:border-[--lines] cursor-pointer ":
-                          currentPathname !== item.link,
-                        " bg-[--color-brand] cursor-default ":
-                          currentPathname === item.link,
+                          !routeIsActive(item.link),
+                        " bg-[--color-brand] cursor-default ": routeIsActive(
+                          item.link
+                        ),
                       })
                     }
                   >
@@ -75,8 +82,8 @@ function Sidebar() {
                       <div className="text-xl">
                         <Icon
                           fill={cn({
-                            "#FFFFFF": currentPathname === item.link,
-                            "#c7c7cd": currentPathname !== item.link,
+                            "#FFFFFF": routeIsActive(item.link),
+                            "#c7c7cd": !routeIsActive(item.link),
                           })}
                         />
                       </div>
@@ -87,7 +94,7 @@ function Sidebar() {
                         className={
                           "text-[--invert] transitioning  text-base " +
                           cn({
-                            " text-white ": currentPathname === item.link,
+                            " text-white ": routeIsActive(item.link),
                           })
                         }
                       >

@@ -1,4 +1,4 @@
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import Link from "next/link";
 import Image from "next/image";
 import SavingsImage from "../../../assets/images/icons/SavingsLite.svg";
 import TargetImage from "../../../assets/images/icons/target.svg";
@@ -66,7 +66,8 @@ function OverviewCard() {
             </p>
           </div>
 
-          <div
+          <Link
+            href="/savings/goals"
             id="goal-savings"
             className="bg-[#FF91001A] min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6 "
           >
@@ -90,9 +91,10 @@ function OverviewCard() {
             <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
               ₦0
             </p>
-          </div>
+          </Link>
 
-          <div
+          <Link
+            href="/savings/locked"
             id="locked-savings"
             className="bg-[#ff6100]/10 min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6"
           >
@@ -115,7 +117,7 @@ function OverviewCard() {
             <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
               ₦0
             </p>
-          </div>
+          </Link>
         </div>
       </div>
     </section>

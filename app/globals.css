@@ -7,6 +7,7 @@
   --lines: #e6e6e6;
   --text-brand: #ff6100;
   --text-brand-2: #ff9100;
+  --text-brand-2-hover: #ff9100cc;
   --text-secondary: #1a374d;
   --primary: #162f43;
   --placeholder: #9f9f9f;
@@ -105,6 +106,10 @@
 
   .btn-2 {
     @apply hover:bg-[#8d4000]/10 disabled:pointer-events-none disabled:opacity-60  transitioning  bg-white border border-[--color-brand] text-[--color-brand] rounded-[4px] p-2 w-full;
+  }
+
+  .btn-3 {
+    @apply bg-[--text-brand-2] disabled:pointer-events-none disabled:opacity-60  transitioning  hover:bg-[--text-brand-2-hover] text-white rounded-[4px] p-2 w-full;
   }
 }
 

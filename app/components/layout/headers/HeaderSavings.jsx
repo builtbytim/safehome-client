@@ -5,7 +5,7 @@ import { BiMenuAltLeft } from "react-icons/bi";
 import { useUiStore } from "../../../utils/store";
 import NotificationBell from "../../NotificationBell";
 
-function HeaderSavings() {
+function HeaderSavings({ title = "", extraClasses = "" }) {
   const toggleNotifications = useUiStore((state) => state.toggleNotifications);
 
   return (
@@ -13,9 +13,13 @@ function HeaderSavings() {
       <div className="w-full flex flex-row justify-between items-center ">
         <div className="flex flex-row justify-start space-x-3">
           <BiMenuAltLeft className="text-[--text-brand] self-center text-4xl hidden " />
-          <h1 className="self-center text-[--color-brand-2] capitalize text-2xl md:text-3xl lg:text-4xl  font-bold">
-            {" "}
-            Savings
+          <h1
+            className={
+              "self-center text-[--color-brand-2] capitalize text-2xl md:text-3xl lg:text-4xl  font-bold " +
+              extraClasses
+            }
+          >
+            {title || "Savings"}
           </h1>
         </div>
 

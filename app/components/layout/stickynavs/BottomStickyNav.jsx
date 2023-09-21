@@ -47,6 +47,12 @@ const items = [
 
 function BottomStickyNav() {
   const currentPathname = usePathname();
+
+  const routeIsActive = (route) =>
+    ((currentPathname.includes(route) || currentPathname.startsWith(route)) &&
+      route.length > 1) ||
+    currentPathname === route;
+
   return (
     <div className=" md:hidden flex fixed bottom-0 inset-x-0 flex-row justify-between  items-center  w-full z-20  shadow bg-white px-4">
       <ul className=" flex flex-row justify-between items-center  w-full ">
@@ -61,8 +67,8 @@ function BottomStickyNav() {
                       "flex  flex-col justify-center items-center group  transitioning" +
                       cn({
                         " hover:bg-[--b1] hover:border-[--lines] cursor-pointer ":
-                          currentPathname !== item.link,
-                        "  cursor-default ": currentPathname === item.link,
+                          !routeIsActive(item.link),
+                        "  cursor-default ": routeIsActive(item.link),
                       })
                     }
                   >
@@ -70,8 +76,8 @@ function BottomStickyNav() {
                       <div className="text-xl">
                         <Icon
                           fill={cn({
-                            "#c7c7cd": currentPathname !== item.link,
-                            "#8d4000": currentPathname === item.link,
+                            "#c7c7cd": !routeIsActive(item.link),
+                            "#8d4000": routeIsActive(item.link),
                           })}
                         />
                       </div>
@@ -81,10 +87,8 @@ function BottomStickyNav() {
                         className={
                           " transitioning text-center text-sm " +
                           cn({
-                            " text-[--color-brand] ":
-                              currentPathname === item.link,
-                            "  text-[--invert]  ":
-                              currentPathname !== item.link,
+                            " text-[--color-brand] ": routeIsActive(item.link),
+                            "  text-[--invert]  ": !routeIsActive(item.link),
                           })
                         }
                       >
