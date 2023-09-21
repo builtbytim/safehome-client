@@ -87,7 +87,7 @@ function SignIn() {
           <BarLoader active={isLoading} />
 
           <div>
-            <legend className="font-bold text-center text-lg lg:text-xl text-[--text-brand]">
+            <legend className="font-bold text-center text-lg lg:text-xl text-[--color-brand]">
               Log in to your account
             </legend>
             <p className="text-center text-xs text-[--text-secondary] ">

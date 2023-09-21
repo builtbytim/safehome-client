@@ -10,22 +10,22 @@ export const metadata = {
 export default function Page() {
   return (
     <>
-      <div className="bg-white w-[448px] max-w-[80%] lg:max-w-sm min-h-[300px] rounded-brand  border-0 relative p-8 ">
+      <div className="bg-white w-[448px] max-w-[98%] sm:max-w-[80%] lg:max-w-sm min-h-[300px] rounded-brand  border-0 relative py-8 px-4 sm:p-8 ">
         <SignIn />
       </div>
 
       <div className="mt-8 space-y-2 lg:space-y-4">
-        <p className="text-center text-sm text-white ">
+        <p className="text-center text-sm text-[--color-brand-2] sm:text-white ">
           Don&apos;t have an account?{" "}
           <Link
             href="/sign-up"
-            className="text-white font-semibold hover:text-[--lines] cursor-pointer "
+            className="text-[--color-brand-2] sm:text-white font-semibold sm:hover:text-[--lines] cursor-pointer "
           >
             Create account
           </Link>
         </p>
 
-        <p className="text-center  lg:no-underline hover:underline cursor-pointer text-sm text-white ">
+        <p className="text-center  lg:no-underline hover:underline cursor-pointer text-sm text-[--text-brand-2] sm:text-white ">
           Forgot password?
         </p>
       </div>

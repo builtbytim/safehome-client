@@ -97,7 +97,7 @@
   }
 
   .field-1 {
-    @apply rounded-[8px] focus:border-[#8d4000]/40 transition-colors duration-[400]  border bg-[--surface-bg] outline-none  pl-3 py-2 text-sm pr-3 placeholder:text-[--placeholder] w-full border-[--lines];
+    @apply rounded-[8px] focus:border-[#8d4000]/40 transition-colors duration-[400]  border bg-[--surface-bg] outline-none  pl-3 py-3 text-sm pr-3 placeholder:text-[--placeholder] w-full border-[--lines];
   }
 
   .btn-1 {
