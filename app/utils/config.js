@@ -1,4 +1,13 @@
+const LANDING_PAGE_APP_URL =
+  process.env.NEXT_PUBLIC_LANDING_PAGE_APP_URL || "http://localhost:3001";
+
 const config = {
+  urlMaps: {
+    home: LANDING_PAGE_APP_URL + "",
+    about: LANDING_PAGE_APP_URL + "/about",
+    services: LANDING_PAGE_APP_URL + "/services",
+    products: LANDING_PAGE_APP_URL + "/products",
+  },
   app: {
     name: process.env.appName || "Safehome",
     description:

@@ -136,7 +136,7 @@ function SignIn() {
                 />
 
                 <div
-                  className="absolute top-[50%] -translate-y-[50%] right-[5%] text-[--text-secondary] text-xs text-right cursor-pointer"
+                  className="absolute top-[50%] -translate-y-[50%] right-[5%] text-[--text-secondary]  text-right cursor-pointer text-xl"
                   onClick={toggleShowPassword}
                 >
                   {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}

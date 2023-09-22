@@ -253,7 +253,7 @@ function SignUp() {
                     />
 
                     <div
-                      className="absolute top-[50%] -translate-y-[50%] right-[5%] text-[--text-secondary] text-xs text-right cursor-pointer"
+                      className="absolute top-[50%] -translate-y-[50%] right-[5%] text-[--text-secondary] text-xl text-right cursor-pointer"
                       onClick={toggleShowPassword}
                     >
                       {showPassword ? (
@@ -286,7 +286,7 @@ function SignUp() {
                     />
 
                     <div
-                      className="absolute top-[50%] -translate-y-[50%] right-[5%] text-[--text-secondary] text-xs text-right cursor-pointer"
+                      className="absolute top-[50%] -translate-y-[50%] right-[5%] text-[--text-secondary] text-xl text-right cursor-pointer"
                       onClick={toggleShowPassword}
                     >
                       {showPassword ? (
@@ -328,7 +328,7 @@ function SignUp() {
                   role="button"
                   className="btn-1 self-stretch px-0 bg-white hover:bg-white  border-[--color-brand] rounded-r-none  inline-flex justify-start  items-center"
                 >
-                  <BsArrowLeftShort className="text-[--color-brand] hover:text-[--color-brand-hover] text-2xl transitioning border rounded-full" />
+                  <BsArrowLeftShort className="text-[--color-brand] hover:text-[--color-brand-hover] text-3xl transitioning border rounded-full" />
                 </button>
                 <button
                   disabled={!isValid}

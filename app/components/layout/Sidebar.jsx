@@ -1,6 +1,7 @@
 "use client";
 
 import LogoBrand from "../../../assets/images/logo_brand.png";
+import config from "../../utils/config";
 import Image from "next/image";
 import Link from "next/link";
 import { BiLogOut, BiX } from "react-icons/bi";
@@ -55,9 +56,11 @@ function Sidebar() {
 
   return (
     <div className="flex relative flex-col justify-start border-r  border-[--lines] items-center  border-b-[5vh] border-b-[--color-brand] w-full z-20 pt-[48px] pb-8 space-y-16 shadow h-full">
-      <div>
-        <Image priority src={LogoBrand} alt="logo" width="100" />
-      </div>
+      <a target="_blank" href={config.urlMaps.home}>
+        <div className="hover:cursor-pointer">
+          <Image priority src={LogoBrand} alt="logo" width="100" />
+        </div>
+      </a>
 
       <ul className="space-y-6 flex flex-col justify-start items-start  w-full px-4">
         {items.map((item, index) => {
