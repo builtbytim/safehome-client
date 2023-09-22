@@ -15,9 +15,9 @@ export default function useSignIn(onError = null, onSuccess = null) {
       }
     },
 
-    onError(err, vars, ctx) {
+    onError(err, vars) {
       if ("function" === typeof onError) {
-        onError(err, vars, ctx);
+        onError(err, vars);
       }
     },
   });

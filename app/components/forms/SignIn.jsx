@@ -24,6 +24,7 @@ function SignIn() {
   const router = useRouter();
 
   function onError(err, vars) {
+    cosole.log("That erro:", err, vars);
     if (err.message === "VERIFY_EMAIL") {
       setNotify({
         show: true,
