@@ -13,7 +13,6 @@ import { useState } from "react";
 
 function SignIn() {
   const setNotify = useNotifyStore((state) => state.setNotify);
-  const { mutate, isLoading, reset } = useSignIn(onError, onSuccess);
   const [showPassword, setShowPassword] = useState(false);
   const [_email, _setEmail] = useState("");
 
@@ -24,7 +23,7 @@ function SignIn() {
   const router = useRouter();
 
   function onError(err, vars) {
-    cosole.log("That erro:", err, vars);
+    // cosole.log("That erro:", err, vars);
     if (err.message === "VERIFY_EMAIL") {
       setNotify({
         show: true,
@@ -59,10 +58,13 @@ function SignIn() {
     router.push(`/`);
   }
 
+  const { mutate, isLoading, reset } = useSignIn(onError, onSuccess);
+
   function handleSignIn(values) {
     if (isLoading) return;
 
     _setEmail(values.email);
+
     const body = {
       username: values.email,
       password: values.password,

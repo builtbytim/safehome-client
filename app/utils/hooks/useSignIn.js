@@ -46,8 +46,9 @@ async function req(params) {
     return res.data;
   } else {
     console.log(res.errorMessage, res.error);
-    const ACTION = res.headers.get("X-ACTION") || "";
+    const ACTION = res.headers?.get("X-ACTION") || "";
 
     throw new Error(ACTION || res.error?.detail || res.errorMessage);
+    // throw new Error("Unable to sign in");
   }
 }

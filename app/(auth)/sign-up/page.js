@@ -9,7 +9,7 @@ export const metadata = {
 export default function Page() {
   return (
     <>
-      <div className="bg-white relative  w-[448px] max-w-[98%] sm:max-w-[80%] lg:max-w-sm min-h-[300px] rounded-brand py-8 px-4 sm:p-8 ">
+      <div className="bg-white relative  w-[448px] max-w-[95%] sm:max-w-[80%] lg:max-w-sm min-h-[300px] rounded-brand py-8 px-4 sm:p-8 ">
         <SignUp />
       </div>
 

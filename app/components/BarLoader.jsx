@@ -13,7 +13,7 @@ export default function BarLoader({ active = false, v = 1 }) {
         className={
           "   z-10 " +
           cn({
-            " border-0 rounded-brand ": v === 1,
+            " border-0  sm:rounded-brand ": v === 1,
 
             " hidden  ": !active,
             " block ": active,
