@@ -19,7 +19,13 @@ export default function Overlay({
             " z-50 bg-black/70 backdrop-blur ": z === 4,
           })
         }
-      ></div>
+      >
+        {ClickBack && (
+          <div className="absolute z-30 top-4 right-2 md:righ-4">
+            <ClickBack />
+          </div>
+        )}
+      </div>
       {!skipWrapper ? (
         <div
           className={
@@ -32,11 +38,11 @@ export default function Overlay({
             })
           }
         >
-          {ClickBack && (
+          {/* {ClickBack && (
             <div className="absolute z-30 top-4 right-2">
               <ClickBack />
             </div>
-          )}
+          )} */}
 
           <div
             className={

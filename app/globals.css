@@ -79,6 +79,14 @@
   background-color: #c7c7cd;
 }
 
+.filter-btn {
+  @apply text-sm md:text-base text-[--placeholder] border border-[--invert] px-5 py-2 md:px-7 md:py-2 min-w-[100px] rounded hover:border-[--placeholder] inline-block w-auto;
+}
+
+.filter-btn-active {
+  @apply text-sm md:text-base text-[--text-brand] border border-[--text-brand] px-5 py-2 md:px-7 md:py-2 min-w-[100px] rounded inline-block w-auto;
+}
+
 * {
   @apply custom-scrollbar;
 }

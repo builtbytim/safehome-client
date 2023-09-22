@@ -21,7 +21,17 @@ export default function Notifications() {
   if (!showNotifications) return null;
 
   return (
-    <Overlay skipWrapper z={3}>
+    <Overlay
+      ClickBack={() => {
+        return (
+          <div className="hidden md:block" onClick={toggleNotifications}>
+            <BsX className="text-4xl text-[--invert]" />
+          </div>
+        );
+      }}
+      skipWrapper
+      z={3}
+    >
       <Slide left className="" duration={300}>
         {/* <Zoom top right duration="250" className="w-full"> */}
 
@@ -31,7 +41,7 @@ export default function Notifications() {
           }
         >
           <div className="w-full min-h-screen bg-white mt-4  px-4  space-y-4 relative">
-            <div className="flex flex-row justify-end items-center w-full">
+            <div className="  flex md:hidden  flex-row justify-end items-center w-full">
               <BsX
                 role="button"
                 className="text-3xl text-[#8d4000] hover:text-[#8d4000]/80 transition-flow"
