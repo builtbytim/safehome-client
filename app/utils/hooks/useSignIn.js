@@ -9,9 +9,9 @@ export default function useSignIn(onError = null, onSuccess = null) {
 
     mutationFn: req,
 
-    onSuccess(data) {
+    onSuccess(data, vars) {
       if ("function" === typeof onSuccess) {
-        onSuccess(data);
+        onSuccess(data, vars);
       }
     },
 

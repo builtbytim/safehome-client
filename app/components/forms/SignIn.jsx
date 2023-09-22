@@ -13,8 +13,9 @@ import { useState } from "react";
 
 function SignIn() {
   const setNotify = useNotifyStore((state) => state.setNotify);
-  const { mutate, isLoading, data, reset } = useSignIn(onError, onSuccess);
+  const { mutate, isLoading, reset } = useSignIn(onError, onSuccess);
   const [showPassword, setShowPassword] = useState(false);
+  const [_email, _setEmail] = useState("");
 
   function toggleShowPassword() {
     setShowPassword(!showPassword);
@@ -28,7 +29,7 @@ function SignIn() {
         show: true,
         title: "Verify Email",
         onAccept: () => {
-          router.push(`/verify-email/${vars.email}`);
+          router.push(`/verify-email/${vars.email || _email}`);
         },
         onAcceptText: "Verify",
 
@@ -60,6 +61,7 @@ function SignIn() {
   function handleSignIn(values) {
     if (isLoading) return;
 
+    _setEmail(values.email);
     const body = {
       username: values.email,
       password: values.password,
