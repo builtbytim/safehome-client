@@ -107,7 +107,7 @@ function Page({ authenticatedUser }) {
           {/* Home targets starts  */}
 
           <div className="grid grid-cols-2 gap-2 md:gap-4 lg:gap-6 xl:gap-8 justify-center items-center">
-            {Array.from({ length: 10 })
+            {Array.from({ length: 4 })
               .fill(0)
               .map((v, i) => {
                 return <HomeTarget key={i} />;

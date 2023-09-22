@@ -2,7 +2,7 @@
 
 import { BsX } from "react-icons/bs";
 import Overlay from "./Overlay";
-import cn from "classnames";
+import { FcEmptyFilter } from "react-icons/fc";
 import { Slide } from "react-reveal";
 import { useUiStore } from "../utils/store";
 import Image from "next/image";
@@ -62,7 +62,17 @@ export default function Notifications() {
             {/* Notification items  */}
 
             <div className="pb-32  max-h-[80vh] overflow-y-auto scrollbar-fix">
-              {Array.from({ length: 10 }).map((_, i) => (
+              <div className="w-full flex h-full flex-col justify-center items-center">
+                <div className="h-full py-16   space-y-4  mt-4 flex flex-col justify-center items-center text-[--color-brand-2]">
+                  <FcEmptyFilter className="text-4xl text-[--color-brand-2] hover:text-[--color-brand-2]/80 transition-flow" />
+                  <p className="text-center text-xl md:text-2xl">
+                    {" "}
+                    No notifications at the moment.
+                  </p>
+                </div>
+              </div>
+
+              {Array.from({ length: 0 }).map((_, i) => (
                 <div
                   key={i}
                   className="flex flex-row justify-between items-center w-full mt-4"

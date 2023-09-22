@@ -84,7 +84,7 @@ function Page() {
           </div> */}
 
           <div className="grid grid-cols-2 gap-2 md:gap-4 lg:gap-6 xl:gap-8 justify-center items-center">
-            {Array.from({ length: 10 }).map((v, index) => (
+            {Array.from({ length: 4 }).map((v, index) => (
               <HomeTarget key={index} />
             ))}
           </div>

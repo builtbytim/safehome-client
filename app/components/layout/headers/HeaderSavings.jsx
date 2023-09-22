@@ -26,7 +26,7 @@ function HeaderSavings({ title = "", extraClasses = "" }) {
         <div className="flex flex-row justify-center items-center  space-x-4 md:space-x-8">
           <NotificationBell toggleNotifications={toggleNotifications} />
 
-          <div className="self-center">
+          <div className="self-center hidden">
             <Image
               src="https://i.pravatar.cc/150?u=helios@g.com"
               width="52"
