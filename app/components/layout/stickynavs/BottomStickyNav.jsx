@@ -1,13 +1,8 @@
 "use client";
 
-import LogoBrand from "../../../../assets/images/logo_brand.png";
-import Image from "next/image";
 import Link from "next/link";
-import { BiLogOut, BiX } from "react-icons/bi";
 import cn from "classnames";
-import { useUiStore } from "../../../utils/store";
 import { usePathname } from "next/navigation";
-import Overlay from "../../Overlay";
 import {
   AccountSVG,
   HomeSVG,
