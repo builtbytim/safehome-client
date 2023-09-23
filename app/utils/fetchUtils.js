@@ -89,6 +89,29 @@ export async function fetchUtil({
   }
 }
 
+export function extractErrorMessage(err) {
+  if (err instanceof Error) {
+    return err.message;
+  }
+
+  if (err instanceof String) {
+    return err;
+  }
+
+  if (err instanceof Object) {
+    return (
+      err?.error?.detail ||
+      err?.error?.message ||
+      err?.error?.error ||
+      err?.error?.errorMessage ||
+      err?.error?.error_message ||
+      err?.errorMessage
+    );
+  }
+
+  return err;
+}
+
 export function levelToColor(level) {
   switch (level) {
     case "info":

@@ -22,28 +22,26 @@ function SignIn() {
 
   const router = useRouter();
 
-  function onError(err, vars) {
-    // cosole.log("That erro:", err, vars);
-    if (err.message === "VERIFY_EMAIL") {
-      setNotify({
-        show: true,
-        title: "Verify Email",
-        onAccept: () => {
-          router.push(`/verify-email/${vars.email || _email}`);
-        },
-        onAcceptText: "Verify",
+  function onError(err) {
+    const action = err.action;
 
-        content: "Please verify your email address to continue",
-      });
-      return;
+    switch (action) {
+      case "VERIFY_EMAIL":
+        router.push({
+          pathname: "/verify-email",
+          query: { email: _email },
+        });
+        break;
+
+      default:
+        setNotify({
+          show: true,
+          title: "Unable to sign in",
+          content: err?.message,
+        });
+        reset();
+        break;
     }
-
-    setNotify({
-      show: true,
-      title: "Unable to Sign In",
-      content: err?.message,
-    });
-    reset();
   }
 
   function onSuccess(data) {
@@ -55,10 +53,10 @@ function SignIn() {
 
     saveToLocalStorage(tokenObj, `${config.localStorageKey}:token`);
 
-    router.push(`/`);
+    router.push(config.authenticatedHome);
   }
 
-  const { mutate, isLoading, reset } = useSignIn(onError, onSuccess);
+  const { mutate, isLoading, reset } = useSignIn(onSuccess, onError);
 
   function handleSignIn(values) {
     if (isLoading) return;

@@ -10,14 +10,14 @@ const queryClient = new QueryClient({
     },
 
     mutations: {
-      retry: 1,
+      retry: 0,
     },
   },
 });
-function DataClient({ children }) {
+function RemoteDataProvider({ children }) {
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 }
 
-export default DataClient;
+export default RemoteDataProvider;

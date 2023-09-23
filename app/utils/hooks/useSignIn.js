@@ -1,25 +1,16 @@
 import { useMutation } from "react-query";
 import queryKeys from "../queryKeys";
-import { fetchUtil, makeUrl } from "../fetchUtils";
+import { fetchUtil, makeUrl, extractErrorMessage } from "../fetchUtils";
 import config from "../config";
 
-export default function useSignIn(onError = null, onSuccess = null) {
+export default function useSignIn(onSuccess, onError) {
   const { mutate, isError, data, isSuccess, reset, isLoading } = useMutation({
     mutationKey: [queryKeys.signIn],
 
     mutationFn: req,
 
-    onSuccess(data, vars) {
-      if ("function" === typeof onSuccess) {
-        onSuccess(data, vars);
-      }
-    },
-
-    onError(err, vars) {
-      if ("function" === typeof onError) {
-        onError(err, vars);
-      }
-    },
+    onSuccess,
+    onError,
   });
 
   return {
@@ -45,10 +36,14 @@ async function req(params) {
   if (res.success) {
     return res.data;
   } else {
-    console.log(res.errorMessage, res.error);
+    console.log("useSignIn: ", res.errorMessage, res.error);
     const ACTION = res.headers?.get("X-ACTION") || "";
 
-    throw new Error(ACTION || res.error?.detail || res.errorMessage);
-    // throw new Error("Unable to sign in");
+    const signInError = {
+      action: ACTION,
+      message: extractErrorMessage(res),
+    };
+
+    throw signInError;
   }
 }

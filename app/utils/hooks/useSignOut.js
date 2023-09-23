@@ -1,5 +1,5 @@
 import { useMutation } from "react-query";
-import { fetchUtil, makeUrl } from "../fetchUtils";
+import { fetchUtil, makeUrl, extractErrorMessage } from "../fetchUtils";
 import config from "../config";
 
 export default function useSignOut(onSuccess) {
@@ -31,7 +31,7 @@ async function signOutReq(data) {
 
   if (!res.success) {
     console.log("fetchUtil: ", res.error);
-    throw new Error(res.errorMessage);
+    throw new Error(extractErrorMessage(res));
   }
 
   return res.data;

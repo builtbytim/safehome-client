@@ -2,7 +2,7 @@
 
 import { useQuery } from "react-query";
 import queryKeys from "../queryKeys";
-import { fetchUtil, makeUrl } from "../fetchUtils";
+import { fetchUtil, makeUrl, extractErrorMessage } from "../fetchUtils";
 import config from "../config";
 
 export default function useRemoteSession(
@@ -63,6 +63,6 @@ async function req(params) {
   if (res.success) {
     return res.data;
   } else {
-    throw new Error(res.error?.detail || res.errorMessage);
+    throw new Error(extractErrorMessage(res));
   }
 }

@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
 import queryKeys from "../queryKeys";
-import { fetchUtil, makeUrl } from "../fetchUtils";
+import { fetchUtil, makeUrl, extractErrorMessage } from "../fetchUtils";
 import config from "../config";
 
 export default function useSignUp(onError = null, onSuccess = null) {
@@ -45,6 +45,6 @@ async function req(params) {
     return res.data;
   } else {
     console.log(res.errorMessage, res.error);
-    throw new Error(res?.error?.detail || res.errorMessage);
+    throw new Error(extractErrorMessage(res));
   }
 }

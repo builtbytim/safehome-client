@@ -1,9 +1,9 @@
 import "./globals.css";
 import { Outfit } from "next/font/google";
 import config from "./utils/config";
-import DataClient from "./utils/DataClient";
 import Notify from "./components/Notify";
 import Notifications from "./components/Notifications";
+import RemoteDataProvider from "./utils/RemoteDataProvider";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -15,14 +15,14 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   return (
-    <DataClient>
-      <html lang="en">
-        <body className={outfit.className}>
+    <html lang="en">
+      <body className={outfit.className}>
+        <RemoteDataProvider>
           <Notify />
           <Notifications />
           {children}
-        </body>
-      </html>
-    </DataClient>
+        </RemoteDataProvider>
+      </body>
+    </html>
   );
 }
