@@ -4,7 +4,6 @@ import SecureRoute from "../../components/SecureRoute";
 import HeaderSavings from "../../components/layout/headers/HeaderSavings";
 import OverviewCard from "../../components/savings/OverviewCard";
 import TabSwitch from "../../components/savings/TabSwitch";
-import Image from "next/image";
 import HomeTarget from "../../components/savings/HomeTarget";
 
 function Page({ authenticatedUser }) {
