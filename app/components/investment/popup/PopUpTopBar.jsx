@@ -4,7 +4,7 @@ import closeIcon from "../../../../assets/images/icons/closeIcon.svg";
 
 const PopUpTopBar = ({ close }) => {
 	return (
-		<div className="py-10 px-5 flex justify-end items-center">
+		<div className="py-10 px-5 flex justify-end items-center fixe z-[1000] w-full bg-white top-0 left-0">
 			<button
 				className="p-[4px] border-2 border-[--lines] rounded-full"
 				onClick={() => close()}

@@ -13,7 +13,10 @@ const InvestmentCard = ({
 	openInfo,
 }) => {
 	return (
-		<div className="rounded md:rounded-lg lg:rounded-xl border overflow-hidden text-[--text-secondary] text-left relative grid grid-cols-5 md:grid-cols-5 h-[165px] md:h-[192px]">
+		<button
+			className="relative rounded md:rounded-lg lg:rounded-xl border overflow-hidden text-[--text-secondary] text-left grid grid-cols-5 md:grid-cols-5 h-[165px] md:h-[192px] w-full group"
+			onClick={() => openInfo()}
+		>
 			<div className="w-full h-full col-span-2 md:col-span-2 overflow-x-hidden">
 				<Image
 					src={img}
@@ -24,10 +27,7 @@ const InvestmentCard = ({
 				/>
 			</div>
 			<div className="p-3 md:px-4 xl:px-7 col-span-3 md:col-span-3 space-y-1">
-				<button
-					className="uppercase font-medium text-[1rem] leading-[1.2rem] md:text-xl md:leading-[1.4rem] xl:text-[1.35rem] xl:leading-[1.55rem] max-h-[2.4rem] md:max-h-[2.8rem] xl:max-h-[3.1rem] text-left overflow-hidden hover:text-[--text-brand]"
-					onClick={() => openInfo()}
-				>
+				<button className="uppercase font-medium text-[1rem] leading-[1.2rem] md:text-xl md:leading-[1.4rem] xl:text-[1.35rem] xl:leading-[1.55rem] max-h-[2.4rem] md:max-h-[2.8rem] xl:max-h-[3.1rem] text-left overflow-hidden group-hover:text-[--text-brand]">
 					{title}
 				</button>
 				<p className="text-[0.75rem] leading-[1] md:text-sm">
@@ -52,7 +52,7 @@ const InvestmentCard = ({
 			<div className="absolute bottom-0 right-0 rounded-tl-xl py-[0.4rem] md:py-2 px-3 text-white bg-[--green] text-[0.7rem] md:text-sm">
 				{quantity} Available
 			</div>
-		</div>
+		</button>
 	);
 };
 
