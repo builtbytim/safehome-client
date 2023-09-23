@@ -47,7 +47,7 @@ const items = [
 ];
 
 function Sidebar() {
-  const currentPathname = usePathname();
+  const currentPathname = usePathname() || "";
 
   const routeIsActive = (route) =>
     ((currentPathname.includes(route) || currentPathname.startsWith(route)) &&

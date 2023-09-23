@@ -27,10 +27,16 @@ function SignIn() {
 
     switch (action) {
       case "VERIFY_EMAIL":
-        router.push({
-          pathname: "/verify-email",
-          query: { email: _email },
+        setNotify({
+          show: true,
+          title: "Unable to sign in",
+          content: err?.message,
+          onAcceptText: "Verify Email",
+          onAccept: () => {
+            router.push(`/verify-email/${_email}`);
+          },
         });
+
         break;
 
       default:
