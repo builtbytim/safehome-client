@@ -1,11 +1,5 @@
 import { create } from "zustand";
 
-const useBearStore = create((set) => ({
-  bears: 0,
-  increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-  removeAllBears: () => set({ bears: 0 }),
-}));
-
 const useNotifyStore = create((set) => ({
   notifyState: {
     show: false,
@@ -45,4 +39,4 @@ const useUiStore = create((set) => ({
     set((state) => ({ ...state, showSidebar: !state.showSidebar })),
 }));
 
-export { useBearStore, useUiStore, useNotifyStore };
+export { useUiStore, useNotifyStore };

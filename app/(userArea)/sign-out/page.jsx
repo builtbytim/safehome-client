@@ -38,7 +38,7 @@ function Page({ authenticatedUser, authenticationToken, signOut }) {
             height={100}
             src={SafeHomeLogo}
             priority
-            alt="safehome logo"
+            alt="SafeHome logo"
             className=""
           />
 

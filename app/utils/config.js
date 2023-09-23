@@ -9,11 +9,11 @@ const config = {
     products: LANDING_PAGE_APP_URL + "/products",
   },
   app: {
-    name: process.env.appName || "Safehome",
+    name: process.env.appName || "SafeHome",
     description:
-      "Safehome estates is a real estate company that provides affordable housing for all",
+      "SafeHome estates is a real estate company that provides affordable housing for all",
     keywords:
-      "real estate, housing, affordable housing, safehome estates, safehome",
+      "real estate, housing, affordable housing, SafeHome estates, SafeHome",
   },
 
   apiPaths: {

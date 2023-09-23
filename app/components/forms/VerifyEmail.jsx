@@ -29,7 +29,7 @@ function VerifyEmail({ email }) {
       const uid = params.get("uid");
       const token = decodeFromBase64(params.get("token"));
 
-      console.log({ uid, token });
+      // console.log({ uid, token });
 
       if (uid && token) {
         setOtp(token);
