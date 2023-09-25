@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import closeIcon from "../../../../assets/images/icons/closeIcon.svg";
+import closeIcon from "../../../assets/images/icons/closeIcon.svg";
 
 const PopUpTopBar = ({ close, title, desc }) => {
 	return (
@@ -21,7 +21,7 @@ const PopUpTopBar = ({ close, title, desc }) => {
 			</div>
 			{title && (
 				<div className="pb-3 px-7 space-y-2 text-[--text-secondary]">
-					<h3 className="text-3xl text-[--text-brand] font-semibold">
+					<h3 className="text-3xl text-[--color-brand] font-semibold">
 						{title}
 					</h3>
 					<p>{desc}</p>
