@@ -3,19 +3,19 @@ import React from "react";
 const InvestNow = ({ data }) => {
 	return (
 		<div className="px-7 pb-8 space-y-8 text-[--text-secondary]">
-			<div className="pb-3 space-y-2">
+			{/* <div className="py-3 px-7 space-y-2 text-[--text-secondary]">
 				<h3 className="text-3xl text-[--text-brand] font-semibold">
-					Invest Now
+					Investment Now
 				</h3>
 				<p>Use the form below to purchase enough investment units.</p>
-			</div>
+			</div> */}
 
 			<div className="flex justify-between gap-5">
-				<p className="text-lg leading-[1.6rem] max-h-[3.2rem] font-medium text-[--text-secondary] capitalize">
+				<p className="text-xl leading-[1.65rem] max-h-[3.3rem] font-medium text-[--text-secondary] capitalize">
 					{data.title}
 				</p>
 				<div className="text-right">
-					<p className="text-[--text-brand] font-medium text-xl">
+					<p className="text-[--text-brand] font-medium text-2xl">
 						₦{data.value}
 					</p>
 					<p className="text-[--placeholder] font-light mt-[-8px]">Per unit</p>
