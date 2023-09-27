@@ -2,7 +2,7 @@
 import VisualCapture from "../../../components/forms/branded/VisualCapture";
 import SecureRoute from "../../../components/SecureRoute";
 
-function Page({ authenticatedUser, authenticationToken }) {
+function Page() {
   return (
     <div className=" space-y-6 min-h-[500px] flex flex-col justify-start  items-center">
       <div className="space-y-6 ">
@@ -17,11 +17,9 @@ function Page({ authenticatedUser, authenticationToken }) {
         </p>
       </div>
 
-      <VisualCapture user={authenticatedUser} token={authenticationToken} />
+      <VisualCapture />
     </div>
   );
 }
 
-export default function ProtectedPage(props) {
-  return <SecureRoute offspring={Page} {...props} />;
-}
+export default Page;

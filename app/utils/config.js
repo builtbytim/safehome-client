@@ -22,9 +22,11 @@ const config = {
     confirmEmailOtp: "/users/emails/confirm",
     getSession: "/users/session",
     signIn: "/users/sign-in",
-    uploadKycPicture: "/users/kyc/picture",
-    uploadKycID: "/users/kyc/id",
+    uploadKycPicture: "/users/kyc/photo",
+    uploadKycID: "/users/kyc/document",
     signOut: "/users/sign-out",
+    resetPassword: "/users/password/reset",
+    confirmResetPassword: "/users/password/confirm-reset",
   },
 
   redirectSearchParam: "redirect",

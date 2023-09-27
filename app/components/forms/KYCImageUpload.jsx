@@ -2,7 +2,7 @@
 
 import { CiImageOn } from "react-icons/ci";
 import { useDropzone } from "react-dropzone";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import cn from "classnames";
 import { BsX } from "react-icons/bs";
@@ -13,11 +13,27 @@ import config from "../../utils/config";
 import queryKeys from "../../utils/queryKeys";
 import { useNotifyStore } from "../../utils/store";
 import Reviewing from "../Reviewing";
+import { useSearchParams, useRouter } from "next/navigation";
 
-function KYCImageUpload({ user, token }) {
+function KYCImageUpload() {
   const setNotify = useNotifyStore((state) => state.setNotify);
   const [imageFile, setImageFile] = useState(null);
   const [rawFile, setRawFile] = useState(null);
+  const [authCode, setAuthCode] = useState(null);
+  const searchParams = useSearchParams();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (authCode) return;
+
+    if (searchParams.has("authCode")) {
+      const t = searchParams.get("authCode");
+
+      setAuthCode(t);
+    }
+  }, [searchParams, authCode]);
+
   const { mutate, isLoading, isSuccess } = useMutation({
     mutationKey: [queryKeys.kycIDPicture],
 
@@ -28,7 +44,9 @@ function KYCImageUpload({ user, token }) {
         formEncoded: true,
         url,
         body,
-        auth: token,
+        headers: {
+          "X-AUTH-CODE": authCode,
+        },
       });
 
       if (res.success) {
@@ -46,6 +64,10 @@ function KYCImageUpload({ user, token }) {
         allowClose: true,
         show: true,
       });
+    },
+
+    onSuccess: function (data, vars) {
+      router.replace(`/verify-kyc/photo?authCode=${data.code}`);
     },
   });
 

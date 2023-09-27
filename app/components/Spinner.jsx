@@ -5,12 +5,14 @@ const Spinner = ({ size = "small", invert = false }) => {
   const mini = size === "mini";
   const small = size === "small";
   const large = size === "large";
+  const huge = size === "huge";
   return (
     <div className="flex justify-center items-center h-full w-full">
       <div
         className={
-          "  block animate-spin-fast  rounded-full    " +
+          "  block animate-spin-2  rounded-full    " +
           cn({
+            "h-20 w-20 border-4": huge,
             "  h-12 w-12 border-4 ": large,
             " h-8 w-8 border-4 ": small,
             " h-6 w-6 border-2 ": mini,

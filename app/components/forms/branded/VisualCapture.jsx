@@ -1,7 +1,7 @@
 "use client";
 
 import LiveCapture, { CaptureArea, CaptureView } from "./LiveCapture";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cn from "classnames";
 import { useMutation } from "react-query";
 import { fetchUtil, makeUrl } from "../../../utils/fetchUtils";
@@ -10,11 +10,26 @@ import { useNotifyStore } from "../../../utils/store";
 import queryKeys from "../../../utils/queryKeys";
 import BarLoader from "../../BarLoader";
 import Reviewing from "../../Reviewing";
+import { useSearchParams, useRouter } from "next/navigation";
 
-function VisualCapture({ user, token }) {
+function VisualCapture() {
   const setNotify = useNotifyStore((state) => state.setNotify);
   const [captureState, setCaptureState] = useState("idle");
   const [photo, setPhoto] = useState(null);
+  const [authCode, setAuthCode] = useState(null);
+  const searchParams = useSearchParams();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (authCode) return;
+
+    if (searchParams.has("authCode")) {
+      const t = searchParams.get("authCode");
+
+      setAuthCode(t);
+    }
+  }, [searchParams, authCode]);
 
   const { mutate, isLoading, isSuccess } = useMutation({
     mutationKey: [queryKeys.kycPicture],
@@ -26,7 +41,9 @@ function VisualCapture({ user, token }) {
         formEncoded: true,
         url,
         body,
-        auth: token,
+        headers: {
+          "X-AUTH-CODE": authCode,
+        },
       });
 
       if (res.success) {
@@ -43,6 +60,20 @@ function VisualCapture({ user, token }) {
         content: error.message,
         allowClose: true,
         show: true,
+      });
+    },
+
+    onSuccess: function (data, vars) {
+      setNotify({
+        title: "Verification Complete",
+        content:
+          "Your verification is complete, your account will become active when we approve your KYC. We will notify you via email when it is done.",
+        allowClose: true,
+        show: true,
+        onAcceptText: "Sign In",
+        onAccept: () => {
+          router.push("/sign-in");
+        },
       });
     },
   });

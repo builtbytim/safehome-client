@@ -1,9 +1,8 @@
 "use client";
 
 import KYCImageUpload from "../../../components/forms/KYCImageUpload";
-import SecureRoute from "../../../components/SecureRoute";
 
-function ImageUpload({ authenticatedUser, authenticationToken }) {
+function Page() {
   return (
     <div className="">
       <div className="space-y-6 ">
@@ -21,12 +20,10 @@ function ImageUpload({ authenticatedUser, authenticationToken }) {
           Make sure it is clear. Supported format JPG, PNG, PDF.
         </p>
 
-        <KYCImageUpload user={authenticatedUser} token={authenticationToken} />
+        <KYCImageUpload />
       </div>
     </div>
   );
 }
 
-export default function ProtectedPage(props) {
-  return <SecureRoute offspring={ImageUpload} {...props} />;
-}
+export default Page;

@@ -42,7 +42,7 @@ async function req(params) {
   // console.log(params);
 
   if (res.success) {
-    return res.data;
+    return res;
   } else {
     console.log(res.errorMessage, res.error);
     throw new Error(extractErrorMessage(res));

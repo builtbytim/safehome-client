@@ -1,4 +1,4 @@
-import { BsX } from "react-icons/bs";
+import CancelButton from "../components/CancelButton";
 
 export default function Layout({ children }) {
   return (
@@ -7,7 +7,7 @@ export default function Layout({ children }) {
 
       <div className=" w-[607px]  max-w-[90%] lg:max-w-2xl shadow px-4 lg:px-8 py-4 lg:py-8 border rounded-brand border-[--lines] space-y-4 lg:space-y-8">
         <div className="flex flex-col justify-center items-end">
-          <BsX className="text-3xl transitioning hover:scale-[1.1] text-[#8D4000] cursor-pointer" />
+          <CancelButton />
         </div>
 
         <div className="w-full  flex flex-col justify-center items-center">

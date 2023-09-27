@@ -36,6 +36,9 @@ async function req(body) {
     body,
     method: "POST",
     url: makeUrl(config.apiPaths.requestEmailOtp),
+    headers: {
+      "X-AUTH-CODE": body.authCode,
+    },
   });
 
   if (res.success) {

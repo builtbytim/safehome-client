@@ -19,12 +19,29 @@ function VerifyEmail({ email }) {
   const [resendCount, setResendCount] = useState(0);
   const router = useRouter();
   const params = useSearchParams();
+  const [authCode, setAuthCode] = useState(null);
 
   const { remainingTime, setFutureTimestamp } = useCountdown(Date.now());
 
   const setNotify = useNotifyStore((state) => state.setNotify);
 
+  // extract auth code
+
   useEffect(() => {
+    if (authCode) return;
+
+    if (params.has("authCode")) {
+      const t = params.get("authCode");
+
+      setAuthCode(t);
+    }
+  }, [params, authCode]);
+
+  // auto confirm of email if token is supplied via search params
+
+  useEffect(() => {
+    if (!authCode) return;
+
     if (params.get("uid") && params.get("token")) {
       const uid = params.get("uid");
       const token = decodeFromBase64(params.get("token"));
@@ -40,16 +57,17 @@ function VerifyEmail({ email }) {
           token,
           foreignKey: email,
           uid,
+          authCode,
         });
 
         return;
       }
     } else {
       if (email) {
-        mutate({ email, channel: "EMAIL" });
+        mutate({ email, channel: "EMAIL", authCode });
       }
     }
-  }, []);
+  }, [authCode]);
 
   function onError(err) {
     setNotify({
@@ -81,12 +99,11 @@ function VerifyEmail({ email }) {
     setNotify({
       show: true,
       title: "OTP Confirmed",
-      content:
-        "Your account has been successfully verified. Proceed to sign in.",
+      content: "Your email has been confirmed. Proceed to KYC.",
       onAcceptText: "Continue",
       allowClose: false,
       onAccept: () => {
-        router.replace("/sign-in");
+        router.replace(`/verify-kyc/document?authCode=${data.code}`);
       },
     });
   }
@@ -106,12 +123,12 @@ function VerifyEmail({ email }) {
     if (isLoading) return;
 
     setOtp("");
-    mutate({ email, channel: "EMAIL" });
+    mutate({ email, channel: "EMAIL", authCode });
   }
 
   function handleActionBtn() {
     if (!codeSent) {
-      mutate({ email, channel: "EMAIL" });
+      mutate({ email, channel: "EMAIL", authCode });
       return;
     }
 
@@ -122,6 +139,7 @@ function VerifyEmail({ email }) {
       token: otp,
       foreignKey: email,
       uid: data?.uid || params.get("uid"),
+      authCode,
     });
   }
 

@@ -67,8 +67,12 @@ function SignUp() {
     reset();
   }
 
-  function onSuccess(data) {
-    router.push(`/verify-email/${data.email}`);
+  function onSuccess(result) {
+    const data = result.data;
+    const headers = result.headers;
+    const authCode = headers.get("X-AUTH-CODE");
+
+    router.push(`/verify-email/${data.email}?authCode=${authCode}`);
   }
 
   async function handleSubmit(values) {

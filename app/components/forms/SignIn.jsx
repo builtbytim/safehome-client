@@ -38,6 +38,32 @@ function SignIn() {
 
         break;
 
+      case "VERIFY_KYC_DOC":
+        setNotify({
+          show: true,
+          title: "Unable to sign in",
+          content: err?.message,
+          onAcceptText: "Verify KYC",
+          onAccept: () => {
+            router.push(`/verify-kyc/document`);
+          },
+        });
+
+        break;
+
+      case "VERIFY_KYC_PHOTO":
+        setNotify({
+          show: true,
+          title: "Unable to sign in",
+          content: err?.message,
+          onAcceptText: "Verify KYC",
+          onAccept: () => {
+            router.push(`/verify-kyc/photo`);
+          },
+        });
+
+        break;
+
       default:
         setNotify({
           show: true,
