@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import BarLoader from "../BarLoader";
 import useSignIn from "../../utils/hooks/useSignIn";
 import { useNotifyStore } from "../../utils/store";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import config from "../../utils/config";
 import { saveToLocalStorage } from "../../utils/security";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
@@ -14,6 +14,11 @@ import { useState } from "react";
 function SignIn() {
   const setNotify = useNotifyStore((state) => state.setNotify);
   const [showPassword, setShowPassword] = useState(false);
+
+  const searchParams = useSearchParams();
+
+  const mode =
+    searchParams.get(config.signInModeParam) || config.signInModes.REGULAR;
 
   function toggleShowPassword() {
     setShowPassword(!showPassword);
@@ -84,6 +89,12 @@ function SignIn() {
 
     saveToLocalStorage(tokenObj, `${config.localStorageKey}:token`);
 
+    if (searchParams.has(config.redirectSearchParam)) {
+      let targetUrl = searchParams.get(config.redirectSearchParam);
+      router.push(decodeURIComponent(targetUrl));
+      return;
+    }
+
     router.push(config.authenticatedHome);
   }
 
@@ -120,7 +131,14 @@ function SignIn() {
 
           <div>
             <legend className="font-bold text-center text-lg lg:text-xl text-[--color-brand]">
-              Log in to your account
+              {mode === config.signInModes.AUTH_FAILED &&
+                "Session Expired, Log in again"}
+              {mode === config.signInModes.REGULAR && "Log in to your account"}
+
+              {mode === config.signInModes.NEW_USER &&
+                "Hey new user, Log in now"}
+              {!Object.values(config.signInModes).includes(mode) &&
+                "Log in to your account"}
             </legend>
             <p className="text-center text-xs text-[--text-secondary] ">
               {" "}

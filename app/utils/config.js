@@ -29,7 +29,14 @@ const config = {
     confirmResetPassword: "/users/password/confirm-reset",
   },
 
+  signInModes: {
+    NEW_USER: "NU",
+    REGULAR: "RG",
+    AUTH_FAILED: "AUF",
+  },
+
   redirectSearchParam: "redirect",
+  signInModeParam: "mode",
   loginUrl: "/sign-in",
 
   signInRedirectIgnore: ["/sign-in", "/sign-up"],
