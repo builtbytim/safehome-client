@@ -45,6 +45,8 @@ export default function SecureRoute(props) {
   if (authenticated) {
     // console.log("Authentication Sucesssful!");
 
+    console.log(targetUrl);
+
     // * if autoLogin, skips login page on success auth
 
     if (autoLogin) {
@@ -95,6 +97,7 @@ export default function SecureRoute(props) {
     const newUrl = new URL(config.loginUrl, window.location.origin);
 
     newUrl.searchParams.append("t", 3);
+
     newUrl.searchParams.append(
       config.redirectSearchParam,
       redirectUrl.pathname
