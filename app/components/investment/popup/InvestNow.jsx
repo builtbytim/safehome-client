@@ -1,6 +1,12 @@
-import React from "react";
+"use client";
+import { useState } from "react";
 
 const InvestNow = ({ data }) => {
+	const [toggleActive, setToggleActive] = useState(false);
+
+	const toggleFunc = () => {
+		setToggleActive((prev) => (prev = !prev));
+	};
 	return (
 		<div className="px-7 pb-8 space-y-8 text-[--text-secondary]">
 			{/* <div className="py-3 px-7 space-y-2 text-[--text-secondary]">
@@ -50,8 +56,15 @@ const InvestNow = ({ data }) => {
 			</form>
 			<div className="flex gap-3">
 				<div className="block w-[51px] h-[31px] bg-[--lines] rounded-3xl">
-					<button className="block w-[51px] h-[31px] bg-[--lines] rounded-3xl p-[4px]">
-						<span className="block w-[23px] h-[23px] bg-white rounded-full"></span>
+					<button
+						className={`h-[31px] w-[53px] rounded-3xl block p-[3px] ${
+							toggleActive
+								? "bg-[--color-green] text-right"
+								: "bg-[--lines] text-left"
+						}`}
+						onClick={() => toggleFunc()}
+					>
+						<span className="bg-white rounded-full h-[25px] w-[25px] inline-block shadow"></span>
 					</button>
 				</div>
 				<p>
