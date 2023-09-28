@@ -2,10 +2,8 @@
 
 import SecureRoute from "../../../components/SecureRoute";
 import HeaderSavings from "../../../components/layout/headers/HeaderSavings";
-import OverviewCard from "../../../components/savings/OverviewCard";
 import TabSwitch from "../../../components/savings/TabSwitch";
 import Image from "next/image";
-import HomeTarget from "../../../components/savings/HomeTarget";
 import TargetIcon from "../../../../assets/images/icons/target.svg";
 import { useRouter } from "next/navigation";
 import SavingsSVG from "../../../components/svg/SavingsSVG";
@@ -56,18 +54,14 @@ function Page({ authenticatedUser }) {
     if (tabId === tabItemsArr[0][0].tabId) {
       return router.push("/savings");
     }
-
-    if (tabId === tabItemsArr[0][2].tabId) {
-      return router.push("/savings/locked");
-    }
   }
 
   return (
     <div className="space-y-2  lg:space-y-8 w-full min-h-screen pb-16">
       <HeaderSavings
         user={authenticatedUser}
-        title="Goal Savings"
-        extraClasses="text-[--text-brand-2]"
+        title="Locked Savings"
+        extraClasses="text-[--color-brand] border-[--color-brand]"
       />
 
       <main className=" space-y-2 md:space-y-10">
@@ -75,20 +69,20 @@ function Page({ authenticatedUser }) {
           <div className="flex flex-row justify-between items-center space-x-8">
             <TabSwitch
               tabParamName="tabGoals"
+              defaultTab={2}
               tabItems={tabItemsArr[0]}
               persistActiveTab={handleTabChange}
-              defaultTab={1}
-              extraClasses="text-[--text-brand-2]  border-[--text-brand-2]"
+              extraClasses="text-[--color-brand]  border-[--color-brand]"
             />
 
             <div className="hidden md:block ">
-              <button className="btn-3 px-6 whitespace-nowrap ">
-                Create a goal
+              <button className="btn-3 bg-[#8d4000] hover:bg-[#8d4000]/80 px-6 whitespace-nowrap ">
+                Lock your funds
               </button>
             </div>
           </div>
           <div className="grid grid-cols-5 gap-2 md:gap-4 lg:gap-6 xl:gap-8 justify-center items-center">
-            <div className="col-span-5 self-stretch md:col-span-3 xl:col-span-4 rounded-[8px] md:rounded-[16px] border border-[--lines] p-6 flex flex-col justify-center items-start space-y-6">
+            <div className="col-span-5 self-stretch md:col-span-5 xl:col-span-5 rounded-[8px] md:rounded-[16px] border border-[--lines] p-6 flex flex-col justify-center items-start space-y-6">
               <div>
                 <Image src={TargetIcon} alt="my funds" width="48" />
               </div>
@@ -97,47 +91,66 @@ function Page({ authenticatedUser }) {
                 Total Balance
               </h2>
 
-              <p className="text-[--text-brand-2] font-bold text-xl lg:text-2xl">
+              <p className="text-[--color-brand] font-bold text-xl lg:text-2xl">
                 ₦0
               </p>
             </div>
 
             <div className="col-span-5 md:hidden">
-              <span className="text-[--text-brand-2] uppercase">
-                {" "}
-                Interest &nbsp;&nbsp;
-              </span>{" "}
-              <span className="text-[--text-secondary]"> 5% p.a </span>
-            </div>
-            <div className="col-span-5 md:hidden">
-              <button className="btn-3 ">Create a goal</button>
-            </div>
-
-            <div className="hidden self-stretch md:flex md:col-span-2 xl:col-span-1 rounded-brand border border-[--lines] p-6  flex-col justify-center items-start space-y-6">
-              <p className=" text-[--text-secondary] uppercase font-medium">
-                Interest
-              </p>
-              <p className="text-[--text-brand-2] font-bold text-xl lg:text-2xl">
-                0%
-              </p>
-              <p className=" text-[--text-secondary] font-medium">Per Annum</p>
+              <button className="btn-3 bg-[#8d4000] hover:bg-[#8d4000]/80  ">
+                Lock your funds{" "}
+              </button>
             </div>
           </div>
         </section>
 
         <section className="bg-white rounded-brand  pt-2 pb-8 md:p-8 space-y-4">
           <TabSwitch
+            tabParamName="tab02"
             tabItems={tabItemsArr[1]}
-            extraClasses="text-[--text-brand-2]  border-[--text-brand-2]"
+            extraClasses="text-[--color-brand]  border-[--color-brand]"
           />
 
-          {/* Home targets starts  */}
-
-          <div className="grid grid-cols-2 gap-2 md:gap-4 lg:gap-6 xl:gap-8 justify-center items-center">
-            {Array.from({ length: 4 })
-              .fill(0)
+          <div className="space-y-4 pt-4">
+            {Array(6)
+              .fill(2)
               .map((v, i) => {
-                return <HomeTarget key={i} />;
+                return (
+                  <div
+                    key={i}
+                    className="flex flex-row justify-between items-center "
+                  >
+                    <div className="text-left flex flex-col justify-center items-start space-y-1 font-medium">
+                      <span className="text-sm capitalize text-[--placeholder]">
+                        {" "}
+                        Title{" "}
+                      </span>
+
+                      <span className="text-[--primary] ">
+                        Smart Lekki Office
+                      </span>
+                    </div>
+
+                    <div className="text-left flex flex-col justify-center items-start space-y-1 font-medium">
+                      <span className="text-sm capitalize text-[--placeholder]">
+                        {" "}
+                        Amount
+                      </span>
+
+                      <span className="text-[--color-brand] uppercase">
+                        #500,000
+                      </span>
+                    </div>
+
+                    <div className="text-left flex flex-col justify-center items-start space-y-1 font-medium">
+                      <span className="text-sm capitalize text-[--placeholder]">
+                        Lock Duration
+                      </span>
+
+                      <span className="text-[--color-brand] ">365 days</span>
+                    </div>
+                  </div>
+                );
               })}
           </div>
         </section>
