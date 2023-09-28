@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import SavingsSVG from "../../../components/svg/SavingsSVG";
 import LockSVG from "../../../components/svg/LockSVG";
 import TargetSVG from "../../../components/svg/TargetSVG";
+import LockedSavings from "../../../components/savings/LockedSavings";
 
 function Page({ authenticatedUser }) {
   const router = useRouter();
@@ -115,42 +116,7 @@ function Page({ authenticatedUser }) {
             {Array(6)
               .fill(2)
               .map((v, i) => {
-                return (
-                  <div
-                    key={i}
-                    className="flex flex-row justify-between items-center "
-                  >
-                    <div className="text-left flex flex-col justify-center items-start space-y-1 font-medium">
-                      <span className="text-sm capitalize text-[--placeholder]">
-                        {" "}
-                        Title{" "}
-                      </span>
-
-                      <span className="text-[--primary] ">
-                        Smart Lekki Office
-                      </span>
-                    </div>
-
-                    <div className="text-left flex flex-col justify-center items-start space-y-1 font-medium">
-                      <span className="text-sm capitalize text-[--placeholder]">
-                        {" "}
-                        Amount
-                      </span>
-
-                      <span className="text-[--color-brand] uppercase">
-                        #500,000
-                      </span>
-                    </div>
-
-                    <div className="text-left flex flex-col justify-center items-start space-y-1 font-medium">
-                      <span className="text-sm capitalize text-[--placeholder]">
-                        Lock Duration
-                      </span>
-
-                      <span className="text-[--color-brand] ">365 days</span>
-                    </div>
-                  </div>
-                );
+                return <LockedSavings key={i} />;
               })}
           </div>
         </section>
