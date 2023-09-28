@@ -24,8 +24,11 @@ export default function Notifications() {
     <Overlay
       ClickBack={() => {
         return (
-          <div className="hidden md:block" onClick={toggleNotifications}>
-            <BsX className="text-4xl text-[--invert]" />
+          <div
+            className="hidden md:block hover:cursor-pointer"
+            onClick={toggleNotifications}
+          >
+            <BsX className="text-4xl text-white hover:text-white/80" />
           </div>
         );
       }}
@@ -65,9 +68,9 @@ export default function Notifications() {
               <div className="w-full flex h-full flex-col justify-center items-center">
                 <div className="h-full py-16   space-y-4  mt-4 flex flex-col justify-center items-center text-[--color-brand-2]">
                   <FcEmptyFilter className="text-4xl text-[--color-brand-2] hover:text-[--color-brand-2]/80 transition-flow" />
-                  <p className="text-center text-xl md:text-2xl">
+                  <p className="text-center text-lg md:text-xl">
                     {" "}
-                    No notifications at the moment.
+                    No notifications at the moment
                   </p>
                 </div>
               </div>

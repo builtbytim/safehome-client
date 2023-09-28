@@ -163,7 +163,7 @@
 
 @layer components {
   .transitioning {
-    @apply transition  duration-[800];
+    @apply transition-all  duration-[0.4s];
   }
 
   .rounded-brand {
@@ -178,8 +178,16 @@
     @apply bg-[--color-brand] disabled:pointer-events-none disabled:opacity-60  transitioning  hover:bg-[--color-brand-hover] text-white rounded-[4px] px-2 py-2  w-full;
   }
 
+  .btn-1-v1 {
+    @apply btn-1 bg-[--text-brand-2] hover:bg-[--text-brand-2-hover];
+  }
+
   .btn-2 {
     @apply hover:bg-[#8d4000]/10 disabled:pointer-events-none disabled:opacity-60  transitioning  bg-white border border-[--color-brand] text-[--color-brand] rounded-[4px] p-2 w-full;
+  }
+
+  .btn-2-v1 {
+    @apply btn-2 text-[--text-brand-2] border-[--text-brand-2] hover:bg-[#ff9100]/10;
   }
 
   .btn-3 {

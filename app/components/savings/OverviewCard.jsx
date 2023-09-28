@@ -24,7 +24,7 @@ function OverviewCard() {
             containerId="scroll-indicators"
             activeClass="inline-block rounded-full  w-[8px] bg-[--text-brand] p-1"
             className="inline-block rounded-full border p-1 "
-            to="interest-earned"
+            to="total-balance"
           ></ScrollLink>
 
           <ScrollLink
@@ -40,6 +40,12 @@ function OverviewCard() {
             className="inline-block rounded-full border p-1 "
             to="locked-savings"
           ></ScrollLink>
+          <ScrollLink
+            containerId="scroll-indicators"
+            activeClass="inline-block rounded-full  w-[8px] bg-[--text-brand] p-1"
+            className="inline-block rounded-full border p-1 "
+            to="interest-earned"
+          ></ScrollLink>
         </div>
 
         {/* Scroll Indicatots end  */}
@@ -49,7 +55,7 @@ function OverviewCard() {
           className="flex  flex-row justify-between items-center overflow-x-auto whitespace-nowrap space-x-4 no-scrollbar text-sm lg:text-lg"
         >
           <div
-            id="interest-earned"
+            id="total-balance"
             className="bg-[#1E07001A] min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6"
           >
             <div>
@@ -57,8 +63,7 @@ function OverviewCard() {
             </div>
 
             <h2 className=" text-[--text-secondary] font-medium">
-              {" "}
-              Interest Earned{" "}
+              Total Balance
             </h2>
 
             <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
@@ -118,6 +123,23 @@ function OverviewCard() {
               ₦0
             </p>
           </Link>
+
+          <div
+            id="interest-earned"
+            className="bg-[#1E07001A] min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6"
+          >
+            <div>
+              <Image src={SavingsImage} alt="my funds" width="48" />
+            </div>
+
+            <h2 className=" text-[--text-secondary] font-medium">
+              Interest Earned
+            </h2>
+
+            <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
+              ₦0
+            </p>
+          </div>
         </div>
       </div>
     </section>

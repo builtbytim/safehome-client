@@ -17,7 +17,7 @@ function Page() {
         </p>
 
         <p className="text-[--placeholder]">
-          Make sure it is clear. Supported format JPG, PNG, PDF.
+          Make sure it is clear. Supported format JPG, PNG, PDF. (2MB max.)
         </p>
 
         <KYCImageUpload />

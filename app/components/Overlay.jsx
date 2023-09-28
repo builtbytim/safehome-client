@@ -21,7 +21,7 @@ export default function Overlay({
         }
       >
         {ClickBack && (
-          <div className="absolute z-30 top-4 right-2 md:righ-4">
+          <div className="absolute z-30 top-4 right-2 md:righ-4 xl:right-8">
             <ClickBack />
           </div>
         )}
