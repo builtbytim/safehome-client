@@ -13,7 +13,8 @@ import TargetSVG from "../../../components/svg/TargetSVG";
 import {
   GoalCreation,
   GoalCreation2,
-} from "../../../components/savings/popups";
+  GoalOverview,
+} from "../../../components/savings/goalsPopups";
 import { useState } from "react";
 
 const tabItemsArr = [
@@ -58,6 +59,11 @@ function Page({ authenticatedUser }) {
   const router = useRouter();
   const [showGoalCreationF1, setShowGoalCreationF1] = useState(false);
   const [showGoalCreationF2, setShowGoalCreationF2] = useState(false);
+  const [showGoalOverview, setShowGoalOverview] = useState(false);
+
+  function toggleGoalOverview() {
+    setShowGoalOverview(!showGoalOverview);
+  }
 
   function toggleGoalCreationF1() {
     setShowGoalCreationF1(!showGoalCreationF1);
@@ -94,6 +100,9 @@ function Page({ authenticatedUser }) {
         toggleShow={toggleGoalCreationF2}
         show={showGoalCreationF2}
       />
+
+      <GoalOverview show={showGoalOverview} toggleShow={toggleGoalOverview} />
+
       <div className="space-y-2  lg:space-y-8 w-full min-h-screen pb-16">
         <HeaderSavings
           user={authenticatedUser}
