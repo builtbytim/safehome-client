@@ -25,9 +25,11 @@ export default function Page() {
           </Link>
         </p>
 
-        <p className="text-center  lg:no-underline hover:underline cursor-pointer text-sm text-[--text-brand-2] sm:text-white ">
-          Forgot password?
-        </p>
+        <Link href="/password/reset">
+          <p className="text-center  lg:no-underline hover:underline cursor-pointer text-sm text-[--text-brand-2] sm:text-white ">
+            Forgot password?
+          </p>
+        </Link>
       </div>
     </>
   );

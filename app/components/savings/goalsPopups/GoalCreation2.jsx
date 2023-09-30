@@ -4,11 +4,8 @@ import React from "react";
 import Overlay2 from "../../Overlay2";
 import { Slide } from "react-reveal";
 import { BiX } from "react-icons/bi";
-import Image from "next/image";
-import GoalImage from "../../../../assets/images/investment/inv1.png";
 import { Form, Formik, Field, ErrorMessage } from "formik";
-import { useCallback, useState } from "react";
-import cn from "classnames";
+import SwitchField from "../../forms/branded/SwitchField";
 
 function GoalCreation2({ show = false, toggleShow }) {
   if (!show) return null;
@@ -26,9 +23,9 @@ function GoalCreation2({ show = false, toggleShow }) {
             </div>
           </div>
 
-          <div className="space-y-4 mt-6 max-h-[75vh] overflow-y-auto no-scrollbar pb-8">
+          <div className="space-y-4 mt-6 max-h-[90vh] md:max-h-[75vh] overflow-y-auto no-scrollbar pb-8">
             <h1 className="text-[--text-brand-2] text-lg md:text-xl lg:text-2xl font-semibold">
-              Final Step
+              Final Setup Stage
             </h1>
             <p className="font-medium text-[--primary] text-sm md:text-base">
               Finalize your goal settings
@@ -150,6 +147,29 @@ function GoalCreation2({ show = false, toggleShow }) {
 
                         <ErrorMessage
                           name="primarySource"
+                          component="div"
+                          className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                        />
+                      </div>
+
+                      <div className="w-full relative flex flex-col justify-center items-start space-y-2 ">
+                        <SwitchField />
+                        <label
+                          htmlFor="acknowledgement"
+                          className="text-[--text-secondary] font-medium text-sm text-left"
+                        >
+                          I acknowledge and agree that in the event I do not
+                          achieve the Goal amount of (₦340,000.00) by the set
+                          withdrawal date, I will forfeit the interest accrued
+                          on this Goal savings. Additionally, I understand that
+                          breaking the Goal before the withdrawal date will
+                          result in the loss of all accrued interest and I will
+                          be responsible for bearing the 1% payment gateway
+                          charge for processing my deposits into this Goal
+                        </label>
+
+                        <ErrorMessage
+                          name="acknowledgement"
                           component="div"
                           className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                         />

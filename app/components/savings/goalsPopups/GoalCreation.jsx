@@ -45,7 +45,7 @@ function GoalCreation({ show = false, toggleShow, handleSubmit }) {
             </div>
           </div>
 
-          <div className="space-y-4 mt-6 max-h-[75vh] overflow-y-auto no-scrollbar pb-8">
+          <div className="space-y-4 mt-6 max-h-[90vh] md:max-h-[75vh] overflow-y-auto no-scrollbar pb-8">
             <h1 className="text-[--text-brand-2] text-lg md:text-xl lg:text-2xl font-semibold">
               {" "}
               Create a Goal{" "}
@@ -219,7 +219,7 @@ function GoalCreation({ show = false, toggleShow, handleSubmit }) {
                           className="btn-1 bg-[--text-brand-2] hover:bg-[--text-brand-2-hover] "
                         >
                           {" "}
-                          Continue{" "}
+                          Continue Setup
                         </button>
                         <button
                           type="button"
