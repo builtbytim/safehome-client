@@ -2,7 +2,6 @@ import Overlay2 from "../../Overlay2";
 import { Slide } from "react-reveal";
 import { BiX } from "react-icons/bi";
 import SmallDetailsCard from "./SmallDetailsCard";
-import SwitchField from "../../forms/branded/SwitchField";
 
 function SafelockOverview({ toggleShow, handleSubmit }) {
   return (
