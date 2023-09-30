@@ -35,7 +35,7 @@ export default function Notifications() {
       skipWrapper
       z={3}
     >
-      <Slide left className="" duration={300}>
+      <Slide left className="" delay={200} duration={300}>
         {/* <Zoom top right duration="250" className="w-full"> */}
 
         <div

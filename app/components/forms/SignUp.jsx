@@ -6,7 +6,7 @@ import { useState } from "react";
 import cn from "classnames";
 import { BsArrowRight, BsArrowLeftShort } from "react-icons/bs";
 import { parsePhoneNumber } from "awesome-phonenumber";
-import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 
 import useSignUp from "../../utils/hooks/useSignUp";
 import { useNotifyStore } from "../../utils/store";
@@ -260,11 +260,7 @@ function SignUp() {
                       className="absolute top-[50%] -translate-y-[50%] right-[5%] text-[--text-secondary] text-xl text-right cursor-pointer"
                       onClick={toggleShowPassword}
                     >
-                      {showPassword ? (
-                        <AiOutlineEyeInvisible />
-                      ) : (
-                        <AiOutlineEye />
-                      )}
+                      {showPassword ? <BsEyeSlashFill /> : <BsEyeFill />}
                     </div>
                   </div>
                   <ErrorMessage
@@ -293,11 +289,7 @@ function SignUp() {
                       className="absolute top-[50%] -translate-y-[50%] right-[5%] text-[--text-secondary] text-xl text-right cursor-pointer"
                       onClick={toggleShowPassword}
                     >
-                      {showPassword ? (
-                        <AiOutlineEyeInvisible />
-                      ) : (
-                        <AiOutlineEye />
-                      )}
+                      {showPassword ? <BsEyeSlashFill /> : <BsEyeFill />}
                     </div>
                   </div>
                   <ErrorMessage

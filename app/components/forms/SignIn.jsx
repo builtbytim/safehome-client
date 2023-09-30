@@ -8,7 +8,7 @@ import { useNotifyStore } from "../../utils/store";
 import { useRouter, useSearchParams } from "next/navigation";
 import config from "../../utils/config";
 import { saveToLocalStorage } from "../../utils/security";
-import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { useState } from "react";
 
 function SignIn() {
@@ -189,7 +189,7 @@ function SignIn() {
                   className="absolute top-[50%] -translate-y-[50%] right-[5%] text-[--text-secondary]  text-right cursor-pointer text-xl"
                   onClick={toggleShowPassword}
                 >
-                  {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                  {showPassword ? <BsEyeSlashFill /> : <BsEyeFill />}
                 </div>
               </div>
 

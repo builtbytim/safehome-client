@@ -5,6 +5,7 @@ import HeaderSavings from "../../components/layout/headers/HeaderSavings";
 import OverviewCard from "../../components/savings/OverviewCard";
 import TabSwitch from "../../components/savings/TabSwitch";
 import HomeTarget from "../../components/savings/HomeTarget";
+import Link from "next/link";
 
 const tabItems = [
   {
@@ -24,7 +25,6 @@ function Page({ authenticatedUser }) {
     <>
       {/* Pop ups starts  */}
 
-
       {/* Pop ups ends  */}
       <div className="space-y-2  lg:space-y-8 w-full min-h-screen pb-16">
         <HeaderSavings user={authenticatedUser} />
@@ -33,8 +33,13 @@ function Page({ authenticatedUser }) {
           <OverviewCard />
           <section className="bg-white rounded-brand  py-8 md:p-8 space-y-4">
             <div className="flex flex-row justify-start items-center space-x-4 max-w-[70%] md:max-w-[60%] lg:max-w-[40%] ">
-              <button className="btn-1 text-sm "> Goal Savings </button>
-              <button className="btn-2 text-sm"> Locked Savings </button>
+              <Link className="w-full" href="/savings/goals">
+                <button className="btn-1 text-sm "> Goal Savings </button>
+              </Link>
+
+              <Link className="w-full" href="/savings/locked">
+                <button className="btn-2 text-sm "> Locked Savings </button>
+              </Link>
             </div>
             <TabSwitch tabItems={tabItems} />
 
