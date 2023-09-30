@@ -7,8 +7,7 @@ const ToggleCard = ({ heading, text, recommended, active, toggleFunc }) => {
 		<div className="flex w-full pb-5 border-b border-[--lines] tex-[--text-secondary] items-center">
 			<div className="space-y-2 w-full">
 				<h3 className="tems-center text-lg font-medium w-full">
-					{heading}{" "}
-					<PiQuestionFill className="text-[--color-green] inline mb-1" />{" "}
+					{heading} <PiQuestionFill className="text-[--green] inline mb-1" />{" "}
 					{recommended === "yes" && (
 						<span className="text-[--placeholder]">(Recommended)</span>
 					)}
@@ -19,7 +18,7 @@ const ToggleCard = ({ heading, text, recommended, active, toggleFunc }) => {
 			<div className="">
 				<button
 					className={`h-[31px] w-[53px] rounded-3xl block p-[3px] ${
-						active ? "bg-[--color-green] text-right" : "bg-[--lines] text-left"
+						active ? "bg-[--green] text-right" : "bg-[--lines] text-left"
 					}`}
 					onClick={() => toggleFunc()}
 				>

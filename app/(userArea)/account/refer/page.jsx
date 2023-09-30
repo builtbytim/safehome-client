@@ -20,10 +20,7 @@ export default function Refer() {
 				<h3 className="text-3xl text-[--color-brand] font-semibold">
 					Referrals
 				</h3>
-				<p>
-					You can reach us via our phone numbers, social media profiles, email
-					etc.
-				</p>
+				<p>Refer and earn 40% per referral.</p>
 			</div>
 		</main>
 	);

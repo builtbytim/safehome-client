@@ -5,7 +5,11 @@ import { useState } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import Image from "next/image";
 
-import { BasicInfoTab, PasswordTab } from "../../components/account";
+import {
+	BasicInfoTab,
+	PasswordTab,
+	NextOfKinTab,
+} from "../../components/account";
 
 function Page({ authenticatedUser }) {
 	const [tabState, setTabState] = useState(0);
@@ -21,7 +25,7 @@ function Page({ authenticatedUser }) {
 				</p>
 			</div>
 			<div>
-				<div className="flex">
+				<div className="flex gap-[2px]">
 					<button
 						className={
 							tabState === 0
@@ -42,8 +46,24 @@ function Page({ authenticatedUser }) {
 					>
 						Password
 					</button>
+					<button
+						className={
+							tabState === 2
+								? "account-tab-button-active"
+								: "account-tab-button"
+						}
+						onClick={() => setTabState(2)}
+					>
+						Next of Kin
+					</button>
 				</div>
-				{tabState === 0 ? <BasicInfoTab /> : <PasswordTab />}
+				{tabState === 0 ? (
+					<BasicInfoTab />
+				) : tabState === 1 ? (
+					<PasswordTab />
+				) : (
+					<NextOfKinTab />
+				)}
 				<div>
 					{tabState === 0 ? (
 						<div className="py-10 text-center">
@@ -51,10 +71,16 @@ function Page({ authenticatedUser }) {
 								Update Profile
 							</button>
 						</div>
-					) : (
+					) : tabState === 1 ? (
 						<div className="py-10 text-center">
 							<button className="w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg">
 								Change Password
+							</button>
+						</div>
+					) : (
+						<div className="py-10 text-center">
+							<button className="w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg">
+								Update Next of Kin
 							</button>
 						</div>
 					)}

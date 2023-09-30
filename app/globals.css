@@ -20,7 +20,9 @@
   --b1: #f9f9f9;
   --platinum: #e6e6e6;
   --green: #087940;
-  --color-green: #34c759;
+  --visa-bg: linear-gradient(112.7deg, #4682B4 0%, #87CEEB 43.77%, #0000FF 100.06%);
+  --mastercard-bg: linear-gradient(112.7deg, #DC143C 0%, #FF0000 43.77%, #800000 100.06%);
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -81,6 +83,14 @@
   background-color: #c7c7cd;
 }
 
+.visa-bg{
+  background: linear-gradient(112.7deg, #4682B4 0%, #87CEEB 43.77%, #0000FF 100.06%);
+}
+
+.mastercard-bg{
+  background: linear-gradient(112.7deg, #DC143C 0%, #FF0000 43.77%, #800000 100.06%);
+}
+
 /* investment page custom styles */
 .tab-button {
   @apply text-sm md:text-lg text-[--placeholder] px-3 pb-2 lg:px-7 lg:pb-2 border-b border-[--lines] hover:border-[--placeholder] mb-[-1px];
@@ -90,8 +100,17 @@
   @apply text-sm md:text-lg text-[--text-brand] px-3 pb-2 lg:px-7 lg:pb-2  border-b border-[--text-brand] min-w-[100px] mb-[-1px];
 }
 
-.filter-btn {
-  @apply text-sm md:text-base text-[--placeholder] border border-[--invert] px-5 py-2 md:px-7 md:py-2 min-w-[100px] rounded hover:border-[--placeholder] inline-block w-auto;
+.tab-button-2{
+  @apply text-sm md:text-lg text-[--placeholder] px-3 pb-2 lg:px-7 lg:pb-2 border-b-2 border-[--placeholder] hover:border-[--placeholder] mb-[-1px]
+}
+
+.tab-button-active-2{
+  @apply text-sm md:text-lg text-[--color-brand] px-3 pb-2 lg:px-7 lg:pb-2  border-b-2 border-[--color-brand] min-w-[100px] mb-[-1px]
+}
+
+.filter-btn{
+  @apply text-sm md:text-base text-[--placeholder] border border-[--invert] px-5 py-2 md:px-7 md:py-2 min-w-[100px] rounded hover:border-[--placeholder] inline-block w-auto
+
 }
 
 .filter-btn-active {
@@ -153,6 +172,7 @@
 .radio-btn-container input:checked ~ .checkmark {
   @apply bg-[--color-brand];
 }
+  
 * {
   @apply custom-scrollbar;
 }

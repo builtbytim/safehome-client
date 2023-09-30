@@ -8,6 +8,7 @@ import {
 	Authenticator,
 	SMSAuthenticator,
 	PopUpTopBar,
+	SecurityQuestionAuth,
 } from "../../../components/security";
 
 import { PiCaretUpBold, PiCaretDownBold } from "react-icons/pi";
@@ -16,8 +17,11 @@ import picIcon from "../../../../assets/images/icons/picIcon.svg";
 export default function Security() {
 	const [authAppToggled, setAuthAppToggled] = useState(false);
 	const [smsAuthToggled, setSmsAuthToggled] = useState(false);
+	const [securityQuestionToggled, setSecurityQuestionToggled] = useState(false);
+
 	const [showAuthApp, setShowAuthApp] = useState(false);
 	const [showSMSAuth, setShowSMSAuth] = useState(false);
+	const [showSecurityQuestion, setShowSecurityQuestion] = useState(false);
 
 	const saveAuth = () => {
 		setShowAuthApp(false);
@@ -27,6 +31,11 @@ export default function Security() {
 	const saveSMSAuth = () => {
 		setShowSMSAuth(false);
 		setSmsAuthToggled(true);
+	};
+
+	const setSecurityQuestion = () => {
+		setShowSecurityQuestion(false);
+		setSecurityQuestionToggled(true);
 	};
 	return (
 		<main className=" space-y-8 lg:space-y-8 text-[--text-secondary] border border-[--lines] p-5 h-full min-h-[80vh] rounded-2xl">
@@ -63,6 +72,17 @@ export default function Security() {
 							: setShowSMSAuth(true)
 					}
 				/>
+				<ToggleCard
+					heading="Security Question"
+					text="Answer a security question to confirm it’s you."
+					recommended="yes"
+					active={securityQuestionToggled}
+					toggleFunc={() =>
+						securityQuestionToggled === true
+							? setSecurityQuestionToggled(false)
+							: setShowSecurityQuestion(true)
+					}
+				/>
 			</div>
 
 			{showAuthApp && (
@@ -96,6 +116,24 @@ export default function Security() {
 						<SMSAuthenticator
 							saveFunc={() => saveSMSAuth()}
 							closeFunc={() => setShowSMSAuth(false)}
+						/>
+					</div>
+				</div>
+			)}
+
+			{showSecurityQuestion && (
+				<div className="fixed top-[-40px] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow">
+					<div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
+						<PopUpTopBar
+							close={() => setShowSecurityQuestion(false)}
+							title="Security Question"
+							desc="Answer a security question to confirm it’s you."
+						/>
+					</div>
+					<div className="pt-[230px] h-full">
+						<SecurityQuestionAuth
+							saveFunc={() => setSecurityQuestion()}
+							closeFunc={() => setShowSecurityQuestion(false)}
 						/>
 					</div>
 				</div>
