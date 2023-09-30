@@ -5,6 +5,7 @@ import Image from "next/image";
 import bankLogo from "../../../assets/images/zenith-logo.svg";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 
+<<<<<<< HEAD
 const banksData = [
 	{
 		logo: bankLogo,
@@ -29,6 +30,17 @@ const banksData = [
 // 		<p>{text}</p>
 // 	</button>
 // );
+=======
+const iconBox = ({ icon, text, buttonFunction }) => (
+	<button
+		className="w-full py-2 bg-white hover:bg-[--color-brand] hover:text-white flex gap-2"
+		onClick={() => buttonFunction()}
+	>
+		<div>{icon}</div>
+		<p>{text}</p>
+	</button>
+);
+>>>>>>> a093b9abec02d8f87703b932daae9f59e68fe111
 
 const CardDisplay = ({ logo, name, bank, acct_num }) => (
 	<div
@@ -62,6 +74,7 @@ const CardDisplay = ({ logo, name, bank, acct_num }) => (
 const BankDetailsTab = () => {
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[650px]">
+<<<<<<< HEAD
 			{banksData.map((data, index) => (
 				<CardDisplay
 					key={index}
@@ -72,6 +85,20 @@ const BankDetailsTab = () => {
 					id={index}
 				/>
 			))}
+=======
+			<CardDisplay
+				logo={bankLogo}
+				name="ADEWALE ADEP"
+				bank="Zenith Bank"
+				acct_num="2190909090"
+			/>
+			<CardDisplay
+				logo={bankLogo}
+				name="ADEWALE ADEP"
+				bank="Zenith Bank"
+				acct_num="2190909090"
+			/>
+>>>>>>> a093b9abec02d8f87703b932daae9f59e68fe111
 		</div>
 	);
 };

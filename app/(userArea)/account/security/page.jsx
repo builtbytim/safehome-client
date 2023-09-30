@@ -8,7 +8,10 @@ import {
 	Authenticator,
 	SMSAuthenticator,
 	PopUpTopBar,
+<<<<<<< HEAD
 	SecurityQuestionAuth,
+=======
+>>>>>>> a093b9abec02d8f87703b932daae9f59e68fe111
 } from "../../../components/security";
 
 import { PiCaretUpBold, PiCaretDownBold } from "react-icons/pi";
@@ -17,12 +20,18 @@ import picIcon from "../../../../assets/images/icons/picIcon.svg";
 export default function Security() {
 	const [authAppToggled, setAuthAppToggled] = useState(false);
 	const [smsAuthToggled, setSmsAuthToggled] = useState(false);
+<<<<<<< HEAD
 	const [securityQuestionToggled, setSecurityQuestionToggled] = useState(false);
 
 	const [showAuthApp, setShowAuthApp] = useState(false);
 	const [showSMSAuth, setShowSMSAuth] = useState(false);
 	const [showSecurityQuestion, setShowSecurityQuestion] = useState(false);
 
+=======
+	const [showAuthApp, setShowAuthApp] = useState(false);
+	const [showSMSAuth, setShowSMSAuth] = useState(false);
+
+>>>>>>> a093b9abec02d8f87703b932daae9f59e68fe111
 	const saveAuth = () => {
 		setShowAuthApp(false);
 		setAuthAppToggled(true);
@@ -31,11 +40,14 @@ export default function Security() {
 	const saveSMSAuth = () => {
 		setShowSMSAuth(false);
 		setSmsAuthToggled(true);
+<<<<<<< HEAD
 	};
 
 	const setSecurityQuestion = () => {
 		setShowSecurityQuestion(false);
 		setSecurityQuestionToggled(true);
+=======
+>>>>>>> a093b9abec02d8f87703b932daae9f59e68fe111
 	};
 	return (
 		<main className=" space-y-8 lg:space-y-8 text-[--text-secondary] border border-[--lines] p-5 h-full min-h-[80vh] rounded-2xl">
@@ -72,6 +84,7 @@ export default function Security() {
 							: setShowSMSAuth(true)
 					}
 				/>
+<<<<<<< HEAD
 				<ToggleCard
 					heading="Security Question"
 					text="Answer a security question to confirm it’s you."
@@ -83,6 +96,8 @@ export default function Security() {
 							: setShowSecurityQuestion(true)
 					}
 				/>
+=======
+>>>>>>> a093b9abec02d8f87703b932daae9f59e68fe111
 			</div>
 
 			{showAuthApp && (
@@ -120,6 +135,7 @@ export default function Security() {
 					</div>
 				</div>
 			)}
+<<<<<<< HEAD
 
 			{showSecurityQuestion && (
 				<div className="fixed top-[-40px] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow">
@@ -138,6 +154,8 @@ export default function Security() {
 					</div>
 				</div>
 			)}
+=======
+>>>>>>> a093b9abec02d8f87703b932daae9f59e68fe111
 		</main>
 	);
 }
