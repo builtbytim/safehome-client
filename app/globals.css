@@ -6,14 +6,16 @@
   --surface-bg: #f9f9f9;
   --lines: #e6e6e6;
   --text-brand: #ff6100;
+  /* --text-brand: #1e0700; */
   --text-brand-2: #ff9100;
   --text-brand-2-hover: #ff9100cc;
   --text-secondary: #1a374d;
   --primary: #162f43;
   --placeholder: #9f9f9f;
   --text-danger: #ff0000;
-  /* --color-brand: #8d4000; */
-  --color-brand: #1e0700;
+  --color-brand: #8d4000;
+  /* --color-brand: #1e0700; */
+  --color-brand-2: #1e0700;
   --color-brand-hover: #9e5200;
   --color-success: #00ff00;
   --invert: #c7c7cd;
