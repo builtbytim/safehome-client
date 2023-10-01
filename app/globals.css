@@ -20,11 +20,7 @@
   --b1: #f9f9f9;
   --platinum: #e6e6e6;
   --green: #087940;
-<<<<<<< HEAD
-=======
   --color-green: #34C759;
-
->>>>>>> a093b9abec02d8f87703b932daae9f59e68fe111
   --visa-bg: linear-gradient(112.7deg, #4682B4 0%, #87CEEB 43.77%, #0000FF 100.06%);
   --mastercard-bg: linear-gradient(112.7deg, #DC143C 0%, #FF0000 43.77%, #800000 100.06%);
 
@@ -90,18 +86,6 @@
 
 .visa-bg{
   background: linear-gradient(112.7deg, #4682B4 0%, #87CEEB 43.77%, #0000FF 100.06%);
-<<<<<<< HEAD
-=======
-}
-
-.mastercard-bg{
-  background: linear-gradient(112.7deg, #DC143C 0%, #FF0000 43.77%, #800000 100.06%);
-}
-
-/* investment page custom styles */
-.tab-button{
-  @apply text-sm md:text-lg text-[--placeholder] px-3 pb-2 lg:px-7 lg:pb-2 border-b border-[--lines] hover:border-[--placeholder] mb-[-1px]
->>>>>>> a093b9abec02d8f87703b932daae9f59e68fe111
 }
 
 .mastercard-bg{
@@ -146,13 +130,8 @@
   @apply block text-left pb-2;
 }
 
-<<<<<<< HEAD
 .form-input {
   @apply block p-3 bg-[--b1] w-full shadow outline-none rounded placeholder:text-[--placeholder];
-=======
-.form-input{
-  @apply block p-3 bg-[--b1] w-full shadow outline-none rounded placeholder:text-[--placeholder]
->>>>>>> a093b9abec02d8f87703b932daae9f59e68fe111
 }
 
 /* Account page custom styles */
@@ -183,7 +162,6 @@
   @apply block py-3 bg-transparent w-full outline-none placeholder:text-[--placeholder] font-normal;
 }
 
-<<<<<<< HEAD
 .radio-btn-container {
   @apply relative inline-block pl-[35px] pr-3 cursor-pointer select-none text-[--text-secondary] w-auto;
 }
@@ -203,28 +181,6 @@
 .radio-btn-container input:checked ~ .checkmark {
   @apply bg-[--color-brand];
 }
-  
-=======
-.radio-btn-container{
-  @apply relative inline-block pl-[35px] pr-3 cursor-pointer select-none text-[--text-secondary] w-auto
-}
-
-.radio-btn-container input{
-  @apply absolute top-0 left-0 h-0 w-0
-}
-
-.checkmark{
-  @apply absolute top-0 left-0 h-[25px] w-[25px] bg-white border-2 border-[--color-brand] rounded-lg
-}
-
-.radio-btn-container:hover input ~ .checkmark {
-  @apply bg-[--color-brand]
-}
-
-.radio-btn-container input:checked ~ .checkmark {
-  @apply bg-[--color-brand]
-}
->>>>>>> a093b9abec02d8f87703b932daae9f59e68fe111
 * {
   @apply custom-scrollbar;
 }
