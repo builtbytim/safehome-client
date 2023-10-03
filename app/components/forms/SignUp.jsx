@@ -30,6 +30,24 @@ const yupSchema = Yup.object({
       return result.valid;
     }),
 
+  gender: Yup.string()
+    .required("Required")
+    .oneOf(["MALE", "FEMALE"], "Invalid gender selected"),
+
+  dateOfBirth: Yup.date()
+    .required("Required")
+    .test(
+      "date-is-valid",
+      "You must be 18 years or older to use this service",
+      function (value) {
+        const now = new Date();
+        const dob = new Date(value);
+        const diff = now.getTime() - dob.getTime();
+        const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+        return age >= 18;
+      }
+    ),
+
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string()
     .min(8, "Must be 8 characters or more")
@@ -81,6 +99,9 @@ function SignUp() {
     const body = {
       firstName: values.firstName,
       lastName: values.surname,
+      gender: values.gender,
+      dateOfBirth:
+        Date.parse(new Date(values.dateOfBirth).toUTCString()) / 1000,
       phone: parsePhoneNumber(values.phone, { regionCode: "NG" }).number.e164,
       email: values.email,
       password: values.cpassword,
@@ -102,6 +123,8 @@ function SignUp() {
       initialValues={{
         firstName: "",
         surname: "",
+        gender: "",
+        dateOfBirth: new Date().toISOString().split("T")[0],
         phone: "",
         email: "",
         password: "",
@@ -183,21 +206,51 @@ function SignUp() {
 
                 <div className="w-full relative flex flex-col justify-center items-start space-y-2">
                   <label
-                    htmlFor="email"
+                    htmlFor="gender"
                     className="text-[--text-secondary] text-sm text-left"
                   >
-                    Email Address
+                    Gender
                   </label>
 
                   <Field
-                    name="email"
-                    type="email"
+                    name="gender"
+                    type="text"
+                    as="select"
                     className="field-1"
-                    placeholder="Email"
+                    placeholder="gender"
+                  >
+                    <option selected disabled>
+                      Choose gender
+                    </option>
+
+                    <option value="MALE"> Male </option>
+                    <option value="FEMALE"> Female </option>
+                  </Field>
+
+                  <ErrorMessage
+                    name="gender"
+                    component="div"
+                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                  />
+                </div>
+
+                <div className="w-full relative flex flex-col justify-center items-start space-y-2">
+                  <label
+                    htmlFor="dateOfBirth"
+                    className="text-[--text-secondary] text-sm text-left"
+                  >
+                    Date of Birth
+                  </label>
+
+                  <Field
+                    name="dateOfBirth"
+                    type="date"
+                    max="2100-01-01"
+                    className="field-1"
                   />
 
                   <ErrorMessage
-                    name="email"
+                    name="dateOfBirth"
                     component="div"
                     className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                   />
@@ -217,7 +270,27 @@ function SignUp() {
                   })
                 }
               >
-                {" "}
+                <div className="w-full relative flex flex-col justify-center items-start space-y-2">
+                  <label
+                    htmlFor="email"
+                    className="text-[--text-secondary] text-sm text-left"
+                  >
+                    Email Address
+                  </label>
+
+                  <Field
+                    name="email"
+                    type="email"
+                    className="field-1"
+                    placeholder="Email"
+                  />
+
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                  />
+                </div>{" "}
                 <div className="w-full relative flex flex-col justify-center items-start space-y-2">
                   <label
                     htmlFor="phone"
