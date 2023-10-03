@@ -34,7 +34,19 @@ const yupSchema = Yup.object({
     .required("Required")
     .oneOf(["MALE", "FEMALE"], "Invalid gender selected"),
 
-  dateOfBirth: Yup.date().required("Required"),
+  dateOfBirth: Yup.date()
+    .required("Required")
+    .test(
+      "date-is-valid",
+      "You must be 18 years or older to use this service",
+      function (value) {
+        const now = new Date();
+        const dob = new Date(value);
+        const diff = now.getTime() - dob.getTime();
+        const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+        return age >= 18;
+      }
+    ),
 
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string()
@@ -208,8 +220,7 @@ function SignUp() {
                     placeholder="gender"
                   >
                     <option selected disabled>
-                      {" "}
-                      Choose gender{" "}
+                      Choose gender
                     </option>
 
                     <option value="MALE"> Male </option>
@@ -231,7 +242,12 @@ function SignUp() {
                     Date of Birth
                   </label>
 
-                  <Field name="dateOfBirth" type="date" className="field-1" />
+                  <Field
+                    name="dateOfBirth"
+                    type="date"
+                    max="2100-01-01"
+                    className="field-1"
+                  />
 
                   <ErrorMessage
                     name="dateOfBirth"
