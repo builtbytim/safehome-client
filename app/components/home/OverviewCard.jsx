@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { PiDotsThreeOutlineVertical } from "react-icons/pi";
 import Image from "next/image";
@@ -14,12 +14,36 @@ import { Topup, Withdraw, Receipt, ReceiptTopBar } from "./popups";
 import { PopUpTopBar } from "../../components/security";
 
 function OverviewCard() {
-
 	const [showTopup, setShowTopup] = useState(false);
 	const [showWithdraw, setShowWithdraw] = useState(false);
 	const [showReceipt, setShowReceipt] = useState(false);
 
 	const [receiptState, setReceiptState] = useState("");
+
+	// Hide Popups when not clicked on
+	const topupRef = useRef(null);
+	const withdrawRef = useRef(null);
+	const receiptRef = useRef(null);
+
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (topupRef.current && !topupRef.current.contains(event.target)) {
+				setShowTopup(false);
+			}
+			if (withdrawRef.current && !withdrawRef.current.contains(event.target)) {
+				setShowWithdraw(false);
+			}
+			if (receiptRef.current && !receiptRef.current.contains(event.target)) {
+				setShowReceipt(false);
+				setShowTopup(false);
+				setShowWithdraw(false);
+			}
+		};
+		document.addEventListener("click", handleClickOutside, true);
+		return () => {
+			document.removeEventListener("click", handleClickOutside, true);
+		};
+	}, [showTopup, showWithdraw, showReceipt]);
 
 	return (
 		<section className="bg-white rounded-brand  md:p-8 space-y-4 lg:space-y-8">
@@ -182,65 +206,79 @@ function OverviewCard() {
 
 			{/* POPUPS */}
 			{showTopup && (
-				<div className="fixed top-[-40px] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow">
-					<div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
-						<PopUpTopBar
-							close={() => setShowTopup(false)}
-							title="Add funds"
-							desc="Instantly add funds to this savings Goal."
-						/>
-					</div>
-					<div className="pt-[230px] h-full">
-						<Topup
-							btnFunc={() => {
-								setReceiptState("top-up");
-								setShowReceipt(true);
-							}}
-						/>
+				<div className="fixed top-[-20vh] left-0 w-full h-[150vh] bg-black/50 z-[100]">
+					<div
+						className="fixed top-[0] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow"
+						ref={topupRef}
+					>
+						<div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
+							<PopUpTopBar
+								close={() => setShowTopup(false)}
+								title="Add funds"
+								desc="Instantly add funds to this savings Goal."
+							/>
+						</div>
+						<div className="pt-[230px] h-full">
+							<Topup
+								btnFunc={() => {
+									setReceiptState("top-up");
+									setShowReceipt(true);
+								}}
+							/>
+						</div>
 					</div>
 				</div>
 			)}
 
 			{showWithdraw && (
-				<div className="fixed top-[-40px] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow">
-					<div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
-						<PopUpTopBar
-							close={() => setShowWithdraw(false)}
-							title="Withdraw Funds"
-							desc="Withdraw funds to your desired destination."
-						/>
-					</div>
-					<div className="pt-[230px] h-full">
-						<Withdraw
-							btnFunc={() => {
-								setReceiptState("withdrawal");
-								setShowReceipt(true);
-							}}
-						/>
+				<div className="fixed top-[-20vh] left-0 w-full h-[150vh] bg-black/50 z-[100]">
+					<div
+						className="fixed top-[0] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow"
+						ref={withdrawRef}
+					>
+						<div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
+							<PopUpTopBar
+								close={() => setShowWithdraw(false)}
+								title="Withdraw Funds"
+								desc="Withdraw funds to your desired destination."
+							/>
+						</div>
+						<div className="pt-[230px] h-full">
+							<Withdraw
+								btnFunc={() => {
+									setReceiptState("withdrawal");
+									setShowReceipt(true);
+								}}
+							/>
+						</div>
 					</div>
 				</div>
 			)}
 
 			{showReceipt && (
-				<div className="fixed top-[-40px] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow">
-					<div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
-						<ReceiptTopBar
-							close={() => setShowReceipt(false)}
-							title="Transaction Type"
-							desc={receiptState}
-						/>
-					</div>
-					<div className="pt-[230px] h-full">
-						<Receipt
-							btnFunc={() => console.log("withdraw")}
-							type={receiptState}
-						/>
+				<div className="fixed top-[-20vh] left-0 w-full h-[150vh] bg-black/50 z-[100]">
+					<div
+						className="fixed top-[0] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow"
+						ref={receiptRef}
+					>
+						<div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
+							<ReceiptTopBar
+								close={() => setShowReceipt(false)}
+								title="Transaction Type"
+								desc={receiptState}
+							/>
+						</div>
+						<div className="pt-[230px] h-full">
+							<Receipt
+								btnFunc={() => console.log("withdraw")}
+								type={receiptState}
+							/>
+						</div>
 					</div>
 				</div>
 			)}
 		</section>
 	);
-
 }
 
 export default OverviewCard;
