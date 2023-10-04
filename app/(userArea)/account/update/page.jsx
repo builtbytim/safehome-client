@@ -4,6 +4,9 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 
 import { PiCaretUpBold, PiCaretDownBold } from "react-icons/pi";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import moment from "moment";
 import picIcon from "../../../../assets/images/icons/picIcon.svg";
 
 export default function Update() {
@@ -14,6 +17,14 @@ export default function Update() {
 		// `current` points to the mounted file input element
 		fileRef.current.click();
 	};
+
+	const [showCalender, setShowCalender] = useState(false);
+	const [calenderInputText, setCalenderInputText] = useState("DD/MM/YYYY");
+	const [dateState, setDateState] = useState(new Date());
+	const changeDate = (e) => {
+		setDateState(e);
+	};
+
 	return (
 		<main className=" space-y-8 lg:space-y-8 text-[--text-secondary] border border-[--lines] p-5 h-full min-h-[80vh] rounded-2xl">
 			<div className="pb-3 space-y-2">
@@ -26,19 +37,19 @@ export default function Update() {
 				</p>
 			</div>
 
-			<form className="grid grid-cols-1 md:grid-cols-5 gap-5 md:gap-7 w-full">
-				<div className="col-span-3">
+			<form className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-5 w-full">
+				<div className="md:col-span-2">
 					<p className="account-form-text">Residential Address</p>
 					<input
 						type="text"
-						placeholder="Individual"
+						placeholder="Your Address"
 						className="account-form-input"
 					/>
 				</div>
-				<div className="col-span-2">
+				<div className="md:col-span-1">
 					<p className="account-form-text">State</p>
 					<div className="account-form-icon-container">
-						<input type="text" placeholder="Individual" />
+						<input type="text" placeholder="e.g Lagos" />
 						<button
 							type="button"
 							onClick={() => setIsHidden((prev) => (prev = !prev))}
@@ -50,6 +61,33 @@ export default function Update() {
 							)}
 						</button>
 					</div>
+				</div>
+				<div className="md:col-span-1 relative">
+					<p className="account-form-text">Date of Birth</p>
+					<div className="account-form-icon-container">
+						<input
+							type="button"
+							placeholder="Individual"
+							value={moment(dateState).format("DD/MM/YYYY")}
+							onClick={() => setShowCalender((prev) => (prev = !prev))}
+							className="text-left cursor-pointer"
+						/>
+						<button
+							type="button"
+							onClick={() => setShowCalender((prev) => (prev = !prev))}
+						>
+							{showCalender ? (
+								<PiCaretUpBold className="w-full h-full text-[--text-secondary]" />
+							) : (
+								<PiCaretDownBold className="w-full h-full text-[--text-secondary]" />
+							)}
+						</button>
+					</div>
+					{showCalender && (
+						<div className="absolute left-0 top-[100%] w-full pt-3 h-auto">
+							<Calendar value={dateState} onChange={changeDate} />
+						</div>
+					)}
 				</div>
 			</form>
 

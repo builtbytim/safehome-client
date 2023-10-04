@@ -14,7 +14,9 @@ function GoalCreation2({ show = false, toggleShow }) {
       <Slide right duration={300} delay={200}>
         <section
           className={
+
             "w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40 px-6 py-6"
+
           }
         >
           <div className="flex flex-row justify-end items-center">
