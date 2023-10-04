@@ -10,7 +10,7 @@ function ExtendGoal({ toggleShow }) {
       <Slide right duration={300} delay={200}>
         <section
           className={
-            "w-full md:max-w-[493px] bg-white md:h-[90vh] h-[100vh] z-40  "
+            "w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40  "
           }
         >
           <div className="flex p-6 flex-row justify-end items-center">

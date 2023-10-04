@@ -21,12 +21,12 @@ function OverviewCard() {
         </div>
 
         <div className="hidden self-center md:flex justify-center items-center space-x-4">
-          <button className="btn-2 flex justify-center whitespace-nowrap text-sm lg:text-base space-x-2 items-center">
+          <button className="btn-2 flex justify-center whitespace-nowrap text-sm lg:text-base space-x-2 px-6 items-center">
             <AiOutlineMinus className="" />
             <span>Withdraw</span>
           </button>
 
-          <button className="btn-1 flex justify-center text-sm lg:text-base whitespace-nowrap space-x-2 items-center">
+          <button className="btn-1 flex justify-center text-sm lg:text-base whitespace-nowrap space-x-2 px-6 items-center">
             <AiOutlinePlus className="" />
             <span>Add Fund</span>
           </button>
