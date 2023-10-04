@@ -29,7 +29,7 @@ export default function Overlay2({
       {!skipWrapper ? (
         <div
           className={
-            "fixed  inset-y-0 mx-auto flex flex-col justify-center items-center w-full lg:w-[80%] max-w-lg inset-x-0 " +
+            "fixed  inset-y-0 mx-auto flex flex-col justify-center items-center w-full lg:w-[80%] max-w-lg  right-0 left-0 md:left-auto  " +
             cn({
               " z-20 ": z === 1,
               " z-30 ": z === 2,
@@ -46,7 +46,7 @@ export default function Overlay2({
 
           <div
             className={
-              "fixed  inset-y-0 mx-auto flex flex-col lg:justify-center items-center w-full lg:w-[80%] max-w-lg inset-x-0 " +
+              "fixed  inset-y-0 mx-auto flex flex-col lg:justify-center items-center  lg:w-[80%] w-full md:max-w-[493px]   max-w-lg right-0 left-0 md:left-auto  " +
               cn({
                 " z-20 ": z === 1,
                 " z-30 ": z === 2,

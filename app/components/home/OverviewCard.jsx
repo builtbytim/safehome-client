@@ -14,6 +14,7 @@ import { Topup, Withdraw, Receipt, ReceiptTopBar } from "./popups";
 import { PopUpTopBar } from "../../components/security";
 
 function OverviewCard() {
+
 	const [showTopup, setShowTopup] = useState(false);
 	const [showWithdraw, setShowWithdraw] = useState(false);
 	const [showReceipt, setShowReceipt] = useState(false);
@@ -239,6 +240,7 @@ function OverviewCard() {
 			)}
 		</section>
 	);
+
 }
 
 export default OverviewCard;
