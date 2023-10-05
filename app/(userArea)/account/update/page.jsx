@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 
 import { PiCaretUpBold, PiCaretDownBold } from "react-icons/pi";
@@ -24,6 +24,20 @@ export default function Update() {
 	const changeDate = (e) => {
 		setDateState(e);
 	};
+
+	// Hide calender when not clicked on
+	const calenderRef = useRef(null);
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (calenderRef.current && !calenderRef.current.contains(event.target)) {
+				setShowCalender(false);
+			}
+		};
+		document.addEventListener("click", handleClickOutside, true);
+		return () => {
+			document.removeEventListener("click", handleClickOutside, true);
+		};
+	}, [showCalender]);
 
 	return (
 		<main className=" space-y-8 lg:space-y-8 text-[--text-secondary] border border-[--lines] p-5 h-full min-h-[80vh] rounded-2xl">
@@ -84,7 +98,10 @@ export default function Update() {
 						</button>
 					</div>
 					{showCalender && (
-						<div className="absolute left-0 top-[100%] w-full pt-3 h-auto">
+						<div
+							className="absolute left-0 top-[100%] w-full pt-3 h-auto"
+							ref={calenderRef}
+						>
 							<Calendar value={dateState} onChange={changeDate} />
 						</div>
 					)}

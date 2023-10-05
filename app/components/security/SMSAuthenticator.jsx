@@ -4,8 +4,8 @@ import OTPField from "../forms/branded/OTPField";
 
 const SMSAuthenticator = ({ saveFunc, closeFunc }) => {
 	return (
-		<div className="px-8 pb-8 flex flex-col items-center gap-8 text-[--primary]">
-			<p className="text-[--primary]">
+		<div className="px-8 py-8 flex flex-col items-center gap-8 text-[--primar]">
+			<p className="">
 				Enter the Code sent to your registered number at{" "}
 				<span className="text-[--color-brand]">+234 800 000 0000</span>
 			</p>

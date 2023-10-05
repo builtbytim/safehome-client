@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 
 import {
@@ -37,6 +37,32 @@ export default function Security() {
 		setShowSecurityQuestion(false);
 		setSecurityQuestionToggled(true);
 	};
+
+	// Hide Popups when not clicked on
+	const authRef = useRef(null);
+	const smsAuthRef = useRef(null);
+	const securityQRef = useRef(null);
+
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (authRef.current && !authRef.current.contains(event.target)) {
+				setShowAuthApp(false);
+			}
+			if (smsAuthRef.current && !smsAuthRef.current.contains(event.target)) {
+				setShowSMSAuth(false);
+			}
+			if (
+				securityQRef.current &&
+				!securityQRef.current.contains(event.target)
+			) {
+				setShowSecurityQuestion(false);
+			}
+		};
+		document.addEventListener("click", handleClickOutside, true);
+		return () => {
+			document.removeEventListener("click", handleClickOutside, true);
+		};
+	}, [showAuthApp, showSMSAuth, showSecurityQuestion]);
 
 	return (
 		<main className=" space-y-8 lg:space-y-8 text-[--text-secondary] border border-[--lines] p-5 h-full min-h-[80vh] rounded-2xl">
@@ -87,55 +113,70 @@ export default function Security() {
 			</div>
 
 			{showAuthApp && (
-				<div className="fixed top-[-40px] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow">
-					<div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
-						<PopUpTopBar
-							close={() => setShowAuthApp(false)}
-							title="About Investment"
-							desc="Use the form below to purchase enough investment units."
-						/>
-					</div>
-					<div className="pt-[230px]">
-						<Authenticator
-							saveFunc={() => saveAuth()}
-							closeFunc={() => setShowAuthApp(false)}
-						/>
+				<div className="fixed top-[-20vh] left-0 w-full h-[150vh] bg-black/50 z-[100]">
+					<div
+						className="fixed top-[-40px] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow"
+						ref={authRef}
+					>
+						<div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
+							<PopUpTopBar
+								close={() => setShowAuthApp(false)}
+								title="About Investment"
+								desc="Use the form below to purchase enough investment units."
+							/>
+						</div>
+						<div className="pt-[230px]">
+							<Authenticator
+								saveFunc={() => saveAuth()}
+								closeFunc={() => setShowAuthApp(false)}
+							/>
+						</div>
 					</div>
 				</div>
 			)}
 
 			{showSMSAuth && (
-				<div className="fixed top-[-40px] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow">
-					<div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
-						<PopUpTopBar
-							close={() => setShowSMSAuth(false)}
-							title="Text Message"
-							desc="Receive a prompt from your mobile app to confirm it’s you."
-						/>
-					</div>
-					<div className="pt-[230px]">
-						<SMSAuthenticator
-							saveFunc={() => saveSMSAuth()}
-							closeFunc={() => setShowSMSAuth(false)}
-						/>
+				<div className="fixed top-[-20vh] left-0 w-full h-[150vh] bg-black/50 z-[100]">
+					<div
+						className="fixed top-[0] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow"
+						ref={smsAuthRef}
+					>
+						<div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
+							<PopUpTopBar
+								close={() => setShowSMSAuth(false)}
+								title="Text Message"
+								desc="Receive a prompt from your mobile app to confirm it’s you."
+							/>
+						</div>
+						<div className="pt-[230px]">
+							<SMSAuthenticator
+								saveFunc={() => saveSMSAuth()}
+								closeFunc={() => setShowSMSAuth(false)}
+							/>
+						</div>
 					</div>
 				</div>
 			)}
 
 			{showSecurityQuestion && (
-				<div className="fixed top-[-40px] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow">
-					<div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
-						<PopUpTopBar
-							close={() => setShowSecurityQuestion(false)}
-							title="Security Question"
-							desc="Answer a security question to confirm it’s you."
-						/>
-					</div>
-					<div className="pt-[230px] h-full">
-						<SecurityQuestionAuth
-							saveFunc={() => setSecurityQuestion()}
-							closeFunc={() => setShowSecurityQuestion(false)}
-						/>
+				<div className="fixed top-[-20vh] left-0 w-full h-[150vh] bg-black/50 z-[100]">
+					<div
+						className="fixed top-[0] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow"
+						ref={securityQRef}
+					>
+						<div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
+							<PopUpTopBar
+								close={() => setShowSecurityQuestion(false)}
+								title="Security Question"
+								desc="Answer a security question to confirm it’s you."
+							/>
+						</div>
+						<div className="pt-[230px] h-full">
+							<SecurityQuestionAuth
+								saveFunc={() => setSecurityQuestion()}
+								closeFunc={() => setShowSecurityQuestion(false)}
+							/>
+						</div>
 					</div>
 				</div>
 			)}
