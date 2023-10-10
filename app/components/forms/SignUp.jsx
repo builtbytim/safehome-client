@@ -218,7 +218,7 @@ function SignUp() {
                     className="field-1"
                     placeholder="gender"
                   >
-                    <option selected disabled>
+                    <option selected value="">
                       Choose gender
                     </option>
 
