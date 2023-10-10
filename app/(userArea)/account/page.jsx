@@ -66,19 +66,7 @@ function Page({ authenticatedUser, authenticationToken, signOut }) {
           <NextOfKinTab />
         )}
         <div>
-          {tabState === 0 ? (
-            <div className="py-10 text-center">
-              <button className="w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg">
-                Update Profile
-              </button>
-            </div>
-          ) : tabState === 9 ? (
-            <div className="py-10 text-center">
-              <button className="w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg">
-                Change Password
-              </button>
-            </div>
-          ) : tabState === 4 ? (
+          {tabState === 4 ? (
             <div className="py-10 text-center">
               <button className="w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg">
                 Update Next of Kin

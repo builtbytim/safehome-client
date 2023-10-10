@@ -136,131 +136,141 @@ const BasicInfoTab = ({ user }) => {
       >
         {({ isValid, setFieldValue }) => {
           return (
-            <Form className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-x-5 md:gap-y-7">
-              <div className="relative">
-                <p className="account-form-text">First Name</p>
-                <Field
-                  type="text"
-                  placeholder="First Name"
-                  name="firstName"
-                  className="account-form-input"
-                />
+            <Form className="py-6 w-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-x-5 md:gap-y-7">
+                <div className="relative">
+                  <p className="account-form-text">First Name</p>
+                  <Field
+                    type="text"
+                    placeholder="First Name"
+                    name="firstName"
+                    className="account-form-input"
+                  />
 
-                <ErrorMessage
-                  name="firstName"
-                  component="div"
-                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                />
-              </div>
-              <div className="relative">
-                <p className="account-form-text">Surname</p>
-                <Field
-                  type="text"
-                  name="surname"
-                  placeholder="Surname"
-                  className="account-form-input"
-                />
-                <ErrorMessage
-                  name="surname"
-                  component="div"
-                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                />
-              </div>
+                  <ErrorMessage
+                    name="firstName"
+                    component="div"
+                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                  />
+                </div>
+                <div className="relative">
+                  <p className="account-form-text">Surname</p>
+                  <Field
+                    type="text"
+                    name="surname"
+                    placeholder="Surname"
+                    className="account-form-input"
+                  />
+                  <ErrorMessage
+                    name="surname"
+                    component="div"
+                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                  />
+                </div>
 
-              <div className="relative">
-                <p className="account-form-text">Gender</p>
-                <GenericSelectField
-                  items={[
-                    {
-                      name: "Male",
-                      value: "MALE",
-                    },
-                    {
-                      name: "Female",
-                      value: "FEMALE",
-                    },
-                  ]}
-                  handleChange={(selectedItem) => {
-                    setFieldValue("gender", selectedItem.value);
-                  }}
-                />
+                <div className="relative">
+                  <p className="account-form-text">Gender</p>
+                  <GenericSelectField
+                    items={[
+                      {
+                        name: "Male",
+                        value: "MALE",
+                      },
+                      {
+                        name: "Female",
+                        value: "FEMALE",
+                      },
+                    ]}
+                    handleChange={(selectedItem) => {
+                      setFieldValue("gender", selectedItem.value);
+                    }}
+                  />
 
-                <ErrorMessage
-                  name="gender"
-                  component="div"
-                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                />
-              </div>
+                  <ErrorMessage
+                    name="gender"
+                    component="div"
+                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                  />
+                </div>
 
-              <div className="relative">
-                <p className="account-form-text"> Date of Birth</p>
-                <Field
-                  name="dateOfBirth"
-                  type="date"
-                  max="2100-01-01"
-                  className="account-form-input"
-                />
-                <ErrorMessage
-                  name="dateOfBirth"
-                  component="div"
-                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                />
-              </div>
+                <div className="relative">
+                  <p className="account-form-text"> Date of Birth</p>
+                  <Field
+                    name="dateOfBirth"
+                    type="date"
+                    max="2100-01-01"
+                    className="account-form-input"
+                  />
+                  <ErrorMessage
+                    name="dateOfBirth"
+                    component="div"
+                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                  />
+                </div>
 
-              <div className="relative">
-                <p className="account-form-text">Email</p>
-                <Field
-                  readOnly
-                  type="email"
-                  name="email"
-                  placeholder="mail@email.com"
-                  className="account-form-input"
-                />
-                <ErrorMessage
-                  name="email"
-                  component="div"
-                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                />
-              </div>
-              <div className="relative">
-                <p className="account-form-text">Telephone</p>
-                <Field
-                  type="text"
-                  inputMode="numeric"
-                  name="phone"
-                  placeholder="+2348000000000"
-                  className="account-form-input"
-                />
-                <ErrorMessage
-                  name="phone"
-                  component="div"
-                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                />
-              </div>
+                <div className="relative">
+                  <p className="account-form-text">Email</p>
+                  <Field
+                    readOnly
+                    type="email"
+                    name="email"
+                    placeholder="mail@email.com"
+                    className="account-form-input"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                  />
+                </div>
+                <div className="relative">
+                  <p className="account-form-text">Telephone</p>
+                  <Field
+                    type="text"
+                    inputMode="numeric"
+                    name="phone"
+                    placeholder="+2348000000000"
+                    className="account-form-input"
+                  />
+                  <ErrorMessage
+                    name="phone"
+                    component="div"
+                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                  />
+                </div>
 
-              <div className="relative">
-                <p className="account-form-text">Address</p>
-                <Field
-                  type="text"
-                  name="address"
-                  placeholder="Address"
-                  className="account-form-input"
-                />
-                <ErrorMessage
-                  name="address"
-                  component="div"
-                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                />
-              </div>
+                <div className="relative">
+                  <p className="account-form-text">Address</p>
+                  <Field
+                    type="text"
+                    name="address"
+                    placeholder="Address"
+                    className="account-form-input"
+                  />
+                  <ErrorMessage
+                    name="address"
+                    component="div"
+                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                  />
+                </div>
 
-              <div className="relative">
-                <p className="account-form-text">State of Residence</p>
-                <GenericSelectField items={states} />
-                <ErrorMessage
-                  name="state"
-                  component="div"
-                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                />
+                <div className="relative">
+                  <p className="account-form-text">State of Residence</p>
+                  <GenericSelectField items={states} />
+                  <ErrorMessage
+                    name="state"
+                    component="div"
+                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                  />
+                </div>
+              </div>
+              <div className="py-10 text-center flex flex-col justify-center items-center w-full">
+                <button
+                  disabled={!isValid}
+                  className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
+                >
+                  Update profile
+                </button>
               </div>
             </Form>
           );
