@@ -2,15 +2,62 @@ import Image from "next/image";
 import BarLoader from "../BarLoader";
 import { useNotifyStore } from "../../utils/store";
 import { Form, Formik, Field, ErrorMessage } from "formik";
+import { useMutation } from "react-query";
+import { parsePhoneNumber } from "awesome-phonenumber";
+import {
+  makeUrl,
+  extractErrorMessage,
+  fetchUtil,
+} from "../../utils/fetchUtils";
+import * as Yup from "yup";
+import GenericSelectField from "../forms/branded/GenericSelectField";
 
-const BasicInfoTab = () => {
+const validationSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .min(3, "Must be 3 characters or more")
+    .required("Required"),
+
+  surname: Yup.string()
+    .min(3, "Must be 3 characters or more")
+    .required("Required"),
+
+  phone: Yup.string()
+    .required("Required")
+    .min(10, "Must be 10 characters or more")
+    .test("phone-is-valid", "Invalid phone number", function (value) {
+      const result = parsePhoneNumber(value, { regionCode: "NG" });
+      return result.valid;
+    }),
+
+  gender: Yup.string()
+    .required("Required")
+    .oneOf(["MALE", "FEMALE"], "Invalid gender selected"),
+
+  dateOfBirth: Yup.date()
+    .required("Required")
+    .test(
+      "date-is-valid",
+      "You must be 18 years or older to use this service",
+      function (value) {
+        const now = new Date();
+        const dob = new Date(value);
+        const diff = now.getTime() - dob.getTime();
+        const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+        return age >= 18;
+      }
+    ),
+
+  email: Yup.string().email("Invalid email address").required("Required"),
+});
+
+const BasicInfoTab = ({ user }) => {
   return (
     <div className="py-7 space-y-5 font-medium">
       <div className="flex gap-2 items-center">
         <div className="rounded-full h-[96px] w-[96px] overflow-hidden">
           <Image
             priority
-            src="https://i.pravatar.cc/150?u=helios@g.com"
+            src={user.avatarUrl || "https://i.pravatar.cc/150?u=helios@g.com"}
             alt="User"
             width={96}
             height={96}
@@ -22,14 +69,18 @@ const BasicInfoTab = () => {
 
       <Formik
         initialValues={{
-          firstName: "",
-          surname: "",
-          email: "",
-          phone: "",
+          firstName: user.firstName || "",
+          surname: user.lastName || "",
+          email: user.email || "",
+          phone: user.phone || "",
+          gender: user.gender || "",
+          dateOfBirth:
+            user.dateOfBirth || new Date().toISOString().split("T")[0],
         }}
         onSubmit={() => {}}
+        validationSchema={validationSchema}
       >
-        {({ isValid }) => {
+        {({ isValid, setFieldValue }) => {
           return (
             <Form className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-x-5 md:gap-y-7">
               <div>
@@ -50,9 +101,40 @@ const BasicInfoTab = () => {
                   className="account-form-input"
                 />
               </div>
+
+              <div>
+                <p className="account-form-text">Gender</p>
+                <GenericSelectField
+                  items={[
+                    {
+                      name: "Male",
+                      value: "MALE",
+                    },
+                    {
+                      name: "Female",
+                      value: "FEMALE",
+                    },
+                  ]}
+                  handleChange={(selectedItem) => {
+                    setFieldValue("gender", selectedItem.value);
+                  }}
+                />
+              </div>
+
+              <div>
+                <p className="account-form-text"> Date of Birth</p>
+                <Field
+                  name="dateOfBirth"
+                  type="date"
+                  max="2100-01-01"
+                  className="account-form-input"
+                />
+              </div>
+
               <div>
                 <p className="account-form-text">Email</p>
                 <Field
+                  readOnly
                   type="email"
                   name="email"
                   placeholder="mail@email.com"

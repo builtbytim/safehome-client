@@ -59,7 +59,7 @@ function Page({ authenticatedUser, authenticationToken, signOut }) {
           </button>
         </div>
         {tabState === 0 ? (
-          <BasicInfoTab />
+          <BasicInfoTab user={authenticatedUser} />
         ) : tabState === 1 ? (
           <PasswordTab token={authenticationToken} signOut={signOut} />
         ) : (

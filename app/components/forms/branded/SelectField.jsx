@@ -7,6 +7,7 @@ export default function SelectField({
   Itemizer,
   items,
   itemToString,
+  onSelectedItemChange = null,
 }) {
   const {
     isOpen,
@@ -19,6 +20,7 @@ export default function SelectField({
   } = useSelect({
     items,
     itemToString,
+    onSelectedItemChange,
   });
 
   return (
