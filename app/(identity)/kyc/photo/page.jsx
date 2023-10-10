@@ -1,6 +1,4 @@
-"use client";
 import VisualCapture from "../../../components/forms/branded/VisualCapture";
-import SecureRoute from "../../../components/SecureRoute";
 
 function Page() {
   return (

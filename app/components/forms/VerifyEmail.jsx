@@ -67,7 +67,7 @@ function VerifyEmail({ email }) {
         mutate({ email, channel: "EMAIL", authCode });
       }
     }
-  }, [authCode]);
+  }, [authCode, email, params]);
 
   function onError(err) {
     setNotify({
@@ -103,7 +103,7 @@ function VerifyEmail({ email }) {
       onAcceptText: "Continue",
       allowClose: false,
       onAccept: () => {
-        router.replace(`/verify-kyc/document?authCode=${data.code}`);
+        router.replace(`/kyc?authCode=${data.code}`);
       },
     });
   }

@@ -28,6 +28,7 @@ const config = {
     changePassword: "/users/password/change",
     resetPassword: "/users/password/reset",
     confirmResetPassword: "/users/password/confirm-reset",
+    addKycInfo: "/users/kyc",
   },
 
   signInModes: {

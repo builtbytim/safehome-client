@@ -7,8 +7,9 @@ function Reviewing() {
       <div>
         <Image
           src={KycSuccess}
-          alt="KYC Success"
+          alt="reviewing"
           objectFit="contain"
+          priority
           width="300"
           height="300"
         />

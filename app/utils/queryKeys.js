@@ -10,6 +10,7 @@ const queryKeys = {
   changePassword: "changePassword",
   resetPassword: "resetPassword",
   confirmResetPassword: "confirmResetPassword",
+  addKycInfo: "addKycInfo",
 };
 
 export default queryKeys;
