@@ -41,8 +41,8 @@ export default function GenericSelectField({
       ) {
         return (
           <div ref={ref} {...props} className={` ${!_isOpen && "hidden"}`}>
-            <div className="absolute left-0 top-[100%] w-full pt-3 h-auto">
-              <div className="bg-white w-full border border-[--lines] rounded">
+            <div className="absolute bg-white z-20 left-0 top-[100%] w-full pt-3 pb-8 h-auto">
+              <div className="bg-white w-full border border-[--lines] max-h-[400px] overflow-y-auto scrollbar-fix rounded">
                 {items.map((item, index) => {
                   return (
                     <div

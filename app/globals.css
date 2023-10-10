@@ -159,7 +159,7 @@
 
 /* Account page custom styles */
 .account-tab-button {
-  @apply text-sm md:text-lg text-[--placeholder] border-b-2 border-[--placeholder] px-3 pb-2 md:px-7 md:py-2 hover:border-[--invert] w-full md:w-auto md:min-w-[200px];
+  @apply text-sm md:text-lg text-[--placeholder] border-b-2 hover:border-[--placeholder] px-3 pb-2 md:px-7 md:py-2 border-[--invert] w-full md:w-auto md:min-w-[200px];
 }
 
 .account-tab-button-active {

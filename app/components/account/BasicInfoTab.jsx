@@ -12,6 +12,47 @@ import {
 import * as Yup from "yup";
 import GenericSelectField from "../forms/branded/GenericSelectField";
 
+const states = [
+  { name: "Choose state", value: "" },
+  { name: "Abia", value: "ABIA" },
+  { name: "Adamawa", value: "ADAMAWA" },
+  { name: "Akwa Ibom", value: "AKWA_IBOM" },
+  { name: "Anambra", value: "ANAMBRA" },
+  { name: "Bauchi", value: "BAUCHI" },
+  { name: "Bayelsa", value: "BAYELSA" },
+  { name: "Benue", value: "BENUE" },
+  { name: "Borno", value: "BORNO" },
+  { name: "Cross River", value: "CROSS_RIVER" },
+  { name: "Delta", value: "DELTA" },
+  { name: "Ebonyi", value: "EBONYI" },
+  { name: "Edo", value: "EDO" },
+  { name: "Ekiti", value: "EKITI" },
+  { name: "Enugu", value: "ENUGU" },
+  { name: "FCT", value: "FCT" },
+  { name: "Gombe", value: "GOMBE" },
+  { name: "Imo", value: "IMO" },
+  { name: "Jigawa", value: "JIGAWA" },
+  { name: "Kaduna", value: "KADUNA" },
+  { name: "Kano", value: "KANO" },
+  { name: "Katsina", value: "KATSINA" },
+  { name: "Kebbi", value: "KEBBI" },
+  { name: "Kogi", value: "KOGI" },
+  { name: "Kwara", value: "KWARA" },
+  { name: "Lagos", value: "LAGOS" },
+  { name: "Nasarawa", value: "NASARAWA" },
+  { name: "Niger", value: "NIGER" },
+  { name: "Ogun", value: "OGUN" },
+  { name: "Ondo", value: "ONDO" },
+  { name: "Osun", value: "OSUN" },
+  { name: "Oyo", value: "OYO" },
+  { name: "Plateau", value: "PLATEAU" },
+  { name: "Rivers", value: "RIVERS" },
+  { name: "Sokoto", value: "SOKOTO" },
+  { name: "Taraba", value: "TARABA" },
+  { name: "Yobe", value: "YOBE" },
+  { name: "Zamfara", value: "ZAMFARA" },
+];
+
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()
     .min(3, "Must be 3 characters or more")
@@ -32,6 +73,18 @@ const validationSchema = Yup.object().shape({
   gender: Yup.string()
     .required("Required")
     .oneOf(["MALE", "FEMALE"], "Invalid gender selected"),
+
+  state: Yup.string()
+    .required("Required")
+    .oneOf(
+      states.map((state) => state.value),
+      "Invalid state selected"
+    ),
+
+  address: Yup.string()
+    .required("Required")
+    .min(10, "Must be 10 characters or more")
+    .max(100, "Must be 100 characters or less"),
 
   dateOfBirth: Yup.date()
     .required("Required")
@@ -74,8 +127,9 @@ const BasicInfoTab = ({ user }) => {
           email: user.email || "",
           phone: user.phone || "",
           gender: user.gender || "",
-          dateOfBirth:
-            user.dateOfBirth || new Date().toISOString().split("T")[0],
+          dateOfBirth: user.dateOfBirth
+            ? new Date(user.dateOfBirth * 1000).toISOString().split("T")[0]
+            : new Date().toISOString().split("T")[0],
         }}
         onSubmit={() => {}}
         validationSchema={validationSchema}
@@ -83,7 +137,7 @@ const BasicInfoTab = ({ user }) => {
         {({ isValid, setFieldValue }) => {
           return (
             <Form className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-x-5 md:gap-y-7">
-              <div>
+              <div className="relative">
                 <p className="account-form-text">First Name</p>
                 <Field
                   type="text"
@@ -91,8 +145,14 @@ const BasicInfoTab = ({ user }) => {
                   name="firstName"
                   className="account-form-input"
                 />
+
+                <ErrorMessage
+                  name="firstName"
+                  component="div"
+                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                />
               </div>
-              <div>
+              <div className="relative">
                 <p className="account-form-text">Surname</p>
                 <Field
                   type="text"
@@ -100,9 +160,14 @@ const BasicInfoTab = ({ user }) => {
                   placeholder="Surname"
                   className="account-form-input"
                 />
+                <ErrorMessage
+                  name="surname"
+                  component="div"
+                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                />
               </div>
 
-              <div>
+              <div className="relative">
                 <p className="account-form-text">Gender</p>
                 <GenericSelectField
                   items={[
@@ -119,9 +184,15 @@ const BasicInfoTab = ({ user }) => {
                     setFieldValue("gender", selectedItem.value);
                   }}
                 />
+
+                <ErrorMessage
+                  name="gender"
+                  component="div"
+                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                />
               </div>
 
-              <div>
+              <div className="relative">
                 <p className="account-form-text"> Date of Birth</p>
                 <Field
                   name="dateOfBirth"
@@ -129,9 +200,14 @@ const BasicInfoTab = ({ user }) => {
                   max="2100-01-01"
                   className="account-form-input"
                 />
+                <ErrorMessage
+                  name="dateOfBirth"
+                  component="div"
+                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                />
               </div>
 
-              <div>
+              <div className="relative">
                 <p className="account-form-text">Email</p>
                 <Field
                   readOnly
@@ -140,8 +216,13 @@ const BasicInfoTab = ({ user }) => {
                   placeholder="mail@email.com"
                   className="account-form-input"
                 />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                />
               </div>
-              <div>
+              <div className="relative">
                 <p className="account-form-text">Telephone</p>
                 <Field
                   type="text"
@@ -149,6 +230,36 @@ const BasicInfoTab = ({ user }) => {
                   name="phone"
                   placeholder="+2348000000000"
                   className="account-form-input"
+                />
+                <ErrorMessage
+                  name="phone"
+                  component="div"
+                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                />
+              </div>
+
+              <div className="relative">
+                <p className="account-form-text">Address</p>
+                <Field
+                  type="text"
+                  name="address"
+                  placeholder="Address"
+                  className="account-form-input"
+                />
+                <ErrorMessage
+                  name="address"
+                  component="div"
+                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                />
+              </div>
+
+              <div className="relative">
+                <p className="account-form-text">State of Residence</p>
+                <GenericSelectField items={states} />
+                <ErrorMessage
+                  name="state"
+                  component="div"
+                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                 />
               </div>
             </Form>
