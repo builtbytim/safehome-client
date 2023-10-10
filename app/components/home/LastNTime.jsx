@@ -1,7 +1,5 @@
 "use client";
 
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
-import Image from "next/image";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import SelectField from "../../components/forms/branded/SelectField";
 import { forwardRef } from "react";

@@ -65,7 +65,7 @@ export default function Notify() {
             Notification{" "}
           </p>
 
-          <p className="text-[--text-secondary] mt-2  text-sm first-letter:uppercase">
+          <p className="text-[--primary] mt-2   first-letter:uppercase">
             {content}
           </p>
 

@@ -54,7 +54,7 @@ function BottomStickyNav() {
         {items.map((item, index) => {
           const Icon = item.icon;
           return (
-            <div className="self-center pb-1 pt-2" key={index}>
+            <div className="self-center pb-2 pt-2" key={index}>
               <li className="block">
                 <Link href={item.link} as={item.link}>
                   <div

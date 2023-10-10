@@ -13,6 +13,9 @@ export default function useRemoteSession(
   const { isError, data, isSuccess, isLoading } = useQuery({
     queryKey: [queryKeys.getSession, tokenObj],
 
+    retry: false,
+    cacheTime: 0,
+
     enabled: !!tokenObj,
 
     queryFn: req,
