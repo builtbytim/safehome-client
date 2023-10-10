@@ -5,7 +5,7 @@ import Notify from "./components/Notify";
 import Notifications from "./components/Notifications";
 import RemoteDataProvider from "./utils/RemoteDataProvider";
 
-// const outfit = Outfit({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata = {
   title: config.app.name,
@@ -16,7 +16,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="">
+      <body className={outfit.className}>
         <RemoteDataProvider>
           <Notify />
           <Notifications />
