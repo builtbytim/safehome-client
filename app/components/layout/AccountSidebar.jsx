@@ -1,9 +1,6 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Hero from "../../../assets/images/account-hero.png";
-
-import Image from "next/image";
 import Link from "next/link";
 import { BiLogOut, BiX } from "react-icons/bi";
 import { useUiStore } from "../../utils/store";
@@ -18,6 +15,7 @@ import {
   SecuritySVG,
   UpdateProfileSVG,
 } from "../svg/account";
+import UserSection from "./UserSection";
 
 const items = [
   {
@@ -63,31 +61,7 @@ function AccountSidebar() {
 
   return (
     <div className="flex relative flex-col justify-start border-r border-[--lines] items-center  w-full z-20 h-full">
-      <div className="w-full relative">
-        <div className="w-full h-[124px]">
-          <Image
-            priority
-            src={Hero}
-            alt="User"
-            width="auto"
-            height="auto"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="rounded-full h-[96px] w-[96px] overflow-hidden absolute left-[50%] bottom-[-48px] translate-x-[-50%]">
-          <Image
-            priority
-            src="https://i.pravatar.cc/150?u=helios@g.com"
-            alt="User"
-            width={96}
-            height={96}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </div>
-      <h1 className="pt-16 pb-5 font-semibold text-[--text-secondary] text-center text-2xl">
-        Adewale A.
-      </h1>
+      <UserSection />
 
       <ul className="space-y-4 flex flex-col justify-start items-start  w-full px-4">
         {items.map((item, index) => {

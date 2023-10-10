@@ -1,9 +1,10 @@
 "use client";
 
 import SecureRoute from "../../components/SecureRoute";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import Image from "next/image";
+import { useDataStore } from "../../utils/store";
 
 import {
   BasicInfoTab,
@@ -13,6 +14,11 @@ import {
 
 function Page({ authenticatedUser, authenticationToken, signOut }) {
   const [tabState, setTabState] = useState(0);
+  const setDataStore = useDataStore((state) => state.setData);
+
+  useEffect(() => {
+    setDataStore({ user: authenticatedUser });
+  }, [authenticatedUser]);
 
   return (
     <main className=" space-y-8 lg:space-y-10 text-[--text-secondary] border border-[--lines] p-5 h-full rounded-2xl">

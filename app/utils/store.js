@@ -1,5 +1,13 @@
 import { create } from "zustand";
 
+const useDataStore = create((set) => ({
+  data: {},
+  setData: (obj) =>
+    set((state) => ({
+      data: { ...state.data, ...obj },
+    })),
+}));
+
 const useNotifyStore = create((set) => ({
   notifyState: {
     show: false,
@@ -53,4 +61,4 @@ const useUiStore = create((set) => ({
     })),
 }));
 
-export { useUiStore, useNotifyStore };
+export { useUiStore, useNotifyStore, useDataStore };
