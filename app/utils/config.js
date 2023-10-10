@@ -25,6 +25,7 @@ const config = {
     uploadKycPicture: "/users/kyc/photo",
     uploadKycID: "/users/kyc/document",
     signOut: "/users/sign-out",
+    changePassword: "/users/password/change",
     resetPassword: "/users/password/reset",
     confirmResetPassword: "/users/password/confirm-reset",
   },
@@ -35,7 +36,7 @@ const config = {
     AUTH_FAILED: "AUF",
   },
 
-  redirectSearchParam: "redirect",
+  redirectSearchParam: "redirectUri",
   signInModeParam: "mode",
   loginUrl: "/sign-in",
 

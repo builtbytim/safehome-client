@@ -7,6 +7,7 @@ const queryKeys = {
   signOut: "signOut",
   kycIDPicture: "kycIDPicture",
   kycPicture: "kycPicture",
+  changePassword: "changePassword",
   resetPassword: "resetPassword",
   confirmResetPassword: "confirmResetPassword",
 };

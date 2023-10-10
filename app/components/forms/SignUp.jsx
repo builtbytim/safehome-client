@@ -7,7 +7,6 @@ import cn from "classnames";
 import { BsArrowRight, BsArrowLeftShort } from "react-icons/bs";
 import { parsePhoneNumber } from "awesome-phonenumber";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
-
 import useSignUp from "../../utils/hooks/useSignUp";
 import { useNotifyStore } from "../../utils/store";
 import { useRouter } from "next/navigation";
