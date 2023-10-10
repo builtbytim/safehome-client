@@ -17,7 +17,7 @@ const PasswordTab = ({ signOut, token }) => {
     setNotify({
       show: true,
       content:
-        "Password changed successfully, you will be signed out now to sign in with your new password",
+        "Password changed successfully, you must sign in with your new password to continue",
       allowClose: false,
       onAcceptText: "Proceed",
       onAccept: signOut,
@@ -150,7 +150,7 @@ const PasswordTab = ({ signOut, token }) => {
                   </div>
                 </div>
                 <div>
-                  <p className="account-form-text">Confirm Password</p>
+                  <p className="account-form-text">Confirm New Password</p>
                   <div className="account-form-icon-container relative">
                     <Field
                       type={isHidden2 ? "password" : "text"}
