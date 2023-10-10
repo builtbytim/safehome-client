@@ -33,7 +33,7 @@ function UserSection() {
       </div>
       <h1 className="pt-16 pb-5 font-semibold text-[--text-secondary] text-center text-2xl">
         {data && data.user
-          ? `${data.user?.lastName}  ${data.user?.firstName.charAt(0)}.`
+          ? `${data.user?.lastName}  ${data.user?.firstName}`
           : "Loading..."}
       </h1>
     </div>
