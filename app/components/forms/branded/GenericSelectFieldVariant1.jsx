@@ -4,7 +4,7 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import SelectField from "./SelectField";
 import { forwardRef } from "react";
 
-export default function GenericSelectField({
+export default function GenericSelectFieldVariant1({
   items,
   itemToString = null,
   handleChange,

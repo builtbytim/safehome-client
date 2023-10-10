@@ -1,4 +1,10 @@
 import CancelButton from "../components/CancelButton";
+import config from "../utils/config";
+
+export const metadata = {
+  name: "Verification | SafeHome",
+  description: config.app.description,
+};
 
 export default function Layout({ children }) {
   return (

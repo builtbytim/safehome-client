@@ -43,27 +43,14 @@ function SignIn() {
 
         break;
 
-      case "VERIFY_KYC_DOC":
+      case "VERIFY_KYC":
         setNotify({
           show: true,
           title: "Unable to sign in",
           content: err?.message,
           onAcceptText: "Verify KYC",
           onAccept: () => {
-            router.push(`/verify-kyc/document`);
-          },
-        });
-
-        break;
-
-      case "VERIFY_KYC_PHOTO":
-        setNotify({
-          show: true,
-          title: "Unable to sign in",
-          content: err?.message,
-          onAcceptText: "Verify KYC",
-          onAccept: () => {
-            router.push(`/verify-kyc/photo`);
+            router.push(`/kyc?authCode=${err?.authCode}`);
           },
         });
 

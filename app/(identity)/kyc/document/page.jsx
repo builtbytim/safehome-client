@@ -1,5 +1,3 @@
-"use client";
-
 import KYCImageUpload from "../../../components/forms/KYCImageUpload";
 
 function Page() {

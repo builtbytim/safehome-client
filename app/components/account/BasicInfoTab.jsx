@@ -11,47 +11,7 @@ import {
 } from "../../utils/fetchUtils";
 import * as Yup from "yup";
 import GenericSelectField from "../forms/branded/GenericSelectField";
-
-const states = [
-  { name: "Choose state", value: "" },
-  { name: "Abia", value: "ABIA" },
-  { name: "Adamawa", value: "ADAMAWA" },
-  { name: "Akwa Ibom", value: "AKWA_IBOM" },
-  { name: "Anambra", value: "ANAMBRA" },
-  { name: "Bauchi", value: "BAUCHI" },
-  { name: "Bayelsa", value: "BAYELSA" },
-  { name: "Benue", value: "BENUE" },
-  { name: "Borno", value: "BORNO" },
-  { name: "Cross River", value: "CROSS_RIVER" },
-  { name: "Delta", value: "DELTA" },
-  { name: "Ebonyi", value: "EBONYI" },
-  { name: "Edo", value: "EDO" },
-  { name: "Ekiti", value: "EKITI" },
-  { name: "Enugu", value: "ENUGU" },
-  { name: "FCT", value: "FCT" },
-  { name: "Gombe", value: "GOMBE" },
-  { name: "Imo", value: "IMO" },
-  { name: "Jigawa", value: "JIGAWA" },
-  { name: "Kaduna", value: "KADUNA" },
-  { name: "Kano", value: "KANO" },
-  { name: "Katsina", value: "KATSINA" },
-  { name: "Kebbi", value: "KEBBI" },
-  { name: "Kogi", value: "KOGI" },
-  { name: "Kwara", value: "KWARA" },
-  { name: "Lagos", value: "LAGOS" },
-  { name: "Nasarawa", value: "NASARAWA" },
-  { name: "Niger", value: "NIGER" },
-  { name: "Ogun", value: "OGUN" },
-  { name: "Ondo", value: "ONDO" },
-  { name: "Osun", value: "OSUN" },
-  { name: "Oyo", value: "OYO" },
-  { name: "Plateau", value: "PLATEAU" },
-  { name: "Rivers", value: "RIVERS" },
-  { name: "Sokoto", value: "SOKOTO" },
-  { name: "Taraba", value: "TARABA" },
-  { name: "Yobe", value: "YOBE" },
-  { name: "Zamfara", value: "ZAMFARA" },
-];
+import { states } from "../../utils/constants";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()

@@ -38,9 +38,11 @@ async function req(params) {
   } else {
     console.log("useSignIn: ", res.errorMessage, res.error);
     const ACTION = res.headers?.get("X-ACTION") || "";
+    const authCode = res.headers?.get("X-AUTH-CODE") || "";
 
     const signInError = {
       action: ACTION,
+      authCode,
       message: extractErrorMessage(res),
     };
 
