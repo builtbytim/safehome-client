@@ -15,7 +15,6 @@ function UserSection() {
             priority
             src={Hero}
             alt="User"
-            fill
             className="w-full h-full object-cover"
           />
         </div>
