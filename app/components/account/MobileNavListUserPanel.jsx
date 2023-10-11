@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useDataStore } from "../../utils/store";
 
-function MobileNavListUserPanel({}) {
+function MobileNavListUserPanel() {
   const data = useDataStore((state) => state.data);
 
   const user = data.user;

@@ -3,23 +3,14 @@
 import SecureRoute from "../../components/SecureRoute";
 import { useEffect } from "react";
 import { useDataStore } from "../../utils/store";
-import InlineRedirect from "../../components/InlineRedirect";
 
 function Page({ authenticatedUser }) {
-  const setData = useDataStore((state) => state.setData);
-
-  console.log(setData);
-
-  // useEffect(() => {
-  //   setData({ user: authenticatedUser });
-  // }, [authenticatedUser]);
+  const setUser = useDataStore((state) => state.setUser);
 
   return (
     <div className="space-y-2  lg:space-y-8 w-full min-h-screen pt-8 pb-16">
       <main className=" space-y-2 lg:space-y-10">
-        <div className="hidden ">
-          <InlineRedirect to="/account/profile" />
-        </div>
+        <div className="hidden "></div>
       </main>
     </div>
   );

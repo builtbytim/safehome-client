@@ -2,9 +2,15 @@ import { create } from "zustand";
 
 const useDataStore = create((set) => ({
   data: {},
+
   setData: (obj) =>
     set((state) => ({
       data: { ...state.data, ...obj },
+    })),
+
+  setUser: (obj) =>
+    set((state) => ({
+      data: { ...state.data, user: obj },
     })),
 }));
 

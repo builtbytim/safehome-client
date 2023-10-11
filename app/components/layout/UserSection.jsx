@@ -11,7 +11,13 @@ function UserSection() {
     <div>
       <div className="w-full relative">
         <div className="w-full h-[124px] relative overflow-hidden">
-          <Image priority src={Hero} alt="User" fill className="w-full" />
+          <Image
+            priority
+            src={Hero}
+            alt="User"
+            fill
+            className="w-full h-full object-cover"
+          />
         </div>
         <div className="rounded-full h-[96px] w-[96px] overflow-hidden absolute left-[50%] bottom-[-48px] translate-x-[-50%]">
           <Image
