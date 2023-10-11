@@ -10,22 +10,15 @@ function UserSection() {
   return (
     <div>
       <div className="w-full relative">
-        <div className="w-full h-[124px]">
-          <Image
-            priority
-            src={Hero}
-            alt="User"
-            width="auto"
-            height="auto"
-            className="w-full h-full object-cover"
-          />
+        <div className="w-full h-[124px] relative overflow-hidden">
+          <Image priority src={Hero} alt="User" fill className="w-full" />
         </div>
         <div className="rounded-full h-[96px] w-[96px] overflow-hidden absolute left-[50%] bottom-[-48px] translate-x-[-50%]">
           <Image
             priority
             src={
               data.user
-                ? data.user?.avatarurl
+                ? data.user?.avatarUrl
                 : "https://i.pravatar.cc/150?u=helios@g.com"
             }
             alt="User"

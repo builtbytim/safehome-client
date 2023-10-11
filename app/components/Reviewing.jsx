@@ -8,7 +8,6 @@ function Reviewing() {
         <Image
           src={KycSuccess}
           alt="reviewing"
-          objectFit="contain"
           priority
           width="300"
           height="300"

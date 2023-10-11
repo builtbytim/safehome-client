@@ -1,3 +1,13 @@
+import {
+  AccountSettingsSVG,
+  CardSVG,
+  ContactSVG,
+  NotificationSVG,
+  ReferEarnSVG,
+  SecuritySVG,
+  UpdateProfileSVG,
+} from "../components/svg/account";
+
 export const states = [
   { name: "Choose state", value: "" },
   { name: "Abia", value: "ABIA" },
@@ -37,4 +47,43 @@ export const states = [
   { name: "Taraba", value: "TARABA" },
   { name: "Yobe", value: "YOBE" },
   { name: "Zamfara", value: "ZAMFARA" },
+];
+
+export const navItems = [
+  {
+    name: "Profile Info",
+    icon: AccountSettingsSVG,
+    link: "/account/profile",
+  },
+  // {
+  //   name: "Update Profile",
+  //   icon: UpdateProfileSVG,
+  //   link: "/account/update",
+  // },
+  {
+    name: "Notification",
+    icon: NotificationSVG,
+    link: "/account/notification",
+  },
+
+  {
+    name: "Card & Bank Settings",
+    icon: CardSVG,
+    link: "/account/card",
+  },
+  {
+    name: "Security",
+    icon: SecuritySVG,
+    link: "/account/security",
+  },
+  {
+    name: "Refer & Earn",
+    icon: ReferEarnSVG,
+    link: "/account/refer",
+  },
+  {
+    name: "Contact Us",
+    icon: ContactSVG,
+    link: "/account/contact",
+  },
 ];

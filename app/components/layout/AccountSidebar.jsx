@@ -5,56 +5,8 @@ import Link from "next/link";
 import { BiLogOut, BiX } from "react-icons/bi";
 import { useUiStore } from "../../utils/store";
 import Overlay from "../Overlay";
-
-import {
-  AccountSettingsSVG,
-  CardSVG,
-  ContactSVG,
-  NotificationSVG,
-  ReferEarnSVG,
-  SecuritySVG,
-  UpdateProfileSVG,
-} from "../svg/account";
+import { navItems as items } from "../../utils/constants";
 import UserSection from "./UserSection";
-
-const items = [
-  {
-    name: "Account Settings",
-    icon: AccountSettingsSVG,
-    link: "/account",
-  },
-  {
-    name: "Update Profile",
-    icon: UpdateProfileSVG,
-    link: "/account/update",
-  },
-  {
-    name: "Notification",
-    icon: NotificationSVG,
-    link: "/account/notification",
-  },
-
-  {
-    name: "Card & Bank Settings",
-    icon: CardSVG,
-    link: "/account/card",
-  },
-  {
-    name: "Security",
-    icon: SecuritySVG,
-    link: "/account/security",
-  },
-  {
-    name: "Refer & Earn",
-    icon: ReferEarnSVG,
-    link: "/account/refer",
-  },
-  {
-    name: "Contact Us",
-    icon: ContactSVG,
-    link: "/account/contact",
-  },
-];
 
 function AccountSidebar() {
   const pathname = usePathname();

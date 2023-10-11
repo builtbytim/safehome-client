@@ -15,7 +15,7 @@ export default function Layout({ children }) {
         src={Pattern}
         alt="pattern"
         className="opacity-10 hidden sm:block"
-        layout="fill"
+        fill
       />
 
       <Image
