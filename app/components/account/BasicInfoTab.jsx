@@ -4,11 +4,6 @@ import { useNotifyStore } from "../../utils/store";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import { useMutation } from "react-query";
 import { parsePhoneNumber } from "awesome-phonenumber";
-import {
-  makeUrl,
-  extractErrorMessage,
-  fetchUtil,
-} from "../../utils/fetchUtils";
 import * as Yup from "yup";
 import GenericSelectField from "../forms/branded/GenericSelectField";
 import { states } from "../../utils/constants";
