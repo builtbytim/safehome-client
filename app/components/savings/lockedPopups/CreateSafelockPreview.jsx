@@ -1,5 +1,5 @@
 import Overlay2 from "../../Overlay2";
-import { Slide } from "react-reveal";
+import { Slide } from "react-awesome-reveal";
 import { BiX } from "react-icons/bi";
 import SmallDetailsCard from "./SmallDetailsCard";
 import SwitchField from "../../forms/branded/SwitchField";
@@ -7,12 +7,10 @@ import SwitchField from "../../forms/branded/SwitchField";
 function CreateSafelockPreview({ toggleShow, handleSubmit }) {
   return (
     <Overlay2 pos="center">
-      <Slide right duration={300} delay={200}>
+      <div right duration={300} delay={200}>
         <section
           className={
-
             "w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40  "
-
           }
         >
           <div className="flex p-6 flex-row justify-end items-center">
@@ -61,7 +59,7 @@ function CreateSafelockPreview({ toggleShow, handleSubmit }) {
             </button>
           </div>
         </section>
-      </Slide>
+      </div>
     </Overlay2>
   );
 }

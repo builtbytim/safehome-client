@@ -2,7 +2,7 @@
 
 import React from "react";
 import Overlay2 from "../../Overlay2";
-import { Slide } from "react-reveal";
+import { Slide } from "react-awesome-reveal";
 import { BiX } from "react-icons/bi";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import SwitchField from "../../forms/branded/SwitchField";
@@ -11,12 +11,10 @@ function GoalCreation2({ show = false, toggleShow }) {
   if (!show) return null;
   return (
     <Overlay2 pos="center">
-      <Slide right duration={300} delay={200}>
+      <div right duration={300} delay={200}>
         <section
           className={
-
             "w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40 px-6 py-6"
-
           }
         >
           <div className="flex flex-row justify-end items-center">
@@ -196,7 +194,7 @@ function GoalCreation2({ show = false, toggleShow }) {
             </div>
           </div>
         </section>
-      </Slide>
+      </div>
     </Overlay2>
   );
 }

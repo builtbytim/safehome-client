@@ -3,7 +3,7 @@
 import { BsX } from "react-icons/bs";
 import Overlay from "./Overlay";
 import { FcEmptyFilter } from "react-icons/fc";
-import { Slide } from "react-reveal";
+import { Slide } from "react-awesome-reveal";
 import { useUiStore } from "../utils/store";
 import Image from "next/image";
 import CampaignRoundedImage from "../../assets/images/icons/campaign-rounded.svg";
@@ -35,9 +35,7 @@ export default function Notifications() {
       skipWrapper
       z={3}
     >
-      <Slide left className="" delay={200} duration={300}>
-        {/* <Zoom top right duration="250" className="w-full"> */}
-
+      <div direction="left" delay={200} duration={300} className="fixed">
         <div
           className={
             "fixed  inset-y-0  bg-white mx-auto flex flex-col lg:justify-center items-center w-full lg:w-[80%] max-w-lg inset-x-0  md:right-auto md:left-0  z-40"
@@ -116,7 +114,7 @@ export default function Notifications() {
           </div>
           {/* </Zoom> */}
         </div>
-      </Slide>
+      </div>
     </Overlay>
   );
 }

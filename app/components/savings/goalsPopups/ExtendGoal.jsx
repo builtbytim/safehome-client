@@ -1,5 +1,5 @@
 import Overlay2 from "../../Overlay2";
-import { Slide } from "react-reveal";
+import { Slide } from "react-awesome-reveal";
 import { BiX } from "react-icons/bi";
 import Image from "next/image";
 import { Form, Formik, Field, ErrorMessage } from "formik";
@@ -7,12 +7,10 @@ import { Form, Formik, Field, ErrorMessage } from "formik";
 function ExtendGoal({ toggleShow }) {
   return (
     <Overlay2 pos="center">
-      <Slide right duration={300} delay={200}>
+      <div right duration={300} delay={200}>
         <section
           className={
-
             "w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40  "
-
           }
         >
           <div className="flex p-6 flex-row justify-end items-center">
@@ -125,7 +123,7 @@ function ExtendGoal({ toggleShow }) {
             </Formik>
           </div>
         </section>
-      </Slide>
+      </div>
     </Overlay2>
   );
 }

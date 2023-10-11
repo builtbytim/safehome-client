@@ -3,7 +3,7 @@
 import { BsX } from "react-icons/bs";
 import Overlay from "./Overlay";
 import cn from "classnames";
-import { Slide } from "react-reveal";
+import { Slide } from "react-awesome-reveal";
 import { useNotifyStore } from "../utils/store";
 
 export default function Notify() {
@@ -48,7 +48,7 @@ export default function Notify() {
 
   return (
     <Overlay z={3}>
-      <Slide top className="" duration={300}>
+      <div top className="" duration={300}>
         {/* <Zoom top right duration="250" className="w-full"> */}
         <div className="w-full bg-white mt-4 py-4 px-4">
           {allowClose && (
@@ -102,7 +102,7 @@ export default function Notify() {
           </div>
         </div>
         {/* </Zoom> */}
-      </Slide>
+      </div>
     </Overlay>
   );
 }
