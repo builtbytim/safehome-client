@@ -23,7 +23,11 @@ function UserSection() {
         <div className="rounded-full h-[96px] w-[96px] overflow-hidden absolute left-[50%] bottom-[-48px] translate-x-[-50%]">
           <Image
             priority
-            src="https://i.pravatar.cc/150?u=helios@g.com"
+            src={
+              data.user
+                ? data.user?.avatarurl
+                : "https://i.pravatar.cc/150?u=helios@g.com"
+            }
             alt="User"
             width={96}
             height={96}
