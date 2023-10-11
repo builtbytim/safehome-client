@@ -5,8 +5,6 @@ import { PasswordTab } from "../../../components/account";
 
 import {
   ToggleCard,
-  Authenticator,
-  SMSAuthenticator,
   PopUpTopBar,
   SecurityQuestionAuth,
 } from "../../../components/security";
@@ -17,21 +15,6 @@ export default function Security() {
   const [showPasswordTab, setShowPasswordTab] = useState(false);
   const [showSecurityQuestionTab, setShowSecurityQuestionTab] = useState(false);
   const [showSecurityQuestion, setShowSecurityQuestion] = useState(false);
-
-  const saveAuth = () => {
-    setShowPasswordTab(false);
-    setAuthAppToggled(true);
-  };
-
-  const saveSMSAuth = () => {
-    setShowSecurityQuestionTab(false);
-    setSmsAuthToggled(true);
-  };
-
-  const setSecurityQuestion = () => {
-    setShowSecurityQuestion(false);
-    setSecurityQuestionToggled(true);
-  };
 
   // Hide Popups when not clicked on
   const changePasswordRef = useRef(null);
@@ -82,7 +65,7 @@ export default function Security() {
           heading="Change Password"
           text="Change the password to your SafeHome account"
           recommended="no"
-          handleClick={() => setShowPasswordTab(!showPasswordTab)}
+          handleClick={() => setShowPasswordTab(true)}
         />
         <ToggleCard
           heading="Security Question"
