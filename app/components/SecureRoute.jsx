@@ -6,9 +6,17 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { retreiveFromLocalStorage, clearLocalStorage } from "../utils/security";
 import Spinner from "./Spinner";
 import Overlay3 from "./Overlay3";
+import { useState, useEffect } from "react";
 
 export default function SecureRoute(props) {
   const tokenObj = retreiveFromLocalStorage(`${config.localStorageKey}:token`);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    if (tokenObj && !ready) {
+      setReady(true);
+    }
+  }, [tokenObj, ready]);
 
   const { offspring: SecureChild, autoLogin = true, ...remProps } = props;
   const {
@@ -27,7 +35,7 @@ export default function SecureRoute(props) {
   const newSearchParams = new URLSearchParams();
   let targetUrl = searchParams.get(config.redirectSearchParam);
 
-  if (authenticating) {
+  if (authenticating || !ready) {
     // console.log("Authenticating...", tokenObj);
     return <AuthLoader />;
   }

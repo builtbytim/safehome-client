@@ -14,7 +14,7 @@ export default function Layout({ children, authenticatedUser }) {
 
         {/* <MobileSidebar /> */}
 
-        <section className="w-full md:p-5 h-full min-h-[80vh]">
+        <section className="w-full md:p-5 ">
           <MobileNavList />
           <div className="w-full h-full">{children}</div>
         </section>

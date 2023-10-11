@@ -21,7 +21,7 @@ function MobileNavListUserPanel() {
           alt="User"
           width={56}
           height={56}
-          className="w-full h-full object-cover"
+          className="w-full border border-[--b1] h-full object-cover"
         />
       </div>
       <div>

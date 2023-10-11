@@ -17,7 +17,7 @@ function MobileNavList() {
 
       <MobileNavListUserPanel />
 
-      <ul className="space-y-4 flex flex-col justify-start items-start  w-full pt-6">
+      <ul className="space-y-6 flex flex-col justify-start items-start  w-full pt-10">
         {items.map((item, index) => {
           const Icon = item.icon;
           return (

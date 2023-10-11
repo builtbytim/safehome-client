@@ -8,7 +8,7 @@ function Page({ authenticatedUser }) {
   const setUser = useDataStore((state) => state.setUser);
 
   return (
-    <div className="space-y-2  lg:space-y-8 w-full min-h-screen pt-8 pb-16">
+    <div className="space-y-2  lg:space-y-8 w-full md:min-h-screen pt-8 pb-16">
       <main className=" space-y-2 lg:space-y-10">
         <div className="hidden "></div>
       </main>

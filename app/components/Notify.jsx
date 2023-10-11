@@ -46,7 +46,7 @@ export default function Notify() {
   if (!show) return null;
 
   return (
-    <Overlay>
+    <Overlay z={3}>
       <div className="w-full bg-white mt-4 py-4 px-4">
         {allowClose && (
           <div className="flex flex-row justify-end items-center w-full">

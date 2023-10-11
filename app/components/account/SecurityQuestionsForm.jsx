@@ -10,7 +10,7 @@ import useChangePassword from "../../utils/hooks/useChangePassword";
 import BarLoader from "../BarLoader";
 import { useNotifyStore } from "../../utils/store";
 
-const PasswordTab = ({ signOut, token, closeParent }) => {
+const SecurityQuestionsForm = ({ signOut, token, closeParent }) => {
   const setNotify = useNotifyStore((state) => state.setNotify);
 
   function onSuccess(data) {
@@ -61,38 +61,14 @@ const PasswordTab = ({ signOut, token, closeParent }) => {
   return (
     <div className="py-7 bg-white font-medium w-full ">
       <Formik
-        initialValues={{
-          currentPassword: "",
-          newPassword: "",
-          newPasswordConfirmation: "",
-        }}
+        initialValues={{}}
         onSubmit={handleSubmit}
-        validationSchema={Yup.object().shape({
-          currentPassword: Yup.string()
-            .min(8, "Must be 8 characters or more")
-            .max(25, "Too long")
-            .required("Required"),
-          newPassword: Yup.string()
-            .min(8, "Must be 8 characters or more")
-            .max(25, "Too long")
-            .required("Required"),
-          newPasswordConfirmation: Yup.string()
-            .min(8, "Must be 8 characters or more")
-            .max(25, "Too long")
-            .required("Required")
-            .test(
-              "passwords-match",
-              "New passwords must match",
-              function (value) {
-                return this.parent.newPassword === value;
-              }
-            ),
-        })}
+        validationSchema={Yup.object().shape({})}
       >
         {({ isValid }) => {
           return (
-            <Form className="w-full relative py-6">
-              <div className="grid grid-cols-1 gap-5 md:gap-7 w-full  max-w-[500px]">
+            <Form className="w-full relative py-6 px-6">
+              <div className="grid grid-cols-1 gap-5 md:gap-7 w-full  max-w-[500px] ">
                 <BarLoader active={isLoading} />
 
                 <div>
@@ -199,4 +175,4 @@ const PasswordTab = ({ signOut, token, closeParent }) => {
   );
 };
 
-export default PasswordTab;
+export default SecurityQuestionsForm;

@@ -3,7 +3,12 @@
 import Switch from "react-switch";
 import { useState } from "react";
 
-function SwitchField({ handleChange, defaultChecked = false, color }) {
+function SwitchField({
+  handleChange,
+  defaultChecked = false,
+  color,
+  ...props
+}) {
   const [checked, setChecked] = useState(defaultChecked);
 
   function _handleChange(v) {
@@ -18,6 +23,7 @@ function SwitchField({ handleChange, defaultChecked = false, color }) {
       checked={checked}
       checkedIcon={false}
       uncheckedIcon={false}
+      {...props}
     />
   );
 }
