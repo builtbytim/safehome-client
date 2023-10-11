@@ -4,12 +4,8 @@ import SecureRoute from "../../../components/SecureRoute";
 
 import { useState, useRef, useEffect } from "react";
 import { PasswordTab, SecurityQuestionsTab } from "../../../components/account";
-
-import {
-  ToggleCard,
-  PopUpTopBar,
-  SecurityQuestionAuth,
-} from "../../../components/security";
+import Overlay from "../../../components/Overlay2";
+import { ToggleCard, PopUpTopBar } from "../../../components/security";
 
 function Page({ signOut, authenticationToken }) {
   const [securityQuestionToggled, setSecurityQuestionToggled] = useState(false);
@@ -67,7 +63,7 @@ function Page({ signOut, authenticationToken }) {
           heading="Email Verification"
           text="Receive a six digit code sent to your registered Email Address to verify important account actions."
           recommended="yes"
-          active={securityQuestionToggled}
+          active
           readOnly
           toggleFunc={() =>
             securityQuestionToggled === true
@@ -90,50 +86,54 @@ function Page({ signOut, authenticationToken }) {
       </div>
 
       {showPasswordTab && (
-        <div className="fixed top-[-20vh] left-0 w-full h-[150vh] bg-black/50 z-[100]">
-          <div
-            className="fixed top-[-40px] right-0 w-full md:w-[493px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow"
-            ref={changePasswordRef}
-          >
-            <div className="fixed top-0 right-0 z-[10] w-full md:w-[493px] bg-transparent pr-1">
-              <PopUpTopBar
-                close={() => setShowPasswordTab(false)}
-                title="Change Password"
-                desc="Change your password using the form below"
-              />
+        <div className="fixed  left-0 w-full  bg-black/50 z-20">
+          <Overlay z={3}>
+            <div
+              className="fixed inset-y-0 right-0 w-full md:w-[493px]  pb-[5vh] bg-white overflow-y-auto shadow"
+              ref={changePasswordRef}
+            >
+              <div className="  w-full md:w-[493px] bg-white ">
+                <PopUpTopBar
+                  close={() => setShowPasswordTab(false)}
+                  title="Change Password"
+                  desc="Change your password using the form below"
+                />
+              </div>
+              <div className="">
+                <PasswordTab
+                  signOut={signOut}
+                  token={authenticationToken}
+                  closeParent={() => setShowPasswordTab(false)}
+                />
+              </div>
             </div>
-            <div className="pt-[230px]  px-8">
-              <PasswordTab
-                signOut={signOut}
-                token={authenticationToken}
-                closeParent={() => setShowPasswordTab(false)}
-              />
-            </div>
-          </div>
+          </Overlay>
         </div>
       )}
 
       {showSecurityQuestionTab && (
-        <div className="fixed top-[-20vh] left-0 w-full h-[150vh] bg-black/50 z-[100]">
-          <div
-            className="fixed top-[0] right-0 w-full md:w-[493px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow"
-            ref={smschangePasswordRef}
-          >
-            <div className="fixed top-0 right-0 z-[10] w-full md:w-[493px] bg-transparent pr-1">
-              <PopUpTopBar
-                close={() => setShowSecurityQuestionTab(false)}
-                title="Security Question"
-                desc="Make sure you input the right information"
-              />
+        <div className="fixed  left-0 w-full  bg-black/50 z-20">
+          <Overlay z={3}>
+            <div
+              className="fixed inset-y-0 right-0 w-full md:w-[493px]  pb-[5vh] bg-white overflow-y-auto shadow"
+              ref={smschangePasswordRef}
+            >
+              <div className="  w-full md:w-[493px] bg-white ">
+                <PopUpTopBar
+                  close={() => setShowSecurityQuestionTab(false)}
+                  title="Security Question"
+                  desc="Make sure you input the right information"
+                />
+              </div>
+              <div className=" ">
+                <SecurityQuestionsTab
+                  signOut={signOut}
+                  token={authenticationToken}
+                  closeParent={() => setShowSecurityQuestionTab(false)}
+                />
+              </div>
             </div>
-            <div className="pt-[230px] ">
-              <SecurityQuestionsTab
-                signOut={signOut}
-                token={authenticationToken}
-                closeParent={() => setShowSecurityQuestionTab(false)}
-              />
-            </div>
-          </div>
+          </Overlay>
         </div>
       )}
     </main>

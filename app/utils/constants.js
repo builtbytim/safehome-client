@@ -49,6 +49,33 @@ export const states = [
   { name: "Zamfara", value: "ZAMFARA" },
 ];
 
+export const securityQuestions = [
+  {
+    name: "Choose a security question",
+    value: "",
+  },
+  {
+    name: "What is your mother's maiden name?",
+    value: "WhatIsYourMotherSMaidenName",
+  },
+  {
+    name: "In which city were you born?",
+    value: "InWhichCityWereYouBorn",
+  },
+  {
+    name: "What is your favorite pet's name?",
+    value: "WhatIsYourFavoritePetSName",
+  },
+  {
+    name: "Who is your favorite teacher?",
+    value: "WhoIsYourFavoriteTeacher",
+  },
+  {
+    name: "What is the name of your first car?",
+    value: "WhatIsTheNameOfYourFirstCar",
+  },
+];
+
 export const navItems = [
   {
     name: "Profile Info",

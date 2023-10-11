@@ -3,12 +3,15 @@
 import { useState } from "react";
 import Image from "next/image";
 import HideIcon from "../../../assets/images/icons/password-hide.svg";
+import GenericSelectField from "../forms/branded/GenericSelectField";
 import ShowIcon from "../../../assets/images/icons/password-show.svg";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import useChangePassword from "../../utils/hooks/useChangePassword";
 import BarLoader from "../BarLoader";
 import { useNotifyStore } from "../../utils/store";
+import { securityQuestions } from "../../utils/constants";
+import { TbRulerMeasure } from "react-icons/tb";
 
 const SecurityQuestionsForm = ({ signOut, token, closeParent }) => {
   const setNotify = useNotifyStore((state) => state.setNotify);
@@ -40,17 +43,11 @@ const SecurityQuestionsForm = ({ signOut, token, closeParent }) => {
 
   const { mutate, isLoading } = useChangePassword(onSuccess, onError);
 
-  const [isHidden1, setIsHidden1] = useState(true);
-  const [isHidden2, setIsHidden2] = useState(true);
-
   async function handleSubmit(values) {
     if (isLoading) return;
 
     const payload = {
-      body: {
-        currentPassword: values.currentPassword,
-        newPassword: values.newPassword,
-      },
+      body: {},
 
       token,
     };
@@ -59,100 +56,106 @@ const SecurityQuestionsForm = ({ signOut, token, closeParent }) => {
   }
 
   return (
-    <div className="py-7 bg-white font-medium w-full ">
+    <div className="py-6 bg-white font-medium w-full ">
       <Formik
-        initialValues={{}}
+        validateOnMount
+        initialValues={{
+          question1: "",
+          answer1: "",
+          question2: "",
+          answer2: "",
+        }}
         onSubmit={handleSubmit}
-        validationSchema={Yup.object().shape({})}
+        validationSchema={Yup.object().shape({
+          question1: Yup.string()
+            .required("Please select a security question")
+            .oneOf(
+              securityQuestions.map((q) => q.value),
+              "Invalid question"
+            ),
+          answer1: Yup.string()
+            .required("Please provide an answer")
+            .min(6, "Answer must be at least 6 characters"),
+
+          question2: Yup.string()
+            .required("Please select a security question")
+            .oneOf(
+              securityQuestions.map((q) => q.value),
+              "Invalid question"
+            )
+            .test("notSame", "Questions must be different", function (value) {
+              if (!this.parent.question1) return true;
+              return this.parent.question1 !== value;
+            }),
+
+          answer2: Yup.string()
+            .required("Please provide an answer")
+            .min(6, "Answer must be at least 6 characters"),
+        })}
       >
-        {({ isValid }) => {
+        {({ isValid, setFieldValue }) => {
           return (
-            <Form className="w-full relative py-6 px-6">
+            <Form className="w-full relative  px-6 space-y-6">
               <div className="grid grid-cols-1 gap-5 md:gap-7 w-full  max-w-[500px] ">
                 <BarLoader active={isLoading} />
 
+                <div className="relative">
+                  <p className="account-form-text">Security Question 1</p>
+                  <GenericSelectField
+                    type="text"
+                    name="question1"
+                    items={securityQuestions}
+                    handleChange={({ selectedItem }) => {
+                      setFieldValue("question1", selectedItem.value, true);
+                    }}
+                  />
+
+                  <ErrorMessage
+                    name="question1"
+                    component="div"
+                    className="absolute -bottom-[40%] left-0 text-[--text-danger] text-xs text-left"
+                  />
+                </div>
+
                 <div>
-                  <p className="account-form-text">Current Password</p>
+                  <p className="account-form-text">Answer</p>
                   <div className="account-form-icon-container relative">
-                    <Field
-                      type={isHidden1 ? "password" : "text"}
-                      placeholder="Current Password"
-                      name="currentPassword"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setIsHidden1((prev) => !prev)}
-                    >
-                      <Image
-                        priority
-                        src={isHidden1 ? ShowIcon : HideIcon}
-                        alt="User"
-                        width="auto"
-                        height="auto"
-                        className="w-full h-full object-cover"
-                      />
-                    </button>
+                    <Field type="text" placeholder="" name="answer1" />
 
                     <ErrorMessage
-                      name="currentPassword"
+                      name="answer1"
                       component="div"
                       className="absolute -bottom-[40%] left-0 text-[--text-danger] text-xs text-left"
                     />
                   </div>
                 </div>
-                <div>
-                  <p className="account-form-text">New Password</p>
-                  <div className="account-form-icon-container relative">
-                    <Field
-                      type={isHidden2 ? "password" : "text"}
-                      placeholder="New Password"
-                      name="newPassword"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setIsHidden2((prev) => !prev)}
-                    >
-                      <Image
-                        priority
-                        src={isHidden2 ? ShowIcon : HideIcon}
-                        alt="User"
-                        width="auto"
-                        height="auto"
-                        className="w-full h-full object-cover"
-                      />
-                    </button>
 
-                    <ErrorMessage
-                      name="newPassword"
-                      component="div"
-                      className="absolute -bottom-[40%] left-0 text-[--text-danger] text-xs text-left"
-                    />
-                  </div>
+                <div className="relative">
+                  <p className="account-form-text">Security Question 2</p>
+
+                  <GenericSelectField
+                    type="text"
+                    name="question2"
+                    items={securityQuestions}
+                    handleChange={({ selectedItem }) => {
+                      setFieldValue("question2", selectedItem.value, true);
+                    }}
+                  />
+
+                  <ErrorMessage
+                    name="question2"
+                    component="div"
+                    className="absolute -bottom-[40%] left-0 text-[--text-danger] text-xs text-left"
+                  />
                 </div>
+
                 <div>
-                  <p className="account-form-text">Confirm New Password</p>
+                  <p className="account-form-text">Answer</p>
                   <div className="account-form-icon-container relative">
-                    <Field
-                      type={isHidden2 ? "password" : "text"}
-                      placeholder="Confirm Password"
-                      name="newPasswordConfirmation"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setIsHidden2((prev) => !prev)}
-                    >
-                      <Image
-                        priority
-                        src={isHidden2 ? ShowIcon : HideIcon}
-                        alt="User"
-                        width="auto"
-                        height="auto"
-                        className="w-full h-full object-cover"
-                      />
-                    </button>
+                    <Field type="text" placeholder="" name="answer2" />
 
                     <ErrorMessage
-                      name="newPasswordConfirmation"
+                      name="answer2"
                       component="div"
                       className="absolute -bottom-[40%] left-0 text-[--text-danger] text-xs text-left"
                     />
@@ -164,7 +167,7 @@ const SecurityQuestionsForm = ({ signOut, token, closeParent }) => {
                   disabled={!isValid || isLoading}
                   className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
                 >
-                  Change Password
+                  Save
                 </button>
               </div>
             </Form>

@@ -59,7 +59,7 @@ const PasswordTab = ({ signOut, token, closeParent }) => {
   }
 
   return (
-    <div className="py-7 bg-white font-medium w-full ">
+    <div className="py-6 bg-white font-medium w-full ">
       <Formik
         initialValues={{
           currentPassword: "",
@@ -91,7 +91,7 @@ const PasswordTab = ({ signOut, token, closeParent }) => {
       >
         {({ isValid }) => {
           return (
-            <Form className="w-full relative py-6">
+            <Form className="w-full relative px-6">
               <div className="grid grid-cols-1 gap-5 md:gap-7 w-full  max-w-[500px]">
                 <BarLoader active={isLoading} />
 
