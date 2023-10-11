@@ -78,7 +78,7 @@ export const securityQuestions = [
 
 export const navItems = [
   {
-    name: "Profile Info",
+    name: "Profile",
     icon: AccountSettingsSVG,
     link: "/account/profile",
   },

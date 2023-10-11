@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import Image from "next/image";
+import SecureRoute from "../../../components/SecureRoute";
 
 import {
   PiMapPin,
@@ -12,21 +12,19 @@ import {
 } from "react-icons/pi";
 import { RiFacebookFill } from "react-icons/ri";
 import { SlSocialLinkedin } from "react-icons/sl";
-import picIcon from "../../../../assets/images/icons/picIcon.svg";
 
 const InfoCard = ({ icon, text }) => (
-  <div className="flex flex-row justify-start  border border-[--lines] px-6 py-6 rounded md:rounded-xl items-center">
-    <div className="w-[150px]">
-      <div className="border-2 border-[--color-brand] text-3xl rounded-full w-[70px] h-[70px] flex items-center justify-center">
+  <div className="flex flex-row justify-start space-x-8  border border-[--lines] px-6 py-6  rounded md:rounded-xl items-center">
+    <div className="self-center">
+      <div className="border border-[--color-brand] text-2xl md:text-3xl md:text-white` rounded-full w-[50px] h-[50px] md:w-[70px] md:h-[70px] flex items-center justify-center">
         {icon}
       </div>
     </div>
-    <p className="">{text}</p>
+    <p className="self-center   ">{text}</p>
   </div>
 );
 
 export default function Contact() {
-  const [isHidden, setIsHidden] = useState(true);
   const fileRef = useRef(null);
 
   const openFile = () => {
@@ -36,7 +34,7 @@ export default function Contact() {
   return (
     <main className=" space-y-8 lg:space-y-8 text-[--text-secondary] border border-[--lines] p-5 h-full min-h-[80vh] rounded-2xl">
       <div className="pb-3 space-y-2">
-        <h3 className="text-3xl text-[--color-brand] font-semibold">
+        <h3 className="text-2xl md:text-3xl text-[--color-brand] font-semibold">
           Contact Us
         </h3>
         <p>
@@ -44,7 +42,7 @@ export default function Contact() {
           etc.
         </p>
       </div>
-      <div className="space-y-5">
+      <div className="space-y-3">
         <InfoCard
           icon={<PiMapPin className="text-[--color-brand]" />}
           text="Lapal House, 235 Igbosere Road, Onikan, Lagos"
