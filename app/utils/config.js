@@ -37,7 +37,7 @@ const config = {
     AUTH_FAILED: "AUF",
   },
 
-  redirectSearchParam: "redirectUri",
+  redirectSearchParam: "redirectUrl",
   signInModeParam: "mode",
   loginUrl: "/sign-in",
 

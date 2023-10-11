@@ -3,7 +3,6 @@
 import { BsX } from "react-icons/bs";
 import Overlay from "./Overlay";
 import cn from "classnames";
-import { Zoom } from "react-awesome-reveal";
 import { useNotifyStore } from "../utils/store";
 
 export default function Notify() {
@@ -47,7 +46,7 @@ export default function Notify() {
   if (!show) return null;
 
   return (
-    <Zoom direction="up" delay={200} duration={300}>
+    <Overlay>
       <div className="w-full bg-white mt-4 py-4 px-4">
         {allowClose && (
           <div className="flex flex-row justify-end items-center w-full">
@@ -99,7 +98,6 @@ export default function Notify() {
           )}
         </div>
       </div>
-      {/* </Zoom> */}
-    </Zoom>
+    </Overlay>
   );
 }

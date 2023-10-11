@@ -5,7 +5,7 @@ import { useDataStore } from "../../utils/store";
 function MobileNavListUserPanel({}) {
   const data = useDataStore((state) => state.data);
 
-  const user = data.user || null;
+  const user = data.user;
 
   return (
     <div className="flex justify-start space-x-3 items-center">

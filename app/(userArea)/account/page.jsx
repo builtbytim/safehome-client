@@ -6,13 +6,13 @@ import { useDataStore } from "../../utils/store";
 import InlineRedirect from "../../components/InlineRedirect";
 
 function Page({ authenticatedUser }) {
-  const setData = useDataStore((state) => state.data);
+  const setData = useDataStore((state) => state.setData);
 
-  useEffect(() => {
-    if (authenticatedUser) {
-      setData({ user: authenticatedUser });
-    }
-  }, [authenticatedUser]);
+  console.log(setData);
+
+  // useEffect(() => {
+  //   setData({ user: authenticatedUser });
+  // }, [authenticatedUser]);
 
   return (
     <div className="space-y-2  lg:space-y-8 w-full min-h-screen pt-8 pb-16">

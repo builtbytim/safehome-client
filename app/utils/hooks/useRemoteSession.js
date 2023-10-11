@@ -14,7 +14,6 @@ export default function useRemoteSession(
     queryKey: [queryKeys.getSession, tokenObj],
 
     retry: false,
-    cacheTime: 0,
 
     enabled: !!tokenObj,
 
@@ -31,6 +30,20 @@ export default function useRemoteSession(
         onError(err, vars);
       }
     },
+
+    cacheTime: 60000,
+
+    staleTime: 60000,
+
+    refetchOnWindowFocus: false,
+
+    refetchOnMount: false,
+
+    refetchOnReconnect: false,
+
+    refetchInterval: false,
+
+    refetchIntervalInBackground: false,
   });
 
   return {
@@ -42,7 +55,7 @@ export default function useRemoteSession(
     authenticated: isSuccess,
     authenticatedUser: data?.user,
     authenticatedSession: data?.session,
-    authenticationFailed: isError || !!!tokenObj,
+    authenticationFailed: isError || !tokenObj,
     authenticationToken: tokenObj,
   };
 }

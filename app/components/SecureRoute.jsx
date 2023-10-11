@@ -1,25 +1,14 @@
 "use client";
 
 import useRemoteSession from "../utils/hooks/useRemoteSession";
-import PageLoader from "./layout/PageLoader";
 import config from "../utils/config";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { retreiveFromLocalStorage, clearLocalStorage } from "../utils/security";
-import { useEffect, useState } from "react";
+import Spinner from "./Spinner";
+import Overlay3 from "./Overlay3";
 
 export default function SecureRoute(props) {
   const tokenObj = retreiveFromLocalStorage(`${config.localStorageKey}:token`);
-  const [proceed, setProceed] = useState(false);
-
-  useEffect(() => {
-    if (proceed) {
-      return;
-    }
-
-    if (window && window.location) {
-      setProceed(true);
-    }
-  }, [proceed]);
 
   const { offspring: SecureChild, autoLogin = true, ...remProps } = props;
   const {
@@ -35,11 +24,12 @@ export default function SecureRoute(props) {
 
   const currentPathname = usePathname();
 
+  const newSearchParams = new URLSearchParams();
   let targetUrl = searchParams.get(config.redirectSearchParam);
 
-  if (authenticating || !proceed) {
-    // console.log("Authenticating...");
-    return <PageLoader />;
+  if (authenticating) {
+    // console.log("Authenticating...", tokenObj);
+    return <AuthLoader />;
   }
 
   if (authenticated) {
@@ -53,12 +43,9 @@ export default function SecureRoute(props) {
           targetUrl = null;
         }
 
-        const destinationUrl = new URL(
-          targetUrl || config.authenticatedHome,
-          window.location.origin
-        );
+        const destinationUrl = targetUrl || config.authenticatedHome;
 
-        router.replace(destinationUrl.href);
+        router.replace(destinationUrl);
       }
     }
 
@@ -86,24 +73,33 @@ export default function SecureRoute(props) {
 
     // * if the page is not  the log in page,  redirect
 
-    const redirectUrl = new URL(currentPathname, window.location.origin);
+    const redirectUrl = currentPathname;
 
-    // for (let name of searchParams.keys()) {
-    //   redirectUrl.searchParams.append(name, searchParams.get(name));
-    // }
+    const newUrl = config.loginUrl;
 
-    const newUrl = new URL(config.loginUrl, window.location.origin);
-
-    newUrl.searchParams.append(
+    newSearchParams.append(
       config.signInModeParam,
       config.signInModes.AUTH_FAILED
     );
 
-    newUrl.searchParams.append(
-      config.redirectSearchParam,
-      redirectUrl.pathname
-    );
+    newSearchParams.append(config.redirectSearchParam, redirectUrl);
 
-    router.replace(newUrl.href);
+    router.replace(`${newUrl}?${newSearchParams.toString()}`);
   }
+}
+
+function AuthLoader() {
+  return (
+    <Overlay3 z={1}>
+      <section className=" top-0 bottom-0 inset-x-0  flex flex-col justify-center items-center  w-full min-h-screen z-10 space-y-16">
+        <div className="md:hidden">
+          <Spinner size="small" />
+        </div>
+
+        <div className="md:block hidden">
+          <Spinner size="large" />
+        </div>
+      </section>
+    </Overlay3>
+  );
 }
