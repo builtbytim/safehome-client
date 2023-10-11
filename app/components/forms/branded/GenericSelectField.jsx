@@ -3,15 +3,19 @@
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import SelectField from "./SelectField";
 import { forwardRef } from "react";
+import cn from "classnames";
 
 export default function GenericSelectField({
   items,
   itemToString = null,
   handleChange,
+  defaultSelectedItem = null,
+  disabled = false,
 }) {
   return (
     <SelectField
       items={items}
+      defaultSelectedItem={defaultSelectedItem}
       onSelectedItemChange={handleChange}
       itemToString={itemToString || ((item) => (item ? item.name : "No name"))}
       ToggleElement={forwardRef(function A(
@@ -19,7 +23,16 @@ export default function GenericSelectField({
         ref
       ) {
         return (
-          <div ref={ref} {...props} className="account-form-icon-container">
+          <div
+            ref={ref}
+            {...props}
+            className={
+              "account-form-icon-container" +
+              cn({
+                " opacity-40 pointer-events-none ": disabled,
+              })
+            }
+          >
             <div className="account-form-field">
               <span className="font-medium self-center">
                 {_selectedItem?.name ?? items[0].name}

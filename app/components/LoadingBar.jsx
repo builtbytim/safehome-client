@@ -8,7 +8,7 @@ function LoadingBar({ v = 1 }) {
         cn({
           "  border border-transparent sm:rounded-t-[16px] h-[8px]  bg-[#ff6100]/30 ":
             v === 1,
-          " h-[4px]   bg-[#ff6100]/20  ": v === 0,
+          " h-[4px] md:h-[6px]   bg-[#ff6100]/20  ": v === 0,
         })
       }
     >

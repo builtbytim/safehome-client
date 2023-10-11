@@ -8,6 +8,7 @@ export default function SelectField({
   items,
   itemToString,
   onSelectedItemChange = null,
+  defaultSelectedItem = null,
 }) {
   const {
     isOpen,
@@ -21,6 +22,7 @@ export default function SelectField({
     items,
     itemToString,
     onSelectedItemChange,
+    defaultSelectedItem: defaultSelectedItem || items[0],
   });
 
   return (

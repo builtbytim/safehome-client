@@ -1,19 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import HideIcon from "../../../assets/images/icons/password-hide.svg";
 import GenericSelectField from "../forms/branded/GenericSelectField";
-import ShowIcon from "../../../assets/images/icons/password-show.svg";
+import SwitchField from "../forms/branded/SwitchField";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import useChangePassword from "../../utils/hooks/useChangePassword";
+import {
+  fetchUtil,
+  makeUrl,
+  extractErrorMessage,
+} from "../../utils/fetchUtils";
 import BarLoader from "../BarLoader";
 import { useNotifyStore } from "../../utils/store";
 import { securityQuestions } from "../../utils/constants";
-import { TbRulerMeasure } from "react-icons/tb";
+import { useMutation } from "react-query";
+import queryKeys from "../../utils/queryKeys";
+import config from "../../utils/config";
 
-const SecurityQuestionsForm = ({ signOut, token, closeParent }) => {
+const SecurityQuestionsForm = ({ user, token, closeParent }) => {
+  console.log(user);
+
   const setNotify = useNotifyStore((state) => state.setNotify);
 
   function onSuccess(data) {
@@ -21,11 +27,10 @@ const SecurityQuestionsForm = ({ signOut, token, closeParent }) => {
 
     setNotify({
       show: true,
-      content:
-        "Password changed successfully, you must sign in with your new password to continue",
+      content: "Your security questions have been set.",
       allowClose: false,
-      onAcceptText: "Proceed",
-      onAccept: signOut,
+      onAcceptText: "Ok",
+      onAccept: () => {},
     });
   }
 
@@ -36,36 +41,61 @@ const SecurityQuestionsForm = ({ signOut, token, closeParent }) => {
       show: true,
       content: err.message,
       allowClose: true,
-      onAcceptText: "Close",
-      onAccept: () => setNotify({ show: false }),
     });
   }
 
-  const { mutate, isLoading } = useChangePassword(onSuccess, onError);
+  const { mutate, isLoading } = useMutation({
+    onSuccess,
+    onError,
+    mutationFn: async function (body) {
+      const res = await fetchUtil({
+        url: makeUrl(config.apiPaths.setSecurityQuestions),
+        method: "POST",
+        body,
+        auth: token,
+      });
+
+      if (!res.success) {
+        throw new Error(extractErrorMessage(res));
+      }
+
+      return res.data;
+    },
+    mutationKey: [queryKeys.setSecurityQuestions, token],
+  });
 
   async function handleSubmit(values) {
     if (isLoading) return;
 
-    const payload = {
-      body: {},
-
-      token,
+    const body = {
+      question1: values.question1,
+      answer1: values.answer1,
+      question2: values.question2,
+      answer2: values.answer2,
+      replace: values.allowEdits,
     };
 
-    mutate(payload);
+    mutate(body);
   }
 
   return (
     <div className="py-6 bg-white font-medium w-full ">
       <Formik
-        validateOnMount
         initialValues={{
-          question1: "",
+          question1: user.securityQuestions?.question1 || "",
           answer1: "",
-          question2: "",
+          question2: user.securityQuestions?.question2 || "",
           answer2: "",
+          allowEdits: !!user.securityQuestions ? false : true,
         }}
         onSubmit={handleSubmit}
+        initialTouched={{
+          question1: true,
+          question2: true,
+          // answer1: true,
+          // answer2: true,
+          allowEdits: true,
+        }}
         validationSchema={Yup.object().shape({
           question1: Yup.string()
             .required("Please select a security question")
@@ -75,7 +105,7 @@ const SecurityQuestionsForm = ({ signOut, token, closeParent }) => {
             ),
           answer1: Yup.string()
             .required("Please provide an answer")
-            .min(6, "Answer must be at least 6 characters"),
+            .min(3, "Answer must be at least 3 characters"),
 
           question2: Yup.string()
             .required("Please select a security question")
@@ -90,37 +120,58 @@ const SecurityQuestionsForm = ({ signOut, token, closeParent }) => {
 
           answer2: Yup.string()
             .required("Please provide an answer")
-            .min(6, "Answer must be at least 6 characters"),
+            .min(3, "Answer must be at least 3 characters"),
         })}
       >
-        {({ isValid, setFieldValue }) => {
+        {({ isValid, setFieldValue, values }) => {
+          const disableForm = !values.allowEdits;
+
+          console.log(disableForm);
+
           return (
             <Form className="w-full relative  px-6 space-y-6">
               <div className="grid grid-cols-1 gap-5 md:gap-7 w-full  max-w-[500px] ">
                 <BarLoader active={isLoading} />
 
-                <div className="relative">
+                <div className="">
                   <p className="account-form-text">Security Question 1</p>
-                  <GenericSelectField
-                    type="text"
-                    name="question1"
-                    items={securityQuestions}
-                    handleChange={({ selectedItem }) => {
-                      setFieldValue("question1", selectedItem.value, true);
-                    }}
-                  />
 
-                  <ErrorMessage
-                    name="question1"
-                    component="div"
-                    className="absolute -bottom-[40%] left-0 text-[--text-danger] text-xs text-left"
-                  />
+                  <div className="relative">
+                    <GenericSelectField
+                      disabled={disableForm}
+                      defaultSelectedItem={
+                        user.securityQuestions.question1
+                          ? securityQuestions.find(
+                              (q) =>
+                                q.value === user.securityQuestions.question1
+                            )
+                          : null
+                      }
+                      name="question1"
+                      items={securityQuestions}
+                      handleChange={({ selectedItem }) => {
+                        setFieldValue("question1", selectedItem.value, true);
+                      }}
+                    />
+
+                    <ErrorMessage
+                      name="question1"
+                      component="div"
+                      className="absolute -bottom-[40%] left-0 text-[--text-danger] text-xs text-left"
+                    />
+                  </div>
                 </div>
 
                 <div>
                   <p className="account-form-text">Answer</p>
                   <div className="account-form-icon-container relative">
-                    <Field type="text" placeholder="" name="answer1" />
+                    <Field
+                      disabled={disableForm}
+                      type="text"
+                      placeholder=""
+                      className="disabled:opacity-40 disabled:pointer-events-none"
+                      name="answer1"
+                    />
 
                     <ErrorMessage
                       name="answer1"
@@ -130,29 +181,45 @@ const SecurityQuestionsForm = ({ signOut, token, closeParent }) => {
                   </div>
                 </div>
 
-                <div className="relative">
+                <div className="">
                   <p className="account-form-text">Security Question 2</p>
 
-                  <GenericSelectField
-                    type="text"
-                    name="question2"
-                    items={securityQuestions}
-                    handleChange={({ selectedItem }) => {
-                      setFieldValue("question2", selectedItem.value, true);
-                    }}
-                  />
+                  <div className="relative">
+                    <GenericSelectField
+                      disabled={disableForm}
+                      defaultSelectedItem={
+                        user.securityQuestions.question2
+                          ? securityQuestions.find(
+                              (q) =>
+                                q.value === user.securityQuestions.question2
+                            )
+                          : null
+                      }
+                      name="question2"
+                      items={securityQuestions}
+                      handleChange={({ selectedItem }) => {
+                        setFieldValue("question2", selectedItem.value, true);
+                      }}
+                    />
 
-                  <ErrorMessage
-                    name="question2"
-                    component="div"
-                    className="absolute -bottom-[40%] left-0 text-[--text-danger] text-xs text-left"
-                  />
+                    <ErrorMessage
+                      name="question2"
+                      component="div"
+                      className="absolute -bottom-[40%] left-0 text-[--text-danger] text-xs text-left"
+                    />
+                  </div>
                 </div>
 
                 <div>
                   <p className="account-form-text">Answer</p>
                   <div className="account-form-icon-container relative">
-                    <Field type="text" placeholder="" name="answer2" />
+                    <Field
+                      disabled={disableForm}
+                      type="text"
+                      className="disabled:opacity-40 disabled:pointer-events-none"
+                      placeholder=""
+                      name="answer2"
+                    />
 
                     <ErrorMessage
                       name="answer2"
@@ -161,9 +228,23 @@ const SecurityQuestionsForm = ({ signOut, token, closeParent }) => {
                     />
                   </div>
                 </div>
+
+                {user.securityQuestions && (
+                  <div className="mt-4">
+                    <p className="account-form-text"> Allow Edits </p>
+                    <div className="">
+                      <SwitchField
+                        color="#1E0700"
+                        defaultChecked={values.allowEdits}
+                        handleChange={(v) => setFieldValue("allowEdits", v)}
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="py-10 text-center flex flex-col justify-center items-center w-full">
                 <button
+                  type="submit"
                   disabled={!isValid || isLoading}
                   className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
                 >

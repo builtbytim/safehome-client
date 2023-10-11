@@ -31,7 +31,7 @@ export default function useRemoteSession(
       }
     },
 
-    cacheTime: 60000,
+    cacheTime: 0,
 
     staleTime: 60000,
 

@@ -7,7 +7,7 @@ import { PasswordTab, SecurityQuestionsTab } from "../../../components/account";
 import Overlay from "../../../components/Overlay2";
 import { ToggleCard, PopUpTopBar } from "../../../components/security";
 
-function Page({ signOut, authenticationToken }) {
+function Page({ signOut, authenticationToken, authenticatedUser }) {
   const [securityQuestionToggled, setSecurityQuestionToggled] = useState(false);
 
   const [showPasswordTab, setShowPasswordTab] = useState(false);
@@ -129,6 +129,7 @@ function Page({ signOut, authenticationToken }) {
                 <SecurityQuestionsTab
                   signOut={signOut}
                   token={authenticationToken}
+                  user={authenticatedUser}
                   closeParent={() => setShowSecurityQuestionTab(false)}
                 />
               </div>
