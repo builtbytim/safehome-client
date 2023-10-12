@@ -3,6 +3,16 @@
 import GenericSelectField from "../forms/branded/GenericSelectField";
 import { relationshipTypes } from "../../utils/constants";
 import { parsePhoneNumber } from "awesome-phonenumber";
+import BarLoader from "../BarLoader";
+import {
+  fetchUtil,
+  makeUrl,
+  extractErrorMessage,
+} from "../../utils/fetchUtils";
+import { useMutation, useQueryClient } from "react-query";
+import queryKeys from "../../utils/queryKeys";
+import config from "../../utils/config";
+import { useNotifyStore } from "../../utils/store";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -35,9 +45,68 @@ const yupSchema = Yup.object({
   email: Yup.string().required("Required").email("Invalid email address"),
 });
 
-const NextOfKinTab = () => {
+const NextOfKinTab = ({ token }) => {
+  const setNotify = useNotifyStore((state) => state.setNotify);
+  const queryClient = useQueryClient();
+
+  function onSuccess(data) {
+    queryClient.invalidateQueries({ queryKey: [queryKeys.getNextOfKin] });
+
+    setNotify({
+      show: true,
+      content: "Your next of kin has been updated successfully",
+      allowClose: false,
+      onAcceptText: "Ok",
+      onAccept: () => {},
+    });
+  }
+
+  function onError(err) {
+    setNotify({
+      show: true,
+      content: err.message,
+      allowClose: true,
+    });
+  }
+
+  const { mutate, isLoading } = useMutation({
+    onSuccess,
+    onError,
+    mutationFn: async function (body) {
+      const res = await fetchUtil({
+        url: makeUrl(config.apiPaths.setNextOfKin),
+        method: "POST",
+        body,
+        auth: token,
+      });
+
+      if (!res.success) {
+        throw new Error(extractErrorMessage(res));
+      }
+
+      return res.data;
+    },
+    mutationKey: [queryKeys.setNextOfKin, token],
+  });
+
+  async function handleSubmit(values) {
+    if (isLoading) return;
+
+    const body = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      phone: values.phone,
+      relationship: values.relationship,
+      email: values.email,
+    };
+
+    mutate(body);
+  }
+
   return (
     <div className="py-7 space-y-7 font-medium">
+      <BarLoader isLoading={isLoading} />
+
       <Formik
         initialValues={{
           firstName: "",
@@ -50,7 +119,7 @@ const NextOfKinTab = () => {
           relationship: true,
         }}
         validationSchema={yupSchema}
-        onSubmit={() => {}}
+        onSubmit={handleSubmit}
       >
         {({ isValid, setFieldValue }) => {
           return (
@@ -133,6 +202,7 @@ const NextOfKinTab = () => {
               </div>
               <div className="py-10 text-center">
                 <button
+                  type="submit"
                   disabled={!isValid}
                   className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
                 >
