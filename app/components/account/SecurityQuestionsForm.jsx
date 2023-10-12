@@ -123,7 +123,7 @@ const SecurityQuestionsForm = ({ user, token, closeParent }) => {
         {({ isValid, setFieldValue, values }) => {
           const disableForm = !values.allowEdits;
 
-          console.log(disableForm);
+          // console.log(disableForm);
 
           return (
             <Form className="w-full relative  px-6 space-y-6">
@@ -137,7 +137,7 @@ const SecurityQuestionsForm = ({ user, token, closeParent }) => {
                     <GenericSelectField
                       disabled={disableForm}
                       defaultSelectedItem={
-                        user.securityQuestions.question1
+                        user.securityQuestions?.question1
                           ? securityQuestions.find(
                               (q) =>
                                 q.value === user.securityQuestions.question1
@@ -185,7 +185,7 @@ const SecurityQuestionsForm = ({ user, token, closeParent }) => {
                     <GenericSelectField
                       disabled={disableForm}
                       defaultSelectedItem={
-                        user.securityQuestions.question2
+                        user.securityQuestions?.question2
                           ? securityQuestions.find(
                               (q) =>
                                 q.value === user.securityQuestions.question2
