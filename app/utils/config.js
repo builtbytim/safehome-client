@@ -30,6 +30,8 @@ const config = {
     confirmResetPassword: "/users/password/confirm-reset",
     addKycInfo: "/users/kyc",
     setSecurityQuestions: "/users/security-questions",
+    getNotificationPreferences: "/notifications/preferences",
+    setNotificationPreferences: "/notifications/preferences",
   },
 
   signInModes: {

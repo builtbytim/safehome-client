@@ -96,6 +96,10 @@ function BVNNINForm() {
         BVN: "",
         NIN: "",
       }}
+      initialTouched={{
+        NIN: true,
+        BVN: true,
+      }}
       validationSchema={Yup.object().shape({
         documentType: Yup.string()
           .oneOf(["BVN", "NIN"], "Invalid document type")
@@ -118,6 +122,13 @@ function BVNNINForm() {
           .test("BVN-is-valid", "Invalid BVN", function (value) {
             if (!value) return true;
             return isDigit(value);
+          })
+          .test("bvn-is-required-when-selected", "Required", function (value) {
+            if (this.parent.documentType === "BVN") {
+              return !!value;
+            } else {
+              return true;
+            }
           }),
 
         NIN: Yup.string()
@@ -126,6 +137,13 @@ function BVNNINForm() {
             if (!value) return true;
 
             return isDigit(value);
+          })
+          .test("nin-is-required-when-selected", "Required", function (value) {
+            if (this.parent.documentType === "NIN") {
+              return !!value;
+            } else {
+              return true;
+            }
           }),
       })}
       onSubmit={handleSubmit}

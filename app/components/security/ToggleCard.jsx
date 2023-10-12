@@ -1,6 +1,7 @@
 import React from "react";
 import { PiQuestionFill } from "react-icons/pi";
 import cn from "classnames";
+import Spinner from "../Spinner";
 
 const ToggleCard = ({
   heading,
@@ -10,11 +11,12 @@ const ToggleCard = ({
   toggleFunc,
   handleClick = null,
   readOnly = false,
+  isLoading = false,
 }) => {
   return (
     <div
       onClick={handleClick}
-      className="flex w-full pb-4 border-b border-[--lines] [--text-secondary] items-center hover:bg-[--b1] hover:cursor-pointer transitioning px-2 py-4 rounded-[8px] space-x-8"
+      className="flex w-full pb-4 border-b border-[--lines] [--text-secondary] items-center hover:bg-[--b1] hover:cursor-pointer transitioning px-6 py-4  space-x-8"
     >
       <div className="space-y-2 w-full">
         <h3 className="tems-center text-base md:text-xl font-medium w-full">
@@ -28,10 +30,20 @@ const ToggleCard = ({
         <p className="text-sm md:text-lg">{text}</p>
       </div>
 
-      {toggleFunc && (
+      {isLoading && (
+        <div className="flex justify-center items-center">
+          <Spinner size="mini" />
+        </div>
+      )}
+
+      {toggleFunc && !isLoading && (
         <div className="">
           <button
-            title="You can't change this setting because it is required for your account."
+            title={
+              readOnly
+                ? "You can't change this setting because it is required for your account."
+                : ""
+            }
             disabled={readOnly}
             className={
               `h-[31px] w-[53px] rounded-3xl block p-[3px] ${

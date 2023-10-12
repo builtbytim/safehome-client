@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import GenericSelectField from "../forms/branded/GenericSelectField";
 import SwitchField from "../forms/branded/SwitchField";
 import { Form, Formik, Field, ErrorMessage } from "formik";
@@ -18,8 +17,6 @@ import queryKeys from "../../utils/queryKeys";
 import config from "../../utils/config";
 
 const SecurityQuestionsForm = ({ user, token, closeParent }) => {
-  console.log(user);
-
   const setNotify = useNotifyStore((state) => state.setNotify);
 
   function onSuccess(data) {
@@ -133,7 +130,7 @@ const SecurityQuestionsForm = ({ user, token, closeParent }) => {
               <div className="grid grid-cols-1 gap-5 md:gap-7 w-full  max-w-[500px] ">
                 <BarLoader active={isLoading} />
 
-                <div className="">
+                <div className="pt-2">
                   <p className="account-form-text">Security Question 1</p>
 
                   <div className="relative">

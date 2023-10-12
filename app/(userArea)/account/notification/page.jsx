@@ -1,143 +1,203 @@
 "use client";
 
-import { useState, useRef } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import { ToggleCard } from "../../../components/security";
+import {
+  fetchUtil,
+  makeUrl,
+  extractErrorMessage,
+} from "../../../utils/fetchUtils";
+import { useQueryClient } from "react-query";
+import { useNotifyStore } from "../../../utils/store";
+import { useMutation, useQuery } from "react-query";
+import queryKeys from "../../../utils/queryKeys";
+import config from "../../../utils/config";
+import SecureRoute from "../../../components/SecureRoute";
+import { startTransition } from "react";
 
-import { PiCaretUpBold, PiCaretDownBold } from "react-icons/pi";
-import { BsCheck } from "react-icons/bs";
-import picIcon from "../../../../assets/images/icons/picIcon.svg";
+function Page({ authenticationToken }) {
+  const queryClient = useQueryClient();
 
-export default function Notification() {
-	const [isHidden, setIsHidden] = useState(true);
-	const fileRef = useRef(null);
+  const [preferences, setPreferences] = useState({
+    pushNotification: true,
+    emailAlerts: true,
+    smsAlerts: false,
+  });
 
-	const openFile = () => {
-		fileRef.current.click();
-	};
+  function updatePreferencesLocalState(obj) {
+    setPreferences({
+      ...preferences,
+      ...obj,
+    });
+  }
 
-	return (
-		<main className=" space-y-8 lg:space-y-8 text-[--text-secondary] border border-[--lines] p-5 h-full min-h-[80vh] rounded-2xl">
-			<div className="pb-3 space-y-2">
-				<h3 className="text-3xl text-[--color-brand] font-semibold">
-					Notification
-				</h3>
-				<p>Manage the kind of messages you get from safeHome</p>
-			</div>
+  const { isLoading, isError, data } = useQuery({
+    queryKey: [queryKeys.getNotificationPreferences, authenticationToken],
 
-			<div className="space-y-8 max-w-[650px]">
-				<div className="space-y-4">
-					<div>
-						<h3 className="font-medium text-xl pb-1">Login Alerts</h3>
-						<p>Notifications on successful log ins to your account</p>
-					</div>
-					<div className="grid grid-cols-2 gap-3">
-						<div>
-							<label className="radio-btn-container">
-								Push Notification
-								<input type="checkbox" />
-								<span className="checkmark">
-									<BsCheck className="text-white w-full h-full" />
-								</span>
-							</label>
-						</div>
-						<div>
-							<label className="radio-btn-container">
-								Email
-								<input type="checkbox" />
-								<span className="checkmark">
-									<BsCheck className="text-white w-full h-full" />
-								</span>
-							</label>
-						</div>
-					</div>
-				</div>
-				<div className="space-y-4">
-					<div>
-						<h3 className="font-medium text-xl pb-1">
-							Investments & Savings Alerts
-						</h3>
-						<p>Notifications on new opportunities and purchased investments</p>
-					</div>
-					<div className="grid grid-cols-2 gap-3">
-						<div>
-							<label className="radio-btn-container">
-								Push Notification
-								<input type="checkbox" />
-								<span className="checkmark">
-									<BsCheck className="text-white w-full h-full" />
-								</span>
-							</label>
-						</div>
-						<div>
-							<label className="radio-btn-container">
-								Email
-								<input type="checkbox" />
-								<span className="checkmark">
-									<BsCheck className="text-white w-full h-full" />
-								</span>
-							</label>
-						</div>
-					</div>
-				</div>
-				<div className="space-y-4">
-					<div>
-						<h3 className="font-medium text-xl pb-1">Transaction Alerts</h3>
-						<p>Notifications on new opportunities and purchased investments</p>
-					</div>
-					<div className="grid grid-cols-2 gap-3">
-						<div>
-							<label className="radio-btn-container">
-								Push Notification
-								<input type="checkbox" />
-								<span className="checkmark">
-									<BsCheck className="text-white w-full h-full" />
-								</span>
-							</label>
-						</div>
-						<div>
-							<label className="radio-btn-container">
-								Email
-								<input type="checkbox" />
-								<span className="checkmark">
-									<BsCheck className="text-white w-full h-full" />
-								</span>
-							</label>
-						</div>
-					</div>
-				</div>
-				<div className="space-y-4">
-					<div>
-						<h3 className="font-medium text-xl pb-1">Transaction Alerts</h3>
-						<p>Notifications on new opportunities and purchased investments</p>
-					</div>
-					<div className="grid grid-cols-2 gap-3">
-						<div>
-							<label className="radio-btn-container">
-								Push Notification
-								<input type="checkbox" />
-								<span className="checkmark">
-									<BsCheck className="text-white w-full h-full" />
-								</span>
-							</label>
-						</div>
-						<div>
-							<label className="radio-btn-container">
-								Email
-								<input type="checkbox" />
-								<span className="checkmark">
-									<BsCheck className="text-white w-full h-full" />
-								</span>
-							</label>
-						</div>
-					</div>
-				</div>
+    onSuccess(data) {
+      startTransition(() => {
+        setPreferences({
+          pushNotification: data.push,
+          emailAlerts: data.email,
+          smsAlerts: data.sms,
+        });
+      });
+    },
 
-				<div className="py-10 text-center">
-					<button className="w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg">
-						Save Changes
-					</button>
-				</div>
-			</div>
-		</main>
-	);
+    queryFn: async function (body) {
+      const res = await fetchUtil({
+        url: makeUrl(config.apiPaths.getNotificationPreferences),
+        method: "GET",
+        body,
+        auth: authenticationToken,
+      });
+
+      if (!res.success) {
+        throw new Error(extractErrorMessage(res));
+      }
+
+      return res.data;
+    },
+  });
+
+  const setNotify = useNotifyStore((state) => state.setNotify);
+
+  function onSuccess(data) {
+    queryClient.invalidateQueries({
+      queryKey: [queryKeys.getNotificationPreferences, authenticationToken],
+    });
+
+    // setNotify({
+    //   show: true,
+    //   content: "Your notification preferences have been updated.",
+    //   allowClose: false,
+    //   onAcceptText: "Ok",
+    //   onAccept: () => {
+    //     queryClient.invalidateQueries({
+    //       queryKey: [queryKeys.getNotificationPreferences, authenticationToken],
+    //     });
+    //   },
+    // });
+  }
+
+  function onError(err) {
+    setNotify({
+      show: true,
+      content: err.message,
+      allowClose: true,
+    });
+  }
+
+  const { mutate, isLoading: isLoading2 } = useMutation({
+    onSuccess,
+    onError,
+    mutationFn: async function (body) {
+      const res = await fetchUtil({
+        url: makeUrl(config.apiPaths.setNotificationPreferences),
+        method: "POST",
+        body,
+        auth: authenticationToken,
+      });
+
+      if (!res.success) {
+        throw new Error(extractErrorMessage(res));
+      }
+
+      return res.data;
+    },
+    mutationKey: [queryKeys.setNotificationPreferences, authenticationToken],
+  });
+
+  const preventInput = isLoading || isLoading2;
+
+  function updatePreferencesOnServer() {
+    if (preventInput) {
+      return;
+    }
+    mutate({
+      push: preferences.pushNotification,
+      email: preferences.emailAlerts,
+      sms: preferences.smsAlerts,
+    });
+  }
+
+  useEffect(() => {
+    if (
+      preferences.pushNotification === data?.push &&
+      preferences.emailAlerts === data?.email &&
+      preferences.smsAlerts === data?.sms
+    ) {
+      return;
+    }
+    updatePreferencesOnServer();
+  }, [preferences]);
+
+  return (
+    <main className=" space-y-8 lg:space-y-8 text-[--text-secondary] border border-[--lines]  h-full min-h-[80vh] rounded-2xl">
+      <div className="p-6 pb-0  space-y-2">
+        <h3 className="text-2xl md:text-3xl text-[--color-brand] font-semibold">
+          Notification
+        </h3>
+        <p>Manage your notification settings</p>
+      </div>
+
+      <div className="space-y-8 ">
+        {isError && <p className="text-[--danger]"> Unable to syc data </p>}
+
+        <ToggleCard
+          heading="Email Alerts"
+          text="Get notifications via your registered email."
+          recommended="yes"
+          active={data ? data.email : preferences.emailAlerts}
+          readOnly
+          isLoading={(isLoading && !data) || isLoading2}
+          toggleFunc={() => {
+            updatePreferencesLocalState({
+              emailAlerts: !preferences.emailAlerts,
+            });
+          }}
+        />
+        <ToggleCard
+          heading="Push Notification"
+          text="Notifications on successful log ins to your account."
+          recommended="no"
+          readOnly={preventInput}
+          isLoading={(isLoading && !data) || isLoading2}
+          active={data ? data.push : preferences.pushNotification}
+          toggleFunc={() => {
+            updatePreferencesLocalState({
+              pushNotification: !preferences.pushNotification,
+            });
+          }}
+        />
+
+        <ToggleCard
+          heading="SMS Alerts"
+          text="Get notifications via your verified phone number."
+          recommended="no"
+          readOnly={preventInput}
+          isLoading={(isLoading && !data) || isLoading2}
+          active={data ? data.sms : preferences.smsAlerts}
+          toggleFunc={() => {
+            updatePreferencesLocalState({
+              smsAlerts: !preferences.smsAlerts,
+            });
+          }}
+        />
+
+        {/* <div className="py-10 text-center flex flex-col justify-center items-center w-full px-6">
+          <button
+            type="submit"
+            className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
+          >
+            Save
+          </button>
+        </div> */}
+      </div>
+    </main>
+  );
+}
+
+export default function ProtectedPage(props) {
+  return <SecureRoute offspring={Page} {...props} />;
 }

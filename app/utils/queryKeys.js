@@ -12,6 +12,8 @@ const queryKeys = {
   confirmResetPassword: "confirmResetPassword",
   addKycInfo: "addKycInfo",
   setSecurityQuestions: "setSecurityQuestions",
+  getNotificationPreferences: "getNotificationPreferences",
+  setNotificationPreferences: "setNotificationPreferences",
 };
 
 export default queryKeys;

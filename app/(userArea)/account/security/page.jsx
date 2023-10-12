@@ -47,8 +47,8 @@ function Page({ signOut, authenticationToken, authenticatedUser }) {
   }, [showPasswordTab, showSecurityQuestionTab, showSecurityQuestion]);
 
   return (
-    <main className=" space-y-8 lg:space-y-8 text-[--text-secondary] border border-[--lines] pt-8 px-6 h-full min-h-[80vh] rounded-2xl">
-      <div className="md:pb-3 space-y-4">
+    <main className=" space-y-8 lg:space-y-8 text-[--text-secondary] border border-[--lines] pt-8  h-full min-h-[80vh] rounded-2xl">
+      <div className="px-6 md:pb-3 space-y-4">
         <h3 className="text-2xl md:text-3xl text-[--color-brand] font-semibold">
           Security
         </h3>
