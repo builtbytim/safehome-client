@@ -18,18 +18,7 @@ const Topup = ({ token, closeSelf }) => {
 
   function onSuccess(data) {
     closeSelf();
-
-    setNotify({
-      show: true,
-      content: "You will be redirected to complete your payment...",
-      allowClose: false,
-      onAcceptText: "Proceed",
-      onAccept: () => {
-        window.location.href = data.redirectUrl;
-      },
-      onRejectText: "Cancel",
-      onReject: () => {},
-    });
+    window.location.href = data.redirectUrl;
   }
 
   function onError(err) {
