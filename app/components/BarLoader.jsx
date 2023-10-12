@@ -2,7 +2,7 @@ import LocalOverlay from "./LocalOverlay";
 import LoadingBar from "./LoadingBar";
 import cn from "classnames";
 
-export default function BarLoader({ active = false, v = 1 }) {
+export default function BarLoader({ active = false, v = 0 }) {
   if (!active) {
     return null;
   }
