@@ -10,13 +10,16 @@ import {
   extractErrorMessage,
 } from "../../../utils/fetchUtils";
 import { useNotifyStore } from "../../../utils/store";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import config from "../../../utils/config";
 
 const Topup = ({ token, closeSelf }) => {
+  const queryClient = useQueryClient();
   const setNotify = useNotifyStore((state) => state.setNotify);
 
   function onSuccess(data) {
+    queryClient.invalidateQueries({ queryKey: [queryKeys.getWallet, token] });
+
     closeSelf();
     window.location.href = data.redirectUrl;
   }

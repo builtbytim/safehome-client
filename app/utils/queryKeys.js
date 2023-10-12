@@ -17,6 +17,7 @@ const queryKeys = {
   setNextOfKin: "setNextOfKin",
   getNextOfKin: "getNextOfKin",
   initiateTopUp: "initiateTopUp",
+  getWallet: "getWallet",
 };
 
 export default queryKeys;

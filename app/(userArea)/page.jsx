@@ -136,6 +136,7 @@ function Page({ authenticatedUser, authenticationToken }) {
         <OverviewCard
           setShowTopup={setShowTopup}
           setShowWithdraw={setShowWithdraw}
+          token={authenticationToken}
         />
         <section className="bg-white rounded-brand  py-8 md:p-8 space-y-4">
           <div className="flex flex-row justify-between items-center">

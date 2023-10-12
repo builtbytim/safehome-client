@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import Image from "next/image";
 import FundsImage from "../../../assets/images/icons/Funds.svg";
@@ -8,8 +7,38 @@ import Savingsmage from "../../../assets/images/icons/SavingsLite.svg";
 import TrendsImage from "../../../assets/images/icons/Trends.svg";
 import LoanImage from "../../../assets/images/icons/loan.svg";
 import ScrollLink from "../ScrollLink";
+import { useQuery } from "react-query";
+import queryKeys from "../../utils/queryKeys";
+import {
+  fetchUtil,
+  extractErrorMessage,
+  makeUrl,
+} from "../../utils/fetchUtils";
+import config from "../../utils/config";
 
-function OverviewCard({ setShowTopup, setShowWithdraw }) {
+function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
+  const { data, isLoading, isError, isSuccess, refetch } = useQuery({
+    queryKey: [queryKeys.getWallet, token],
+
+    queryFn: async function () {
+      const res = await fetchUtil({
+        url: makeUrl(config.apiPaths.getWallet),
+        method: "GET",
+        auth: token,
+      });
+
+      if (!res.success) {
+        throw new Error(extractErrorMessage(res));
+      }
+
+      return res.data;
+    },
+
+    onError(err) {
+      console.log(err);
+    },
+  });
+
   return (
     <section className="bg-white rounded-brand  md:p-8 space-y-4 lg:space-y-8">
       <div className="hidden md:flex flex-row justify-between items-center">
@@ -87,7 +116,7 @@ function OverviewCard({ setShowTopup, setShowWithdraw }) {
             <h2 className=" text-[--text-secondary] font-medium"> My Funds </h2>
 
             <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
-              ₦0
+              ₦{data ? data.balance : 0}
             </p>
           </div>
 

@@ -36,6 +36,7 @@ const config = {
     setNextOfKin: "/users/next-of-kin",
     getNextOfKin: "/users/next-of-kin",
     initiateTopUp: "/payments/top-up",
+    getWallet: "/wallet",
   },
 
   signInModes: {
