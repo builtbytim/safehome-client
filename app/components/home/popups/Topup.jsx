@@ -1,39 +1,91 @@
 "use client";
 
-import { useState } from "react";
-import GenericSelectField from "../../forms/branded/GenericSelectField";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import queryKeys from "../../../utils/queryKeys";
+import BarLoader from "../../BarLoader";
+import {
+  fetchUtil,
+  makeUrl,
+  extractErrorMessage,
+} from "../../../utils/fetchUtils";
+import { useNotifyStore } from "../../../utils/store";
+import { useMutation } from "react-query";
+import config from "../../../utils/config";
 
-const dropdownData = [
-  { name: "Debit card 531212 XXXX XXXX 1234", value: "debit" },
-  { name: "Bank Transfer", value: "bank" },
-];
+const Topup = ({ token, closeSelf }) => {
+  const setNotify = useNotifyStore((state) => state.setNotify);
 
-const Topup = ({ btnFunc }) => {
+  function onSuccess(data) {
+    closeSelf();
+
+    setNotify({
+      show: true,
+      content: "You will be redirected to complete your payment...",
+      allowClose: false,
+      onAcceptText: "Proceed",
+      onAccept: () => {
+        window.location.href = data.redirectUrl;
+      },
+      onRejectText: "Cancel",
+      onReject: () => {},
+    });
+  }
+
+  function onError(err) {
+    closeSelf();
+
+    setNotify({
+      show: true,
+      content: err.message,
+      allowClose: true,
+    });
+  }
+
+  const { mutate, isLoading } = useMutation({
+    onSuccess,
+    onError,
+    mutationFn: async function (body) {
+      const res = await fetchUtil({
+        url: makeUrl(config.apiPaths.initiateTopUp),
+        method: "POST",
+        body,
+        auth: token,
+      });
+
+      if (!res.success) {
+        throw new Error(extractErrorMessage(res));
+      }
+
+      return res.data;
+    },
+    mutationKey: [queryKeys.initiateTopUp, token],
+  });
+
+  async function handleSubmit(values) {
+    if (isLoading) return;
+
+    const body = {
+      amount: values.amount,
+    };
+
+    mutate(body);
+  }
+
   return (
-    <div className="px-7 flex flex-col justify-between w-full h-full">
+    <div className="px-7 flex flex-col justify-between w-full h-full relative">
+      <BarLoader active={isLoading} />
+
       <Formik
         validationSchema={Yup.object().shape({
           amount: Yup.number()
             .required("Please enter an amount")
             .positive("Please enter an amount greater than 0")
             .typeError("Please enter a valid amount"),
-
-          fundingSource: Yup.string()
-            .required("Please select a funding source")
-            .oneOf(
-              dropdownData.map((item) => item.value),
-              "Please select a valid funding source"
-            ),
         })}
-        onSubmit={() => {}}
+        onSubmit={handleSubmit}
         initialValues={{
-          fundingSource: "",
           amount: "",
-        }}
-        initialTouched={{
-          fundingSource: true,
         }}
       >
         {({ isValid, setFieldValue }) => {
@@ -44,7 +96,7 @@ const Topup = ({ btnFunc }) => {
                 <Field
                   type="text"
                   inputMode="numeric"
-                  placeholder="XXXXXXXXXXXX"
+                  placeholder=""
                   name="amount"
                   className="account-form-input"
                 />
@@ -55,28 +107,12 @@ const Topup = ({ btnFunc }) => {
                   className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                 />
               </div>
-              <div className="relative">
-                <p className="account-form-text">Funding Source</p>
-                <div className="">
-                  <GenericSelectField
-                    items={dropdownData}
-                    handleChange={({ selectedItem }) => {
-                      setFieldValue("fundingSource", selectedItem.value, true);
-                    }}
-                  />
-                  <ErrorMessage
-                    name="fundingSource"
-                    component="div"
-                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                  />
-                </div>
-              </div>
 
               <div className="py-8">
                 <button
+                  type="submit"
                   disabled={!isValid}
                   className="w-full text-white bg-[--color-brand] py-3 px-5 shadow rounded"
-                  onClick={() => btnFunc()}
                 >
                   Top-up
                 </button>

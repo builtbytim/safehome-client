@@ -17,7 +17,7 @@ import {
 } from "../components/home/popups";
 import { useState, useRef, useEffect } from "react";
 
-function Page({ authenticatedUser }) {
+function Page({ authenticatedUser, authenticationToken }) {
   const [showTopup, setShowTopup] = useState(false);
   const [showWithdraw, setShowWithdraw] = useState(false);
   const [showReceipt, setShowReceipt] = useState(false);
@@ -48,14 +48,6 @@ function Page({ authenticatedUser }) {
     };
   }, [showTopup, showWithdraw, showReceipt]);
 
-  // function openTopup() {
-  //   setShowTopup(true);
-  // }
-
-  // function openWithdraw() {
-  //   setShowWithdraw(true);
-  // }
-
   return (
     <div className="space-y-2  lg:space-y-8 w-full min-h-screen pb-16">
       {/* POPUPS */}
@@ -75,10 +67,8 @@ function Page({ authenticatedUser }) {
               </div>
               <div className="pt-6 h-full">
                 <Topup
-                  btnFunc={() => {
-                    setReceiptState("top-up");
-                    setShowReceipt(true);
-                  }}
+                  token={authenticationToken}
+                  closeSelf={() => setShowTopup(false)}
                 />
               </div>
             </div>
@@ -102,6 +92,7 @@ function Page({ authenticatedUser }) {
               </div>
               <div className="pt-6 h-full">
                 <Withdraw
+                  token={authenticationToken}
                   btnFunc={() => {
                     setReceiptState("withdrawal");
                     setShowReceipt(true);
@@ -122,6 +113,7 @@ function Page({ authenticatedUser }) {
             >
               <div className="  w-full md:w-[493px] bg-white ">
                 <ReceiptTopBar
+                  token={authenticationToken}
                   close={() => setShowReceipt(false)}
                   title="Transaction Type"
                   desc={receiptState}

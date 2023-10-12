@@ -131,8 +131,8 @@ const NextOfKinTab = ({ token }) => {
   }
 
   return (
-    <div className="py-7 space-y-7 font-medium">
-      <BarLoader isLoading={isLoading} />
+    <div className="py-7 space-y-7 font-medium relative">
+      <BarLoader active={isLoading} />
       {loadingData && (
         <div className="flex h-[50vh] justify-center items-center  w-full">
           <Spinner />

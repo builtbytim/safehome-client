@@ -16,6 +16,7 @@ const queryKeys = {
   setNotificationPreferences: "setNotificationPreferences",
   setNextOfKin: "setNextOfKin",
   getNextOfKin: "getNextOfKin",
+  initiateTopUp: "initiateTopUp",
 };
 
 export default queryKeys;
