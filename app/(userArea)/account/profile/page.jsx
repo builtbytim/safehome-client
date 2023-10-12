@@ -24,34 +24,27 @@ function Page({ authenticatedUser, authenticationToken, signOut }) {
         </p>
       </div>
       <div>
-        <div className="flex gap-[2px]">
+        <div className="flex justify-between gap-[2px]">
           <button
             className={
-              tabState === 0
+              " md:w-full " +
+              (tabState === 0
                 ? "account-tab-button-active"
-                : "account-tab-button"
+                : "account-tab-button")
             }
             onClick={() => setTabState(0)}
           >
             Basic Information
           </button>
+
           <button
             className={
-              tabState === 1
+              " md:w-full " +
+              (tabState === 1
                 ? "account-tab-button-active"
-                : "account-tab-button"
+                : "account-tab-button")
             }
             onClick={() => setTabState(1)}
-          >
-            Password
-          </button>
-          <button
-            className={
-              tabState === 2
-                ? "account-tab-button-active"
-                : "account-tab-button"
-            }
-            onClick={() => setTabState(2)}
           >
             Next of Kin
           </button>
@@ -59,10 +52,8 @@ function Page({ authenticatedUser, authenticationToken, signOut }) {
         {tabState === 0 ? (
           <BasicInfoTab user={authenticatedUser} />
         ) : tabState === 1 ? (
-          <PasswordTab token={authenticationToken} signOut={signOut} />
-        ) : (
-          <NextOfKinTab />
-        )}
+          <NextOfKinTab token={authenticationToken} signOut={signOut} />
+        ) : null}
         <div>
           {tabState === 4 ? (
             <div className="py-10 text-center">

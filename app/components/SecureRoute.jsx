@@ -7,10 +7,13 @@ import { retreiveFromLocalStorage, clearLocalStorage } from "../utils/security";
 import Spinner from "./Spinner";
 import Overlay3 from "./Overlay3";
 import { useState, useEffect } from "react";
+import { useDataStore } from "../utils/store";
 
 export default function SecureRoute(props) {
   const tokenObj = retreiveFromLocalStorage(`${config.localStorageKey}:token`);
   const [ready, setReady] = useState(false);
+
+  const setUserLocal = useDataStore((state) => state.setUserLocal);
 
   useEffect(() => {
     if (tokenObj && !ready) {
@@ -27,6 +30,13 @@ export default function SecureRoute(props) {
     authenticationFailed,
     authenticationToken,
   } = useRemoteSession(tokenObj);
+
+  useEffect(() => {
+    if (authenticatedUser) {
+      setUserLocal(authenticatedUser);
+    }
+  }, [authenticatedUser]);
+
   const router = useRouter();
   const searchParams = useSearchParams();
 

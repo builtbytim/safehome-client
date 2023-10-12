@@ -1,17 +1,15 @@
 import { create } from "zustand";
 
 const useDataStore = create((set) => ({
-  data: {},
+  data: {
+    usr: null,
+  },
 
   setData: (obj) =>
-    set((state) => ({
-      data: { ...state.data, ...obj },
-    })),
+    set((state) => ({ ...state, data: { ...state.data, ...obj } })),
 
-  setUser: (obj) =>
-    set((state) => ({
-      data: { ...state.data, user: obj },
-    })),
+  setUserLocal: (usr) =>
+    set((state) => ({ ...state, data: { ...state.data, usr } })),
 }));
 
 const useNotifyStore = create((set) => ({

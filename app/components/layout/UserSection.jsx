@@ -5,7 +5,7 @@ import Hero from "../../../assets/images/account-hero.png";
 import { useDataStore } from "../../utils/store";
 
 function UserSection() {
-  const data = useDataStore((state) => state.data);
+  const user = useDataStore((state) => state.data?.usr);
 
   return (
     <div>
@@ -22,8 +22,8 @@ function UserSection() {
           <Image
             priority
             src={
-              data.user
-                ? data.user?.avatarUrl
+              user && user.avatarUrl
+                ? user.avatarUrl
                 : "https://i.pravatar.cc/150?u=helios@g.com"
             }
             alt="User"
@@ -34,9 +34,7 @@ function UserSection() {
         </div>
       </div>
       <h1 className="pt-16 pb-5 font-semibold text-[--text-secondary] text-center text-2xl">
-        {data && data.user
-          ? `${data.user?.lastName}  ${data.user?.firstName}`
-          : "Loading..."}
+        {user ? `${user?.lastName}  ${user?.firstName}` : "Loading..."}
       </h1>
     </div>
   );
