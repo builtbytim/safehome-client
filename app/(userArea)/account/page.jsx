@@ -1,13 +1,16 @@
 "use client";
 
 import SecureRoute from "../../components/SecureRoute";
+import ProfileInformationArea from "../../components/account/ProfileInformationArea";
 
-function Page({ authenticatedUser }) {
+function Page({ authenticatedUser, authenticationToken, signOut }) {
   return (
-    <div className="space-y-2  lg:space-y-8 w-full md:min-h-screen pt-8 pb-16">
-      <main className=" space-y-2 lg:space-y-10">
-        <div className="hidden "></div>
-      </main>
+    <div className="hidden lg:block ">
+      <ProfileInformationArea
+        authenticatedUser={authenticatedUser}
+        authenticationToken={authenticationToken}
+        signOut={signOut}
+      />
     </div>
   );
 }

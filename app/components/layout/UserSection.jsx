@@ -34,9 +34,13 @@ function UserSection() {
           )}
         </div>
       </div>
-      <h1 className="pt-16 pb-5 font-semibold text-[--text-secondary] text-center text-2xl">
+      <h2 className="pt-16  font-semibold text-[--text-secondary] text-center text-2xl ">
         {user ? `${user?.lastName}  ${user?.firstName}` : "Loading..."}
-      </h1>
+      </h2>
+
+      <h3 className="text-sm pb-4 text-[--text-brand-2] text-center">
+        {user ? user.email : `Loading...`}
+      </h3>
     </div>
   );
 }
