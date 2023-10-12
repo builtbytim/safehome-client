@@ -33,6 +33,7 @@ const config = {
     getNotificationPreferences: "/notifications/preferences",
     setNotificationPreferences: "/notifications/preferences",
     setAvatar: "/users/avatar",
+    setNextOfKin: "/users/next-of-kin",
   },
 
   signInModes: {

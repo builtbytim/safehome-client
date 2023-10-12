@@ -81,11 +81,17 @@ const BasicInfoTab = ({ user, token }) => {
         {({ isValid, setFieldValue }) => {
           return (
             <Form className="py-6 w-full">
+              <legend className="text-sm text-[--color-brand] pb-3">
+                {" "}
+                Your profile is read-only, if you wish to make changes, please
+                contact support.
+              </legend>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-x-5 md:gap-y-7">
                 <div className="relative">
                   <p className="account-form-text">First Name</p>
                   <Field
                     type="text"
+                    disabled
                     placeholder="First Name"
                     name="firstName"
                     className="account-form-input"
@@ -100,6 +106,7 @@ const BasicInfoTab = ({ user, token }) => {
                 <div className="relative">
                   <p className="account-form-text">Surname</p>
                   <Field
+                    disabled
                     type="text"
                     name="surname"
                     placeholder="Surname"
@@ -115,6 +122,7 @@ const BasicInfoTab = ({ user, token }) => {
                 <div className="relative">
                   <p className="account-form-text">Gender</p>
                   <GenericSelectField
+                    disabled
                     items={[
                       {
                         name: "Male",
@@ -140,6 +148,7 @@ const BasicInfoTab = ({ user, token }) => {
                 <div className="relative">
                   <p className="account-form-text"> Date of Birth</p>
                   <Field
+                    disabled
                     name="dateOfBirth"
                     type="date"
                     max="2100-01-01"
@@ -155,7 +164,7 @@ const BasicInfoTab = ({ user, token }) => {
                 <div className="relative">
                   <p className="account-form-text">Email</p>
                   <Field
-                    readOnly
+                    disabled
                     type="email"
                     name="email"
                     placeholder="mail@email.com"
@@ -171,6 +180,7 @@ const BasicInfoTab = ({ user, token }) => {
                   <p className="account-form-text">Telephone</p>
                   <Field
                     type="text"
+                    disabled
                     inputMode="numeric"
                     name="phone"
                     placeholder="+2348000000000"
@@ -187,6 +197,7 @@ const BasicInfoTab = ({ user, token }) => {
                   <p className="account-form-text">Address</p>
                   <Field
                     type="text"
+                    disabled
                     name="address"
                     placeholder="Address"
                     className="account-form-input"
@@ -200,7 +211,7 @@ const BasicInfoTab = ({ user, token }) => {
 
                 <div className="relative">
                   <p className="account-form-text">State of Residence</p>
-                  <GenericSelectField items={states} />
+                  <GenericSelectField disabled items={states} />
                   <ErrorMessage
                     name="state"
                     component="div"
@@ -210,7 +221,7 @@ const BasicInfoTab = ({ user, token }) => {
               </div>
               <div className="py-10 text-center flex flex-col justify-center items-center w-full">
                 <button
-                  disabled={!isValid}
+                  disabled
                   className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
                 >
                   Update profile

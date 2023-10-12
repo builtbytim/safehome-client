@@ -307,7 +307,7 @@ function SignUp() {
 
                   <ErrorMessage
                     name="phone"
-                    inputMode="numeric"
+                    inputMode="tel"
                     component="div"
                     className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                   />

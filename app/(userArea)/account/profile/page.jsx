@@ -11,7 +11,7 @@ function Page({ authenticatedUser, authenticationToken, signOut }) {
   return (
     <main className=" space-y-8 lg:space-y-10 text-[--text-secondary] border border-[--lines] p-5 h-full rounded-2xl">
       <div className="pb-3 space-y-2">
-        <h3 className="text-3xl text-[--color-brand] font-semibold">
+        <h3 className="text-2xl md:text-3xl text-[--color-brand] font-semibold">
           Account Settings
         </h3>
         <p>
@@ -50,15 +50,6 @@ function Page({ authenticatedUser, authenticationToken, signOut }) {
         ) : tabState === 1 ? (
           <NextOfKinTab token={authenticationToken} signOut={signOut} />
         ) : null}
-        <div>
-          {tabState === 4 ? (
-            <div className="py-10 text-center">
-              <button className="w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg">
-                Update Next of Kin
-              </button>
-            </div>
-          ) : null}
-        </div>
       </div>
     </main>
   );

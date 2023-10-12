@@ -49,6 +49,23 @@ export const states = [
   { name: "Zamfara", value: "ZAMFARA" },
 ];
 
+export const relationshipTypes = [
+  { name: "Choose relationship", value: "" },
+
+  { name: "Father", value: "FATHER" },
+  { name: "Mother", value: "MOTHER" },
+  { name: "Brother", value: "BROTHER" },
+  { name: "Sister", value: "SISTER" },
+  { name: "Uncle", value: "UNCLE" },
+  { name: "Aunt", value: "AUNT" },
+  { name: "Cousin", value: "COUSIN" },
+  { name: "Nephew", value: "NEPHEW" },
+  { name: "Niece", value: "NIECE" },
+  { name: "Grandson", value: "GRANDSON" },
+  { name: "Granddaughter", value: "GRANDDAUGHTER" },
+  { name: "Friend", value: "FRIEND" },
+];
+
 export const securityQuestions = [
   {
     name: "Choose a security question",

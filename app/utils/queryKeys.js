@@ -14,6 +14,8 @@ const queryKeys = {
   setSecurityQuestions: "setSecurityQuestions",
   getNotificationPreferences: "getNotificationPreferences",
   setNotificationPreferences: "setNotificationPreferences",
+  setNextOfKin: "setNextOfKin",
+  getNextOfKin: "getNextOfKin",
 };
 
 export default queryKeys;

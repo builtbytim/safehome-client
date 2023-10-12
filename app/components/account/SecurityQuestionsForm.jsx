@@ -12,15 +12,18 @@ import {
 import BarLoader from "../BarLoader";
 import { useNotifyStore } from "../../utils/store";
 import { securityQuestions } from "../../utils/constants";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import queryKeys from "../../utils/queryKeys";
 import config from "../../utils/config";
 
 const SecurityQuestionsForm = ({ user, token, closeParent }) => {
   const setNotify = useNotifyStore((state) => state.setNotify);
+  const queryClient = useQueryClient();
 
   function onSuccess(data) {
     closeParent();
+
+    queryClient.invalidateQueries({ queryKey: [queryKeys.getSession] });
 
     setNotify({
       show: true,
@@ -159,24 +162,27 @@ const SecurityQuestionsForm = ({ user, token, closeParent }) => {
                   </div>
                 </div>
 
-                <div>
-                  <p className="account-form-text">Answer</p>
-                  <div className="account-form-icon-container relative">
-                    <Field
-                      disabled={disableForm}
-                      type="text"
-                      placeholder=""
-                      className="disabled:opacity-40 disabled:pointer-events-none"
-                      name="answer1"
-                    />
+                {((user.securityQuestions && values.allowEdits) ||
+                  !user.securityQuestions) && (
+                  <div>
+                    <p className="account-form-text">Answer</p>
+                    <div className="account-form-icon-container relative">
+                      <Field
+                        disabled={disableForm}
+                        type="text"
+                        placeholder=""
+                        className="disabled:opacity-40 disabled:pointer-events-none"
+                        name="answer1"
+                      />
 
-                    <ErrorMessage
-                      name="answer1"
-                      component="div"
-                      className="absolute -bottom-[40%] left-0 text-[--text-danger] text-xs text-left"
-                    />
+                      <ErrorMessage
+                        name="answer1"
+                        component="div"
+                        className="absolute -bottom-[40%] left-0 text-[--text-danger] text-xs text-left"
+                      />
+                    </div>
                   </div>
-                </div>
+                )}
 
                 <div className="">
                   <p className="account-form-text">Security Question 2</p>
@@ -207,24 +213,27 @@ const SecurityQuestionsForm = ({ user, token, closeParent }) => {
                   </div>
                 </div>
 
-                <div>
-                  <p className="account-form-text">Answer</p>
-                  <div className="account-form-icon-container relative">
-                    <Field
-                      disabled={disableForm}
-                      type="text"
-                      className="disabled:opacity-40 disabled:pointer-events-none"
-                      placeholder=""
-                      name="answer2"
-                    />
+                {((user.securityQuestions && values.allowEdits) ||
+                  !user.securityQuestions) && (
+                  <div>
+                    <p className="account-form-text">Answer</p>
+                    <div className="account-form-icon-container relative">
+                      <Field
+                        disabled={disableForm}
+                        type="text"
+                        className="disabled:opacity-40 disabled:pointer-events-none"
+                        placeholder=""
+                        name="answer2"
+                      />
 
-                    <ErrorMessage
-                      name="answer2"
-                      component="div"
-                      className="absolute -bottom-[40%] left-0 text-[--text-danger] text-xs text-left"
-                    />
+                      <ErrorMessage
+                        name="answer2"
+                        component="div"
+                        className="absolute -bottom-[40%] left-0 text-[--text-danger] text-xs text-left"
+                      />
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {user.securityQuestions && (
                   <div className="mt-4">
