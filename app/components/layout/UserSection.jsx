@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Hero from "../../../assets/images/account-hero.png";
 import { useDataStore } from "../../utils/store";
+import { AvatarPlaceholder } from "../account/UserAvatarArea";
 
 function UserSection() {
   const user = useDataStore((state) => state.data?.usr);
@@ -19,18 +20,18 @@ function UserSection() {
           />
         </div>
         <div className="rounded-full h-[96px] w-[96px] overflow-hidden absolute left-[50%] bottom-[-48px] translate-x-[-50%]">
-          <Image
-            priority
-            src={
-              user && user.avatarUrl
-                ? user.avatarUrl
-                : "https://i.pravatar.cc/150?u=helios@g.com"
-            }
-            alt="User"
-            width={96}
-            height={96}
-            className="w-full h-full object-cover"
-          />
+          {user && user.avatarUrl ? (
+            <Image
+              priority
+              src={user.avatarUrl}
+              alt="User"
+              width={96}
+              height={96}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <AvatarPlaceholder width={96} height={96} />
+          )}
         </div>
       </div>
       <h1 className="pt-16 pb-5 font-semibold text-[--text-secondary] text-center text-2xl">

@@ -76,6 +76,7 @@ function KYCImageUpload() {
     setRawFile(file);
     setImageFile(URL.createObjectURL(file));
   }, []);
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {

@@ -3,11 +3,7 @@
 import SecureRoute from "../../../components/SecureRoute";
 import { useState } from "react";
 
-import {
-  BasicInfoTab,
-  PasswordTab,
-  NextOfKinTab,
-} from "../../../components/account";
+import { BasicInfoTab, NextOfKinTab } from "../../../components/account";
 
 function Page({ authenticatedUser, authenticationToken, signOut }) {
   const [tabState, setTabState] = useState(0);
@@ -50,7 +46,7 @@ function Page({ authenticatedUser, authenticationToken, signOut }) {
           </button>
         </div>
         {tabState === 0 ? (
-          <BasicInfoTab user={authenticatedUser} />
+          <BasicInfoTab user={authenticatedUser} token={authenticationToken} />
         ) : tabState === 1 ? (
           <NextOfKinTab token={authenticationToken} signOut={signOut} />
         ) : null}

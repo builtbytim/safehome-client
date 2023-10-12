@@ -7,6 +7,7 @@ import { parsePhoneNumber } from "awesome-phonenumber";
 import * as Yup from "yup";
 import GenericSelectField from "../forms/branded/GenericSelectField";
 import { states } from "../../utils/constants";
+import UserAvatarArea from "./UserAvatarArea";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -58,22 +59,10 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
 });
 
-const BasicInfoTab = ({ user }) => {
+const BasicInfoTab = ({ user, token }) => {
   return (
     <div className="py-7 space-y-5 font-medium">
-      <div className="flex gap-2 items-center">
-        <div className="rounded-full h-[96px] w-[96px] overflow-hidden">
-          <Image
-            priority
-            src={user.avatarUrl || "https://i.pravatar.cc/150?u=helios@g.com"}
-            alt="User"
-            width={96}
-            height={96}
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <button className="p-3">Tap to Change Avatar</button>
-      </div>
+      <UserAvatarArea user={user} token={token} />
 
       <Formik
         initialValues={{

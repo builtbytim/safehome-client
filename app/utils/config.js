@@ -32,6 +32,7 @@ const config = {
     setSecurityQuestions: "/users/security-questions",
     getNotificationPreferences: "/notifications/preferences",
     setNotificationPreferences: "/notifications/preferences",
+    setAvatar: "/users/avatar",
   },
 
   signInModes: {
