@@ -1,3 +1,5 @@
+"use client";
+
 import KycSuccess from "../../assets/images/kycsuccess.png";
 import Image from "next/image";
 import useCountdown from "../utils/hooks/useCountdown";

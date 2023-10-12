@@ -1,86 +1,96 @@
 "use client";
 
 import { useState } from "react";
+import GenericSelectField from "../../forms/branded/GenericSelectField";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
-import { PiCaretUpBold, PiCaretDownBold } from "react-icons/pi";
+const dropdownData = [
+  { name: "Debit card 531212 XXXX XXXX 1234", value: "debit" },
+  { name: "Bank Transfer", value: "bank" },
+];
 
-const dropdownData = [{ text: "My Funds" }, { text: "Savings Balance" }];
+const Topup = ({ btnFunc }) => {
+  return (
+    <div className="px-7 flex flex-col justify-between w-full h-full">
+      <Formik
+        validationSchema={Yup.object().shape({
+          amount: Yup.number()
+            .required("Please enter an amount")
+            .positive("Please enter an amount greater than 0")
+            .typeError("Please enter a valid amount"),
 
-const Withdraw = ({ btnFunc }) => {
-	const [showDropdown, setShowDropdown] = useState(false);
-	const [dropdownInputText, setDropdownInputText] = useState(
-		dropdownData[0].text
-	);
+          fundsDestination: Yup.string()
+            .required("Please select a funding source")
+            .oneOf(
+              dropdownData.map((item) => item.value),
+              "Please select a valid funding source"
+            ),
+        })}
+        onSubmit={() => {}}
+        initialValues={{
+          fundsDestination: "",
+          amount: "",
+        }}
+        initialTouched={{
+          fundsDestination: true,
+        }}
+      >
+        {({ isValid, setFieldValue }) => {
+          return (
+            <Form className="space-y-10">
+              <div className="relative">
+                <p className="account-form-text">Amount to Withdraw</p>
+                <Field
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="XXXXXXXXXXXX"
+                  name="amount"
+                  className="account-form-input"
+                />
 
-	const changeInputData = (data) => {
-		setDropdownInputText(data);
-		setShowDropdown(false);
-	};
+                <ErrorMessage
+                  name="amount"
+                  component="div"
+                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                />
+              </div>
+              <div className="relative">
+                <p className="account-form-text">Destination of Funds</p>
+                <div className="">
+                  <GenericSelectField
+                    items={dropdownData}
+                    handleChange={({ selectedItem }) => {
+                      setFieldValue(
+                        "fundsDestination",
+                        selectedItem.value,
+                        true
+                      );
+                    }}
+                  />
+                  <ErrorMessage
+                    name="fundsDestination"
+                    component="div"
+                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                  />
+                </div>
+              </div>
 
-	return (
-		<div className="px-7 flex flex-col justify-between w-full h-full">
-			<form className="grid grid-cols-1 gap-5 md:gap-x-5 md:gap-y-7">
-				<div>
-					<p className="account-form-text">Ammount to withdraw</p>
-					<input
-						type="text"
-						placeholder="XXXXXXXXXXXX"
-						className="account-form-input"
-					/>
-				</div>
-				<div className="relative">
-					<p className="account-form-text">Destination of Funds</p>
-					<div className="account-form-icon-container">
-						<input
-							type="button"
-							placeholder="Individual"
-							value={dropdownInputText}
-							onClick={() => setShowDropdown((prev) => (prev = !prev))}
-							className="text-left cursor-pointer"
-						/>
-						<button
-							type="button"
-							onClick={() => setShowDropdown((prev) => (prev = !prev))}
-						>
-							{showDropdown ? (
-								<PiCaretUpBold className="w-full h-full text-[--text-secondary]" />
-							) : (
-								<PiCaretDownBold className="w-full h-full text-[--text-secondary]" />
-							)}
-						</button>
-					</div>
-					{/* dropdown */}
-					{showDropdown && (
-						<div className="absolute left-0 top-[100%] w-full pt-3 h-auto">
-							<div className="bg-white w-full border border-[--lines] rounded">
-								{dropdownData.map((data, index) => (
-									<button
-										key={index}
-										className="block w-full text-left px-5 py-4 hover:bg-[--color-brand] hover:text-white"
-										type="button"
-										onClick={() => {
-											changeInputData(data.text);
-										}}
-									>
-										{data.text}
-									</button>
-								))}
-							</div>
-						</div>
-					)}
-				</div>
-			</form>
-
-			<div className="py-9">
-				<button
-					className="w-full text-white bg-[--color-brand] py-3 px-5 shadow rounded"
-					onClick={() => btnFunc()}
-				>
-					Withdraw
-				</button>
-			</div>
-		</div>
-	);
+              <div className="py-8">
+                <button
+                  disabled={!isValid}
+                  className="w-full text-white bg-[--color-brand] py-3 px-5 shadow rounded"
+                  onClick={() => btnFunc()}
+                >
+                  Top-up
+                </button>
+              </div>
+            </Form>
+          );
+        }}
+      </Formik>
+    </div>
+  );
 };
 
-export default Withdraw;
+export default Topup;
