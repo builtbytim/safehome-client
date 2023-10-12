@@ -31,7 +31,7 @@ function Page({ authenticationToken }) {
     });
   }
 
-  const { isLoading, isError, data } = useQuery({
+  const { isLoading, isError, data, refetch } = useQuery({
     queryKey: [queryKeys.getNotificationPreferences, authenticationToken],
 
     onSuccess(data) {
@@ -66,18 +66,6 @@ function Page({ authenticationToken }) {
     queryClient.invalidateQueries({
       queryKey: [queryKeys.getNotificationPreferences, authenticationToken],
     });
-
-    // setNotify({
-    //   show: true,
-    //   content: "Your notification preferences have been updated.",
-    //   allowClose: false,
-    //   onAcceptText: "Ok",
-    //   onAccept: () => {
-    //     queryClient.invalidateQueries({
-    //       queryKey: [queryKeys.getNotificationPreferences, authenticationToken],
-    //     });
-    //   },
-    // });
   }
 
   function onError(err) {
@@ -141,51 +129,61 @@ function Page({ authenticationToken }) {
         <p>Manage your notification settings</p>
       </div>
 
-      <div className="space-y-8 ">
-        {isError && <p className="text-[--danger]"> Unable to syc data </p>}
+      {isError ? (
+        <div className="flex h-[50vh] justify-center items-center  w-full">
+          <p className="text-[#FF3636]">
+            Unable to load notification preferences. Please{" "}
+            <span onClick={refetch} className="underline cursor-pointer ">
+              try again
+            </span>{" "}
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-8 ">
+          {isError && <p className="text-[--danger]"> Unable to syc data </p>}
 
-        <ToggleCard
-          heading="Email Alerts"
-          text="Get notifications via your registered email."
-          recommended="yes"
-          active={data ? data.email : preferences.emailAlerts}
-          readOnly
-          isLoading={(isLoading && !data) || isLoading2}
-          toggleFunc={() => {
-            updatePreferencesLocalState({
-              emailAlerts: !preferences.emailAlerts,
-            });
-          }}
-        />
-        <ToggleCard
-          heading="Push Notification"
-          text="Notifications on successful log ins to your account."
-          recommended="no"
-          readOnly={preventInput}
-          isLoading={(isLoading && !data) || isLoading2}
-          active={data ? data.push : preferences.pushNotification}
-          toggleFunc={() => {
-            updatePreferencesLocalState({
-              pushNotification: !preferences.pushNotification,
-            });
-          }}
-        />
+          <ToggleCard
+            heading="Email Alerts"
+            text="Get notifications via your registered email."
+            recommended="yes"
+            active={data ? data.email : preferences.emailAlerts}
+            readOnly
+            isLoading={(isLoading && !data) || isLoading2}
+            toggleFunc={() => {
+              updatePreferencesLocalState({
+                emailAlerts: !preferences.emailAlerts,
+              });
+            }}
+          />
+          <ToggleCard
+            heading="Push Notification"
+            text="Notifications on successful log ins to your account."
+            recommended="no"
+            readOnly={preventInput}
+            isLoading={(isLoading && !data) || isLoading2}
+            active={data ? data.push : preferences.pushNotification}
+            toggleFunc={() => {
+              updatePreferencesLocalState({
+                pushNotification: !preferences.pushNotification,
+              });
+            }}
+          />
 
-        <ToggleCard
-          heading="SMS Alerts"
-          text="Get notifications via your verified phone number."
-          recommended="no"
-          readOnly={preventInput}
-          isLoading={(isLoading && !data) || isLoading2}
-          active={data ? data.sms : preferences.smsAlerts}
-          toggleFunc={() => {
-            updatePreferencesLocalState({
-              smsAlerts: !preferences.smsAlerts,
-            });
-          }}
-        />
+          <ToggleCard
+            heading="SMS Alerts"
+            text="Get notifications via your verified phone number."
+            recommended="no"
+            readOnly={preventInput}
+            isLoading={(isLoading && !data) || isLoading2}
+            active={data ? data.sms : preferences.smsAlerts}
+            toggleFunc={() => {
+              updatePreferencesLocalState({
+                smsAlerts: !preferences.smsAlerts,
+              });
+            }}
+          />
 
-        {/* <div className="py-10 text-center flex flex-col justify-center items-center w-full px-6">
+          {/* <div className="py-10 text-center flex flex-col justify-center items-center w-full px-6">
           <button
             type="submit"
             className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
@@ -193,7 +191,8 @@ function Page({ authenticationToken }) {
             Save
           </button>
         </div> */}
-      </div>
+        </div>
+      )}
     </main>
   );
 }

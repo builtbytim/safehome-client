@@ -34,6 +34,7 @@ const config = {
     setNotificationPreferences: "/notifications/preferences",
     setAvatar: "/users/avatar",
     setNextOfKin: "/users/next-of-kin",
+    getNextOfKin: "/users/next-of-kin",
   },
 
   signInModes: {
