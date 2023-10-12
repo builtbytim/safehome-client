@@ -88,7 +88,7 @@ const Topup = ({ token, closeSelf }) => {
           amount: "",
         }}
       >
-        {({ isValid, setFieldValue }) => {
+        {({ isValid }) => {
           return (
             <Form className="space-y-10">
               <div className="relative">
@@ -96,7 +96,7 @@ const Topup = ({ token, closeSelf }) => {
                 <Field
                   type="text"
                   inputMode="numeric"
-                  placeholder=""
+                  placeholder="XXXXXXXX"
                   name="amount"
                   className="account-form-input"
                 />
