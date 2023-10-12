@@ -1,28 +1,27 @@
 "use client";
 import Image from "next/image";
 import { useDataStore } from "../../utils/store";
+import { AvatarPlaceholder } from "./UserAvatarArea";
 
 function MobileNavListUserPanel() {
-  const data = useDataStore((state) => state.data);
-
-  const user = data.user;
+  const user = useDataStore((state) => state.data?.usr);
 
   return (
     <div className="flex justify-start space-x-3 items-center">
       <div className="rounded-full h-[56px] w-[56px] overflow-hidden">
         {" "}
-        <Image
-          priority
-          src={
-            user && user.avatarUrl
-              ? user.avatarUrl
-              : "https://i.pravatar.cc/150"
-          }
-          alt="User"
-          width={56}
-          height={56}
-          className="w-full border border-[--b1] h-full object-cover"
-        />
+        {user && user.avatarUrl ? (
+          <Image
+            priority
+            src={user.avatarUrl}
+            alt="User"
+            width={56}
+            height={56}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <AvatarPlaceholder width={96} height={96} />
+        )}
       </div>
       <div>
         <h2 className="font-bold text-base text-[--color-brand-2] text-left">

@@ -113,7 +113,7 @@ function UserAvatarArea({ user, token }) {
           </div>
         )}
       </div>
-      <p className="p-3">
+      <p className="p-3 text-sm">
         {!imageFile &&
           (isDragActive ? (
             <span> Drag the Image here </span>

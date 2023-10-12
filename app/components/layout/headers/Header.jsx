@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
-import BellImage from "../../../../assets/images/icons/bell.svg";
+import { AvatarPlaceholder } from "../../account/UserAvatarArea";
 import { BiMenuAltLeft, BiX } from "react-icons/bi";
 import { useUiStore } from "../../../utils/store";
 import NotificationBell from "../../NotificationBell";
@@ -19,15 +19,17 @@ function Header({ user }) {
       <div className="w-full flex flex-row justify-between items-center ">
         <div className="flex flex-row justify-center items-center  space-x-4 md:space-x-8">
           <div className="self-center">
-            <Image
-              src={
-                user.avatarUrl || `https://i.pravatar.cc/150?u=${user.email}`
-              }
-              width="52"
-              height="52"
-              alt="Avatar"
-              className="rounded-full object-contain "
-            />
+            {user.avatarUrl ? (
+              <Image
+                src={user.avatarUrl}
+                width="52"
+                height="52"
+                alt="Avatar"
+                className="rounded-full object-contain "
+              />
+            ) : (
+              <AvatarPlaceholder width={52} height={52} />
+            )}
           </div>
 
           <div className="self-center">
