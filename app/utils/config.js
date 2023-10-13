@@ -35,7 +35,8 @@ const config = {
     setAvatar: "/users/avatar",
     setNextOfKin: "/users/next-of-kin",
     getNextOfKin: "/users/next-of-kin",
-    initiateTopUp: "/payments/top-up",
+    initiateTopUp: "/wallet/top-up",
+    initiateWithdrawal: "/wallet/withdraw",
     getWallet: "/wallet",
   },
 
