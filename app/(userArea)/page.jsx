@@ -136,7 +136,7 @@ function Page({ authenticatedUser, authenticationToken }) {
           token={authenticationToken}
         />
 
-        <ExploreCardsRow />
+        <ExploreCardsRow user={authenticatedUser} />
         <section className="bg-white rounded-brand pb-8  space-y-4">
           <div className="flex flex-row justify-between items-center pt-8 md:px-8">
             <div className="flex justify-start items-center space-x-16">

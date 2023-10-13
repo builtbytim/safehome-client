@@ -40,7 +40,7 @@ const ExploreCard = ({ title, body, img }) => {
   );
 };
 
-function ExploreCardsRow() {
+function ExploreCardsRow({ user }) {
   return (
     <>
       <h2 className="text-xl  pt-6 md lg:text-2xl xl:text-3xl text-left text-[--sorta-dark] font-bold ">
@@ -50,14 +50,17 @@ function ExploreCardsRow() {
         id="scroll-indicators"
         className="flex   flex-row justify-between items-center overflow-x-auto whitespace-nowrap space-x-4 no-scrollbar text-sm lg:text-lg"
       >
-        {exploreItems.map((item, i) => (
-          <ExploreCard
-            key={i}
-            title={item.title}
-            body={item.body}
-            img={item.img}
-          />
-        ))}
+        {exploreItems.map((item, i) => {
+          if (i === 0 && user.kycStatus === "approved") return null;
+          return (
+            <ExploreCard
+              key={i}
+              title={item.title}
+              body={item.body}
+              img={item.img}
+            />
+          );
+        })}
       </div>
     </>
   );
