@@ -93,10 +93,7 @@ function Page({ authenticatedUser, authenticationToken }) {
               <div className="pt-6 h-full">
                 <Withdraw
                   token={authenticationToken}
-                  btnFunc={() => {
-                    setReceiptState("withdrawal");
-                    setShowReceipt(true);
-                  }}
+                  closeSelf={() => setShowWithdraw(false)}
                 />
               </div>
             </div>

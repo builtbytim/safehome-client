@@ -86,12 +86,12 @@ const Topup = ({ token, closeSelf }) => {
               <div className="relative">
                 <p className="account-form-text">Amount to Add</p>
                 <FormattingField
-                  rightIcon={FaNairaSign}
+                  icon={FaNairaSign}
                   type="text"
                   inputMode="numeric"
                   placeholder="XXXXXXXX"
                   name="amount"
-                  className="account-form-input"
+                  extraClasses="field-1"
                 />
 
                 <ErrorMessage
@@ -105,7 +105,7 @@ const Topup = ({ token, closeSelf }) => {
                 <button
                   type="submit"
                   disabled={!isValid}
-                  className="w-full text-white bg-[--color-brand] py-3 px-5 shadow rounded"
+                  className="btn-1 w-full text-white bg-[--color-brand] py-3 px-5 shadow rounded"
                 >
                   {isLoading ? <Spinner /> : "Continue"}
                 </button>

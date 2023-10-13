@@ -37,7 +37,7 @@ export default function FormattingField({
                 " text-xl   " +
                 cn({
                   " text-[---color-brand] ": focused,
-                  " text-placeholder ": !focused,
+                  " text-[--placeholder] ": !focused,
                 })
               }
             />
@@ -50,8 +50,8 @@ export default function FormattingField({
               className={
                 " text-xl   " +
                 cn({
-                  " text-textColor ": focused,
-                  " text-placeholder ": !focused,
+                  " text-[--color-brand] ": focused,
+                  " text-[--placeholder] ": !focused,
                 })
               }
             />
@@ -71,10 +71,9 @@ export default function FormattingField({
                 autoFocus={false}
                 className={
                   extraClasses +
-                  " account-form-input " +
                   cn({
                     " pl-4 ": !Icon,
-                    " pl-12 ": Icon,
+                    " pl-8 md:pl-10 ": Icon,
                   })
                 }
                 type={type}

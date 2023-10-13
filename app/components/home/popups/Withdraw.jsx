@@ -1,96 +1,150 @@
 "use client";
 
-import { useState } from "react";
-import GenericSelectField from "../../forms/branded/GenericSelectField";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import queryKeys from "../../../utils/queryKeys";
+import { FaNairaSign } from "react-icons/fa6";
+import {
+  fetchUtil,
+  makeUrl,
+  extractErrorMessage,
+} from "../../../utils/fetchUtils";
+import { useNotifyStore } from "../../../utils/store";
+import { useMutation, useQueryClient } from "react-query";
+import config from "../../../utils/config";
+import Spinner from "../../Spinner";
+import FormattingField from "../../forms/branded/FormattingField";
+import useUserWallet from "../../../utils/hooks/useUserWallet";
 
-const dropdownData = [
-  { name: "Debit card 531212 XXXX XXXX 1234", value: "debit" },
-  { name: "Bank Transfer", value: "bank" },
-];
+const Withdraw = ({ token, closeSelf }) => {
+  const queryClient = useQueryClient();
+  const setNotify = useNotifyStore((state) => state.setNotify);
 
-const Topup = ({ btnFunc }) => {
+  const {
+    data: walletData,
+    isLoading: walletLoading,
+    isSuccess: walletSuccess,
+    isError: walletError,
+    refetch: walletRefetch,
+  } = useUserWallet(token, null, null);
+
+  function onSuccess(data) {
+    queryClient.invalidateQueries({ queryKey: [queryKeys.getWallet, token] });
+
+    closeSelf();
+    window.location.href = data.redirectUrl;
+  }
+
+  function onError(err) {
+    closeSelf();
+
+    setNotify({
+      show: true,
+      content: err.message,
+      allowClose: true,
+    });
+  }
+
+  const { mutate, isLoading } = useMutation({
+    onSuccess,
+    onError,
+    mutationFn: async function (body) {
+      const res = await fetchUtil({
+        url: makeUrl(config.apiPaths.initiateTopUp),
+        method: "POST",
+        body,
+        auth: token,
+      });
+
+      if (!res.success) {
+        throw new Error(extractErrorMessage(res));
+      }
+
+      return res.data;
+    },
+    mutationKey: [queryKeys.initiateTopUp, token],
+  });
+
+  async function handleSubmit(values) {
+    if (isLoading) return;
+
+    const body = {
+      amount: values.amount,
+    };
+
+    mutate(body);
+  }
+
   return (
-    <div className="px-7 flex flex-col justify-between w-full h-full">
-      <Formik
-        validationSchema={Yup.object().shape({
-          amount: Yup.number()
-            .required("Please enter an amount")
-            .positive("Please enter an amount greater than 0")
-            .typeError("Please enter a valid amount"),
+    <div className="px-7 flex flex-col justify-between w-full h-full ">
+      {walletLoading && (
+        <div className="flex h-[50vh] justify-center items-center  w-full">
+          <Spinner />
+        </div>
+      )}
 
-          fundsDestination: Yup.string()
-            .required("Please select a funding source")
-            .oneOf(
-              dropdownData.map((item) => item.value),
-              "Please select a valid funding source"
-            ),
-        })}
-        onSubmit={() => {}}
-        initialValues={{
-          fundsDestination: "",
-          amount: "",
-        }}
-        initialTouched={{
-          fundsDestination: true,
-        }}
-      >
-        {({ isValid, setFieldValue }) => {
-          return (
-            <Form className="space-y-10">
-              <div className="relative">
-                <p className="account-form-text">Amount to Withdraw</p>
-                <Field
-                  type="text"
-                  inputMode="numeric"
-                  placeholder="XXXXXXXXXXXX"
-                  name="amount"
-                  className="account-form-input"
-                />
+      {walletError && (
+        <div className="flex h-[50vh] justify-center items-center  w-full">
+          <p className="text-[#FF3636]">
+            Unable to load wallet. Please{" "}
+            <span onClick={walletRefetch} className="underline cursor-pointer ">
+              try again
+            </span>{" "}
+          </p>
+        </div>
+      )}
 
-                <ErrorMessage
-                  name="amount"
-                  component="div"
-                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                />
-              </div>
-              <div className="relative">
-                <p className="account-form-text">Destination of Funds</p>
-                <div className="">
-                  <GenericSelectField
-                    items={dropdownData}
-                    handleChange={({ selectedItem }) => {
-                      setFieldValue(
-                        "fundsDestination",
-                        selectedItem.value,
-                        true
-                      );
-                    }}
+      {walletSuccess && (
+        <Formik
+          validationSchema={Yup.object().shape({
+            amount: Yup.number()
+              .required("Please enter an amount")
+              .positive("Please enter an amount greater than 0")
+              .max(walletData.balance, "Insufficient funds")
+              .typeError("Please enter a valid amount"),
+          })}
+          onSubmit={handleSubmit}
+          initialValues={{
+            amount: "",
+          }}
+        >
+          {({ isValid }) => {
+            return (
+              <Form className="space-y-10">
+                <div className="relative">
+                  <p className="account-form-text">Amount to Withdraw</p>
+                  <FormattingField
+                    icon={FaNairaSign}
+                    type="text"
+                    inputMode="numeric"
+                    placeholder="XXXXXXXX"
+                    name="amount"
+                    extraClasses="field-1"
                   />
+
                   <ErrorMessage
-                    name="fundsDestination"
+                    name="amount"
                     component="div"
                     className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                   />
                 </div>
-              </div>
 
-              <div className="py-8">
-                <button
-                  disabled={!isValid}
-                  className="w-full text-white bg-[--color-brand] py-3 px-5 shadow rounded"
-                  onClick={() => btnFunc()}
-                >
-                  Top-up
-                </button>
-              </div>
-            </Form>
-          );
-        }}
-      </Formik>
+                <div className="py-8">
+                  <button
+                    type="submit"
+                    disabled={!isValid}
+                    className="btn-1 w-full text-white bg-[--color-brand] py-3 px-5 shadow rounded"
+                  >
+                    {isLoading ? <Spinner /> : "Continue"}
+                  </button>
+                </div>
+              </Form>
+            );
+          }}
+        </Formik>
+      )}
     </div>
   );
 };
 
-export default Topup;
+export default Withdraw;

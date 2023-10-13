@@ -7,38 +7,15 @@ import Savingsmage from "../../../assets/images/icons/SavingsLite.svg";
 import TrendsImage from "../../../assets/images/icons/Trends.svg";
 import LoanImage from "../../../assets/images/icons/loan.svg";
 import ScrollLink from "../ScrollLink";
-import { useQuery } from "react-query";
-import queryKeys from "../../utils/queryKeys";
 import { NumericFormat } from "react-number-format";
-import {
-  fetchUtil,
-  extractErrorMessage,
-  makeUrl,
-} from "../../utils/fetchUtils";
-import config from "../../utils/config";
+import useUserWallet from "../../utils/hooks/useUserWallet";
 
 function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
-  const { data, isLoading, isError, isSuccess, refetch } = useQuery({
-    queryKey: [queryKeys.getWallet, token],
-
-    queryFn: async function () {
-      const res = await fetchUtil({
-        url: makeUrl(config.apiPaths.getWallet),
-        method: "GET",
-        auth: token,
-      });
-
-      if (!res.success) {
-        throw new Error(extractErrorMessage(res));
-      }
-
-      return res.data;
-    },
-
-    onError(err) {
-      console.log(err);
-    },
-  });
+  const { data, isLoading, isError, isSuccess, refetch } = useUserWallet(
+    token,
+    null,
+    null
+  );
 
   return (
     <section className="bg-white rounded-brand  md:p-8 space-y-4 lg:space-y-8">

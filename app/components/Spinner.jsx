@@ -12,9 +12,9 @@ const Spinner = ({ size = "small", invert = false }) => {
         className={
           "  block animate-spin-2  rounded-full    " +
           cn({
-            "h-20 w-20 border-4": huge,
-            "  h-12 w-12 border-4 ": large,
-            " h-8 w-8 border-4 ": small,
+            "h-20 w-20 border-2": huge,
+            "  h-12 w-12 border-2 ": large,
+            " h-8 w-8 border-2 ": small,
             " h-6 w-6 border-2 ": mini,
             " h-4 w-4 border-2 ": tiny,
             " border-t-[--color-brand] border-r-[--color-brand] border-b-white border-l-white text-[--color-brand] ":
