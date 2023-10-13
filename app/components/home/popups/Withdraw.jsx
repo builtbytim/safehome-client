@@ -52,12 +52,16 @@ const Withdraw = ({ token, closeSelf }) => {
     queryClient.invalidateQueries({ queryKey: [queryKeys.getWallet, token] });
 
     closeSelf();
-    window.location.href = data.redirectUrl;
+
+    setNotify({
+      show: true,
+      content:
+        "Withdrawal initiated successfully, you will be notified when it is completed.",
+      allowClose: true,
+    });
   }
 
   function onError(err) {
-    closeSelf();
-
     setNotify({
       show: true,
       content: err.message,
@@ -70,7 +74,7 @@ const Withdraw = ({ token, closeSelf }) => {
     onError,
     mutationFn: async function (body) {
       const res = await fetchUtil({
-        url: makeUrl(config.apiPaths.initiateTopUp),
+        url: makeUrl(config.apiPaths.initiateWithdrawal),
         method: "POST",
         body,
         auth: token,
@@ -90,6 +94,7 @@ const Withdraw = ({ token, closeSelf }) => {
 
     const body = {
       amount: values.amount,
+      bankId: values.destinationBankAccount,
     };
 
     mutate(body);
@@ -203,7 +208,7 @@ const Withdraw = ({ token, closeSelf }) => {
                     <GenericComboField
                       defaultSelectedItem={getBankAccountsData[0]}
                       items={getBankAccountsData.map((acct) => ({
-                        name: acct.accountName,
+                        name: ` ${acct.bankName}  -  ${acct.accountName}`,
                         value: acct.uid,
                       }))}
                       handleChange={({ selectedItem }) => {
