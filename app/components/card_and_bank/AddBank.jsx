@@ -222,7 +222,7 @@ function AccountNumberField({ token, setFieldValue, bankCode, accountName }) {
       },
     }),
 
-    enabled: !!token && !error,
+    enabled: !!token && !error && value && accountName === "",
     onError(err) {
       setError(err.message);
     },
