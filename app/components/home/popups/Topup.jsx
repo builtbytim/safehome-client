@@ -21,6 +21,9 @@ const Topup = ({ token, closeSelf }) => {
 
   function onSuccess(data) {
     queryClient.invalidateQueries({ queryKey: [queryKeys.getWallet, token] });
+    queryClient.invalidateQueries({
+      queryKey: [queryKeys.getTransactions, token],
+    });
 
     closeSelf();
     window.location.href = data.redirectUrl;

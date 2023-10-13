@@ -4,18 +4,27 @@ import { useQuery } from "react-query";
 import { createFetcher, levelToColor } from "../../utils/fetchUtils";
 import config from "../../utils/config";
 import queryKeys from "../../utils/queryKeys";
-import Spinner from "../Spinner";
 import { NumericFormat } from "react-number-format";
 import ErrorMessageView from "../ErrorMessageView";
 import LoadingView from "../LoadingView";
+import { useState } from "react";
 
 function TransactionHistoryTable({ token }) {
+  const [params, setParams] = useState({
+    page: 1,
+    limit: 10,
+    type: "",
+    startDate: "",
+    endDate: "",
+  });
+
   const { isLoading, isError, refetch, data, isSuccess, error } = useQuery({
     queryKey: [queryKeys.getTransactions, token],
     queryFn: createFetcher({
       url: config.apiPaths.getTransactions,
       method: "GET",
       auth: token,
+      surfix: `?page=${params.page}&limit=${params.limit}&type=${params.type}&startDate=${params.startDate}&endDate=${params.endDate}`,
     }),
 
     enabled: !!token,
@@ -55,7 +64,7 @@ function TransactionHistoryTable({ token }) {
               key={i}
               className="flex flex-col justify-center items-start space-y-2 border-b border-[#e2e2e2] py-4"
             >
-              <div className="flex flex-row justify-between items-center w-full">
+              <div className="flex flex-row justify-between items-center w-full  overflow-x-auto max-w-full no-scrollbar">
                 <div className="flex max-w-[50%] flex-row justify-center items-center space-x-2 truncate">
                   <div className="bg-[#FFE5E5] flex-1 p-2 rounded-full border border-transparent">
                     <Image
@@ -69,7 +78,7 @@ function TransactionHistoryTable({ token }) {
 
                   <div className="flex  flex-col justify-center items-start space-y-1">
                     <span className="text-[--color-brand-2] truncate text-sm">
-                      {v.reference}
+                      {shortenTextToEllipses(v.reference, 16)}
                     </span>
                     <span className=" text-sm capitalize">
                       <span className={levelToColor(txTypeColorMap[v.type])}>
@@ -151,3 +160,10 @@ function TransactionHistoryTable({ token }) {
 }
 
 export default TransactionHistoryTable;
+
+function shortenTextToEllipses(text, maxLength) {
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return text.substring(0, maxLength - 3) + "...";
+}
