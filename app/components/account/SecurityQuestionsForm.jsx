@@ -9,12 +9,12 @@ import {
   makeUrl,
   extractErrorMessage,
 } from "../../utils/fetchUtils";
-import BarLoader from "../BarLoader";
 import { useNotifyStore } from "../../utils/store";
 import { securityQuestions } from "../../utils/constants";
 import { useMutation, useQueryClient } from "react-query";
 import queryKeys from "../../utils/queryKeys";
 import config from "../../utils/config";
+import Spinner from "../Spinner";
 
 const SecurityQuestionsForm = ({ user, token, closeParent }) => {
   const setNotify = useNotifyStore((state) => state.setNotify);
@@ -126,13 +126,9 @@ const SecurityQuestionsForm = ({ user, token, closeParent }) => {
         {({ isValid, setFieldValue, values }) => {
           const disableForm = !values.allowEdits;
 
-          // console.log(disableForm);
-
           return (
             <Form className="w-full relative  px-6 space-y-6">
               <div className="grid grid-cols-1 gap-5 md:gap-7 w-full  max-w-[500px] ">
-                <BarLoader active={isLoading} />
-
                 <div className="pt-2">
                   <p className="account-form-text">Security Question 1</p>
 
@@ -254,7 +250,7 @@ const SecurityQuestionsForm = ({ user, token, closeParent }) => {
                   disabled={!isValid || isLoading}
                   className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
                 >
-                  Save
+                  {isLoading ? <Spinner /> : "Save"}
                 </button>
               </div>
             </Form>

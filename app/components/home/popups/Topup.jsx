@@ -3,7 +3,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import queryKeys from "../../../utils/queryKeys";
-import BarLoader from "../../BarLoader";
 import {
   fetchUtil,
   makeUrl,
@@ -12,6 +11,7 @@ import {
 import { useNotifyStore } from "../../../utils/store";
 import { useMutation, useQueryClient } from "react-query";
 import config from "../../../utils/config";
+import Spinner from "../../Spinner";
 
 const Topup = ({ token, closeSelf }) => {
   const queryClient = useQueryClient();
@@ -65,9 +65,7 @@ const Topup = ({ token, closeSelf }) => {
   }
 
   return (
-    <div className="px-7 flex flex-col justify-between w-full h-full relative">
-      <BarLoader active={isLoading} />
-
+    <div className="px-7 flex flex-col justify-between w-full h-full ">
       <Formik
         validationSchema={Yup.object().shape({
           amount: Yup.number()
@@ -106,7 +104,7 @@ const Topup = ({ token, closeSelf }) => {
                   disabled={!isValid}
                   className="w-full text-white bg-[--color-brand] py-3 px-5 shadow rounded"
                 >
-                  Top-up
+                  {isLoading ? <Spinner /> : "Continue"}
                 </button>
               </div>
             </Form>
