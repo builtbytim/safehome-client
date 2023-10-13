@@ -42,19 +42,24 @@ const ExploreCard = ({ title, body, img }) => {
 
 function ExploreCardsRow() {
   return (
-    <div
-      id="scroll-indicators"
-      className="flex pt-4 md:pt-0  flex-row justify-between items-center overflow-x-auto whitespace-nowrap space-x-4 no-scrollbar text-sm lg:text-lg"
-    >
-      {exploreItems.map((item, i) => (
-        <ExploreCard
-          key={i}
-          title={item.title}
-          body={item.body}
-          img={item.img}
-        />
-      ))}
-    </div>
+    <>
+      <h2 className="text-xl  pt-6 md lg:text-2xl xl:text-3xl text-left text-[--sorta-dark] font-bold ">
+        Explore
+      </h2>
+      <div
+        id="scroll-indicators"
+        className="flex   flex-row justify-between items-center overflow-x-auto whitespace-nowrap space-x-4 no-scrollbar text-sm lg:text-lg"
+      >
+        {exploreItems.map((item, i) => (
+          <ExploreCard
+            key={i}
+            title={item.title}
+            body={item.body}
+            img={item.img}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 
