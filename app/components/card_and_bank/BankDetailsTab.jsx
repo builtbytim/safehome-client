@@ -13,21 +13,6 @@ import { useNotifyStore } from "../../utils/store";
 import config from "../../utils/config";
 import Spinner from "../Spinner";
 
-const banksData = [
-  {
-    logo: bankLogo,
-    name: "ADEWALE ADEP",
-    bank: "Zenith Bank",
-    acct_num: "2190909090",
-  },
-  {
-    logo: bankLogo,
-    name: "ADEWALE ADEP",
-    bank: "Zenith Bank",
-    acct_num: "2190909090",
-  },
-];
-
 const CardDisplay = ({ logo, name, bank, acct_num, id }) => {
   const [showPopup, setShowPopup] = useState(false);
 
@@ -149,7 +134,7 @@ const BankDetailsTab = ({ token }) => {
           {getBankAccountsData.map((data, index) => (
             <CardDisplay
               key={index}
-              logo={data.logo}
+              logo={bankLogo}
               name={data.accountName}
               bank={data.bankName}
               acct_num={data.accountNumber}
