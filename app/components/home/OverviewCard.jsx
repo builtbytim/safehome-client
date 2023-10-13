@@ -9,6 +9,7 @@ import LoanImage from "../../../assets/images/icons/loan.svg";
 import ScrollLink from "../ScrollLink";
 import { useQuery } from "react-query";
 import queryKeys from "../../utils/queryKeys";
+import { NumericFormat } from "react-number-format";
 import {
   fetchUtil,
   extractErrorMessage,
@@ -116,7 +117,12 @@ function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
             <h2 className=" text-[--text-secondary] font-medium"> My Funds </h2>
 
             <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
-              ₦{data ? data.balance : 0}
+              <NumericFormat
+                value={data ? data.balance : 0}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"₦ "}
+              />
             </p>
           </div>
 

@@ -59,6 +59,9 @@ dependencies:
   react-icons:
     specifier: ^4.11.0
     version: 4.11.0(react@18.2.0)
+  react-number-format:
+    specifier: ^5.3.1
+    version: 5.3.1(react-dom@18.2.0)(react@18.2.0)
   react-otp-input:
     specifier: ^3.0.4
     version: 3.0.4(react-dom@18.2.0)(react@18.2.0)
@@ -2575,6 +2578,17 @@ packages:
 
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+    dev: false
+
+  /react-number-format@5.3.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-qpYcQLauIeEhCZUZY9jXZnnroOtdy3jYaS1zQ3M1Sr6r/KMOBEIGNIb7eKT19g2N1wbYgFgvDzs19hw5TrB8XQ==}
+    peerDependencies:
+      react: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react-otp-input@3.0.4(react-dom@18.2.0)(react@18.2.0):

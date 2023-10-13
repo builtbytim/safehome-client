@@ -1,8 +1,9 @@
 "use client";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import queryKeys from "../../../utils/queryKeys";
+import { FaNairaSign } from "react-icons/fa6";
 import {
   fetchUtil,
   makeUrl,
@@ -12,6 +13,7 @@ import { useNotifyStore } from "../../../utils/store";
 import { useMutation, useQueryClient } from "react-query";
 import config from "../../../utils/config";
 import Spinner from "../../Spinner";
+import FormattingField from "../../forms/branded/FormattingField";
 
 const Topup = ({ token, closeSelf }) => {
   const queryClient = useQueryClient();
@@ -83,7 +85,8 @@ const Topup = ({ token, closeSelf }) => {
             <Form className="space-y-10">
               <div className="relative">
                 <p className="account-form-text">Amount to Add</p>
-                <Field
+                <FormattingField
+                  rightIcon={FaNairaSign}
                   type="text"
                   inputMode="numeric"
                   placeholder="XXXXXXXX"
