@@ -44,7 +44,7 @@ function Page({ authenticatedUser, authenticationToken }) {
         {tabState === 0 && <DebitCardTab token={authenticationToken} />}
         {tabState === 1 && <BankDetailsTab token={authenticationToken} />}
         <div>
-          {tabState === 0 ? (
+          {tabState === 5 ? (
             <div className="py-10 text-center">
               <button
                 className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
@@ -53,7 +53,7 @@ function Page({ authenticatedUser, authenticationToken }) {
                 Add New Card
               </button>
             </div>
-          ) : (
+          ) : tabState == 1 ? (
             <div className="py-10 text-center">
               <button
                 className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
@@ -62,7 +62,7 @@ function Page({ authenticatedUser, authenticationToken }) {
                 Add New Bank
               </button>
             </div>
-          )}
+          ) : null}
         </div>
 
         {showAddCard && (
