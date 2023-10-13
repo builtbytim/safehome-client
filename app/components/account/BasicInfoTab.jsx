@@ -83,7 +83,7 @@ const BasicInfoTab = ({ user, token }) => {
             <Form className="py-6 w-full">
               <legend className="text-sm text-[--color-brand] pb-3">
                 {" "}
-                Your profile is read-only, if you wish to make changes, please
+                Your KYC is approved, if you wish to make changes, please
                 contact support.
               </legend>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-x-5 md:gap-y-7">

@@ -4,21 +4,41 @@ import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import queryKeys from "../../../utils/queryKeys";
 import { FaNairaSign } from "react-icons/fa6";
+import GenericComboField from "../../forms/branded/GenericComboxField";
 import {
   fetchUtil,
   makeUrl,
   extractErrorMessage,
+  createFetcher,
 } from "../../../utils/fetchUtils";
 import { useNotifyStore } from "../../../utils/store";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import config from "../../../utils/config";
 import Spinner from "../../Spinner";
 import FormattingField from "../../forms/branded/FormattingField";
 import useUserWallet from "../../../utils/hooks/useUserWallet";
+import { useRouter } from "next/navigation";
 
 const Withdraw = ({ token, closeSelf }) => {
   const queryClient = useQueryClient();
+  const router = useRouter();
   const setNotify = useNotifyStore((state) => state.setNotify);
+  const {
+    isLoading: getBankAccountsLoading,
+    isError: getBankAccountsError,
+    refetch: getBankAccountsRefetch,
+    data: getBankAccountsData,
+    isSuccess: getBankAccountsSuccess,
+  } = useQuery({
+    queryKey: [queryKeys.getBankAccounts, token],
+    queryFn: createFetcher({
+      url: config.apiPaths.getBankAccounts,
+      method: "GET",
+      auth: token,
+    }),
+
+    enabled: !!token,
+  });
 
   const {
     data: walletData,
@@ -26,7 +46,7 @@ const Withdraw = ({ token, closeSelf }) => {
     isSuccess: walletSuccess,
     isError: walletError,
     refetch: walletRefetch,
-  } = useUserWallet(token, null, null);
+  } = useUserWallet(token, null, null, getBankAccountsSuccess);
 
   function onSuccess(data) {
     queryClient.invalidateQueries({ queryKey: [queryKeys.getWallet, token] });
@@ -75,9 +95,15 @@ const Withdraw = ({ token, closeSelf }) => {
     mutate(body);
   }
 
+  function navigateToBankAccount() {
+    closeSelf();
+
+    router.push("/account/payments?tab=1");
+  }
+
   return (
     <div className="px-7 flex flex-col justify-between w-full h-full ">
-      {walletLoading && (
+      {(walletLoading || getBankAccountsLoading) && (
         <div className="flex h-[50vh] justify-center items-center  w-full">
           <Spinner />
         </div>
@@ -94,55 +120,124 @@ const Withdraw = ({ token, closeSelf }) => {
         </div>
       )}
 
-      {walletSuccess && (
-        <Formik
-          validationSchema={Yup.object().shape({
-            amount: Yup.number()
-              .required("Please enter an amount")
-              .positive("Please enter an amount greater than 0")
-              .max(walletData.balance, "Insufficient funds")
-              .typeError("Please enter a valid amount"),
-          })}
-          onSubmit={handleSubmit}
-          initialValues={{
-            amount: "",
-          }}
-        >
-          {({ isValid }) => {
-            return (
-              <Form className="space-y-10">
-                <div className="relative">
-                  <p className="account-form-text">Amount to Withdraw</p>
-                  <FormattingField
-                    icon={FaNairaSign}
-                    type="text"
-                    inputMode="numeric"
-                    placeholder="Enter amount"
-                    name="amount"
-                    extraClasses="field-1"
-                  />
-
-                  <ErrorMessage
-                    name="amount"
-                    component="div"
-                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                  />
-                </div>
-
-                <div className="py-8">
-                  <button
-                    type="submit"
-                    disabled={!isValid}
-                    className="btn-1 w-full text-white bg-[--color-brand] py-3 px-5 shadow rounded"
-                  >
-                    {isLoading ? <Spinner size="mini" /> : "Continue"}
-                  </button>
-                </div>
-              </Form>
-            );
-          }}
-        </Formik>
+      {getBankAccountsError && (
+        <div className="flex h-[50vh] justify-center items-center  w-full">
+          <p className="text-[#FF3636]">
+            Unable to fetch your bank accounts. Please{" "}
+            <span
+              onClick={getBankAccountsRefetch}
+              className="underline cursor-pointer "
+            >
+              try again
+            </span>{" "}
+          </p>
+        </div>
       )}
+
+      {walletSuccess &&
+        getBankAccountsSuccess &&
+        getBankAccountsData &&
+        getBankAccountsData.length == 0 && (
+          <div className="flex h-[50vh] justify-center items-center  w-full">
+            <p className="text-[#FF3636] text-center">
+              You have no bank account linked to your SafeHome. Please{" "}
+              <span
+                onClick={navigateToBankAccount}
+                className="underline cursor-pointer "
+              >
+                add a bank account
+              </span>
+            </p>
+          </div>
+        )}
+
+      {walletSuccess &&
+        getBankAccountsSuccess &&
+        getBankAccountsData &&
+        getBankAccountsData.length > 0 && (
+          <Formik
+            validationSchema={Yup.object().shape({
+              amount: Yup.number()
+                .required("Please enter an amount")
+                .positive("Please enter an amount greater than 0")
+                .max(walletData.balance, "Insufficient funds")
+                .typeError("Please enter a valid amount"),
+
+              destinationBankAccount: Yup.string()
+                .required("Please select a bank account")
+                .oneOf(getBankAccountsData.map((acct) => acct.uid)),
+            })}
+            onSubmit={handleSubmit}
+            initialTouched={{
+              destinationBankAccount: true,
+            }}
+            initialValues={{
+              amount: "",
+              destinationBankAccount: "",
+            }}
+          >
+            {({ isValid, setFieldValue, errors }) => {
+              console.log(errors);
+              return (
+                <Form className="space-y-10">
+                  <div className="relative">
+                    <p className="account-form-text">Amount to Withdraw</p>
+                    <FormattingField
+                      icon={FaNairaSign}
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="Enter amount"
+                      name="amount"
+                      extraClasses="field-1"
+                    />
+
+                    <ErrorMessage
+                      name="amount"
+                      component="div"
+                      className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                    />
+                  </div>
+
+                  <div className="relative">
+                    <p className="form-text"> Destination Bank Account</p>
+                    <GenericComboField
+                      defaultSelectedItem={getBankAccountsData[0]}
+                      items={getBankAccountsData.map((acct) => ({
+                        name: acct.accountName,
+                        value: acct.uid,
+                      }))}
+                      handleChange={({ selectedItem }) => {
+                        setFieldValue(
+                          "destinationBankAccount",
+                          selectedItem.value
+                        );
+                      }}
+                      type="text"
+                      placeholder="Select Bank"
+                      className="field-1"
+                    />
+
+                    <ErrorMessage
+                      name="destinationBankAccount"
+                      component="div"
+                      className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                    />
+                  </div>
+
+                  <div className="py-8">
+                    <button
+                      type="submit"
+                      disabled={!isValid}
+                      className="btn-1 w-full text-white bg-[--color-brand] py-3 px-5 shadow rounded"
+                    >
+                      {isLoading ? <Spinner size="mini" /> : "Continue"}
+                    </button>
+                  </div>
+                </Form>
+              );
+            }}
+          </Formik>
+        )}
     </div>
   );
 };

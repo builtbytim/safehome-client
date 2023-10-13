@@ -8,12 +8,13 @@ import config from "../config";
 export default function useUserWallet(
   tokenObj,
   onError = null,
-  onSuccess = null
+  onSuccess = null,
+  enabled = true
 ) {
   const { isError, data, isSuccess, isLoading, refetch } = useQuery({
     queryKey: [queryKeys.getWallet, tokenObj],
 
-    enabled: !!tokenObj,
+    enabled: !!tokenObj && enabled,
 
     queryFn: req,
 

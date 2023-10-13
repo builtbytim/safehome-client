@@ -113,7 +113,7 @@ export const navItems = [
   {
     name: "Card & Bank Settings",
     icon: CardSVG,
-    link: "/account/cards",
+    link: "/account/payments",
   },
   {
     name: "Security",

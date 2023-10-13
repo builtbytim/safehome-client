@@ -63,10 +63,10 @@ const CardDisplay = ({ logo, name, bank, acct_num, id }) => {
           }`}
           >
             <div className="bg-white shadow-lg rounded" ref={cardPopupRef}>
-              <button className="flex w-full gap-3 items-center py-5 px-5 hover:bg-[--color-brand] hover:text-white font-semibold">
+              {/* <button className="flex w-full gap-3 items-center py-5 px-5 hover:bg-[--color-brand] hover:text-white font-semibold">
                 <GoPencil className="text-lg" />
                 <p>Edit Bank Details</p>
-              </button>
+              </button> */}
               <button className="flex w-full gap-3 items-center py-5 px-5 hover:bg-[--color-brand] hover:text-white font-semibold">
                 <TbArchive className="text-lg" />
                 <p>Delete Bank</p>
