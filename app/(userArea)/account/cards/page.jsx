@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import Overlay from "../../../components/Overlay2";
-
+import SecureRoute from "../../../components/SecureRoute";
 import {
   DebitCardTab,
   BankDetailsTab,
@@ -11,7 +11,7 @@ import {
 } from "../../../components/card_and_bank";
 import { PopUpTopBar } from "../../../components/security";
 
-export default function Card() {
+function Page({ authenticatedUser, authenticationToken }) {
   const [tabState, setTabState] = useState(0);
   const toggleRef = useRef();
   const [showAddCard, setShowAddCard] = useState(false);
@@ -41,13 +41,13 @@ export default function Card() {
             Bank Details
           </button>
         </div>
-        {tabState === 0 && <DebitCardTab />}
-        {tabState === 1 && <BankDetailsTab />}
+        {tabState === 0 && <DebitCardTab token={authenticationToken} />}
+        {tabState === 1 && <BankDetailsTab token={authenticationToken} />}
         <div>
           {tabState === 0 ? (
             <div className="py-10 text-center">
               <button
-                className="w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
+                className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
                 onClick={() => setShowAddCard(true)}
               >
                 Add New Card
@@ -56,7 +56,7 @@ export default function Card() {
           ) : (
             <div className="py-10 text-center">
               <button
-                className="w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
+                className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
                 onClick={() => setShowAddBank(true)}
               >
                 Add New Bank
@@ -101,7 +101,10 @@ export default function Card() {
                   />
                 </div>
                 <div className="pt-6">
-                  <AddBank closeFunc={() => setShowAddBank(false)} />
+                  <AddBank
+                    token={authenticationToken}
+                    closeFunc={() => setShowAddBank(false)}
+                  />
                 </div>
               </div>
             </Overlay>
@@ -110,4 +113,8 @@ export default function Card() {
       </div>
     </main>
   );
+}
+
+export default function ProtectedPage(props) {
+  return <SecureRoute offspring={Page} {...props} />;
 }

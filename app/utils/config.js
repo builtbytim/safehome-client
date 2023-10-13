@@ -38,6 +38,11 @@ const config = {
     initiateTopUp: "/wallet/top-up",
     initiateWithdrawal: "/wallet/withdraw",
     getWallet: "/wallet",
+    getSupportedBanks: "/wallet/banks/supported",
+    resolveBankAccount: "/wallet/banks/resolve",
+    addBankAccount: "/wallet/banks",
+    getBankAccounts: "/wallet/banks",
+    deleteBankAccount: "/wallet/banks",
   },
 
   signInModes: {

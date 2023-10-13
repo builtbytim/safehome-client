@@ -89,6 +89,30 @@ export async function fetchUtil({
   }
 }
 
+export function createFetcher({
+  url,
+  method,
+  body = null,
+  surfix = "",
+  auth = null,
+}) {
+  return async (params = null) => {
+    const res = await fetchUtil({
+      url: makeUrl(url),
+      method,
+      body: body || params,
+      surfix,
+      auth,
+    });
+
+    if (res.success) {
+      return res.data;
+    }
+
+    throw new Error(extractErrorMessage(res));
+  };
+}
+
 export function extractErrorMessage(err) {
   if (err instanceof Error) {
     return err.message;

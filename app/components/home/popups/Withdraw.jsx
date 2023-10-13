@@ -117,7 +117,7 @@ const Withdraw = ({ token, closeSelf }) => {
                     icon={FaNairaSign}
                     type="text"
                     inputMode="numeric"
-                    placeholder="XXXXXXXX"
+                    placeholder="Enter amount"
                     name="amount"
                     extraClasses="field-1"
                   />
@@ -135,7 +135,7 @@ const Withdraw = ({ token, closeSelf }) => {
                     disabled={!isValid}
                     className="btn-1 w-full text-white bg-[--color-brand] py-3 px-5 shadow rounded"
                   >
-                    {isLoading ? <Spinner /> : "Continue"}
+                    {isLoading ? <Spinner size="mini" /> : "Continue"}
                   </button>
                 </div>
               </Form>

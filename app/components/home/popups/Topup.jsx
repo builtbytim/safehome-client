@@ -89,7 +89,7 @@ const Topup = ({ token, closeSelf }) => {
                   icon={FaNairaSign}
                   type="text"
                   inputMode="numeric"
-                  placeholder="XXXXXXXX"
+                  placeholder="Enter amount"
                   name="amount"
                   extraClasses="field-1"
                 />

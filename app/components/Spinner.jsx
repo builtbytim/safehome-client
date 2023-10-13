@@ -1,6 +1,6 @@
 import cn from "classnames";
 
-const Spinner = ({ size = "small", invert = false }) => {
+const Spinner = ({ size = "mini", invert = false }) => {
   const tiny = size === "tiny";
   const mini = size === "mini";
   const small = size === "small";

@@ -18,6 +18,11 @@ const queryKeys = {
   getNextOfKin: "getNextOfKin",
   initiateTopUp: "initiateTopUp",
   getWallet: "getWallet",
+  getSupportedBanks: "getSupportedBanks",
+  resolveBankAccount: "resolveBankAccount",
+  addBankAccount: "addBankAccount",
+  getBankAccounts: "getBankAccounts",
+  deleteBankAccount: "deleteBankAccount",
 };
 
 export default queryKeys;
