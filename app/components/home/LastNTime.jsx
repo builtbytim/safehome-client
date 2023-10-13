@@ -44,7 +44,7 @@ export default function LastNTime() {
           <div
             ref={ref}
             {...props}
-            className={`absolute rounded-brand min-w-max bg-white mt-1 shadow-md max-h-80 overflow-y-auto p-0 z-10 ${
+            className={`absolute rounded-[8px] min-w-full bg-white mt-2 shadow-md max-h-80 overflow-y-auto p-0 z-10 ${
               !_isOpen && "hidden"
             }`}
           >

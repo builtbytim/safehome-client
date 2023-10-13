@@ -1,7 +1,5 @@
 "use client";
 
-import { BsChevronDown } from "react-icons/bs";
-import { FaRegCalendar } from "react-icons/fa";
 import OverviewCard from "../components/home/OverviewCard";
 import LastNTime from "../components/home/LastNTime";
 import SecureRoute from "../components/SecureRoute";
@@ -16,6 +14,8 @@ import {
   Topup,
 } from "../components/home/popups";
 import { useState, useRef, useEffect } from "react";
+import FilterGroup from "../components/home/FilterGroup";
+import ExploreCardsRow from "../components/home/ExploreCardsRow";
 
 function Page({ authenticatedUser, authenticationToken }) {
   const [showTopup, setShowTopup] = useState(false);
@@ -135,8 +135,10 @@ function Page({ authenticatedUser, authenticationToken }) {
           setShowWithdraw={setShowWithdraw}
           token={authenticationToken}
         />
-        <section className="bg-white rounded-brand  py-8 md:p-8 space-y-4">
-          <div className="flex flex-row justify-between items-center">
+
+        <ExploreCardsRow />
+        <section className="bg-white rounded-brand   space-y-4">
+          <div className="flex flex-row justify-between items-center pt-8 md:px-8">
             <div className="flex justify-start items-center space-x-16">
               <h1 className="  text-[--placeholder] md:text-[--text-secondary] capitalize text-xl sm:text-2xl md:text-3xl lg:text-3xl  font-medium">
                 Transactions
@@ -144,24 +146,7 @@ function Page({ authenticatedUser, authenticationToken }) {
               <LastNTime />
             </div>
 
-            <div className="hidden xl:flex justify-center items-center space-x-4 text-[--placeholder] font-semibold ">
-              <button className="px-4 py-1 flex justify-center whitespace-nowrap text-sm lg:text-base space-x-2 items-center rounded border">
-                <span className="self-center"> Transaction Type </span>
-                <BsChevronDown className=" self-center" />
-              </button>
-
-              <div className="flex px-1 py-1  justify-center whitespace-nowrap text-sm lg:text-base space-x-2 items-center rounded border">
-                <button className="px-4 py-1 flex justify-center whitespace-nowrap text-sm lg:text-base space-x-2 items-center ">
-                  <FaRegCalendar className=" self-center" />
-                  <span className="self-center"> From DD/MM/YYYY </span>
-                </button>
-
-                <button className="px-4 py-1 flex justify-center whitespace-nowrap text-sm lg:text-base space-x-2 items-center ">
-                  <FaRegCalendar className=" self-center" />
-                  <span className="self-center"> To DD/MM/YYYY </span>
-                </button>
-              </div>
-            </div>
+            <FilterGroup />
           </div>
 
           <TransactionHistoryTable />

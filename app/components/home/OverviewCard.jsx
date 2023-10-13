@@ -69,12 +69,12 @@ function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
             to="total-investments"
           ></ScrollLink>
 
-          <ScrollLink
+          {/* <ScrollLink
             containerId="scroll-indicators"
             activeClass="inline-block rounded-full  w-[8px] bg-[--text-brand] p-1"
             className="inline-block rounded-full border p-1 "
             to="total-loans"
-          ></ScrollLink>
+          ></ScrollLink> */}
         </div>
 
         {/* Scroll Indicatots end  */}
@@ -139,7 +139,7 @@ function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
             </p>
           </div>
 
-          <div
+          {/* <div
             id="total-loans"
             className="bg-[#ff6100]/10 min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6"
           >
@@ -155,7 +155,7 @@ function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
             <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
               ₦0
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
 

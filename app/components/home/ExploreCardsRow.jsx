@@ -1,0 +1,61 @@
+import explore1 from "../../../assets/images/explore1.png";
+import explore2 from "../../../assets/images/explore2.png";
+import explore3 from "../../../assets/images/explore3.png";
+import Image from "next/image";
+
+const exploreItems = [
+  {
+    title: "Complete your KYC",
+    body: "Hello, Kindly finish your KYC so we can verify your identity and comply with regulatory requirements.",
+    img: explore1,
+  },
+
+  {
+    title: "Explore our Assets",
+    body: "Explore our diverse Real Estate portfolio and get a feel of our asset options and performance history",
+    img: explore2,
+  },
+
+  {
+    title: "Refer and Earn",
+    body: "Earn $2,000 every successful referral.",
+    img: explore3,
+  },
+];
+
+const ExploreCard = ({ title, body, img }) => {
+  return (
+    <div className="bg-[#FF910019] min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] self-stretch rounded-brand p-6 py-12 flex flex-row justify-between items-center space-x-6 whitespace-normal">
+      <div className="space-y-4 ">
+        <h2 className="text-xl lg:text-2xl text-left text-[--sorta-dark] ">
+          {title}
+        </h2>
+
+        <p className="text-sm">{body}</p>
+      </div>
+      <div>
+        <Image src={img} alt="Explore" width={100} height={100} />
+      </div>
+    </div>
+  );
+};
+
+function ExploreCardsRow() {
+  return (
+    <div
+      id="scroll-indicators"
+      className="flex pt-4 md:pt-0  flex-row justify-between items-center overflow-x-auto whitespace-nowrap space-x-4 no-scrollbar text-sm lg:text-lg"
+    >
+      {exploreItems.map((item, i) => (
+        <ExploreCard
+          key={i}
+          title={item.title}
+          body={item.body}
+          img={item.img}
+        />
+      ))}
+    </div>
+  );
+}
+
+export default ExploreCardsRow;
