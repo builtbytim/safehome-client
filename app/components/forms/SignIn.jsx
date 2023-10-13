@@ -37,7 +37,9 @@ function SignIn() {
           content: err?.message,
           onAcceptText: "Verify Email",
           onAccept: () => {
-            router.push(`/verify-email/${vars.username}`);
+            router.push(
+              `/verify-email/${vars.username}?authCode=${err?.authCode}`
+            );
           },
         });
 

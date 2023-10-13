@@ -137,7 +137,7 @@ function Page({ authenticatedUser, authenticationToken }) {
         />
 
         <ExploreCardsRow />
-        <section className="bg-white rounded-brand   space-y-4">
+        <section className="bg-white rounded-brand pb-8  space-y-4">
           <div className="flex flex-row justify-between items-center pt-8 md:px-8">
             <div className="flex justify-start items-center space-x-16">
               <h1 className="  text-[--placeholder] md:text-[--text-secondary] capitalize text-xl sm:text-2xl md:text-3xl lg:text-3xl  font-medium">
@@ -149,7 +149,7 @@ function Page({ authenticatedUser, authenticationToken }) {
             <FilterGroup />
           </div>
 
-          <TransactionHistoryTable />
+          <TransactionHistoryTable token={authenticationToken} />
         </section>
       </main>
     </div>

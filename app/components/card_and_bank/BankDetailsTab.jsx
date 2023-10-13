@@ -12,6 +12,8 @@ import { useQuery, useQueryClient, useMutation } from "react-query";
 import { useNotifyStore } from "../../utils/store";
 import config from "../../utils/config";
 import Spinner from "../Spinner";
+import LoadingView from "../LoadingView";
+import ErrorMessageView from "../ErrorMessageView";
 
 const CardDisplay = ({ logo, name, bank, acct_num, id }) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -111,21 +113,16 @@ const BankDetailsTab = ({ token }) => {
     <div className="w-full">
       {getBankAccountsLoading && (
         <div className="flex h-[50vh] justify-center items-center  w-full">
-          <Spinner />
+          <LoadingView />
         </div>
       )}
 
       {getBankAccountsError && (
         <div className="flex h-[50vh] justify-center items-center  w-full">
-          <p className="text-[#FF3636]">
-            Unable to load bank accounts. Please{" "}
-            <span
-              onClick={getBankAccountsRefetch}
-              className="underline cursor-pointer "
-            >
-              try again
-            </span>{" "}
-          </p>
+          <ErrorMessageView
+            message="An error occured while fetching your bank accounts"
+            refetch={getBankAccountsRefetch}
+          />
         </div>
       )}
 

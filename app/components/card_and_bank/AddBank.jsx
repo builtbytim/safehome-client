@@ -8,6 +8,8 @@ import config from "../../utils/config";
 import Spinner from "../Spinner";
 import GenericComboField from "../forms/branded/GenericComboxField";
 import { useEffect } from "react";
+import LoadingView from "../LoadingView";
+import ErrorMessageView from "../ErrorMessageView";
 
 const AddBank = ({ closeFunc, token }) => {
   const queryClient = useQueryClient();
@@ -74,21 +76,16 @@ const AddBank = ({ closeFunc, token }) => {
     <div className="px-8 pb-5 space-y-5 text-[--primary]">
       {getSupportedBanksLoading && (
         <div className="flex h-[50vh] justify-center items-center  w-full">
-          <Spinner />
+          <LoadingView />
         </div>
       )}
 
       {getSupportedBanksError && (
         <div className="flex h-[50vh] justify-center items-center  w-full">
-          <p className="text-[#FF3636]">
-            Unable to load supported banks. Please{" "}
-            <span
-              onClick={getSupportedBanksRefetch}
-              className="underline cursor-pointer "
-            >
-              try again
-            </span>{" "}
-          </p>
+          <ErrorMessageView
+            message="Unable to load supported banks. Please try again"
+            refetch={getSupportedBanksRefetch}
+          />
         </div>
       )}
 

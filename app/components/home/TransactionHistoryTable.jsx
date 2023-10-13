@@ -1,15 +1,56 @@
 import Image from "next/image";
 import ArrowDownRed from "../../../assets/images/icons/arrow-down.svg";
+import { useQuery } from "react-query";
+import { createFetcher, levelToColor } from "../../utils/fetchUtils";
+import config from "../../utils/config";
+import queryKeys from "../../utils/queryKeys";
+import Spinner from "../Spinner";
+import { NumericFormat } from "react-number-format";
+import ErrorMessageView from "../ErrorMessageView";
+import LoadingView from "../LoadingView";
 
-function TransactionHistoryTable() {
-  return (
-    <section>
-      {/* For Mobile */}
+function TransactionHistoryTable({ token }) {
+  const { isLoading, isError, refetch, data, isSuccess, error } = useQuery({
+    queryKey: [queryKeys.getTransactions, token],
+    queryFn: createFetcher({
+      url: config.apiPaths.getTransactions,
+      method: "GET",
+      auth: token,
+    }),
 
-      <div className=" md:hidden overflow-auto max-h-[482px]">
-        {Array(10)
-          .fill()
-          .map((_, i) => (
+    enabled: !!token,
+  });
+
+  const txTypeColorMap = {
+    topup: "success",
+    withdrawal: "error",
+    credit: "success",
+    debit: "error",
+  };
+
+  if (isLoading) {
+    return <LoadingView />;
+  }
+
+  if (isError) {
+    return <ErrorMessageView refetch={refetch} message={error.message} />;
+  }
+
+  if (isSuccess && data && data.items && data.items.length === 0) {
+    return (
+      <div className="flex flex-col justify-center items-center py-6 space-y-4">
+        <p className="text-[#C4C4C4]">No transactions yet</p>
+      </div>
+    );
+  }
+
+  if (isSuccess && data)
+    return (
+      <section>
+        {/* For Mobile */}
+
+        <div className=" md:hidden overflow-y-auto overflow-x-scroll max-w-full max-h-[482px]">
+          {data.items.map((v, i) => (
             <div
               key={i}
               className="flex flex-col justify-center items-start space-y-2 border-b border-[#e2e2e2] py-4"
@@ -28,74 +69,85 @@ function TransactionHistoryTable() {
 
                   <div className="flex  flex-col justify-center items-start space-y-1">
                     <span className="text-[--color-brand-2] truncate text-sm">
-                      UYUUGEVUVYVUYTGJ
+                      {v.reference}
                     </span>
-                    <span className="text-[--text-danger] text-sm">
-                      {" "}
-                      Withdrawal
+                    <span className=" text-sm capitalize">
+                      <span className={levelToColor(txTypeColorMap[v.type])}>
+                        {v.type}
+                      </span>
                     </span>
                   </div>
                 </div>
 
                 <div className="flex px-2 flex-col justify-center items-end space-y-1">
                   <span className="text-[--text-secondary] font-semibold text-sm">
-                    {" "}
-                    ₦1,000,000{" "}
+                    <NumericFormat
+                      value={v.amount}
+                      prefix="₦ "
+                      displayType={"text"}
+                      thousandSeparator={true}
+                    />
                   </span>
                   <span className="text-[--placeholder] text-xs">
-                    10/01/2023 - 09:28AM
+                    {new Date(v.createdAt * 1000).toLocaleString()}
                   </span>
                 </div>
               </div>
             </div>
           ))}
-      </div>
+        </div>
 
-      {/* For Desktops  */}
-      <div className="hidden md:block overflow-auto max-h-[482px] ">
-        <table className="w-full  table text-[--text-secondary]  ">
-          <thead className="w-full uppercase font-semibold">
-            <tr className="table-row w-full ">
-              <th className="pl-8 py-4 text-left  whitespace-nowrap font-semibold">
-                {" "}
-                Date & Time{" "}
-              </th>
-              <th className=" text-left  px-6 whitespace-nowrap font-semibold">
-                Transaction Type
-              </th>
-              <th className=" text-left  px-6 whitespace-nowrap font-semibold">
-                Amount
-              </th>
-              <th className=" text-left  px-6 whitespace-nowrap font-semibold">
-                Reference{" "}
-              </th>
-            </tr>
-          </thead>
+        {/* For Desktops  */}
+        <div className="hidden md:block overflow-auto max-h-[482px] ">
+          <table className="w-full  table text-[--text-secondary]  ">
+            <thead className="w-full uppercase font-semibold">
+              <tr className="table-row w-full ">
+                <th className="pl-8 py-4 text-left  whitespace-nowrap font-semibold">
+                  {" "}
+                  Date & Time{" "}
+                </th>
+                <th className=" text-left  px-6 whitespace-nowrap font-semibold">
+                  Transaction Type
+                </th>
+                <th className=" text-left  px-6 whitespace-nowrap font-semibold">
+                  Amount
+                </th>
+                <th className=" text-left  px-6 whitespace-nowrap font-semibold">
+                  Reference{" "}
+                </th>
+              </tr>
+            </thead>
 
-          <tbody>
-            {Array(10)
-              .fill()
-              .map((_, i) => (
+            <tbody>
+              {data.items.map((v, i) => (
                 <tr
                   key={i}
                   className="table-row text-left text-sm odd:bg-[--b1]"
                 >
                   <td className="py-4 text-left pl-8">
-                    10 January 2023, 09:20:58
+                    {new Date(v.createdAt * 1000).toLocaleString()}
                   </td>
-                  <td className="text-left px-6"> Withdraw </td>
-                  <td className="text-left px-6">₦1,000,000</td>
+                  <td className="text-left px-6 capitalize">
+                    <span className={levelToColor(txTypeColorMap[v.type])}>
+                      {v.type}
+                    </span>
+                  </td>
                   <td className="text-left px-6">
-                    {" "}
-                    UYUUGEVUVYVTYFYU#UGEYF&*YG#YUVEYVYU{" "}
+                    <NumericFormat
+                      value={v.amount}
+                      prefix="₦ "
+                      displayType={"text"}
+                      thousandSeparator={true}
+                    />
                   </td>
+                  <td className="text-left px-6">{v.reference}</td>
                 </tr>
               ))}
-          </tbody>
-        </table>
-      </div>
-    </section>
-  );
+            </tbody>
+          </table>
+        </div>
+      </section>
+    );
 }
 
 export default TransactionHistoryTable;

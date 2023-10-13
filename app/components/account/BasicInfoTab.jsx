@@ -83,8 +83,8 @@ const BasicInfoTab = ({ user, token }) => {
             <Form className="py-6 w-full">
               <legend className="text-sm text-[--color-brand] pb-3">
                 {" "}
-                Your KYC is approved, if you wish to make changes, please
-                contact support.
+                Your KYC is {user.kycStatus || " pending"}, if you wish to make
+                changes, please contact support.
               </legend>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-x-5 md:gap-y-7">
                 <div className="relative">

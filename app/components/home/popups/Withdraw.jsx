@@ -18,6 +18,8 @@ import Spinner from "../../Spinner";
 import FormattingField from "../../forms/branded/FormattingField";
 import useUserWallet from "../../../utils/hooks/useUserWallet";
 import { useRouter } from "next/navigation";
+import ErrorMessageView from "../../ErrorMessageView";
+import LoadingView from "../../LoadingView";
 
 const Withdraw = ({ token, closeSelf }) => {
   const queryClient = useQueryClient();
@@ -110,32 +112,25 @@ const Withdraw = ({ token, closeSelf }) => {
     <div className="px-7 flex flex-col justify-between w-full h-full ">
       {(walletLoading || getBankAccountsLoading) && (
         <div className="flex h-[50vh] justify-center items-center  w-full">
-          <Spinner />
+          <LoadingView />
         </div>
       )}
 
       {walletError && (
         <div className="flex h-[50vh] justify-center items-center  w-full">
-          <p className="text-[#FF3636]">
-            Unable to load wallet. Please{" "}
-            <span onClick={walletRefetch} className="underline cursor-pointer ">
-              try again
-            </span>{" "}
-          </p>
+          <ErrorMessageView
+            message="Something went wrong while fetching your wallet."
+            refetch={walletRefetch}
+          />
         </div>
       )}
 
       {getBankAccountsError && (
         <div className="flex h-[50vh] justify-center items-center  w-full">
-          <p className="text-[#FF3636]">
-            Unable to fetch your bank accounts. Please{" "}
-            <span
-              onClick={getBankAccountsRefetch}
-              className="underline cursor-pointer "
-            >
-              try again
-            </span>{" "}
-          </p>
+          <ErrorMessageView
+            refetch={getBankAccountsRefetch}
+            message="Something went wrong while fetching your bank accounts."
+          />
         </div>
       )}
 
@@ -144,15 +139,11 @@ const Withdraw = ({ token, closeSelf }) => {
         getBankAccountsData &&
         getBankAccountsData.length == 0 && (
           <div className="flex h-[50vh] justify-center items-center  w-full">
-            <p className="text-[#FF3636] text-center">
-              You have no bank account linked to your SafeHome. Please{" "}
-              <span
-                onClick={navigateToBankAccount}
-                className="underline cursor-pointer "
-              >
-                add a bank account
-              </span>
-            </p>
+            <ErrorMessageView
+              message="You have no bank account linked to your SafeHome. Please add a bank account"
+              refetch={navigateToBankAccount}
+              buttonText="Add Bank Account"
+            />
           </div>
         )}
 
@@ -181,8 +172,7 @@ const Withdraw = ({ token, closeSelf }) => {
               destinationBankAccount: "",
             }}
           >
-            {({ isValid, setFieldValue, errors }) => {
-              console.log(errors);
+            {({ isValid, setFieldValue }) => {
               return (
                 <Form className="space-y-10">
                   <div className="relative">

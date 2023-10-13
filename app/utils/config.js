@@ -43,6 +43,7 @@ const config = {
     addBankAccount: "/wallet/banks",
     getBankAccounts: "/wallet/banks",
     deleteBankAccount: "/wallet/banks",
+    getTransactions: "/wallet/transactions",
   },
 
   signInModes: {

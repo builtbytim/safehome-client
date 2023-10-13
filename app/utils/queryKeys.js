@@ -23,6 +23,7 @@ const queryKeys = {
   addBankAccount: "addBankAccount",
   getBankAccounts: "getBankAccounts",
   deleteBankAccount: "deleteBankAccount",
+  getTransactions: "getTransactions",
 };
 
 export default queryKeys;
