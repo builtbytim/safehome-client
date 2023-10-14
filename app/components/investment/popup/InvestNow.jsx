@@ -47,11 +47,31 @@ const InvestNow = ({ data }) => {
           units: "",
           acceptTerms: false,
         }}
+        initialTouched={{
+          acceptTerms: true,
+          fundingSource: true,
+        }}
+        validationSchema={Yup.object().shape({
+          amount: Yup.number()
+            .required("Amount is required")
+            .moreThan(0, "Amount must be greater than 0")
+            .typeError("Amount must be a number"),
+          fundingSource: Yup.string()
+            .required("Funding Source is required")
+            .oneOf(fundingSources.map((item) => item.value)),
+          units: Yup.number()
+            .required("Units is required")
+            .moreThan(0, "Units must be greater than 0")
+            .typeError("Units must be a number"),
+          acceptTerms: Yup.boolean()
+            .required("You must accept the terms and conditions to continue")
+            .isTrue("You must accept the terms and conditions to continue"),
+        })}
       >
         {({ isValid, setFieldValue }) => {
           return (
-            <Form className="space-y-5">
-              <div>
+            <Form className="space-y-6">
+              <div className="relative">
                 <p className="form-text">How many units?</p>
 
                 <FormattingField
@@ -61,8 +81,14 @@ const InvestNow = ({ data }) => {
                   name="units"
                   extraClasses="field-1"
                 />
+
+                <ErrorMessage
+                  name="units"
+                  component="div"
+                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                />
               </div>
-              <div>
+              <div className="relative">
                 <p className="form-text">Amount to pay</p>
 
                 <FormattingField
@@ -74,6 +100,12 @@ const InvestNow = ({ data }) => {
                   extraClasses="field-1"
                   disabled
                 />
+
+                <ErrorMessage
+                  name="amount"
+                  component="div"
+                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                />
               </div>
               <div className="relative">
                 <p className="form-text">Fund Source</p>
@@ -84,20 +116,34 @@ const InvestNow = ({ data }) => {
                   }}
                   items={fundingSources}
                 />
+
+                <ErrorMessage
+                  name="fundSource"
+                  component="div"
+                  className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                />
               </div>
 
-              <div className="flex gap-3">
-                <MiniSwitch
-                  onChange={(v) => {
-                    setFieldValue("acceptTerms", v, true);
-                  }}
+              <div className="relative">
+                <div className="flex gap-3 ">
+                  <MiniSwitch
+                    onChange={(v) => {
+                      setFieldValue("acceptTerms", v, true);
+                    }}
+                  />
+                  <p>
+                    I agree to the{" "}
+                    <span className="text-[--text-brand] cursor-pointer">
+                      terms and conditions
+                    </span>
+                  </p>
+                </div>
+
+                <ErrorMessage
+                  name="acceptTerms"
+                  component="div"
+                  className="absolute -bottom-[70%] left-0 text-[--text-danger] text-xs text-left"
                 />
-                <p>
-                  I agree to the{" "}
-                  <span className="text-[--text-brand] cursor-pointer">
-                    terms and conditions
-                  </span>
-                </p>
               </div>
 
               <div className="py-5">

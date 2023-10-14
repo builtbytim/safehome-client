@@ -4,7 +4,7 @@ function MiniSwitch({ onChange }) {
   const [toggleActive, setToggleActive] = useState(false);
 
   const handleToggle = () => {
-    setToggleActive((prev) => (prev = !prev));
+    setToggleActive((prev) => !prev);
     onChange(toggleActive);
   };
 
