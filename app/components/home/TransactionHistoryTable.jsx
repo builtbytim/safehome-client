@@ -210,11 +210,11 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
                 onClick={() => {
                   setPageFilter(params.page - 1);
                 }}
-                className="text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center"
+                className="text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center space-x-1"
               >
-                <BsChevronLeft className="inline-block mr-1" />
+                <BsChevronLeft className="inline-block  self-center" />
 
-                <span>Prev</span>
+                <span className="self-center">Prev</span>
               </div>
             )}
 
@@ -223,10 +223,10 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
                 onClick={() => {
                   setPageFilter(params.page + 1);
                 }}
-                className="text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center"
+                className="text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center space-x-1"
               >
-                <span>Next</span>
-                <BsChevronRight className="inline-block ml-1" />
+                <span className="self-center">Next</span>
+                <BsChevronRight className="inline-block  self-center" />
               </div>
             )}
           </div>

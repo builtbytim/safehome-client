@@ -42,16 +42,18 @@ export default function SecureRoute(props) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (!authenticating) return;
-      setNotify({
-        show: true,
-        content: "This seems to be taking too long",
-        onAccept: () => {
-          if (authenticating) {
-            router.refresh();
-          }
-        },
-        onAcceptText: "Refresh",
-      });
+      // setNotify({
+      //   show: true,
+      //   content: "This seems to be taking too long",
+      //   onAccept: () => {
+      //     if (authenticating) {
+      //       router.refresh();
+      //     }
+      //   },
+      //   onAcceptText: "Refresh",
+      // });
+
+      console.log("This seems to be taking too long");
     }, MAX_WAIT_TIME);
 
     return () => clearTimeout(timeout);
