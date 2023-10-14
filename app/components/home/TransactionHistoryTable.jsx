@@ -208,7 +208,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
             {data.hasPrev && !isLoading && (
               <div
                 onClick={() => {
-                  setPageFilter(params.page - 1);
+                  setPageFilter(data.page - 1);
                 }}
                 className="text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center space-x-1"
               >
@@ -221,7 +221,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
             {data.hasNext && !isLoading && (
               <div
                 onClick={() => {
-                  setPageFilter(params.page + 1);
+                  setPageFilter(data.page + 1);
                 }}
                 className="text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center space-x-1"
               >

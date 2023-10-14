@@ -84,7 +84,7 @@ function DateFilter({ setDateFilter }) {
       <div
         ref={ref2}
         className={
-          "bg-white  absolute -top-[2%]  px-4 py-4 rounded -left-[180%] min-w-[200px]  shadow z-20" +
+          "bg-white  absolute -top-[2%]  px-4 py-4 rounded -left-[180%] min-w-[200px]  shadow z-20 " +
           cn({ " hidden": !show })
         }
       >
