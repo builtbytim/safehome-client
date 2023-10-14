@@ -27,7 +27,7 @@ function Page({ authenticatedUser, authenticationToken }) {
 
   const [params, setParams] = useState({
     page: 1,
-    limit: 10,
+    limit: 1,
     type: "",
     startDate: "",
     endDate: "",
@@ -39,6 +39,13 @@ function Page({ authenticatedUser, authenticationToken }) {
       ...prev,
       startDate,
       endDate,
+    }));
+  }
+
+  function setPageFilter(page) {
+    setParams((prev) => ({
+      ...prev,
+      page,
     }));
   }
 
@@ -190,6 +197,7 @@ function Page({ authenticatedUser, authenticationToken }) {
           <TransactionHistoryTable
             params={params}
             token={authenticationToken}
+            setPageFilter={setPageFilter}
           />
         </section>
       </main>

@@ -8,9 +8,10 @@ import queryKeys from "../../utils/queryKeys";
 import { NumericFormat } from "react-number-format";
 import ErrorMessageView from "../ErrorMessageView";
 import LoadingView from "../LoadingView";
+import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 import cn from "classnames";
 
-function TransactionHistoryTable({ token, params }) {
+function TransactionHistoryTable({ token, params, setPageFilter }) {
   const { isLoading, isError, refetch, data, isSuccess, error } = useQuery({
     queryKey: [queryKeys.getTransactions, token, params],
     queryFn: createFetcher({
@@ -28,6 +29,12 @@ function TransactionHistoryTable({ token, params }) {
     withdrawal: "error",
     credit: "success",
     debit: "error",
+  };
+
+  const txStatusColorMap = {
+    successful: "success",
+    failed: "error",
+    pending: "warning",
   };
 
   if (isLoading) {
@@ -127,6 +134,10 @@ function TransactionHistoryTable({ token, params }) {
                 <th className=" text-left  px-6 whitespace-nowrap font-semibold">
                   Reference{" "}
                 </th>
+
+                <th className=" text-left  px-6 whitespace-nowrap font-semibold">
+                  Status
+                </th>
               </tr>
             </thead>
 
@@ -139,7 +150,7 @@ function TransactionHistoryTable({ token, params }) {
                   <td className="py-4 text-left pl-8">
                     {new Date(v.createdAt * 1000).toLocaleString()}
                   </td>
-                  <td className="text-left px-6 capitalize">
+                  <td className="text-left px-6 capitalize font-medium">
                     <span className={levelToColor(txTypeColorMap[v.type])}>
                       {v.type}
                     </span>
@@ -153,11 +164,52 @@ function TransactionHistoryTable({ token, params }) {
                     />
                   </td>
                   <td className="text-left px-6">{v.reference}</td>
+
+                  <td className="text-left  font-medium capitalize px-6">
+                    <span className={levelToColor(txStatusColorMap[v.status])}>
+                      {v.status}
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+
+        {isSuccess && data && data.items && data.items.length > 0 && (
+          <div className="space-x-4 flex flex-row items-center justify-end pt-8 px-8">
+            {data.numPages > 0 && (
+              <span className="text-[--text-secondary] text-xs">
+                Page {data.page} of {data.numPages}
+              </span>
+            )}
+
+            {data.hasPrev && (
+              <div
+                onClick={() => {
+                  setPageFilter(params.page - 1);
+                }}
+                className="text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center"
+              >
+                <BsChevronLeft className="inline-block mr-1" />
+
+                <span>Prev</span>
+              </div>
+            )}
+
+            {data.hasNext && (
+              <div
+                onClick={() => {
+                  setPageFilter(params.page + 1);
+                }}
+                className="text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center"
+              >
+                <span>Next</span>
+                <BsChevronRight className="inline-block ml-1" />
+              </div>
+            )}
+          </div>
+        )}
       </section>
     );
 }
