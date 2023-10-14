@@ -4,7 +4,7 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { useRef, useState } from "react";
 import useOutsideClickDetector from "../../utils/hooks/useOutsideClickDetector";
 
-function TransactionTypeFilter() {
+function TransactionTypeFilter({ setTxTypeFilter }) {
   const [show, setShow] = useState(false);
   const ref = useRef(null);
   const ref2 = useRef(null);
@@ -28,6 +28,14 @@ function TransactionTypeFilter() {
   ];
 
   const [selected, setSelected] = useState(null);
+
+  function handleSelectItem(item) {
+    return () => {
+      setSelected(item);
+      setTxTypeFilter(item.value);
+      setShow(false);
+    };
+  }
 
   function toggleShow() {
     setShow((show) => !show);
@@ -79,10 +87,7 @@ function TransactionTypeFilter() {
             return (
               <div
                 key={i}
-                onClick={() => {
-                  setShow(false);
-                  setSelected(v);
-                }}
+                onClick={handleSelectItem(v)}
                 className=" w-full px-2 py-2 hover:cursor-pointer text-sm text-[--sorta-dark]  hover:bg-[--surface-bg] border-b border-b-[--surface-bg] transitioning  flex flex-row justify-between items-center"
               >
                 {v.name}

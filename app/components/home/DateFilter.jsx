@@ -6,7 +6,7 @@ import useOutsideClickDetector from "../../utils/hooks/useOutsideClickDetector";
 import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
 
-function DateFilter() {
+function DateFilter({ setDateFilter }) {
   const [show, setShow] = useState(false);
   const [showCalender, setShowCalender] = useState(false);
   const [isStartDate, setIsStartDate] = useState(true);
@@ -23,6 +23,16 @@ function DateFilter() {
     } else {
       setEndDate(nextValue);
     }
+  }
+
+  function handleApply() {
+    if (!startDate || !endDate) return;
+    setDateFilter(
+      new Date(startDate).getTime() / 1000,
+      new Date(endDate).getTime() / 1000
+    );
+    setShowCalender(false);
+    setShow(false);
   }
 
   const ref = useRef(null);
@@ -112,7 +122,14 @@ function DateFilter() {
               </div>
             </div>
             <div className="pt-2">
-              <button className="btn-1 "> Apply </button>
+              <button
+                disabled={!startDate || !endDate}
+                onClick={handleApply}
+                className="btn-1 "
+              >
+                {" "}
+                Apply{" "}
+              </button>
             </div>
           </>
         )}

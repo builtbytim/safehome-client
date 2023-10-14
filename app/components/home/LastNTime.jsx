@@ -5,15 +5,19 @@ import SelectField from "../../components/forms/branded/SelectField";
 import { forwardRef } from "react";
 
 const timeMarks = [
-  { value: "last_1_day", name: "Last 1 day" },
-  { value: "last_7_days", name: "Last 7 days" },
-  { value: "last_14_days", name: "Last 14 days" },
+  { value: "12_hours", name: "Last 12 hours" },
+  { value: "1_day", name: "Last 1 day" },
+  { value: "7_days", name: "Last 7 days" },
+  { value: "14_days", name: "Last 14 days" },
 ];
 
-export default function LastNTime() {
+export default function LastNTime({ setFromLastFilter }) {
   return (
     <SelectField
       items={timeMarks}
+      onSelectedItemChange={({ selectedItem }) => {
+        setFromLastFilter(selectedItem.value);
+      }}
       itemToString={(item) => (item ? item.name : "")}
       ToggleElement={forwardRef(function A(
         { _isOpen, _selectedItem, ...props },

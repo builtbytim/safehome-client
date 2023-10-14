@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
 import { AvatarPlaceholder } from "../../account/UserAvatarArea";
 import { BiMenuAltLeft, BiX } from "react-icons/bi";
 import { useUiStore } from "../../../utils/store";
 import NotificationBell from "../../NotificationBell";
+import Link from "next/link";
 
 function Header({ user }) {
   const toggleSidebar = useUiStore((state) => state.toggleSidebar);
@@ -18,17 +18,19 @@ function Header({ user }) {
     <header className="w-full  ">
       <div className="w-full flex flex-row justify-between items-center ">
         <div className="flex flex-row justify-center items-center  space-x-4 md:space-x-8">
-          <div className="self-center">
+          <div className="self-center overflow-hidden relative">
             {user.avatarUrl ? (
               <Image
                 src={user.avatarUrl}
                 width="52"
                 height="52"
                 alt="Avatar"
-                className="rounded-full object-contain "
+                className="rounded-full object-contain absolute"
               />
             ) : (
-              <AvatarPlaceholder width={52} height={52} />
+              <Link href="/account/profile?tab=1">
+                <AvatarPlaceholder width={52} height={52} />
+              </Link>
             )}
           </div>
 

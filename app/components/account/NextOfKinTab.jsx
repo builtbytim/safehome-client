@@ -18,6 +18,8 @@ import { useNotifyStore } from "../../utils/store";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import ErrorMessageView from "../ErrorMessageView";
+import LoadingView from "../LoadingView";
 
 const yupSchema = Yup.object({
   firstName: Yup.string()
@@ -135,18 +137,16 @@ const NextOfKinTab = ({ token }) => {
       <BarLoader active={isLoading} />
       {loadingData && (
         <div className="flex h-[50vh] justify-center items-center  w-full">
-          <Spinner />
+          <LoadingView />
         </div>
       )}
 
       {isError && (
         <div className="flex h-[50vh] justify-center items-center  w-full">
-          <p className="text-[#FF3636]">
-            Unable to load next of kin. Please{" "}
-            <span onClick={refetch} className="underline cursor-pointer ">
-              try again
-            </span>{" "}
-          </p>
+          <ErrorMessageView
+            refetch={refetch}
+            message="Something went wrong while trying to fetch your next of kin info"
+          />
         </div>
       )}
 

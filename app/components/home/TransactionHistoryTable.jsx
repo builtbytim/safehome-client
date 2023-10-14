@@ -1,5 +1,6 @@
 import Image from "next/image";
-import ArrowDownRed from "../../../assets/images/icons/arrow-down.svg";
+import ArrowDownGreen from "../../../assets/images/icons/arrow-down.svg";
+import ArrowUpRed from "../../../assets/images/icons/arrow-up.svg";
 import { useQuery } from "react-query";
 import { createFetcher, levelToColor } from "../../utils/fetchUtils";
 import config from "../../utils/config";
@@ -7,24 +8,16 @@ import queryKeys from "../../utils/queryKeys";
 import { NumericFormat } from "react-number-format";
 import ErrorMessageView from "../ErrorMessageView";
 import LoadingView from "../LoadingView";
-import { useState } from "react";
+import cn from "classnames";
 
-function TransactionHistoryTable({ token }) {
-  const [params, setParams] = useState({
-    page: 1,
-    limit: 10,
-    type: "",
-    startDate: "",
-    endDate: "",
-  });
-
+function TransactionHistoryTable({ token, params }) {
   const { isLoading, isError, refetch, data, isSuccess, error } = useQuery({
-    queryKey: [queryKeys.getTransactions, token],
+    queryKey: [queryKeys.getTransactions, token, params],
     queryFn: createFetcher({
       url: config.apiPaths.getTransactions,
       method: "GET",
       auth: token,
-      surfix: `?page=${params.page}&limit=${params.limit}&type=${params.type}&startDate=${params.startDate}&endDate=${params.endDate}`,
+      surfix: `?page=${params.page}&limit=${params.limit}&type=${params.type}&startDate=${params.startDate}&endDate=${params.endDate}&fromLast=${params.fromLast}`,
     }),
 
     enabled: !!token,
@@ -66,9 +59,19 @@ function TransactionHistoryTable({ token }) {
             >
               <div className="flex flex-row justify-between items-center w-full  overflow-x-auto max-w-full no-scrollbar">
                 <div className="flex max-w-[50%] flex-row justify-center items-center space-x-2 truncate">
-                  <div className="bg-[#FFE5E5] flex-1 p-2 rounded-full border border-transparent">
+                  <div
+                    className={
+                      " flex-1 p-2 rounded-full border border-transparent " +
+                      cn({
+                        "bg-[#E5FFE5]": v.direction === "incoming",
+                        "bg-[#FFE5E5]": v.direction === "outgoing",
+                      })
+                    }
+                  >
                     <Image
-                      src={ArrowDownRed}
+                      src={
+                        v.direction === "incoming" ? ArrowDownGreen : ArrowUpRed
+                      }
                       alt="arrow down"
                       width="24"
                       height="24"

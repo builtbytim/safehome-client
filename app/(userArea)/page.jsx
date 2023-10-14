@@ -23,6 +23,41 @@ function Page({ authenticatedUser, authenticationToken }) {
   const [showReceipt, setShowReceipt] = useState(false);
   const [receiptState, setReceiptState] = useState("");
 
+  // Transaction Filters and Params area
+
+  const [params, setParams] = useState({
+    page: 1,
+    limit: 10,
+    type: "",
+    startDate: "",
+    endDate: "",
+    fromLast: "",
+  });
+
+  function setDateFilter(startDate, endDate) {
+    setParams((prev) => ({
+      ...prev,
+      startDate,
+      endDate,
+    }));
+  }
+
+  function setTxTypeFilter(type) {
+    setParams((prev) => ({
+      ...prev,
+      type,
+    }));
+  }
+
+  function setFromLastFilter(fromLast) {
+    setParams((prev) => ({
+      ...prev,
+      fromLast,
+    }));
+  }
+
+  // Transaction Filters and Params area  ends
+
   // Hide Popups when not clicked on
   const topupRef = useRef(null);
   const withdrawRef = useRef(null);
@@ -143,13 +178,19 @@ function Page({ authenticatedUser, authenticationToken }) {
               <h1 className="  text-[--placeholder] md:text-[--text-secondary] capitalize text-xl sm:text-2xl md:text-3xl lg:text-3xl  font-medium">
                 Transactions
               </h1>
-              <LastNTime />
+              <LastNTime setFromLastFilter={setFromLastFilter} />
             </div>
 
-            <FilterGroup />
+            <FilterGroup
+              setDateFilter={setDateFilter}
+              setTxTypeFilter={setTxTypeFilter}
+            />
           </div>
 
-          <TransactionHistoryTable token={authenticationToken} />
+          <TransactionHistoryTable
+            params={params}
+            token={authenticationToken}
+          />
         </section>
       </main>
     </div>
