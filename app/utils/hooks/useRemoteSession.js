@@ -31,19 +31,9 @@ export default function useRemoteSession(
       }
     },
 
-    cacheTime: 0,
+    cacheTime: 1000,
 
     staleTime: 60000,
-
-    refetchOnWindowFocus: false,
-
-    refetchOnMount: false,
-
-    refetchOnReconnect: false,
-
-    refetchInterval: false,
-
-    refetchIntervalInBackground: false,
   });
 
   return {

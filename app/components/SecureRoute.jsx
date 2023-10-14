@@ -8,10 +8,15 @@ import Spinner from "./Spinner";
 import Overlay3 from "./Overlay3";
 import { useState, useEffect } from "react";
 import { useDataStore } from "../utils/store";
+import { useNotifyStore } from "../utils/store";
+
+const MAX_WAIT_TIME = 30000;
 
 export default function SecureRoute(props) {
+  const setNotify = useNotifyStore(state.state.setNotify);
   const tokenObj = retreiveFromLocalStorage(`${config.localStorageKey}:token`);
   const [ready, setReady] = useState(false);
+  const [propapgatedSession, setPropagatedSession] = useState(false);
 
   const setUserLocal = useDataStore((state) => state.setUserLocal);
 
@@ -19,7 +24,24 @@ export default function SecureRoute(props) {
     if (tokenObj && !ready) {
       setReady(true);
     }
-  }, [tokenObj, ready]);
+  }, [tokenObj]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setNotify({
+        show: true,
+        content: "This seems to be taking too long",
+        onAccept: () => {
+          if (authenticating) {
+            router.refresh();
+          }
+        },
+        onAcceptText: "Refresh",
+      });
+    }, MAX_WAIT_TIME);
+
+    return () => clearTimeout(timeout);
+  }, [authenticating, ready]);
 
   const { offspring: SecureChild, autoLogin = true, ...remProps } = props;
   const {
@@ -32,8 +54,9 @@ export default function SecureRoute(props) {
   } = useRemoteSession(tokenObj);
 
   useEffect(() => {
-    if (authenticatedUser) {
+    if (authenticatedUser && !propapgatedSession) {
       setUserLocal(authenticatedUser);
+      setPropagatedSession(true);
     }
   }, [authenticatedUser]);
 

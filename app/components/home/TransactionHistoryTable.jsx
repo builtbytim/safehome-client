@@ -1,6 +1,6 @@
 import Image from "next/image";
 import ArrowDownGreen from "../../../assets/images/icons/arrow-down.svg";
-import ArrowUpRed from "../../../assets/images/icons/arrow-up.svg";
+import ArrowUpRed from "../../../assets/images/icons/minus.svg";
 import { useQuery } from "react-query";
 import { createFetcher, levelToColor } from "../../utils/fetchUtils";
 import config from "../../utils/config";
