@@ -64,11 +64,7 @@ function DateFilter({ setDateFilter }) {
           onClick={toggleShow}
           className="px-1  flex lg:hidden  justify-between whitespace-nowrap text-sm   items-center "
         >
-          {show ? (
-            <BsFilterLeft className=" text-xl self-center" />
-          ) : (
-            <BsFilterRight className=" text-xl self-center" />
-          )}
+          <MdOutlineCalendarMonth className=" text-xl self-center" />
         </button>
 
         <button
