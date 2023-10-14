@@ -62,12 +62,12 @@ function DateFilter({ setDateFilter }) {
       >
         <button
           onClick={toggleShow}
-          className="px-4  flex justify-between whitespace-nowrap text-sm lg:text-base space-x-4 items-center "
+          className="px-4  flex justify-between whitespace-nowrap text-sm  space-x-4 items-center "
         >
           {show ? (
-            <BsFilterLeft className=" text-2xl self-center" />
+            <BsFilterLeft className=" text-xl self-center" />
           ) : (
-            <BsFilterRight className=" text-2xl self-center" />
+            <BsFilterRight className=" text-xl self-center" />
           )}
 
           <span className="self-center"> Filter </span>

@@ -51,14 +51,14 @@ function TransactionTypeFilter({ setTxTypeFilter }) {
 
   return (
     <div className="relative">
-      <span className="rounded-[8px] px-2 inline-block mb-2 text-xs py-1 bg-[--lines]">
+      <span className="rounded-[8px]  px-2 inline-block mb-2 text-xs py-1 bg-[--lines]">
         {" "}
         Transaction Type{" "}
       </span>
       <div
         ref={ref2}
         onClick={toggleShow}
-        className=" hover:cursor-pointer min-w-[150px] px-4 py-1 flex justify-between whitespace-nowrap self-stretch text-sm lg:text-base space-x-2 items-center rounded border border-[#1E1E1E]/50 transtioning hover:border-[#1E1E1E]"
+        className=" hover:cursor-pointer min-w-[150px] px-4 py-1 flex justify-between whitespace-nowrap self-stretch text-sm  space-x-2 items-center rounded border border-[#1E1E1E]/50 transtioning hover:border-[#1E1E1E]"
       >
         <span className="self-center">
           {" "}
