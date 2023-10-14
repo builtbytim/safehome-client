@@ -1,11 +1,11 @@
 import "./globals.css";
-import { Outfit } from "next/font/google";
+import { Noto_Sans } from "next/font/google";
 import config from "./utils/config";
 import Notify from "./components/Notify";
 import Notifications from "./components/Notifications";
 import RemoteDataProvider from "./utils/RemoteDataProvider";
 
-const outfit = Outfit({ subsets: ["latin"] });
+const noto = Noto_Sans({ subsets: ["cyrillic"] });
 
 export const metadata = {
   title: config.app.name,
@@ -16,7 +16,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={outfit.className}>
+      <body className={noto.className}>
         <RemoteDataProvider>
           <Notify />
           <Notifications />
