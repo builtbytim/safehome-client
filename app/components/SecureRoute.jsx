@@ -14,17 +14,12 @@ const MAX_WAIT_TIME = 30000;
 
 export default function SecureRoute(props) {
   const setNotify = useNotifyStore((state) => state.setNotify);
-  const tokenObj = retreiveFromLocalStorage(`${config.localStorageKey}:token`);
-  const [ready, setReady] = useState(false);
-  const [propapgatedSession, setPropagatedSession] = useState(false);
+  const authenticationToken = retreiveFromLocalStorage(
+    `${config.localStorageKey}:token`
+  );
+  const [propagatedSession, setPropagatedSession] = useState(false);
 
   const setUserLocal = useDataStore((state) => state.setUserLocal);
-
-  useEffect(() => {
-    if (tokenObj && !ready) {
-      setReady(true);
-    }
-  }, [tokenObj]);
 
   const { offspring: SecureChild, autoLogin = true, ...remProps } = props;
   const {
@@ -33,11 +28,10 @@ export default function SecureRoute(props) {
     authenticatedSession,
     authenticatedUser,
     authenticationFailed,
-    authenticationToken,
-  } = useRemoteSession(tokenObj);
+  } = useRemoteSession(authenticationToken);
 
   useEffect(() => {
-    if (authenticatedUser && !propapgatedSession) {
+    if (authenticatedUser && !propagatedSession) {
       setUserLocal(authenticatedUser);
       setPropagatedSession(true);
     }
@@ -61,7 +55,7 @@ export default function SecureRoute(props) {
     }, MAX_WAIT_TIME);
 
     return () => clearTimeout(timeout);
-  }, [authenticating, ready]);
+  }, []);
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -71,8 +65,7 @@ export default function SecureRoute(props) {
   const newSearchParams = new URLSearchParams();
   let targetUrl = searchParams.get(config.redirectSearchParam);
 
-  if (authenticating || !ready) {
-    // console.log("Authenticating...", tokenObj);
+  if (authenticating) {
     return <AuthLoader />;
   }
 

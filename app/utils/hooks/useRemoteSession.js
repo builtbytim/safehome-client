@@ -17,6 +17,8 @@ export default function useRemoteSession(
 
     enabled: !!tokenObj,
 
+    keepPreviousData: true,
+
     queryFn: req,
 
     onSuccess(data) {
@@ -37,16 +39,11 @@ export default function useRemoteSession(
   });
 
   return {
-    data,
-    isLoading,
-    isError,
-    isSuccess,
-    authenticating: isLoading,
+    authenticating: isLoading && !data,
     authenticated: isSuccess,
     authenticatedUser: data?.user,
     authenticatedSession: data?.session,
     authenticationFailed: isError || !tokenObj,
-    authenticationToken: tokenObj,
   };
 }
 
