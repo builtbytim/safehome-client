@@ -5,7 +5,7 @@ import TransactionTypeFilter from "./TransactionTypeFilter";
 
 function FilterGroup({ setDateFilter, setTxTypeFilter }) {
   return (
-    <div className="flex flex-row justify-start items-center space-x-4 lg:space-x-6 xl:space-x-8  text-[--sorta-dark]  ">
+    <div className="ml-4 flex flex-row justify-start items-center space-x-4 lg:space-x-6 xl:space-x-8  text-[--sorta-dark]  ">
       <DateFilter setDateFilter={setDateFilter} />
 
       <TransactionTypeFilter setTxTypeFilter={setTxTypeFilter} />
