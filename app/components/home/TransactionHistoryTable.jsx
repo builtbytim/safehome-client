@@ -37,7 +37,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
     pending: "warning",
   };
 
-  if (isLoading) {
+  if (isLoading && (data === null || data === undefined)) {
     return <LoadingView />;
   }
 
@@ -45,10 +45,20 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
     return <ErrorMessageView refetch={refetch} message={error.message} />;
   }
 
-  if (isSuccess && data && data.items && data.items.length === 0) {
+  if (isSuccess && data && data.numItems === 0 && data.entries === 0) {
     return (
       <div className="flex flex-col justify-center items-center py-6 space-y-4">
         <p className="text-[#C4C4C4]">No transactions yet</p>
+      </div>
+    );
+  }
+
+  if (isSuccess && data && data.numItems === 0 && data.entries > 0) {
+    return (
+      <div className="flex flex-col justify-center items-center py-6 space-y-4">
+        <p className="text-[#C4C4C4]">
+          No transactions found for the selected filters
+        </p>
       </div>
     );
   }

@@ -56,7 +56,7 @@ export default function LastNTime({ setFromLastFilter }) {
               return (
                 <div
                   key={`${item.value}${index}`}
-                  className={`px-4 py-2 whitespace-nowrap text-[--text-secondary] hover:bg-gray-50 cursor-pointer ${
+                  className={`px-4 text-sm py-2 whitespace-nowrap text-[--text-secondary] hover:bg-gray-50 cursor-pointer ${
                     _highlightedIndex === index && "bg-gray-50"
                   }`}
                   {..._itemProps({ item, index })}
