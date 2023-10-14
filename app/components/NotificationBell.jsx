@@ -11,6 +11,7 @@ function NotificationBell({ toggleNotifications }) {
         src={BellImage}
         width="48"
         height="48"
+        priority
         alt="Notification Logo"
         className="w-[30px]  h-[30px] md:w-[40px] md:h-[40px] object-contain"
       />

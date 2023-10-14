@@ -58,11 +58,11 @@ function OverviewCard() {
                 <Image src={TrendImage} alt="my funds" width="48" />
               </div>
 
-              <div className="flex flex-row justify-center items-center space-x-2 self-center text-[--text-secondary]">
+              {/* <div className="flex flex-row justify-center items-center space-x-2 self-center text-[--text-secondary]">
                 <span> Button </span>
 
                 <BiChevronRight className="inline-block text-2xl self-center" />
-              </div>
+              </div> */}
             </div>
 
             <h2 className=" text-[--text-secondary] font-medium">
@@ -83,15 +83,15 @@ function OverviewCard() {
                 <Image src={TrendImage} alt="my funds" width="48" />
               </div>
 
-              <div className="flex flex-row justify-center items-center space-x-2 self-center text-[--text-secondary]">
+              {/* <div className="flex flex-row justify-center items-center space-x-2 self-center text-[--text-secondary]">
                 <span> Button </span>
 
                 <BiChevronRight className="inline-block text-2xl self-center" />
-              </div>
+              </div> */}
             </div>
 
             <h2 className=" text-[--text-secondary] font-medium">
-              Total Expected Returns
+              Interest Earned
             </h2>
 
             <p className="text-[--text-brand] font-bold text-xl lg:text-2xl">

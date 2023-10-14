@@ -18,14 +18,14 @@ function Header({ user }) {
     <header className="w-full  ">
       <div className="w-full flex flex-row justify-between items-center ">
         <div className="flex flex-row justify-center items-center  space-x-4 md:space-x-8">
-          <div className="self-center overflow-hidden relative">
+          <div className="self-center overflow-hidden ">
             {user.avatarUrl ? (
               <Image
                 src={user.avatarUrl}
                 width="52"
                 height="52"
                 alt="Avatar"
-                className="rounded-full object-contain absolute"
+                className="rounded-full max-h-[52px] max-w-[52px] object-cover "
               />
             ) : (
               <Link href="/account/profile?tab=1">

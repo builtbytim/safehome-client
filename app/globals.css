@@ -12,6 +12,7 @@
   --sorta-dark: #1e1e1e;
   --text-secondary: #1a374d;
   --primary: #162f43;
+
   --placeholder: #9f9f9f;
   --text-danger: #ff0000;
   --color-brand: #8d4000;
@@ -144,11 +145,11 @@
   }
 
   .filter-btn {
-    @apply text-sm md:text-base text-[--placeholder] border border-[--invert] px-5 py-2 md:px-7 md:py-2 min-w-[100px] rounded hover:border-[--placeholder] inline-block w-auto;
+    @apply text-sm  text-[--placeholder] border border-[--invert] px-4 py-2 md:px-6 md:py-2  rounded-[8px] hover:border-[--placeholder] transitioning font-semibold hover:text-[--placeholder]  whitespace-nowrap block;
   }
 
   .filter-btn-active {
-    @apply text-sm md:text-base text-[--text-brand] border border-[--text-brand] px-5 py-2 md:px-7 md:py-2 min-w-[100px] rounded inline-block w-auto;
+    @apply filter-btn text-[--text-brand] hover:text-[--text-brand] cursor-default  hover:border-[--text-brand] border border-[--text-brand];
   }
 
   .form-text {
@@ -235,12 +236,20 @@
     @apply btn-1 bg-[--text-brand-2] hover:bg-[--text-brand-2-hover];
   }
 
+  .btn-1-v2 {
+    @apply btn-1 bg-[--text-brand] hover:bg-[#ff6100]/80;
+  }
+
   .btn-2 {
     @apply hover:bg-[#8d4000]/10 disabled:pointer-events-none disabled:opacity-60  transitioning  bg-white border border-[--color-brand] text-[--color-brand] rounded-[4px] p-2 w-full;
   }
 
   .btn-2-v1 {
     @apply btn-2 text-[--text-brand-2] border-[--text-brand-2] hover:bg-[#ff9100]/10;
+  }
+
+  .btn-2-v2 {
+    @apply btn-2 text-[--text-brand] border-[--text-brand] hover:bg-[#ff6100]/10;
   }
 
   .btn-3 {
