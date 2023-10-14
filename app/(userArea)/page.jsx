@@ -39,6 +39,7 @@ function Page({ authenticatedUser, authenticationToken }) {
       ...prev,
       startDate,
       endDate,
+      fromLast: null,
     }));
   }
 
@@ -60,6 +61,8 @@ function Page({ authenticatedUser, authenticationToken }) {
     setParams((prev) => ({
       ...prev,
       fromLast,
+      startDate: null,
+      endDate: null,
     }));
   }
 

@@ -12,13 +12,22 @@ import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 import cn from "classnames";
 
 function TransactionHistoryTable({ token, params, setPageFilter }) {
+  const queryParams = new URLSearchParams();
+
+  if (params.type) queryParams.append("type", params.type);
+  if (params.startDate) queryParams.append("startDate", params.startDate);
+  if (params.endDate) queryParams.append("endDate", params.endDate);
+  if (params.fromLast) queryParams.append("fromLast", params.fromLast);
+  if (params.page) queryParams.append("page", params.page);
+  if (params.limit) queryParams.append("limit", params.limit);
+
   const { isLoading, isError, refetch, data, isSuccess, error } = useQuery({
     queryKey: [queryKeys.getTransactions, token, params],
     queryFn: createFetcher({
       url: config.apiPaths.getTransactions,
       method: "GET",
       auth: token,
-      surfix: `?page=${params.page}&limit=${params.limit}&type=${params.type}&startDate=${params.startDate}&endDate=${params.endDate}&fromLast=${params.fromLast}`,
+      surfix: `?${queryParams.toString()}`,
     }),
 
     enabled: !!token,

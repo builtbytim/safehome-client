@@ -85,7 +85,20 @@ function DateFilter({ setDateFilter }) {
           <Calendar value={value} onChange={onChange} />
         ) : (
           <>
-            <h2> Filter by date </h2>
+            <div className="flex flex-row justify-between items-center">
+              <h2> Filter by date </h2>
+
+              <span
+                onClick={() => {
+                  setStartDate(null);
+                  setEndDate(null);
+                  setDateFilter(null);
+                }}
+                className="text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center"
+              >
+                Clear
+              </span>
+            </div>
 
             <div className="flex space-y-4 pt-4 flex-col w-full justify-center items-center">
               <div

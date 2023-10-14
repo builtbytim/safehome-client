@@ -5,7 +5,10 @@ import SelectField from "../../components/forms/branded/SelectField";
 import { forwardRef } from "react";
 
 const timeMarks = [
-  { value: "12_hours", name: "Last 12 hours" },
+  { value: "all_time", name: "All" },
+  { value: "15_minutes", name: "Last 15 minutes" },
+  { value: "1_hour", name: "Last 1 hour" },
+  // { value: "12_hours", name: "Last 12 hours" },
   { value: "1_day", name: "Last 1 day" },
   { value: "7_days", name: "Last 7 days" },
   { value: "14_days", name: "Last 14 days" },
