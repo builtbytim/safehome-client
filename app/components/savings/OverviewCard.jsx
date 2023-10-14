@@ -56,7 +56,7 @@ function OverviewCard() {
         >
           <div
             id="total-balance"
-            className="bg-[#1E07001A] min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6"
+            className="bg-[#1E07001A] w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6"
           >
             <div>
               <Image src={SavingsImage} alt="my funds" width="48" />
@@ -74,7 +74,7 @@ function OverviewCard() {
           <Link
             href="/savings/goals"
             id="goal-savings"
-            className="bg-[#FF91001A] min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6 "
+            className="bg-[#FF91001A] w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6 "
           >
             <div className="w-full flex flex-row justify-between items-center">
               <div className="self-center">
@@ -101,7 +101,7 @@ function OverviewCard() {
           <Link
             href="/savings/locked"
             id="locked-savings"
-            className="bg-[#ff6100]/10 min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6"
+            className="bg-[#ff6100]/10 w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6"
           >
             <div className="w-full flex flex-row justify-between items-center">
               <div className="self-center">
@@ -126,7 +126,7 @@ function OverviewCard() {
 
           <div
             id="interest-earned"
-            className="bg-[#1E07001A] min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6"
+            className="bg-[#1E07001A] w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6"
           >
             <div>
               <Image src={SavingsImage} alt="my funds" width="48" />

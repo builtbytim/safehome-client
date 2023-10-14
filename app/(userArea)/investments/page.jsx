@@ -2,77 +2,26 @@
 
 import { useState, useRef, useEffect } from "react";
 import SecureRoute from "../../components/SecureRoute";
-import Image from "next/image";
-import {
-  Balance,
-  InvestmentCard,
-  NoInvestment,
-} from "../../components/investment";
-import HomeTarget from "../../components/savings/HomeTarget";
+import Overlay from "../../components/Overlay2";
+import { InvestmentCard, NoInvestment } from "../../components/investment";
 import {
   AboutInvestment,
-  AlreadyInvested,
-  CashoutInvestment,
-  InvestmentInfo,
   InvestNow,
   PopUpTopBar,
 } from "../../components/investment/popup";
 import HeaderInvestments from "../../components/layout/headers/HeaderInvestments";
-import TabSwitch from "../../components/savings/TabSwitch";
 import OverviewCard from "../../components/investment/OverviewCard";
-import inv1 from "../../../assets/images/investment/inv1.png";
-import inv2 from "../../../assets/images/investment/inv2.png";
-import inv3 from "../../../assets/images/investment/inv3.png";
-import inv4 from "../../../assets/images/investment/inv4.png";
+import ClubOwnersFilter from "../../components/investment/ClubOwnersFilter";
+import TabSwitch from "../../components/investment/TabSwitch";
+import AssetList from "../../components/investment/AssetList";
+import InvestmentInfoPopup from "../../components/investment/InvestmentInfoPopup";
+import { dummyAssets } from "../../utils/constants";
 
-const investments = [
-  {
-    id: 1,
-    img: inv1,
-    title: "SMART OFFICE LEKKI",
-    returns: "10%",
-    value: "555,073",
-    investors: "1823",
-    quantity: "100",
-  },
-
-  {
-    id: 2,
-    img: inv2,
-    title: "SHOPS IN IKOYI",
-    returns: "10%",
-    value: "555,073",
-    investors: "1823",
-    quantity: "100",
-  },
-  {
-    id: 3,
-    img: inv3,
-    title: "LANDS IN FREEDOM WAY",
-    returns: "10%",
-    value: "555,073",
-    investors: "1823",
-    quantity: "100",
-  },
-  {
-    id: 4,
-    img: inv4,
-    title: "DUPLEX IN FREEDOM WAY, LEKKI",
-    returns: "10%",
-    value: "555,073",
-    investors: "1823",
-    quantity: "100",
-  },
-];
+let investments = dummyAssets;
 
 function Page() {
   const [tabState, setTabState] = useState(0);
-  const InvestmentStates = [
-    "Not invested",
-    "Already Invested",
-    "Matured Investment",
-  ];
-  const InvestmentState = InvestmentStates[0];
+
   const [showInvestmentInfo, setShowInvestmentInfo] = useState(false);
   const [showInvestNow, setShowInvestNow] = useState(false);
   const [showAboutInvestment, setShowAboutInvestment] = useState(false);
@@ -89,8 +38,15 @@ function Page() {
 
   const openInvestNow = () => {
     setShowAboutInvestment(false);
+    setShowInvestmentInfo(false);
     setShowInvestNow(true);
   };
+
+  function handleShowAboutInvestment() {
+    setShowAboutInvestment(true);
+    setShowInvestNow(false);
+    setShowInvestmentInfo(false);
+  }
 
   // Hide Overlays when not clicked on
   const infoRef = useRef(null);
@@ -123,34 +79,9 @@ function Page() {
 
       <OverviewCard />
       <section className="bg-white rounded-brand pt-5 pb-3 md:py-8 text-sm">
-        <div className="border-b border-[--lines] px-0 md:px-0 flex font-semibold">
-          <button
-            className={tabState === 0 ? "tab-button-active" : "tab-button"}
-            onClick={() => setTabState(0)}
-          >
-            My Investments
-          </button>
-          <button
-            className={tabState === 1 ? "tab-button-active" : "tab-button"}
-            onClick={() => setTabState(1)}
-          >
-            New Oppurtunities
-          </button>
-          <button
-            className={tabState === 2 ? "tab-button-active" : "tab-button"}
-            onClick={() => setTabState(2)}
-          >
-            Completed
-          </button>
-        </div>
-        <div className=" py-5 md:p-8 space-y-5 md:space-y-8">
-          <div className="flex flex-no-wrap space-x-4 items-center scrollbar-fix text-center filter-container  overflow-x-auto pb-2 no-scrollbar">
-            <button className="filter-btn-active">All</button>
-            <button className="filter-btn">Land Owners Club</button>
-            <button className="filter-btn">Home Owners Club</button>
-            <button className="filter-btn">Office Owners Club</button>
-            <button className="filter-btn">Shop Owners Club</button>
-          </div>
+        <TabSwitch tabState={tabState} setTabState={setTabState} />
+        <div className=" md:px-8 pt-4 space-y-4 md:space-y-4">
+          <ClubOwnersFilter />
 
           {/* New Oppurtunities Tab */}
           {tabState === 0 && (
@@ -159,20 +90,7 @@ function Page() {
 
           {/* New Oppurtunities Tab */}
           {tabState === 1 && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 xl:gap-7 lg:max-h-[60vh] overflow-y-auto scrollbar-fix pr-3">
-              {investments.map((investment, index) => (
-                <InvestmentCard
-                  key={index}
-                  img={investment.img}
-                  title={investment.title}
-                  returns={investment.returns}
-                  value={investment.value}
-                  investors={investment.investors}
-                  quantity={investment.quantity}
-                  openInfo={() => openInfo(index)}
-                />
-              ))}
-            </div>
+            <AssetList investments={investments} openInfo={openInfo} />
           )}
 
           {/* Completed */}
@@ -182,93 +100,58 @@ function Page() {
         </div>
       </section>
       {showInvestmentInfo && (
-        <div className="fixed top-[-20vh] left-0 w-full h-[150vh] bg-black/50 z-[100]">
-          <div
-            className="fixed top-0 right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow"
-            ref={infoRef}
-          >
-            {InvestmentState === "Matured Investment" ? (
-              <div className="relative">
-                <div className="fixed top-0 right-0 z-[1] w-full md:w-[450px]">
-                  <PopUpTopBar close={() => closePopup()} />
-                </div>
-                <div className="pt-[100px]">
-                  <CashoutInvestment
-                    data={investments[dataId]}
-                    showAboutFunction={() => setShowAboutInvestment(true)}
-                  />
-                </div>
-              </div>
-            ) : InvestmentState === "Already Invested" ? (
-              <div className="relative">
-                <div className="fixed top-0 right-0 z-[1] w-full md:w-[450px]">
-                  <PopUpTopBar close={() => closePopup()} />
-                </div>
-                <div className="pt-[100px]">
-                  <AlreadyInvested
-                    data={investments[dataId]}
-                    showAboutFunction={() => setShowAboutInvestment(true)}
-                    investNowFunction={() => openInvestNow()}
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="relative">
-                <div className="fixed top-0 right-0 z-[1] w-full md:w-[450px]">
-                  <PopUpTopBar close={() => closePopup()} />
-                </div>
-                <div className="pt-[100px]">
-                  <InvestmentInfo
-                    data={investments[dataId]}
-                    showAboutFunction={() => setShowAboutInvestment(true)}
-                    investNowFunction={() => openInvestNow()}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+        <InvestmentInfoPopup
+          investments={investments}
+          dataId={dataId}
+          closePopup={closePopup}
+          openInvestNow={openInvestNow}
+          handleShowAboutInvestment={handleShowAboutInvestment}
+        />
       )}
 
       {showInvestNow && (
-        <div className="fixed top-[-20vh] left-0 w-full h-[150vh] bg-black/50 z-[100]">
-          <div
-            className="fixed top-[0] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow"
-            ref={investRef}
-          >
-            <div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
-              <PopUpTopBar
-                close={() => setShowInvestNow(false)}
-                title="Invest Now"
-                desc="Use the form below to purchase enough investment units."
-              />
+        <div className="fixed  left-0 w-full  bg-black/50 z-20">
+          <Overlay z={3}>
+            <div
+              className="fixed inset-y-0 right-0 w-full md:w-[493px]  pb-[5vh] bg-white overflow-y-auto "
+              ref={infoRef}
+            >
+              <div className="  w-full md:w-[493px] bg-white ">
+                <PopUpTopBar
+                  close={() => setShowInvestNow(false)}
+                  title="Invest Now"
+                  desc="Invest in this asset"
+                />
+              </div>
+              <div className="pt-6">
+                <InvestNow data={investments[dataId]} />
+              </div>
             </div>
-            <div className="pt-[230px]">
-              <InvestNow data={investments[dataId]} />
-            </div>
-          </div>
+          </Overlay>
         </div>
       )}
       {showAboutInvestment && (
-        <div className="fixed top-[-20vh] left-0 w-full h-[150vh] bg-black/50 z-[100]">
-          <div
-            className="fixed top-[0] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow"
-            ref={aboutRef}
-          >
-            <div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
-              <PopUpTopBar
-                close={() => setShowAboutInvestment(false)}
-                title="About Investment"
-                desc="Use the form below to purchase enough investment units."
-              />
+        <div className="fixed  left-0 w-full  bg-black/50 z-20">
+          <Overlay z={3}>
+            <div
+              className="fixed inset-y-0 right-0 w-full md:w-[493px]  pb-[5vh] bg-white overflow-y-auto "
+              ref={infoRef}
+            >
+              <div className="  w-full md:w-[493px] bg-white ">
+                <PopUpTopBar
+                  close={() => setShowAboutInvestment(false)}
+                  title="About Investment"
+                  desc="Read more about this investment"
+                />
+              </div>
+              <div className="pt-6">
+                <AboutInvestment
+                  data={investments[dataId]}
+                  investNowFunction={() => openInvestNow()}
+                />
+              </div>
             </div>
-            <div className="pt-[230px]">
-              <AboutInvestment
-                data={investments[dataId]}
-                investNowFunction={() => openInvestNow()}
-              />
-            </div>
-          </div>
+          </Overlay>
         </div>
       )}
     </main>

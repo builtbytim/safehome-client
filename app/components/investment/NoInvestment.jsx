@@ -11,7 +11,7 @@ const NoInvestment = ({ investNowFunc }) => {
           Start investing in verified oppurtunities. Let&apos;s help you get
           started.
         </p>
-        <div className="w-full  mx-auto space-y-3 pt-3">
+        <div className="w-full  mx-auto space-y-3 pt-3 max-w-md">
           <button
             className="btn-1-v2 block w-full "
             onClick={() => investNowFunc()}
