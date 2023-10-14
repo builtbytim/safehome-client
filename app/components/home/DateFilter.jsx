@@ -53,7 +53,7 @@ function DateFilter({ setDateFilter }) {
 
   return (
     <div className="relative self-stretch">
-      <span className="hidden lg:inline-block rounded-[8px] px-2  mb-2 text-xs py-1 bg-[--lines]">
+      <span className="hidden  rounded-[8px] px-2  mb-2 text-xs py-1 bg-[--lines]">
         Date Range
       </span>
       <div

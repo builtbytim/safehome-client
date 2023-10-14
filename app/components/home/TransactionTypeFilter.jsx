@@ -52,7 +52,7 @@ function TransactionTypeFilter({ setTxTypeFilter }) {
 
   return (
     <div className="relative self-stretch">
-      <span className="hidden rounded-[8px]  px-2 lg:inline-block mb-2 text-xs py-1 bg-[--lines]">
+      <span className="hidden rounded-[8px]  px-2  mb-2 text-xs py-1 bg-[--lines]">
         {" "}
         Transaction Type{" "}
       </span>

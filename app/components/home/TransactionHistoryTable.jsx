@@ -143,17 +143,20 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
             <thead className="w-full uppercase font-semibold">
               <tr className="table-row w-full ">
                 <th className="pl-8 py-4 text-left  whitespace-nowrap font-semibold">
+                  S/N
+                </th>
+                <th className="pl-8 py-4 text-left  whitespace-nowrap font-semibold">
                   {" "}
                   Date & Time{" "}
                 </th>
                 <th className=" text-left  px-6 whitespace-nowrap font-semibold">
-                  Transaction Type
+                  Description
                 </th>
                 <th className=" text-left  px-6 whitespace-nowrap font-semibold">
                   Amount
                 </th>
                 <th className=" text-left  px-6 whitespace-nowrap font-semibold">
-                  Reference{" "}
+                  Transaction Reference{" "}
                 </th>
 
                 <th className=" text-left  px-6 whitespace-nowrap font-semibold">
@@ -168,12 +171,13 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
                   key={i}
                   className="table-row text-left text-sm odd:bg-[--b1]"
                 >
+                  <td className="py-4 text-left pl-8">{i + 1}</td>
                   <td className="py-4 text-left pl-8">
                     {new Date(v.createdAt * 1000).toLocaleString()}
                   </td>
                   <td className="text-left px-6 capitalize font-medium">
                     <span className={levelToColor(txTypeColorMap[v.type])}>
-                      {v.type}
+                      {v.description}
                     </span>
                   </td>
                   <td className="text-left px-6">

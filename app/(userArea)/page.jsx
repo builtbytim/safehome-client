@@ -27,7 +27,7 @@ function Page({ authenticatedUser, authenticationToken }) {
 
   const [params, setParams] = useState({
     page: 1,
-    limit: 1,
+    limit: 5,
     type: "",
     startDate: "",
     endDate: "",
@@ -40,6 +40,7 @@ function Page({ authenticatedUser, authenticationToken }) {
       startDate,
       endDate,
       fromLast: null,
+      page: 1,
     }));
   }
 
@@ -54,6 +55,7 @@ function Page({ authenticatedUser, authenticationToken }) {
     setParams((prev) => ({
       ...prev,
       type,
+      page: 1,
     }));
   }
 
@@ -63,6 +65,7 @@ function Page({ authenticatedUser, authenticationToken }) {
       fromLast,
       startDate: null,
       endDate: null,
+      page: 1,
     }));
   }
 
