@@ -8,7 +8,8 @@ const NoInvestment = ({ investNowFunc }) => {
           Start Investing
         </h2>
         <p className="text-[--text-secondary] text-sm md:text-base">
-          Start investing in verified oppurtunities. Let's help you get started.
+          Start investing in verified oppurtunities. Let&apos;s help you get
+          started.
         </p>
         <div className="w-full  mx-auto space-y-3 pt-3">
           <button
