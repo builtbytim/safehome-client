@@ -22,6 +22,8 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
     }),
 
     enabled: !!token,
+
+    keepPreviousData: true,
   });
 
   const txTypeColorMap = {
@@ -194,7 +196,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
               </span>
             )}
 
-            {data.hasPrev && (
+            {data.hasPrev && !isLoading && (
               <div
                 onClick={() => {
                   setPageFilter(params.page - 1);
@@ -207,7 +209,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
               </div>
             )}
 
-            {data.hasNext && (
+            {data.hasNext && !isLoading && (
               <div
                 onClick={() => {
                   setPageFilter(params.page + 1);
