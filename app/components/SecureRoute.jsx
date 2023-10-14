@@ -47,6 +47,7 @@ export default function SecureRoute(props) {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
+      if (!authenticating) return;
       setNotify({
         show: true,
         content: "This seems to be taking too long",
