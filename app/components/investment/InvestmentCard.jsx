@@ -44,13 +44,13 @@ const InvestmentCard = ({
           <div>
             <h3 className="text-[--text-brand]   pb-1 font-medium">
               <NumericFormat
-                value={value}
+                value={value / quantity}
                 displayType={"text"}
                 thousandSeparator={true}
                 prefix={"₦ "}
               />
             </h3>
-            <p className="mt-[-4px]">Asset Value</p>
+            <p className="mt-[-4px]">Per unit</p>
           </div>
           <div>
             <h3 className="text-[--text-brand]   pb-1 font-medium">
