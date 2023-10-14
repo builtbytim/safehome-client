@@ -5,7 +5,10 @@ import Notify from "./components/Notify";
 import Notifications from "./components/Notifications";
 import RemoteDataProvider from "./utils/RemoteDataProvider";
 
-const noto = Noto_Sans({ subsets: ["cyrillic"] });
+const noto = Noto_Sans({
+  subsets: ["cyrillic"],
+  weight: ["200", "400", "600", "900"],
+});
 
 export const metadata = {
   title: config.app.name,
