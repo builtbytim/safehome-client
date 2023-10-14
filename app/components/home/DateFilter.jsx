@@ -52,17 +52,28 @@ function DateFilter({ setDateFilter }) {
   );
 
   return (
-    <div className="relative">
-      <span className="rounded-[8px] px-2 inline-block mb-2 text-xs py-1 bg-[--lines]">
+    <div className="relative self-stretch">
+      <span className="hidden lg:inline-block rounded-[8px] px-2  mb-2 text-xs py-1 bg-[--lines]">
         Date Range
       </span>
       <div
         ref={ref}
-        className="flex px-1 py-1  justify-center whitespace-nowrap  text-sm lg:text-base space-x-2 items-center rounded border border-[#1E1E1E]/50 transtioning hover:border-[#1E1E1E]"
+        className="flex px-1 py-1  justify-center whitespace-nowrap  text-sm  lg:space-x-2 items-center rounded border border-[#1E1E1E]/50 transtioning hover:border-[#1E1E1E]"
       >
         <button
           onClick={toggleShow}
-          className="px-4  flex justify-between whitespace-nowrap text-sm  space-x-4 items-center "
+          className="px-1  flex lg:hidden  justify-between whitespace-nowrap text-sm   items-center "
+        >
+          {show ? (
+            <BsFilterLeft className=" text-xl self-center" />
+          ) : (
+            <BsFilterRight className=" text-xl self-center" />
+          )}
+        </button>
+
+        <button
+          onClick={toggleShow}
+          className="px-4  hidden lg:flex  justify-between whitespace-nowrap text-sm  space-x-4 items-center "
         >
           {show ? (
             <BsFilterLeft className=" text-xl self-center" />
@@ -86,7 +97,7 @@ function DateFilter({ setDateFilter }) {
         ) : (
           <>
             <div className="flex flex-row justify-between items-center">
-              <h2> Filter by date </h2>
+              <h2 className="text-sm"> Filter by date </h2>
 
               <span
                 onClick={() => {
@@ -138,7 +149,7 @@ function DateFilter({ setDateFilter }) {
               <button
                 disabled={!startDate || !endDate}
                 onClick={handleApply}
-                className="btn-1 "
+                className="btn-1 py-2 text-sm"
               >
                 {" "}
                 Apply{" "}

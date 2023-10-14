@@ -1,6 +1,7 @@
 "use client";
 
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import { FiType } from "react-icons/fi";
 import { useRef, useState } from "react";
 import useOutsideClickDetector from "../../utils/hooks/useOutsideClickDetector";
 
@@ -50,20 +51,22 @@ function TransactionTypeFilter({ setTxTypeFilter }) {
   );
 
   return (
-    <div className="relative">
-      <span className="rounded-[8px]  px-2 inline-block mb-2 text-xs py-1 bg-[--lines]">
+    <div className="relative self-stretch">
+      <span className="hidden rounded-[8px]  px-2 lg:inline-block mb-2 text-xs py-1 bg-[--lines]">
         {" "}
         Transaction Type{" "}
       </span>
       <div
         ref={ref2}
         onClick={toggleShow}
-        className=" hover:cursor-pointer min-w-[150px] px-4 py-1 flex justify-between whitespace-nowrap self-stretch text-sm  space-x-2 items-center rounded border border-[#1E1E1E]/50 transtioning hover:border-[#1E1E1E]"
+        className=" hover:cursor-pointer lg:min-w-[150px] px-4 py-1 flex justify-between whitespace-nowrap self-stretch text-sm  space-x-2 items-center rounded border border-[#1E1E1E]/50 transtioning hover:border-[#1E1E1E]"
       >
-        <span className="self-center">
+        <span className="self-center hidden lg:flex">
           {" "}
           {selected ? selected.name : "Type"}{" "}
         </span>
+
+        <FiType className="self-center lg:hidden" />
 
         {show ? (
           <BsChevronUp className=" self-center" />
