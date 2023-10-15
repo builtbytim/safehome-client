@@ -30,7 +30,7 @@ export default function LastNTime({ setFromLastFilter }) {
           <div
             ref={ref}
             {...props}
-            className="flex   cursor-pointer justify-start text-[--text-secondary] items-center space-x-2 text-sm"
+            className="hover:cursor-pointer lg:min-w-[150px] px-4 py-1 flex justify-between whitespace-nowrap self-stretch text-sm  space-x-2 items-center rounded border border-[#1E1E1E]/50 transtioning hover:border-[#1E1E1E]"
           >
             <span className="font-medium self-center">
               {_selectedItem?.name ?? timeMarks[0].name}

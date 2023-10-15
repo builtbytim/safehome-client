@@ -1,7 +1,6 @@
 "use client";
 
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
-import { FiType } from "react-icons/fi";
 import { useRef, useState } from "react";
 import useOutsideClickDetector from "../../utils/hooks/useOutsideClickDetector";
 
@@ -61,12 +60,12 @@ function TransactionTypeFilter({ setTxTypeFilter }) {
         onClick={toggleShow}
         className=" hover:cursor-pointer lg:min-w-[150px] px-4 py-1 flex justify-between whitespace-nowrap self-stretch text-sm  space-x-2 items-center rounded border border-[#1E1E1E]/50 transtioning hover:border-[#1E1E1E]"
       >
-        <span className="self-center hidden lg:flex">
+        <span className="self-center ">
           {" "}
           {selected ? selected.name : "Type"}{" "}
         </span>
 
-        <FiType className="self-center lg:hidden" />
+        {/* <FiType className="self-center lg:hidden" /> */}
 
         {show ? (
           <BsChevronUp className=" self-center" />
@@ -91,7 +90,7 @@ function TransactionTypeFilter({ setTxTypeFilter }) {
               <div
                 key={i}
                 onClick={handleSelectItem(v)}
-                className=" w-full px-2 py-2 hover:cursor-pointer text-sm text-[--sorta-dark]  hover:bg-[--surface-bg] border-b border-b-[--surface-bg] transitioning  flex flex-row justify-between items-center"
+                className=" w-full px-4 py-2 hover:cursor-pointer text-sm text-[--sorta-dark]  hover:bg-[--surface-bg] border-b border-b-[--surface-bg] transitioning  flex flex-row justify-between items-center"
               >
                 {v.name}
               </div>

@@ -34,6 +34,16 @@ function Page({ authenticatedUser, authenticationToken }) {
     fromLast: "",
   });
 
+  function clearFilters() {
+    setParams((prev) => ({
+      ...prev,
+      type: "",
+      startDate: "",
+      endDate: "",
+      fromLast: "",
+    }));
+  }
+
   function setDateFilter(startDate, endDate) {
     setParams((prev) => ({
       ...prev,
@@ -191,13 +201,24 @@ function Page({ authenticatedUser, authenticationToken }) {
               <h1 className="  text-[--placeholder] md:text-[--text-secondary] capitalize text-xl sm:text-2xl md:text-3xl lg:text-3xl  font-medium">
                 Transactions
               </h1>
+            </div>
+          </div>
+
+          <div className="md:px-8 flex  flex-row justify-start space-x-4 md:space-x-16">
+            <div className="self-center">
               <LastNTime setFromLastFilter={setFromLastFilter} />
             </div>
-
             <FilterGroup
               setDateFilter={setDateFilter}
               setTxTypeFilter={setTxTypeFilter}
             />
+
+            <button
+              onClick={clearFilters}
+              className="text-[--text-secondary]  text-sm  py-1 px-2 md:px-3 self-center transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center"
+            >
+              Clear All
+            </button>
           </div>
 
           <TransactionHistoryTable
