@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import SecureRoute from "../../components/SecureRoute";
 import Overlay from "../../components/Overlay2";
-import { InvestmentCard, NoInvestment } from "../../components/investment";
+import { NoInvestment } from "../../components/investment";
 import {
   AboutInvestment,
   InvestNow,
@@ -15,23 +15,55 @@ import ClubOwnersFilter from "../../components/investment/ClubOwnersFilter";
 import TabSwitch from "../../components/investment/TabSwitch";
 import AssetList from "../../components/investment/AssetList";
 import InvestmentInfoPopup from "../../components/investment/InvestmentInfoPopup";
-import { dummyAssets } from "../../utils/constants";
 import useOutsideClickDetector from "../../utils/hooks/useOutsideClickDetector";
+import { useQuery } from "react-query";
+import { createFetcher } from "../../utils/fetchUtils";
+import queryKeys from "../../utils/queryKeys";
+import config from "../../utils/config";
 
-let investments = dummyAssets;
-
-function Page() {
+function Page({ authenticationToken, authenticatedUser }) {
   const [tabState, setTabState] = useState(0);
-
+  const [params, setParams] = useState({
+    page: 1,
+    limit: 10,
+    ownersClub: "all",
+  });
   const [showInvestmentInfo, setShowInvestmentInfo] = useState(false);
   const [showInvestNow, setShowInvestNow] = useState(false);
   const [showAboutInvestment, setShowAboutInvestment] = useState(false);
   const [dataId, setDataId] = useState(0);
 
+  const queryParams = new URLSearchParams();
+  queryParams.append("page", params.page);
+  queryParams.append("limit", params.limit);
+  queryParams.append("ownersClub", params.ownersClub);
+
+  const { isLoading, isError, refetch, data, isSuccess, error } = useQuery({
+    queryKey: [queryKeys.getTransactions, authenticationToken, params],
+    queryFn: createFetcher({
+      url: config.apiPaths.getInvestmentAssets,
+      method: "GET",
+      auth: authenticationToken,
+      surfix: `?${queryParams.toString()}`,
+    }),
+
+    enabled: !!authenticationToken,
+
+    keepPreviousData: true,
+  });
+
+  const investments = data?.items || [];
+
   const openInfo = (id) => {
     setDataId(id);
     setShowInvestmentInfo(true);
   };
+
+  function setOwnersFilter(value) {
+    return () => {
+      setParams((prev) => ({ ...prev, ownersClub: value }));
+    };
+  }
 
   const closePopup = () => {
     setShowInvestmentInfo(false);
@@ -66,7 +98,10 @@ function Page() {
       <section className="bg-white rounded-brand pt-5 pb-3 md:py-8 text-sm">
         <TabSwitch tabState={tabState} setTabState={setTabState} />
         <div className=" md:px-8 pt-4 space-y-4 md:space-y-4">
-          <ClubOwnersFilter />
+          <ClubOwnersFilter
+            setOwnerFilter={setOwnersFilter}
+            ownersClub={params.ownersClub}
+          />
 
           {/* New Oppurtunities Tab */}
           {tabState === 0 && (
@@ -75,7 +110,15 @@ function Page() {
 
           {/* New Oppurtunities Tab */}
           {tabState === 1 && (
-            <AssetList investments={investments} openInfo={openInfo} />
+            <AssetList
+              isLoading={isLoading}
+              isError={isError}
+              data={data}
+              refetch={refetch}
+              isSuccess={isSuccess}
+              error={error}
+              openInfo={openInfo}
+            />
           )}
 
           {/* Completed */}

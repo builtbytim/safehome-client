@@ -44,6 +44,9 @@ const config = {
     getBankAccounts: "/wallet/banks",
     deleteBankAccount: "/wallet/banks",
     getTransactions: "/wallet/transactions",
+    getInvestmentAssets: "/investments/assets",
+    getAnInvestmentAsset: "/investments/assets",
+    createInvestmentAsset: "/investments/assets",
   },
 
   signInModes: {

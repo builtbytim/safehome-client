@@ -24,6 +24,9 @@ const queryKeys = {
   getBankAccounts: "getBankAccounts",
   deleteBankAccount: "deleteBankAccount",
   getTransactions: "getTransactions",
+  getInvestmentAssets: "getInvestmentAssets",
+  getAnInvestmentAsset: "getAnInvestmentAsset",
+  createInvestmentAsset: "createInvestmentAsset",
 };
 
 export default queryKeys;
