@@ -21,12 +21,11 @@ const MyInvestmentCard = ({ investment, openInfo }) => {
 
   return (
     <div
-      title={isActive ? "Payment has not been completed" : ""}
+      title={!isActive ? "Payment has not been completed" : ""}
       className={
         "relative rounded-brand md:rounded-lg lg:rounded-xl border overflow-hidden text-[--text-secondary] text-left grid grid-cols-5 md:grid-cols-5 h-[165px] md:h-[192px] hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm transitioning " +
         cn({
-          "bg-[--bg-secondary] border-[--border-secondary] opacity-80 ":
-            !isActive,
+          " opacity-50 pointer-events-none ": !isActive,
         })
       }
     >
@@ -58,7 +57,7 @@ const MyInvestmentCard = ({ investment, openInfo }) => {
           </div>
           <div>
             <h3 className="text-[--text-brand]   pb-1 font-medium">
-              {new Date(createdAt * 1000).toLocaleDateString()}
+              {new Date(createdAt * 1000).toLocaleString()}
             </h3>
             <p className="mt-[-4px]"> Purchase Date </p>
           </div>
@@ -70,7 +69,7 @@ const MyInvestmentCard = ({ investment, openInfo }) => {
           displayType={"text"}
           thousandSeparator={true}
         />{" "}
-        Purchased
+        Units Purchased
       </div>
     </div>
   );

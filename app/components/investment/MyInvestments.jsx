@@ -1,10 +1,11 @@
-import { InvestibleAssetCard, NoInvestment } from ".";
+import { NoInvestment } from ".";
 import { createFetcher } from "../../utils/fetchUtils";
 import config from "../../utils/config";
 import queryKeys from "../../utils/queryKeys";
 import { useQuery } from "react-query";
 import ErrorMessageView from "../ErrorMessageView";
 import LoadingView from "../LoadingView";
+import MyInvestmentCard from "./MyInvestmentCard";
 
 function MyInvestments({ token, setTabState }) {
   const { isLoading, isError, refetch, data, isSuccess, error, isFetching } =
@@ -33,7 +34,7 @@ function MyInvestments({ token, setTabState }) {
       <div className="py-10">
         <ErrorMessageView
           refetch={refetch}
-          message="Something wrong while your investments"
+          message="Something wrong while fetching your investments"
         />
       </div>
     );
@@ -57,7 +58,7 @@ function MyInvestments({ token, setTabState }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[60vh]  overflow-y-auto scrollbar-fix pr-3 min-h-[80px]">
       {data.items.map((investment, index) => (
-        <InvestibleAssetCard key={index} investment={investment} />
+        <MyInvestmentCard key={index} investment={investment} />
       ))}
     </div>
   );
