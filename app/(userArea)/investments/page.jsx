@@ -108,11 +108,17 @@ function Page({ authenticationToken, authenticatedUser }) {
               />
             </div>
 
-            {isFetching && (
-              <div className="self-center">
+            <div className="self-center">
+              {isFetching && !isLoading ? (
                 <Spinner size="tiny" />
-              </div>
-            )}
+              ) : (
+                isSuccess && (
+                  <span className="text-xs text-[--placeholder]">
+                    Showing {data?.numItems} of {data?.entries} results
+                  </span>
+                )
+              )}
+            </div>
           </div>
 
           {/* New Oppurtunities Tab */}

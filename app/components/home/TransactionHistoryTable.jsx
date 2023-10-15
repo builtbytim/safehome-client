@@ -21,19 +21,20 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
   if (params.page) queryParams.append("page", params.page);
   if (params.limit) queryParams.append("limit", params.limit);
 
-  const { isLoading, isError, refetch, data, isSuccess, error } = useQuery({
-    queryKey: [queryKeys.getTransactions, token, params],
-    queryFn: createFetcher({
-      url: config.apiPaths.getTransactions,
-      method: "GET",
-      auth: token,
-      surfix: `?${queryParams.toString()}`,
-    }),
+  const { isLoading, isError, refetch, data, isSuccess, error, isFetching } =
+    useQuery({
+      queryKey: [queryKeys.getTransactions, token, params],
+      queryFn: createFetcher({
+        url: config.apiPaths.getTransactions,
+        method: "GET",
+        auth: token,
+        surfix: `?${queryParams.toString()}`,
+      }),
 
-    enabled: !!token,
+      enabled: !!token,
 
-    keepPreviousData: true,
-  });
+      keepPreviousData: true,
+    });
 
   const txTypeColorMap = {
     topup: "success",
@@ -209,12 +210,18 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
               </span>
             )}
 
-            {data.hasPrev && !isLoading && (
+            {data.hasPrev && (
               <div
                 onClick={() => {
+                  if (isFetching) return;
                   setPageFilter(data.page - 1);
                 }}
-                className="text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center space-x-1"
+                className={
+                  "text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center space-x-1" +
+                  cn({
+                    "pointer-events-none opacity-50": isFetching,
+                  })
+                }
               >
                 <BsChevronLeft className="inline-block  self-center" />
 
@@ -222,12 +229,19 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
               </div>
             )}
 
-            {data.hasNext && !isLoading && (
+            {data.hasNext && (
               <div
                 onClick={() => {
+                  if (isFetching) return;
+
                   setPageFilter(data.page + 1);
                 }}
-                className="text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center space-x-1"
+                className={
+                  "text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center space-x-1" +
+                  cn({
+                    "pointer-events-none opacity-50": isFetching,
+                  })
+                }
               >
                 <span className="self-center">Next</span>
                 <BsChevronRight className="inline-block  self-center" />

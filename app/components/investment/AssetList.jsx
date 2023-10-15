@@ -14,12 +14,12 @@ function AssetList({
   if (isLoading && (data === null || data === undefined)) {
     return (
       <div className="py-10">
-        <LoadingView />;
+        <LoadingView />
       </div>
     );
   }
 
-  if (isError) {
+  if (isError && (data === null || data === undefined)) {
     return (
       <div className="py-10">
         <ErrorMessageView
@@ -50,7 +50,7 @@ function AssetList({
 
   const investments = data.items;
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[60vh]  overflow-y-auto scrollbar-fix pr-3">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[60vh]  overflow-y-auto scrollbar-fix pr-3 min-h-[80px]">
       {investments.map((investment, index) => (
         <InvestmentCard
           key={index}
