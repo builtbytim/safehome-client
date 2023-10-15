@@ -20,6 +20,7 @@ import { useQuery } from "react-query";
 import { createFetcher } from "../../utils/fetchUtils";
 import queryKeys from "../../utils/queryKeys";
 import config from "../../utils/config";
+import Spinner from "../../components/Spinner";
 
 function Page({ authenticationToken, authenticatedUser }) {
   const [tabState, setTabState] = useState(0);
@@ -38,19 +39,20 @@ function Page({ authenticationToken, authenticatedUser }) {
   queryParams.append("limit", params.limit);
   queryParams.append("ownersClub", params.ownersClub);
 
-  const { isLoading, isError, refetch, data, isSuccess, error } = useQuery({
-    queryKey: [queryKeys.getTransactions, authenticationToken, params],
-    queryFn: createFetcher({
-      url: config.apiPaths.getInvestmentAssets,
-      method: "GET",
-      auth: authenticationToken,
-      surfix: `?${queryParams.toString()}`,
-    }),
+  const { isLoading, isError, refetch, data, isSuccess, error, isFetching } =
+    useQuery({
+      queryKey: [queryKeys.getTransactions, authenticationToken, params],
+      queryFn: createFetcher({
+        url: config.apiPaths.getInvestmentAssets,
+        method: "GET",
+        auth: authenticationToken,
+        surfix: `?${queryParams.toString()}`,
+      }),
 
-    enabled: !!authenticationToken,
+      enabled: !!authenticationToken,
 
-    keepPreviousData: true,
-  });
+      keepPreviousData: true,
+    });
 
   const investments = data?.items || [];
 
@@ -98,10 +100,20 @@ function Page({ authenticationToken, authenticatedUser }) {
       <section className="bg-white rounded-brand pt-5 pb-3 md:py-8 text-sm">
         <TabSwitch tabState={tabState} setTabState={setTabState} />
         <div className=" md:px-8 pt-4 space-y-4 md:space-y-4">
-          <ClubOwnersFilter
-            setOwnerFilter={setOwnersFilter}
-            ownersClub={params.ownersClub}
-          />
+          <div className="w-full flex flex-row justify-between items-center ">
+            <div className="flex-1 w-full self-center">
+              <ClubOwnersFilter
+                setOwnerFilter={setOwnersFilter}
+                ownersClub={params.ownersClub}
+              />
+            </div>
+
+            {isFetching && (
+              <div className="self-center">
+                <Spinner size="tiny" />
+              </div>
+            )}
+          </div>
 
           {/* New Oppurtunities Tab */}
           {tabState === 0 && (
