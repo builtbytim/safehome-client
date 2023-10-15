@@ -5,19 +5,20 @@ import cn from "classnames";
 import { NumericFormat } from "react-number-format";
 import inv1 from "../../../assets/images/investment/inv1.png";
 
-const MyInvestmentCard = ({ investment, openInfo }) => {
+const MyInvestmentCard = ({ investment }) => {
   const {
     asset,
     isActive,
     completed,
     createdAt,
     amount,
-
     payment_reference,
     units,
   } = investment;
 
-  const { title } = asset;
+  const { assetName } = asset;
+
+  console.log(asset);
 
   return (
     <div
@@ -32,7 +33,7 @@ const MyInvestmentCard = ({ investment, openInfo }) => {
       <div className="w-full h-full col-span-2 md:col-span-2 overflow-hidden">
         <Image
           src={inv1}
-          alt={title}
+          alt={assetName}
           className="object-cover w-full h-full group-hover:scale-110 transform transition-all duration-1000 ease-in-out "
           width={200}
           height={192}
@@ -40,7 +41,7 @@ const MyInvestmentCard = ({ investment, openInfo }) => {
       </div>
       <div className="p-4 md:px-4 xl:px-6 col-span-3 md:col-span-3 space-y-1">
         <h2 className="uppercase font-medium text-lg md:text-xl text-left truncate ">
-          {title}
+          {assetName}
         </h2>
 
         <div className="flex gap-4 md:gap-6 pt-2 ">
