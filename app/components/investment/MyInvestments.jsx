@@ -5,6 +5,7 @@ import queryKeys from "../../utils/queryKeys";
 import { useQuery } from "react-query";
 import ErrorMessageView from "../ErrorMessageView";
 import LoadingView from "../LoadingView";
+import { InvestmentCard } from ".";
 
 function MyInvestments({ token, setTabState }) {
   const { isLoading, isError, refetch, data, isSuccess, error, isFetching } =
@@ -57,6 +58,25 @@ function MyInvestments({ token, setTabState }) {
       </div>
     );
   }
+
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[60vh]  overflow-y-auto scrollbar-fix pr-3 min-h-[80px]">
+      {data.items.map((investment, index) => (
+        <InvestmentCard
+          key={index}
+          img={investment.img}
+          title={investment.assetName}
+          roi={investment.roi}
+          price={investment.price}
+          investors={investment.investorCount}
+          pricePerUnit={investment.pricePerUnit}
+          location={investment.location}
+          units={investment.units}
+          openInfo={() => openInfo(index)}
+        />
+      ))}
+    </div>
+  );
 }
 
 export default MyInvestments;
