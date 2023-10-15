@@ -63,10 +63,13 @@ export default function FormattingField({
             return (
               <NumericFormat
                 allowNegative={false}
+                // allowedDecimalSeparators={allowDecimalSeparators}
+
                 displayType="input"
                 thousandSeparator=","
                 readOnly={readOnly}
                 disabled={disabled}
+                required={required}
                 inputMode={inputMode}
                 autoFocus={false}
                 className={
@@ -84,11 +87,7 @@ export default function FormattingField({
                   // console.log(field);
                   form.setFieldValue(name, values.value);
                   if ("function" === typeof customOnChange) {
-                    customOnChange({
-                      target: {
-                        value: values.value,
-                      },
-                    });
+                    customOnChange(values.value);
                   }
                 }}
                 onBlur={field.onBlur}

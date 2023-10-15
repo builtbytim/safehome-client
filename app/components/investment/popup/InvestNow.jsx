@@ -61,13 +61,15 @@ const InvestNow = ({ data }) => {
           units: Yup.number()
             .required("Units is required")
             .moreThan(0, "Units must be greater than 0")
+            .integer("Decimal values are not allowed")
+            .max(data.units, `There are only ${data.units} units available`)
             .typeError("Units must be a number"),
-          acceptTerms: Yup.boolean()
-            .required("You must accept the terms and conditions to continue")
-            .isTrue("You must accept the terms and conditions to continue"),
+          acceptTerms: Yup.boolean().isTrue(
+            "You must accept the terms and conditions to continue"
+          ),
         })}
       >
-        {({ isValid, setFieldValue }) => {
+        {({ isValid, setFieldValue, values }) => {
           return (
             <Form className="space-y-6">
               <div className="relative">
@@ -79,6 +81,9 @@ const InvestNow = ({ data }) => {
                   placeholder="Total number of units"
                   name="units"
                   extraClasses="field-1"
+                  customOnChange={(value) => {
+                    setFieldValue("amount", value * data.pricePerUnit, true);
+                  }}
                 />
 
                 <ErrorMessage
@@ -127,7 +132,7 @@ const InvestNow = ({ data }) => {
                 <div className="flex gap-3 ">
                   <MiniSwitch
                     onChange={(v) => {
-                      setFieldValue("acceptTerms", v, true);
+                      setFieldValue("acceptTerms", !values.acceptTerms, true);
                     }}
                   />
                   <p>
@@ -148,7 +153,7 @@ const InvestNow = ({ data }) => {
               <div className="py-5">
                 <button
                   disabled={!isValid}
-                  className="w-full text-white bg-[--text-brand] py-3 px-5 shadow rounded"
+                  className="btn-1-v2 w- hover:bg  py-3 px-5 shadow rounded"
                 >
                   Invest Now
                 </button>
