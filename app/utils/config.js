@@ -47,6 +47,8 @@ const config = {
     getInvestmentAssets: "/investments/assets",
     getAnInvestmentAsset: "/investments/assets",
     createInvestmentAsset: "/investments/assets",
+    createInvestment: "/investments/assets/invest",
+    getMyInvestments: "/investments",
   },
 
   signInModes: {

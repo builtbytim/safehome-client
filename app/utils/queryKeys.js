@@ -27,6 +27,8 @@ const queryKeys = {
   getInvestmentAssets: "getInvestmentAssets",
   getAnInvestmentAsset: "getAnInvestmentAsset",
   createInvestmentAsset: "createInvestmentAsset",
+
+  createInvestment: "createInvestment",
 };
 
 export default queryKeys;

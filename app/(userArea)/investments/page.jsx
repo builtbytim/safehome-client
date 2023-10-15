@@ -169,7 +169,11 @@ function Page({ authenticationToken, authenticatedUser }) {
                 />
               </div>
               <div className="pt-6">
-                <InvestNow data={investments[dataId]} />
+                <InvestNow
+                  token={authenticationToken}
+                  data={investments[dataId]}
+                  closeSelf={() => setShowInvestNow(false)}
+                />
               </div>
             </div>
           </Overlay>

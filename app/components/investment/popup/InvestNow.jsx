@@ -7,6 +7,12 @@ import { NumericFormat } from "react-number-format";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import MiniSwitch from "../../MiniSwitch";
+import { createFetcher } from "../../../utils/fetchUtils";
+import { useMutation, useQueryClient } from "react-query";
+import { useNotifyStore } from "../../../utils/store";
+import config from "../../../utils/config";
+import queryKeys from "../../../utils/queryKeys";
+import Spinner from "../../Spinner";
 
 const fundingSources = [
   {
@@ -19,7 +25,66 @@ const fundingSources = [
   },
 ];
 
-const InvestNow = ({ data }) => {
+const InvestNow = ({ data, token, closeSelf }) => {
+  const queryClient = useQueryClient();
+  const setNotify = useNotifyStore((state) => state.setNotify);
+
+  function onSuccess(data, vars) {
+    queryClient.invalidateQueries({
+      queryKey: [queryKeys.getWallet],
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: [queryKeys.getTransactions, token],
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: [queryKeys.getInvestmentAssets],
+    });
+    closeSelf();
+
+    if (vars.fundSource === "wallet") {
+      window.location.href = data.redirectUrl;
+    } else {
+      setNotify({
+        show: true,
+        content: "Your investmnet was executed successfully.",
+        allowClose: true,
+      });
+    }
+  }
+
+  function onError(err) {
+    setNotify({
+      show: true,
+      content: err.message,
+      allowClose: true,
+    });
+  }
+
+  const { mutate, isLoading } = useMutation({
+    onSuccess,
+    onError,
+    mutationFn: createFetcher({
+      url: config.apiPaths.createInvestment,
+      method: "POST",
+      auth: token,
+    }),
+    mutationKey: [queryKeys.createInvestment, token],
+  });
+
+  async function handleSubmit(values) {
+    if (isLoading) return;
+
+    const body = {
+      fundingSource: values.fundingSource,
+      units: values.units,
+      assetUid: data.uid,
+    };
+
+    mutate(body);
+  }
+
   return (
     <div className="px-7 pb-8 space-y-8 text-[--text-secondary]">
       <div className="flex justify-between gap-5">
@@ -40,22 +105,23 @@ const InvestNow = ({ data }) => {
       </div>
 
       <Formik
+        onSubmit={handleSubmit}
         initialValues={{
           amount: "",
-          fundingSource: "",
+          fundSource: fundingSources[0].value,
           units: "",
           acceptTerms: false,
         }}
         initialTouched={{
           acceptTerms: true,
-          fundingSource: true,
+          fundSource: true,
         }}
         validationSchema={Yup.object().shape({
           amount: Yup.number()
             .required("Amount is required")
             .moreThan(0, "Amount must be greater than 0")
             .typeError("Amount must be a number"),
-          fundingSource: Yup.string()
+          fundSource: Yup.string()
             .required("Funding Source is required")
             .oneOf(fundingSources.map((item) => item.value)),
           units: Yup.number()
@@ -89,6 +155,7 @@ const InvestNow = ({ data }) => {
 
                   <button
                     type="button"
+                    role="button"
                     onClick={() => {
                       setFieldValue("units", data.units, true);
                       setFieldValue(
@@ -133,7 +200,7 @@ const InvestNow = ({ data }) => {
                 <GenericSelectFieldVariant1
                   defaultSelectedItem={fundingSources[0]}
                   handleChange={({ selectedItem }) => {
-                    setFieldValue("fundingSource", selectedItem.value, true);
+                    setFieldValue("fundSource", selectedItem.value, true);
                   }}
                   items={fundingSources}
                 />
@@ -169,10 +236,11 @@ const InvestNow = ({ data }) => {
 
               <div className="py-5">
                 <button
-                  disabled={!isValid}
+                  type="submit"
+                  disabled={!isValid || isLoading}
                   className="btn-1-v2 w- hover:bg  py-3 px-5 shadow rounded"
                 >
-                  Invest Now
+                  {isLoading ? <Spinner /> : "Invest Now"}
                 </button>
               </div>
             </Form>
