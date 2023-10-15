@@ -41,6 +41,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
     withdrawal: "error",
     credit: "success",
     debit: "error",
+    investment: "success",
   };
 
   const txStatusColorMap = {
@@ -108,12 +109,16 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
                     />
                   </div>
 
-                  <div className="flex  flex-col justify-center items-start space-y-1">
+                  <div className="flex  flex-col justify-center items-start space-y-1 truncate">
                     <span className="text-[--color-brand-2] truncate text-sm">
                       {shortenTextToEllipses(v.reference, 16)}
                     </span>
-                    <span className=" text-sm capitalize">
-                      <span className={levelToColor(txTypeColorMap[v.type])}>
+                    <span className=" text-sm capitalize truncate">
+                      <span
+                        className={
+                          levelToColor(txTypeColorMap[v.type]) + "  truncate"
+                        }
+                      >
                         {v.description}
                       </span>
                     </span>
@@ -177,7 +182,11 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
                     {new Date(v.createdAt * 1000).toLocaleString()}
                   </td>
                   <td className="text-left px-6 capitalize font-medium">
-                    <span className={levelToColor(txTypeColorMap[v.type])}>
+                    <span
+                      className={
+                        levelToColor(txTypeColorMap[v.type]) + "  truncate"
+                      }
+                    >
                       {v.description}
                     </span>
                   </td>

@@ -43,12 +43,12 @@ const InvestNow = ({ data, token, closeSelf }) => {
     });
     closeSelf();
 
-    if (vars.fundSource === "wallet") {
+    if (vars.fundSource === fundingSources[1].value) {
       window.location.href = data.redirectUrl;
     } else {
       setNotify({
         show: true,
-        content: "Your investmnet was executed successfully.",
+        content: "Your investment was executed successfully.",
         allowClose: true,
       });
     }
@@ -77,7 +77,7 @@ const InvestNow = ({ data, token, closeSelf }) => {
     if (isLoading) return;
 
     const body = {
-      fundingSource: values.fundingSource,
+      fundSource: values.fundSource,
       units: values.units,
       assetUid: data.uid,
     };
