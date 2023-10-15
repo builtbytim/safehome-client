@@ -1,11 +1,10 @@
-import { NoInvestment } from ".";
+import { InvestibleAssetCard, NoInvestment } from ".";
 import { createFetcher } from "../../utils/fetchUtils";
 import config from "../../utils/config";
 import queryKeys from "../../utils/queryKeys";
 import { useQuery } from "react-query";
 import ErrorMessageView from "../ErrorMessageView";
 import LoadingView from "../LoadingView";
-import { InvestmentCard } from ".";
 
 function MyInvestments({ token, setTabState }) {
   const { isLoading, isError, refetch, data, isSuccess, error, isFetching } =
@@ -15,6 +14,7 @@ function MyInvestments({ token, setTabState }) {
         url: config.apiPaths.getMyInvestments,
         method: "GET",
         auth: token,
+        surfix: "?includeAsset=true",
       }),
 
       enabled: !!token,
@@ -41,11 +41,6 @@ function MyInvestments({ token, setTabState }) {
 
   if (isSuccess && data & (data.unfilteredEntries === 0)) {
     return <NoInvestment investNowFunc={() => setTabState(1)} />;
-    // return (
-    //   <div className="flex flex-col justify-center items-center py-6 space-y-4">
-    //     <p className="text-[#C4C4C4]">No investments available at this time</p>
-    //   </div>
-    // );
   }
 
   if (isSuccess && data & (data.entries === 0)) {
@@ -62,18 +57,7 @@ function MyInvestments({ token, setTabState }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[60vh]  overflow-y-auto scrollbar-fix pr-3 min-h-[80px]">
       {data.items.map((investment, index) => (
-        <InvestmentCard
-          key={index}
-          img={investment.img}
-          title={investment.assetName}
-          roi={investment.roi}
-          price={investment.price}
-          investors={investment.investorCount}
-          pricePerUnit={investment.pricePerUnit}
-          location={investment.location}
-          units={investment.units}
-          openInfo={() => openInfo(index)}
-        />
+        <InvestibleAssetCard key={index} investment={investment} />
       ))}
     </div>
   );

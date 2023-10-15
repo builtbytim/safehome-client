@@ -1,4 +1,4 @@
-import { InvestmentCard } from ".";
+import InvestibleAssetCard from "./InvestibleAssetCard";
 import ErrorMessageView from "../ErrorMessageView";
 import LoadingView from "../LoadingView";
 
@@ -52,7 +52,7 @@ function AssetList({
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[60vh]  overflow-y-auto scrollbar-fix pr-3 min-h-[80px]">
       {investments.map((investment, index) => (
-        <InvestmentCard
+        <InvestibleAssetCard
           key={index}
           img={investment.img}
           title={investment.assetName}

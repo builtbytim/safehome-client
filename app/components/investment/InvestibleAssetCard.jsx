@@ -5,7 +5,7 @@ import { VscLocation } from "react-icons/vsc";
 import { NumericFormat } from "react-number-format";
 import inv1 from "../../../assets/images/investment/inv1.png";
 
-const InvestmentCard = ({
+const InvestibleAssetCard = ({
   title,
   roi,
   price,
@@ -77,4 +77,4 @@ const InvestmentCard = ({
   );
 };
 
-export default InvestmentCard;
+export default InvestibleAssetCard;
