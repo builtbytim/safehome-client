@@ -137,6 +137,15 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
                   <span className="text-[--placeholder] text-xs">
                     {new Date(v.createdAt * 1000).toLocaleString()}
                   </span>
+
+                  <span
+                    className={
+                      levelToColor(txStatusColorMap[v.status]) +
+                      "text-xs capitalize"
+                    }
+                  >
+                    {v.status}
+                  </span>
                 </div>
               </div>
             </div>

@@ -1,0 +1,62 @@
+import { NoInvestment } from ".";
+import { createFetcher } from "../../utils/fetchUtils";
+import config from "../../utils/config";
+import queryKeys from "../../utils/queryKeys";
+import { useQuery } from "react-query";
+import ErrorMessageView from "../ErrorMessageView";
+import LoadingView from "../LoadingView";
+
+function MyInvestments({ token, setTabState }) {
+  const { isLoading, isError, refetch, data, isSuccess, error, isFetching } =
+    useQuery({
+      queryKey: [queryKeys.getMyInvestments, token],
+      queryFn: createFetcher({
+        url: config.apiPaths.getMyInvestments,
+        method: "GET",
+        auth: token,
+      }),
+
+      enabled: !!token,
+    });
+
+  if (isLoading && (data === null || data === undefined)) {
+    return (
+      <div className="py-10">
+        <LoadingView />
+      </div>
+    );
+  }
+
+  if (isError && (data === null || data === undefined)) {
+    return (
+      <div className="py-10">
+        <ErrorMessageView
+          refetch={refetch}
+          message="Something wrong while your investments"
+        />
+      </div>
+    );
+  }
+
+  if (isSuccess && data & (data.unfilteredEntries === 0)) {
+    return <NoInvestment investNowFunc={() => setTabState(1)} />;
+    // return (
+    //   <div className="flex flex-col justify-center items-center py-6 space-y-4">
+    //     <p className="text-[#C4C4C4]">No investments available at this time</p>
+    //   </div>
+    // );
+  }
+
+  if (isSuccess && data & (data.entries === 0)) {
+    return (
+      <div className="flex flex-col justify-center items-center py-6 space-y-4">
+        <p className="text-[#C4C4C4]">
+          {" "}
+          No investment matches your selected filters{" "}
+        </p>
+      </div>
+    );
+  }
+}
+
+export default MyInvestments;

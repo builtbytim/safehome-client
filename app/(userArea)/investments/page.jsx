@@ -21,6 +21,7 @@ import { createFetcher } from "../../utils/fetchUtils";
 import queryKeys from "../../utils/queryKeys";
 import config from "../../utils/config";
 import Spinner from "../../components/Spinner";
+import MyInvestments from "../../components/investment/MyInvestments";
 
 function Page({ authenticationToken, authenticatedUser }) {
   const [tabState, setTabState] = useState(0);
@@ -108,21 +109,26 @@ function Page({ authenticationToken, authenticatedUser }) {
               />
             </div>
           </div>
-          <div className="self-start flex flex-row justify-start items-start">
-            {isFetching && !isLoading ? (
-              <Spinner size="tiny" />
-            ) : (
-              isSuccess && (
-                <span className="text-xs text-[--placeholder]">
-                  {data.numItems} of {data?.entries}
-                </span>
-              )
-            )}
-          </div>
+          {tabState === 1 && (
+            <div className="self-start flex flex-row justify-start items-start">
+              {isFetching && !isLoading ? (
+                <Spinner size="tiny" />
+              ) : (
+                isSuccess && (
+                  <span className="text-xs text-[--placeholder]">
+                    {data.numItems} of {data?.entries}
+                  </span>
+                )
+              )}
+            </div>
+          )}
 
           {/* New Oppurtunities Tab */}
           {tabState === 0 && (
-            <NoInvestment investNowFunc={() => setTabState(1)} />
+            <MyInvestments
+              token={authenticationToken}
+              setTabState={setTabState}
+            />
           )}
 
           {/* New Oppurtunities Tab */}

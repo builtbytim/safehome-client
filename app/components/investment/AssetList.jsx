@@ -33,7 +33,9 @@ function AssetList({
   if (isSuccess && data && data.unFilteredEntries === 0) {
     return (
       <div className="flex flex-col justify-center items-center py-6 space-y-4">
-        <p className="text-[#C4C4C4]">No assets available at this time</p>
+        <p className="text-[#C4C4C4]">
+          No assets available at this time, check back later
+        </p>
       </div>
     );
   }
@@ -41,9 +43,7 @@ function AssetList({
   if (isSuccess && data && data.entries === 0) {
     return (
       <div className="flex flex-col justify-center items-center py-6 space-y-4">
-        <p className="text-[#C4C4C4]">
-          No assets found for the selected filters
-        </p>
+        <p className="text-[#C4C4C4]">No assets matches the selected filters</p>
       </div>
     );
   }

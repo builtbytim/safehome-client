@@ -27,7 +27,7 @@ const queryKeys = {
   getInvestmentAssets: "getInvestmentAssets",
   getAnInvestmentAsset: "getAnInvestmentAsset",
   createInvestmentAsset: "createInvestmentAsset",
-
+  getMyInvestments: "getMyInvestments",
   createInvestment: "createInvestment",
 };
 
