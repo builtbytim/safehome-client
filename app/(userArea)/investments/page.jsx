@@ -99,7 +99,7 @@ function Page({ authenticationToken, authenticatedUser }) {
       <OverviewCard />
       <section className="bg-white rounded-brand pt-5 pb-3 md:py-8 text-sm">
         <TabSwitch tabState={tabState} setTabState={setTabState} />
-        <div className=" md:px-8 pt-4 space-y-4 md:space-y-4">
+        <div className=" md:px-8 pt-4 space-y-2 md:space-y-4">
           <div className="w-full flex flex-row justify-between items-center ">
             <div className="flex-1 w-full self-center">
               <ClubOwnersFilter
@@ -107,18 +107,17 @@ function Page({ authenticationToken, authenticatedUser }) {
                 ownersClub={params.ownersClub}
               />
             </div>
-
-            <div className="self-center">
-              {isFetching && !isLoading ? (
-                <Spinner size="tiny" />
-              ) : (
-                isSuccess && (
-                  <span className="text-xs text-[--placeholder]">
-                    Showing {data?.numItems} of {data?.entries} results
-                  </span>
-                )
-              )}
-            </div>
+          </div>
+          <div className="self-start flex flex-row justify-start items-start">
+            {isFetching && !isLoading ? (
+              <Spinner size="tiny" />
+            ) : (
+              isSuccess && (
+                <span className="text-xs text-[--placeholder]">
+                  {data.numItems} of {data?.entries}
+                </span>
+              )
+            )}
           </div>
 
           {/* New Oppurtunities Tab */}

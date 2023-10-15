@@ -114,7 +114,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
                     </span>
                     <span className=" text-sm capitalize">
                       <span className={levelToColor(txTypeColorMap[v.type])}>
-                        {v.type}
+                        {v.description}
                       </span>
                     </span>
                   </div>
