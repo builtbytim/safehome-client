@@ -26,7 +26,7 @@ function Page({ authenticationToken, authenticatedUser }) {
   const [tabState, setTabState] = useState(0);
   const [params, setParams] = useState({
     page: 1,
-    limit: 10,
+    limit: 4,
     ownersClub: "all",
   });
   const [showInvestmentInfo, setShowInvestmentInfo] = useState(false);
