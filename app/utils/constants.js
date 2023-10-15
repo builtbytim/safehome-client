@@ -136,7 +136,7 @@ export const dummyAssets = [
   {
     assetName: "SMART OFFICE LEKKI",
     location: "Lapal House, Onikan, Lagos Island.",
-    pricePerUnit: 8000000,
+    price: 8000000,
     units: 40,
     unitsAvailable: 100,
     investorCount: 40,
@@ -153,7 +153,7 @@ export const dummyAssets = [
   {
     assetName: "2 Bedroom Terrace Duplex",
     location: "Green City Isheri.",
-    pricePerUnit: 30000000,
+    price: 30000000,
     units: 60,
     unitsAvailable: 100,
     investorCount: 60,
@@ -170,7 +170,7 @@ export const dummyAssets = [
   {
     assetName: "Lands for Sale",
     location: "Green City Isheri.",
-    pricePerUnit: 7500000,
+    price: 7500000,
     units: 30,
     unitsAvailable: 100,
     investorCount: 30,
@@ -187,7 +187,7 @@ export const dummyAssets = [
   {
     assetName: "DUPLEX IN FREEDOM WAY, LEKKI",
     location: "Lapal House, Onikan, Lagos Island.",
-    pricePerUnit: 555073.0,
+    price: 555073.0,
     units: 1823,
     unitsAvailable: 100,
     investorCount: 1823,

@@ -16,6 +16,7 @@ import TabSwitch from "../../components/investment/TabSwitch";
 import AssetList from "../../components/investment/AssetList";
 import InvestmentInfoPopup from "../../components/investment/InvestmentInfoPopup";
 import { dummyAssets } from "../../utils/constants";
+import useOutsideClickDetector from "../../utils/hooks/useOutsideClickDetector";
 
 let investments = dummyAssets;
 
@@ -53,25 +54,9 @@ function Page() {
   const aboutRef = useRef(null);
   const investRef = useRef(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (infoRef.current && !infoRef.current.contains(event.target)) {
-        setShowInvestmentInfo(false);
-      }
-      if (aboutRef.current && !aboutRef.current.contains(event.target)) {
-        setShowAboutInvestment(false);
-        setShowInvestmentInfo(false);
-      }
-      if (investRef.current && !investRef.current.contains(event.target)) {
-        setShowInvestNow(false);
-        setShowInvestmentInfo(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside, true);
-    return () => {
-      document.removeEventListener("click", handleClickOutside, true);
-    };
-  }, [showInvestmentInfo, showAboutInvestment, showInvestNow]);
+  useOutsideClickDetector(infoRef, () => setShowInvestmentInfo(false));
+  useOutsideClickDetector(aboutRef, () => setShowAboutInvestment(false));
+  useOutsideClickDetector(investRef, () => setShowInvestNow(false));
 
   return (
     <main className="pb-8 md:pb-12 space-y-8 lg:space-y-10">
@@ -114,7 +99,7 @@ function Page() {
           <Overlay z={3}>
             <div
               className="fixed inset-y-0 right-0 w-full md:w-[493px]  pb-[5vh] bg-white overflow-y-auto "
-              ref={infoRef}
+              ref={investRef}
             >
               <div className="  w-full md:w-[493px] bg-white ">
                 <PopUpTopBar
@@ -134,8 +119,8 @@ function Page() {
         <div className="fixed  left-0 w-full  bg-black/50 z-20">
           <Overlay z={3}>
             <div
+              ref={aboutRef}
               className="fixed inset-y-0 right-0 w-full md:w-[493px]  pb-[5vh] bg-white overflow-y-auto "
-              ref={infoRef}
             >
               <div className="  w-full md:w-[493px] bg-white ">
                 <PopUpTopBar

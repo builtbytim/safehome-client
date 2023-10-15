@@ -10,7 +10,7 @@ function AssetList({ investments, openInfo }) {
           img={investment.img}
           title={investment.assetName}
           returns={investment.roi}
-          value={investment.pricePerUnit}
+          value={investment.price}
           investors={investment.investorCount}
           location={investment.location}
           quantity={investment.units}

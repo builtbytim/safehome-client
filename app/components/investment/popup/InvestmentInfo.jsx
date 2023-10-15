@@ -18,7 +18,7 @@ const InvestmentInfo = ({ data, showAboutFunction, investNowFunction }) => {
           <div className="text-right">
             <p className="text-[--text-brand] font-bold  text-xl md:text-2xl">
               <NumericFormat
-                value={data.pricePerUnit}
+                value={data.price / data.units}
                 displayType={"text"}
                 thousandSeparator={true}
                 prefix={"₦ "}

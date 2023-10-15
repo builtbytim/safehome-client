@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import GenericSelectFieldVariant1 from "../../forms/branded/GenericSelectFieldVariant1";
 import { FaNairaSign } from "react-icons/fa6";
 import FormattingField from "../../forms/branded/FormattingField";
@@ -30,7 +29,7 @@ const InvestNow = ({ data }) => {
         <div className="text-right">
           <p className="text-[--text-brand] font-medium text-2xl">
             <NumericFormat
-              value={data.pricePerUnit}
+              value={data.price / data.units}
               displayType={"text"}
               thousandSeparator={true}
               prefix={"₦ "}
