@@ -75,16 +75,33 @@ const InvestNow = ({ data }) => {
               <div className="relative">
                 <p className="form-text">How many units?</p>
 
-                <FormattingField
-                  type="text"
-                  inputMode="numeric"
-                  placeholder="Total number of units"
-                  name="units"
-                  extraClasses="field-1"
-                  customOnChange={(value) => {
-                    setFieldValue("amount", value * data.pricePerUnit, true);
-                  }}
-                />
+                <div className="relative">
+                  <FormattingField
+                    type="text"
+                    inputMode="numeric"
+                    placeholder="Total number of units"
+                    name="units"
+                    extraClasses="field-1"
+                    customOnChange={(value) => {
+                      setFieldValue("amount", value * data.pricePerUnit, true);
+                    }}
+                  />
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFieldValue("units", data.units, true);
+                      setFieldValue(
+                        "amount",
+                        data.units * data.pricePerUnit,
+                        true
+                      );
+                    }}
+                    className="text-[--text-secondary] absolute right-2 top-[50%] translate-y-[-50%] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center space-x-1"
+                  >
+                    MAX
+                  </button>
+                </div>
 
                 <ErrorMessage
                   name="units"

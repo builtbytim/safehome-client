@@ -11,6 +11,7 @@ function MiniSwitch({ onChange }) {
   return (
     <div className="block w-[51px] h-[31px] bg-[--lines] rounded-3xl">
       <button
+        type="submit"
         className={`h-[31px] w-[53px] rounded-3xl block p-[3px] ${
           toggleActive ? "bg-[--green] text-right" : "bg-[--lines] text-left"
         }`}
