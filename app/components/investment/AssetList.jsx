@@ -30,7 +30,7 @@ function AssetList({
     );
   }
 
-  if (isSuccess && data && data.numItems === 0 && data.entries === 0) {
+  if (isSuccess && data && data.unFilteredEntries === 0) {
     return (
       <div className="flex flex-col justify-center items-center py-6 space-y-4">
         <p className="text-[#C4C4C4]">No assets available at this time</p>
@@ -38,7 +38,7 @@ function AssetList({
     );
   }
 
-  if (isSuccess && data && data.numItems === 0 && data.entries > 0) {
+  if (isSuccess && data && data.entries === 0) {
     return (
       <div className="flex flex-col justify-center items-center py-6 space-y-4">
         <p className="text-[#C4C4C4]">
@@ -56,11 +56,12 @@ function AssetList({
           key={index}
           img={investment.img}
           title={investment.assetName}
-          returns={investment.roi}
-          value={investment.price}
+          roi={investment.roi}
+          price={investment.price}
           investors={investment.investorCount}
+          pricePerUnit={investment.pricePerUnit}
           location={investment.location}
-          quantity={investment.units}
+          units={investment.units}
           openInfo={() => openInfo(index)}
         />
       ))}

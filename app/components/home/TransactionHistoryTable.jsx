@@ -57,7 +57,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
     return <ErrorMessageView refetch={refetch} message={error.message} />;
   }
 
-  if (isSuccess && data && data.numItems === 0 && data.entries === 0) {
+  if (isSuccess && data && data.unfilteredEntries === 0) {
     return (
       <div className="flex flex-col justify-center items-center py-6 space-y-4">
         <p className="text-[#C4C4C4]">No transactions yet</p>
@@ -65,7 +65,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
     );
   }
 
-  if (isSuccess && data && data.numItems === 0 && data.entries > 0) {
+  if (isSuccess && data && data.entries === 0) {
     return (
       <div className="flex flex-col justify-center items-center py-6 space-y-4">
         <p className="text-[#C4C4C4]">

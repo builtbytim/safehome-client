@@ -29,7 +29,7 @@ const InvestNow = ({ data }) => {
         <div className="text-right">
           <p className="text-[--text-brand] font-medium text-2xl">
             <NumericFormat
-              value={data.price / data.units}
+              value={data.pricePerUnit}
               displayType={"text"}
               thousandSeparator={true}
               prefix={"₦ "}

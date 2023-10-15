@@ -30,7 +30,7 @@ const CashoutInvestment = ({ data, showAboutFunction }) => {
           <div className="text-right">
             <p className="text-[--text-brand] font-medium text-xl">
               <NumericFormat
-                value={data.price / data.units}
+                value={data.pricePerUnit}
                 displayType={"text"}
                 thousandSeparator={true}
                 prefix={"₦ "}

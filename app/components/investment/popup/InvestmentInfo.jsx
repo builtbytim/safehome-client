@@ -18,7 +18,7 @@ const InvestmentInfo = ({ data, showAboutFunction, investNowFunction }) => {
           <div className="text-right">
             <p className="text-[--text-brand] font-bold  text-xl md:text-2xl">
               <NumericFormat
-                value={data.price / data.units}
+                value={data.pricePerUnit}
                 displayType={"text"}
                 thousandSeparator={true}
                 prefix={"₦ "}
@@ -44,18 +44,18 @@ const InvestmentInfo = ({ data, showAboutFunction, investNowFunction }) => {
           </button>
         </div>
         <div className="py-6 grid grid-cols-1  gap-y-2 md:gap-y-4">
-          <InvestmentTab heading="ROI" content={data.properties.roi} />
+          <InvestmentTab heading="ROI" content={data.props.roi} />
           <InvestmentTab
             heading="Maturity Date"
-            content={data.properties.maturityDate}
+            content={data.props.maturityDate}
           />
           <InvestmentTab
             heading="Investment ID"
-            content={data.properties.investmentId}
+            content={data.props.investmentId}
           />
           <InvestmentTab
             heading="Investment Exit"
-            content={data.properties.investmentExit}
+            content={data.props.investmentExit}
           />
         </div>
       </div>

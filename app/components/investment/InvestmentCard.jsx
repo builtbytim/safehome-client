@@ -7,11 +7,12 @@ import inv1 from "../../../assets/images/investment/inv1.png";
 
 const InvestmentCard = ({
   title,
-  returns,
-  value,
+  roi,
+  price,
+  pricePerUnit,
   investors,
   location,
-  quantity,
+  units,
   openInfo,
 }) => {
   return (
@@ -44,7 +45,7 @@ const InvestmentCard = ({
           <div>
             <h3 className="text-[--text-brand]   pb-1 font-medium">
               <NumericFormat
-                value={value / quantity}
+                value={pricePerUnit}
                 displayType={"text"}
                 thousandSeparator={true}
                 prefix={"₦ "}
@@ -66,7 +67,7 @@ const InvestmentCard = ({
       </div>
       <div className="absolute bottom-0 right-0 rounded-tl-xl py-[0.4rem] md:py-2 px-3 text-white bg-[--green] text-[0.7rem] md:text-sm">
         <NumericFormat
-          value={quantity}
+          value={units}
           displayType={"text"}
           thousandSeparator={true}
         />{" "}
