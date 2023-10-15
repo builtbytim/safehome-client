@@ -18,8 +18,6 @@ const MyInvestmentCard = ({ investment }) => {
 
   const { assetName } = asset;
 
-  console.log(asset);
-
   return (
     <div
       title={!isActive ? "Payment has not been completed" : ""}
@@ -64,14 +62,21 @@ const MyInvestmentCard = ({ investment }) => {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 right-0 rounded-tl-xl py-[0.4rem] md:py-2 px-3 text-white bg-[--green] text-[0.7rem] md:text-sm">
-        <NumericFormat
-          value={units}
-          displayType={"text"}
-          thousandSeparator={true}
-        />{" "}
-        Units Purchased
-      </div>
+
+      {isActive ? (
+        <div className="absolute bottom-0 right-0 rounded-tl-xl py-[0.4rem] md:py-2 px-3 text-white bg-[--green] text-[0.7rem] md:text-sm">
+          <NumericFormat
+            value={units}
+            displayType={"text"}
+            thousandSeparator={true}
+          />{" "}
+          Units Purchased
+        </div>
+      ) : (
+        <div className="absolute bottom-0 right-0 rounded-tl-xl py-[0.4rem] md:py-2 px-2 text-[--danger]  text-[0.7rem] md:text-sm">
+          Payment Pending
+        </div>
+      )}
     </div>
   );
 };
