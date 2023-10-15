@@ -105,7 +105,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
                       alt="arrow down"
                       width="24"
                       height="24"
-                      className="object-contain w-[24px] h-[24px] "
+                      className="object-cover min-w-[24px] min-h-[24px] "
                     />
                   </div>
 
