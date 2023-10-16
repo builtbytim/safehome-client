@@ -27,7 +27,7 @@ function Page({ authenticatedUser, authenticationToken }) {
 
   const [params, setParams] = useState({
     page: 1,
-    limit: 5,
+    limit: 10,
     type: "",
     startDate: "",
     endDate: "",
