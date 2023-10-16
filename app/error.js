@@ -13,8 +13,8 @@ export default function Error({ error, reset }) {
 
   return (
     <div className=" min-h-screen p-3  xl:p-6">
-      <div className="flex flex-col space-y-12 justify-center items-center">
-        <div className="flex flex-col justify-center items-center  space-y-2 lg:space-y-8 border w-[90%] max-w-2xl   border-[#8d4000]/30  rounded-brand px-6 py-6 ">
+      <div className="min-h-full flex flex-col space-y-12 justify-center items-center">
+        <div className="min-h-full flex flex-col justify-center items-center  space-y-2 lg:space-y-8 border w-[90%] max-w-2xl   border-[#8d4000]/30  rounded-brand px-6 py-6 ">
           <div className="w-full">
             <p className=" text-sm lg:text-xl  font-normal text-center  py-2  text-[--text-secondary]">
               Something went wrong, click to see more info.
@@ -34,7 +34,7 @@ export default function Error({ error, reset }) {
           </div>
           <button
             onClick={() => setShowErr(!showErr)}
-            className="btn-1 text-sm lg:text-base  "
+            className="btn-1-v1 text-sm lg:text-base  "
           >
             {showErr ? "See less" : "See more"}
           </button>

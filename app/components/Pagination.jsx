@@ -5,7 +5,7 @@ function Pagination({ data, setPage, isFetching, isSuccess, isLoading }) {
   return (
     <div>
       {isSuccess && data && data.items && data.items.length > 0 && (
-        <div className="space-x-4 flex flex-row items-center justify-end pt-8 px-8">
+        <div className="space-x-4 flex flex-row items-center justify-end pt-4 px-2 pb-4">
           {data.numPages > 0 && (
             <span className="text-[--text-secondary] text-xs">
               Page {data.page} of {data.numPages}
