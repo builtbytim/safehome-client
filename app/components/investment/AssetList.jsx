@@ -55,13 +55,14 @@ function AssetList({
         <InvestibleAssetCard
           key={index}
           img={investment.img}
-          title={investment.assetName}
+          assetName={investment.assetName}
           roi={investment.roi}
           price={investment.price}
           investors={investment.investorCount}
           pricePerUnit={investment.pricePerUnit}
           location={investment.location}
-          units={investment.units}
+          units={investment.availableUnits}
+          availableUnits={investment.availableUnits}
           openInfo={() => openInfo(index)}
         />
       ))}

@@ -7,15 +7,20 @@ import ErrorMessageView from "../ErrorMessageView";
 import LoadingView from "../LoadingView";
 import MyInvestmentCard from "./MyInvestmentCard";
 
-function MyInvestments({ token, setTabState }) {
+function MyInvestments({ token, setTabState, params }) {
+  const queryParams = new URLSearchParams();
+  queryParams.append("page", params.page);
+  queryParams.append("limit", params.limit);
+  queryParams.append("ownersClub", params.ownersClub);
+
   const { isLoading, isError, refetch, data, isSuccess, error, isFetching } =
     useQuery({
-      queryKey: [queryKeys.getMyInvestments, token],
+      queryKey: [queryKeys.getMyInvestments, token, params],
       queryFn: createFetcher({
         url: config.apiPaths.getMyInvestments,
         method: "GET",
         auth: token,
-        surfix: "?includeAsset=true",
+        surfix: `?includeAsset=true&${queryParams.toString()}`,
       }),
 
       enabled: !!token,

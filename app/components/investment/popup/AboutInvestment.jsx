@@ -58,7 +58,7 @@ const AboutInvestment = ({ data, investNowFunction }) => {
 
       <div className=" bg-white px-7 py-9">
         <button
-          className="w-full text-white bg-[--text-brand] py-3 px-5  rounded"
+          className="btn-1-v2 w-full  py-3 px-5  rounded"
           onClick={() => investNowFunction()}
         >
           Invest Now

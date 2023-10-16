@@ -50,7 +50,7 @@ function Page({ authenticationToken, authenticatedUser }) {
         surfix: `?${queryParams.toString()}`,
       }),
 
-      enabled: !!authenticationToken,
+      enabled: !!authenticationToken && tabState === 1,
 
       keepPreviousData: true,
     });
@@ -66,6 +66,10 @@ function Page({ authenticationToken, authenticatedUser }) {
     return () => {
       setParams((prev) => ({ ...prev, ownersClub: value }));
     };
+  }
+
+  function clearFilters() {
+    setParams((prev) => ({ ...prev, ownersClub: "all", page: 1 }));
   }
 
   const closePopup = () => {
@@ -99,7 +103,13 @@ function Page({ authenticationToken, authenticatedUser }) {
 
       <OverviewCard />
       <section className="bg-white rounded-brand pt-5 pb-3 md:py-8 text-sm">
-        <TabSwitch tabState={tabState} setTabState={setTabState} />
+        <TabSwitch
+          tabState={tabState}
+          setTabState={(v) => {
+            setTabState(v);
+            clearFilters();
+          }}
+        />
         <div className=" md:px-8 pt-4 space-y-2 md:space-y-4">
           <div className="w-full flex flex-row justify-between items-center ">
             <div className="flex-1 w-full self-center">
@@ -128,6 +138,7 @@ function Page({ authenticationToken, authenticatedUser }) {
             <MyInvestments
               token={authenticationToken}
               setTabState={setTabState}
+              params={params}
             />
           )}
 

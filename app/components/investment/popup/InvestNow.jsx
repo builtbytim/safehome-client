@@ -92,11 +92,11 @@ const InvestNow = ({ data, token, closeSelf }) => {
   return (
     <div className="px-7 pb-8 space-y-8 text-[--text-secondary]">
       <div className="flex justify-between gap-5">
-        <p className="text-xl leading-[1.65rem] max-h-[3.3rem] font-medium text-[--text-secondary] capitalize">
+        <p className="text-xl truncate leading-[1.65rem] max-h-[3.3rem] font-medium capitalize text-[--text-secondary] ">
           {data.assetName}
         </p>
         <div className="text-right">
-          <p className="text-[--text-brand] font-medium text-2xl">
+          <p className="text-[--text-brand] whitespace-nowrap font-medium text-2xl">
             <NumericFormat
               value={data.pricePerUnit}
               displayType={"text"}
@@ -132,7 +132,10 @@ const InvestNow = ({ data, token, closeSelf }) => {
             .required("Units is required")
             .moreThan(0, "Units must be greater than 0")
             .integer("Decimal values are not allowed")
-            .max(data.units, `There are only ${data.units} units available`)
+            .max(
+              data.availableUnits,
+              `There are only ${data.availableUnits} units available`
+            )
             .typeError("Units must be a number"),
           acceptTerms: Yup.boolean().isTrue(
             "You must accept the terms and conditions to continue"
@@ -161,14 +164,14 @@ const InvestNow = ({ data, token, closeSelf }) => {
                     type="button"
                     role="button"
                     onClick={() => {
-                      setFieldValue("units", data.units, true);
+                      setFieldValue("units", data.availableUnits, true);
                       setFieldValue(
                         "amount",
-                        data.units * data.pricePerUnit,
+                        data.availableUnits * data.pricePerUnit,
                         true
                       );
                     }}
-                    className="text-[--text-secondary] absolute right-2 top-[50%] translate-y-[-50%] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center space-x-1"
+                    className="text-[--text-secondary] absolute right-2 top-[50%] translate-y-[-50%] self-center text-xs  py-1 px-2 transitioning border border-[--placeholder] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center space-x-1"
                   >
                     MAX
                   </button>

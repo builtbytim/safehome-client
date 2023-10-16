@@ -38,13 +38,14 @@ const MyInvestmentCard = ({ investment }) => {
         />
       </div>
       <div className="p-4 md:px-4 xl:px-6 col-span-3 md:col-span-3 space-y-1">
-        <h2 className="uppercase font-medium text-lg md:text-xl text-left truncate ">
+        <h2 className="capitalize font-medium text-base md:text-lg text-left truncate ">
+          {" "}
           {assetName}
         </h2>
 
         <div className="flex gap-4 md:gap-6 pt-2 ">
           <div>
-            <h3 className="text-[--text-brand]   pb-1 font-medium">
+            <h3 className="text-[--text-brand] whitespace-nowrap text-xs  pb-1 font-medium">
               <NumericFormat
                 value={amount}
                 displayType={"text"}
@@ -52,19 +53,19 @@ const MyInvestmentCard = ({ investment }) => {
                 prefix={"₦ "}
               />
             </h3>
-            <p className="mt-[-4px]">Amount</p>
+            <p className="mt-[-4px] text-xs">Amount</p>
           </div>
           <div>
-            <h3 className="text-[--text-brand]   pb-1 font-medium">
-              {new Date(createdAt * 1000).toLocaleString()}
+            <h3 className="text-[--text-brand] whitespace-nowrap text-xs  pb-1 font-medium">
+              {new Date(createdAt * 1000).toLocaleDateString()}
             </h3>
-            <p className="mt-[-4px]"> Purchase Date </p>
+            <p className="mt-[-4px] text-xs"> Purchase Date </p>
           </div>
         </div>
       </div>
 
       {isActive ? (
-        <div className="absolute bottom-0 right-0 rounded-tl-xl py-[0.4rem] md:py-2 px-3 text-white bg-[--green] text-[0.7rem] md:text-sm">
+        <div className="absolute bottom-0 text-xs right-0 rounded-tl-xl py-1 md:py-2 px-3 text-white bg-[--green] ">
           <NumericFormat
             value={units}
             displayType={"text"}
@@ -73,8 +74,8 @@ const MyInvestmentCard = ({ investment }) => {
           Units Purchased
         </div>
       ) : (
-        <div className="absolute bottom-0 right-0 rounded-tl-xl py-[0.4rem] md:py-2 px-2 text-[--danger]  text-[0.7rem] md:text-sm">
-          Payment Pending
+        <div className="absolute bottom-0 font-medium text-xs right-0 rounded-tl-xl py-1  px-2 text-[--text-danger]  ">
+          Payment not completed
         </div>
       )}
     </div>
