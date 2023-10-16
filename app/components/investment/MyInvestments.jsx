@@ -45,11 +45,11 @@ function MyInvestments({ token, setTabState, params }) {
     );
   }
 
-  if (isSuccess && data & (data.unfilteredEntries === 0)) {
+  if (isSuccess && data && data.unfilteredEntries === 0) {
     return <NoInvestment investNowFunc={() => setTabState(1)} />;
   }
 
-  if (isSuccess && data & (data.entries === 0)) {
+  if (isSuccess && data && data.entries === 0) {
     return (
       <div className="flex flex-col justify-center items-center py-6 space-y-4">
         <p className="text-[#C4C4C4]">
