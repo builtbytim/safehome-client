@@ -3,6 +3,7 @@ import { RoundShape } from "react-placeholder/lib/placeholders";
 import { useDropzone } from "react-dropzone";
 import { useCallback, useState } from "react";
 import Spinner from "../Spinner";
+import { BiImageAdd } from "react-icons/bi";
 import { useMutation, useQueryClient } from "react-query";
 import {
   extractErrorMessage,
@@ -79,7 +80,7 @@ function UserAvatarArea({ user, token }) {
 
       setNotify({
         title: "Success",
-        content: "Avatar updated successfully",
+        content: "Avatar uploaded successfully",
         allowClose: true,
         show: true,
       });
@@ -108,8 +109,9 @@ function UserAvatarArea({ user, token }) {
             />
           </div>
         ) : (
-          <div className="min-w-[96px] min-h-[96px]">
-            <AvatarPlaceholder width={96} height={96} />
+          <div className="min-w-[96px] min-h-[96px] relative">
+            <AvatarPlaceholder width={84} height={84} />
+            <BiImageAdd className="absolute p-[2px] bg-[--primary] rounded right-[15%] bottom-[15%] text-white text-2xl z-20" />
           </div>
         )}
       </div>

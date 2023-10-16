@@ -14,6 +14,7 @@ const MyInvestmentCard = ({ investment, openInfo }) => {
     amount,
     paymentReference,
     units,
+    assetUid,
   } = investment;
 
   const { assetName } = assetInfo;
@@ -21,7 +22,7 @@ const MyInvestmentCard = ({ investment, openInfo }) => {
   return (
     <div
       onClick={() => {
-        openInfo(assetInfo.uid);
+        openInfo(assetUid);
       }}
       title={!isActive ? "Payment has not been completed" : ""}
       className={

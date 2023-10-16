@@ -10,6 +10,7 @@ import {
   AddBank,
 } from "../../../components/card_and_bank";
 import { PopUpTopBar } from "../../../components/security";
+import TabSwitch from "../../../components/savings/TabSwitch";
 
 function Page({ authenticatedUser, authenticationToken }) {
   const [tabState, setTabState] = useState(0);
@@ -27,20 +28,32 @@ function Page({ authenticatedUser, authenticationToken }) {
       </div>
 
       <div className="space-y-8">
-        <div className="flex gap-1">
+        <div className="flex justify-between gap-[2px]">
           <button
-            className={tabState === 0 ? "tab-button-active-2" : "tab-button-2"}
+            className={
+              " md:w-full " +
+              (tabState === 0
+                ? "account-tab-button-active"
+                : "account-tab-button")
+            }
             onClick={() => setTabState(0)}
           >
             Debit Cards
           </button>
+
           <button
-            className={tabState === 1 ? "tab-button-active-2" : "tab-button-2"}
+            className={
+              " md:w-full " +
+              (tabState === 1
+                ? "account-tab-button-active"
+                : "account-tab-button")
+            }
             onClick={() => setTabState(1)}
           >
             Bank Details
           </button>
         </div>
+
         {tabState === 0 && <DebitCardTab token={authenticationToken} />}
         {tabState === 1 && <BankDetailsTab token={authenticationToken} />}
         <div>

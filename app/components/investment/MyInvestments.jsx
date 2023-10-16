@@ -97,7 +97,7 @@ function MyInvestments({
         successText={`Showing ${data?.numItems} of ${data?.entries}`}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[80vh]  overflow-y-auto scrollbar-fix  min-h-[80px] p-2 pb-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[80vh]  overflow-y-auto scrollbar-fix  min-h-[80px] p-2 pb-2">
         {data.items.map((investment, index) => (
           <MyInvestmentCard
             openInfo={openInfo}

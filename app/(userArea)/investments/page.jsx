@@ -107,7 +107,7 @@ function Page({ authenticationToken, authenticatedUser }) {
       <HeaderInvestments title="Investments" extraClasses="text-[--primary]" />
 
       <OverviewCard token={authenticationToken} />
-      <section className="bg-white rounded-brand pt-6 pb-4 md:py-8 text-sm">
+      <section className="bg-white rounded-brand pt-6 pb-10 md:py-8 text-sm">
         <TabSwitch
           tabState={tabState}
           setTabState={(v) => {
