@@ -60,7 +60,7 @@ function Page({ authenticatedUser, authenticationToken }) {
           {tabState === 5 ? (
             <div className="py-10 text-center">
               <button
-                className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
+                className="btn-1 w-full max-w-[400px]  text-white bg-[--color-brand] rounded text-lg"
                 onClick={() => setShowAddCard(true)}
               >
                 Add New Card
@@ -69,7 +69,7 @@ function Page({ authenticatedUser, authenticationToken }) {
           ) : tabState == 1 ? (
             <div className="py-10 text-center">
               <button
-                className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
+                className="btn-1 w-full max-w-[400px]  text-white bg-[--color-brand] rounded text-lg"
                 onClick={() => setShowAddBank(true)}
               >
                 Add New Bank

@@ -126,7 +126,15 @@ const BankDetailsTab = ({ token }) => {
         </div>
       )}
 
-      {getBankAccountsSuccess && (
+      {getBankAccountsSuccess && getBankAccountsData.length === 0 && (
+        <div className="flex flex-col justify-center items-center py-16 space-y-4">
+          <p className="text-[#C4C4C4]">
+            You have no bank accounts linked to your SafeHome
+          </p>
+        </div>
+      )}
+
+      {getBankAccountsSuccess && getBankAccountsData.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[650px]">
           {getBankAccountsData.map((data, index) => (
             <CardDisplay
