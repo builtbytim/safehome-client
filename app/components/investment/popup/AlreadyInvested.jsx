@@ -73,22 +73,30 @@ const AlreadyInvested = ({
           <InvestmentTab
             heading="Effective Capital"
             content={userInvestmentData.amount}
+            formatAsNumber
             type="info"
           />
           <InvestmentTab
-            heading="Maturity Value"
-            content={userInvestmentData.amount}
+            heading="Units"
+            content={userInvestmentData.units}
+            formatAsNumber
             type="info"
           />
-          <InvestmentTab heading="Returns" content={data.roi} type="info" />
+          <InvestmentTab
+            heading="Returns"
+            content={data.props.roi}
+            type="info"
+          />
         </div>
         <div className="space-y-3">
-          <button
-            className="btn-1-v2 block w-full py-2 px-5 "
-            onClick={() => investNowFunction()}
-          >
-            Buy More Units
-          </button>
+          {!data.soldOut && (
+            <button
+              className="btn-1-v2 block w-full py-2 px-5 "
+              onClick={() => investNowFunction()}
+            >
+              Buy More Units
+            </button>
+          )}
           <button
             className="btn-2-v2 block w-full py-2 px-5  "
             onClick={() => showAboutFunction()}

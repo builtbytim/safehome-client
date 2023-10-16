@@ -25,7 +25,7 @@ const fundingSources = [
   },
 ];
 
-const InvestNow = ({ data, token, closeSelf }) => {
+const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
   const queryClient = useQueryClient();
   const setNotify = useNotifyStore((state) => state.setNotify);
 
@@ -84,6 +84,7 @@ const InvestNow = ({ data, token, closeSelf }) => {
       fundSource: values.fundSource,
       units: values.units,
       assetUid: data.uid,
+      reinvesting: userAlreadyInvested,
     };
 
     mutate(body);

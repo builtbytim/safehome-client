@@ -50,14 +50,16 @@ const AboutInvestment = ({ data, investNowFunction }) => {
         </div>
       </div>
 
-      <div className=" bg-white px-7 py-9">
-        <button
-          className="btn-1-v2 w-full  py-3 px-5  rounded"
-          onClick={() => investNowFunction()}
-        >
-          Invest Now
-        </button>
-      </div>
+      {!data.soldOut && (
+        <div className=" bg-white px-7 py-9">
+          <button
+            className="btn-1-v2 w-full  py-3 px-5  rounded"
+            onClick={() => investNowFunction()}
+          >
+            Invest Now
+          </button>
+        </div>
+      )}
     </div>
   );
 };

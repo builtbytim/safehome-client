@@ -34,12 +34,14 @@ const InvestmentInfo = ({ data, showAboutFunction, investNowFunction }) => {
           </div>
         </div>
         <div className="space-y-3">
-          <button
-            className=" btn-1-v2 block w-full py-2 px-5 rounded "
-            onClick={() => investNowFunction()}
-          >
-            Invest Now
-          </button>
+          {!data.soldOut && (
+            <button
+              className=" btn-1-v2 block w-full py-2 px-5 rounded "
+              onClick={() => investNowFunction()}
+            >
+              Invest Now
+            </button>
+          )}
           <button
             className="btn-2-v2 block w-full py-2 px-5 rounded "
             onClick={() => showAboutFunction()}

@@ -94,11 +94,9 @@ function Page({ authenticationToken, authenticatedUser }) {
   // Hide Overlays when not clicked on
   const infoRef = useRef(null);
   const aboutRef = useRef(null);
-  const investRef = useRef(null);
 
   useOutsideClickDetector(infoRef, () => setShowInvestmentInfo(false));
   useOutsideClickDetector(aboutRef, () => setShowAboutInvestment(false));
-  useOutsideClickDetector(investRef, () => setShowInvestNow(false));
 
   return (
     <main className="pb-8 md:pb-12 space-y-8 lg:space-y-10">
@@ -169,43 +167,20 @@ function Page({ authenticationToken, authenticatedUser }) {
           )}
         </div>
       </section>
-      {showInvestmentInfo && (
-        <InvestmentInfoPopup
-          investibleAssets={investibleAssets}
-          selectedAsset={selectedAsset}
-          closePopup={closePopup}
-          authenticatedUser={authenticatedUser}
-          openInvestNow={openInvestNow}
-          handleShowAboutInvestment={handleShowAboutInvestment}
-          token={authenticationToken}
-        />
-      )}
 
-      {showInvestNow && (
-        <div className="fixed  left-0 w-full  bg-black/50 z-20">
-          <Overlay z={3}>
-            <div
-              className="fixed inset-y-0 right-0 w-full md:w-[493px]  pb-[5vh] bg-white overflow-y-auto "
-              ref={investRef}
-            >
-              <div className="  w-full md:w-[493px] bg-white ">
-                <PopUpTopBar
-                  close={() => setShowInvestNow(false)}
-                  title="Invest Now"
-                  desc="Invest in this asset"
-                />
-              </div>
-              <div className="pt-6">
-                <InvestNow
-                  token={authenticationToken}
-                  data={selectedAsset}
-                  closeSelf={() => setShowInvestNow(false)}
-                />
-              </div>
-            </div>
-          </Overlay>
-        </div>
-      )}
+      <InvestmentInfoPopup
+        investibleAssets={investibleAssets}
+        selectedAsset={selectedAsset}
+        closePopup={closePopup}
+        authenticatedUser={authenticatedUser}
+        openInvestNow={openInvestNow}
+        handleShowAboutInvestment={handleShowAboutInvestment}
+        token={authenticationToken}
+        show={showInvestmentInfo}
+        setShowInvestNow={setShowInvestNow}
+        showInvestNow={showInvestNow}
+      />
+
       {showAboutInvestment && (
         <div className="fixed  left-0 w-full  bg-black/50 z-20">
           <Overlay z={3}>
