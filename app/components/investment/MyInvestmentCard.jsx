@@ -7,16 +7,16 @@ import inv1 from "../../../assets/images/investment/inv1.png";
 
 const MyInvestmentCard = ({ investment }) => {
   const {
-    asset,
+    assetInfo,
     isActive,
     completed,
     createdAt,
     amount,
-    payment_reference,
+    paymentReference,
     units,
   } = investment;
 
-  const { assetName } = asset;
+  const { assetName } = assetInfo;
 
   return (
     <div
@@ -71,7 +71,7 @@ const MyInvestmentCard = ({ investment }) => {
             displayType={"text"}
             thousandSeparator={true}
           />{" "}
-          Units Purchased
+          {units > 1 ? "Units" : "Unit"} Purchased
         </div>
       ) : (
         <div className="absolute bottom-0 font-medium text-xs right-0 rounded-tl-xl py-1  px-2 text-[--text-danger]  ">

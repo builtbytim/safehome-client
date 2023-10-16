@@ -22,6 +22,7 @@ import queryKeys from "../../utils/queryKeys";
 import config from "../../utils/config";
 import Spinner from "../../components/Spinner";
 import MyInvestments from "../../components/investment/MyInvestments";
+import MiniFetchStatusIndicator from "../../components/MiniFetchStatusIndicator";
 
 function Page({ authenticationToken, authenticatedUser }) {
   const [tabState, setTabState] = useState(0);
@@ -119,19 +120,17 @@ function Page({ authenticationToken, authenticatedUser }) {
               />
             </div>
           </div>
-          {tabState === 1 && (
-            <div className="self-start flex flex-row justify-start items-start">
-              {isFetching && !isLoading ? (
-                <Spinner size="tiny" />
-              ) : (
-                isSuccess && (
-                  <span className="text-xs text-[--placeholder]">
-                    {data.numItems} of {data?.entries}
-                  </span>
-                )
-              )}
-            </div>
-          )}
+          <MiniFetchStatusIndicator
+            show={tabState === 1}
+            isFetching={isFetching}
+            isLoading={isLoading}
+            retry={refetch}
+            isError={isError}
+            isSuccess={isSuccess}
+            successText={
+              data ? `Showing ${data.numItems} of ${data.entries} ` : ""
+            }
+          />
 
           {/* New Oppurtunities Tab */}
           {tabState === 0 && (

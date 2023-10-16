@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import ErrorMessageView from "../ErrorMessageView";
 import LoadingView from "../LoadingView";
 import MyInvestmentCard from "./MyInvestmentCard";
+import MiniFetchStatusIndicator from "../MiniFetchStatusIndicator";
 
 function MyInvestments({ token, setTabState, params }) {
   const queryParams = new URLSearchParams();
@@ -61,11 +62,22 @@ function MyInvestments({ token, setTabState, params }) {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[60vh]  overflow-y-auto scrollbar-fix pr-3 min-h-[80px]">
-      {data.items.map((investment, index) => (
-        <MyInvestmentCard key={index} investment={investment} />
-      ))}
-    </div>
+    <>
+      <MiniFetchStatusIndicator
+        isFetching={isFetching}
+        isLoading={isLoading}
+        isError={isError}
+        isSuccess={isSuccess}
+        retry={refetch}
+        successText={`Showing ${data?.numItems} of ${data?.entries} investments`}
+      />
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[60vh]  overflow-y-auto scrollbar-fix pr-3 min-h-[80px]">
+        {data.items.map((investment, index) => (
+          <MyInvestmentCard key={index} investment={investment} />
+        ))}
+      </div>
+    </>
   );
 }
 

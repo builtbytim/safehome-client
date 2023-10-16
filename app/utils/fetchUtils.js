@@ -109,7 +109,7 @@ export function createFetcher({
       return res.data;
     }
 
-    console.log("createFetcher: ", res.error);
+    console.log("createFetcher Error: ", res.error);
 
     throw new Error(extractErrorMessage(res));
   };
