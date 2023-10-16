@@ -65,6 +65,10 @@ function Page({ authenticationToken, authenticatedUser }) {
     setShowInvestmentInfo(true);
   };
 
+  function setParamsPage(value) {
+    setParams((prev) => ({ ...prev, page: value }));
+  }
+
   function setOwnersFilter(value) {
     return () => {
       setParams((prev) => ({ ...prev, ownersClub: value }));
@@ -139,6 +143,7 @@ function Page({ authenticationToken, authenticatedUser }) {
               setTabState={setTabState}
               params={params}
               openInfo={openInfo}
+              setParamsPage={setParamsPage}
             />
           )}
 
@@ -150,8 +155,10 @@ function Page({ authenticationToken, authenticatedUser }) {
               data={data}
               refetch={refetch}
               isSuccess={isSuccess}
+              isFetching={isFetching}
               error={error}
               openInfo={openInfo}
+              setParamsPage={setParamsPage}
             />
           )}
 
@@ -162,6 +169,7 @@ function Page({ authenticationToken, authenticatedUser }) {
               setTabState={setTabState}
               params={params}
               openInfo={openInfo}
+              setParamsPage={setParamsPage}
               completed
             />
           )}
