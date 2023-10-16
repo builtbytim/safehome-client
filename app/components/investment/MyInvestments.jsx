@@ -57,6 +57,22 @@ function MyInvestments({
     return <NoInvestment investNowFunc={() => setTabState(1)} />;
   }
 
+  if (
+    isSuccess &&
+    data &&
+    data.entries === 0 &&
+    completed &&
+    (!params.ownersClub || params.ownersClub === "all")
+  ) {
+    return (
+      <div className="flex flex-col justify-center items-center py-6 space-y-4">
+        <p className="text-[#C4C4C4]">
+          You do not have any completed investments
+        </p>
+      </div>
+    );
+  }
+
   if (isSuccess && data && data.entries === 0) {
     return (
       <div className="flex flex-col justify-center items-center py-6 space-y-4">

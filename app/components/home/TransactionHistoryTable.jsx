@@ -190,7 +190,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
                   <td className="py-4 text-left pl-8">
                     {new Date(v.createdAt * 1000).toLocaleString()}
                   </td>
-                  <td className="text-left px-6 capitalize font-medium">
+                  <td className="text-left px-6 truncate capitalize font-medium">
                     <span
                       className={
                         levelToColor(txTypeColorMap[v.type]) + "  truncate"

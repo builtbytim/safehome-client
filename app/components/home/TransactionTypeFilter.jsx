@@ -12,18 +12,22 @@ function TransactionTypeFilter({ setTxTypeFilter }) {
 
   const items = [
     {
+      name: "All",
+      value: "all",
+    },
+    {
       name: "Withdrawal",
       value: "withdrawal",
     },
 
     {
-      name: "Top-Up",
-      value: "topup",
+      name: "Investment",
+      value: "investment",
     },
 
     {
-      name: "All",
-      value: "all",
+      name: "Funding",
+      value: "topup",
     },
   ];
 
