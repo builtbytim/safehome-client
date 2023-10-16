@@ -134,7 +134,6 @@ const NextOfKinTab = ({ token }) => {
 
   return (
     <div className="py-7 space-y-7 font-medium relative">
-      <BarLoader active={isLoading} />
       {loadingData && (
         <div className="flex h-[50vh] justify-center items-center  w-full">
           <LoadingView />
@@ -279,7 +278,11 @@ const NextOfKinTab = ({ token }) => {
                     }
                     className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
                   >
-                    Update Next of Kin
+                    {isLoading || loadingData ? (
+                      <Spinner />
+                    ) : (
+                      "Update Next of Kin"
+                    )}
                   </button>
                 </div>
               </Form>
