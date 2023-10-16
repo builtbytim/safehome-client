@@ -20,7 +20,6 @@ import { useQuery } from "react-query";
 import { createFetcher } from "../../utils/fetchUtils";
 import queryKeys from "../../utils/queryKeys";
 import config from "../../utils/config";
-import Spinner from "../../components/Spinner";
 import MyInvestments from "../../components/investment/MyInvestments";
 import MiniFetchStatusIndicator from "../../components/MiniFetchStatusIndicator";
 
@@ -34,7 +33,7 @@ function Page({ authenticationToken, authenticatedUser }) {
   const [showInvestmentInfo, setShowInvestmentInfo] = useState(false);
   const [showInvestNow, setShowInvestNow] = useState(false);
   const [showAboutInvestment, setShowAboutInvestment] = useState(false);
-  const [dataId, setDataId] = useState(0);
+  const [selectedAssetUid, setSelectedAssetUid] = useState(null);
 
   const queryParams = new URLSearchParams();
   queryParams.append("page", params.page);
@@ -56,10 +55,13 @@ function Page({ authenticationToken, authenticatedUser }) {
       keepPreviousData: true,
     });
 
-  const investments = data?.items || [];
+  const investibleAssets = data?.items || [];
+
+  const selectedAsset =
+    investibleAssets.find((asset) => asset.uid === selectedAssetUid) || null;
 
   const openInfo = (id) => {
-    setDataId(id);
+    setSelectedAssetUid(id);
     setShowInvestmentInfo(true);
   };
 
@@ -103,7 +105,7 @@ function Page({ authenticationToken, authenticatedUser }) {
       <HeaderInvestments title="Investments" extraClasses="text-[--primary]" />
 
       <OverviewCard />
-      <section className="bg-white rounded-brand pt-5 pb-3 md:py-8 text-sm">
+      <section className="bg-white rounded-brand pt-6 pb-4 md:py-8 text-sm">
         <TabSwitch
           tabState={tabState}
           setTabState={(v) => {
@@ -138,6 +140,7 @@ function Page({ authenticationToken, authenticatedUser }) {
               token={authenticationToken}
               setTabState={setTabState}
               params={params}
+              openInfo={openInfo}
             />
           )}
 
@@ -156,17 +159,25 @@ function Page({ authenticationToken, authenticatedUser }) {
 
           {/* Completed */}
           {tabState === 2 && (
-            <NoInvestment investNowFunc={() => setTabState(1)} />
+            <MyInvestments
+              token={authenticationToken}
+              setTabState={setTabState}
+              params={params}
+              openInfo={openInfo}
+              completed
+            />
           )}
         </div>
       </section>
       {showInvestmentInfo && (
         <InvestmentInfoPopup
-          investments={investments}
-          dataId={dataId}
+          investibleAssets={investibleAssets}
+          selectedAsset={selectedAsset}
           closePopup={closePopup}
+          authenticatedUser={authenticatedUser}
           openInvestNow={openInvestNow}
           handleShowAboutInvestment={handleShowAboutInvestment}
+          token={authenticationToken}
         />
       )}
 
@@ -187,7 +198,7 @@ function Page({ authenticationToken, authenticatedUser }) {
               <div className="pt-6">
                 <InvestNow
                   token={authenticationToken}
-                  data={investments[dataId]}
+                  data={selectedAsset}
                   closeSelf={() => setShowInvestNow(false)}
                 />
               </div>
@@ -211,7 +222,7 @@ function Page({ authenticationToken, authenticatedUser }) {
               </div>
               <div className="pt-6">
                 <AboutInvestment
-                  data={investments[dataId]}
+                  data={selectedAsset}
                   investNowFunction={() => openInvestNow()}
                 />
               </div>

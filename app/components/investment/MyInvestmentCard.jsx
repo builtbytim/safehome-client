@@ -5,7 +5,7 @@ import cn from "classnames";
 import { NumericFormat } from "react-number-format";
 import inv1 from "../../../assets/images/investment/inv1.png";
 
-const MyInvestmentCard = ({ investment }) => {
+const MyInvestmentCard = ({ investment, openInfo }) => {
   const {
     assetInfo,
     isActive,
@@ -20,6 +20,9 @@ const MyInvestmentCard = ({ investment }) => {
 
   return (
     <div
+      onClick={() => {
+        openInfo(assetInfo.uid);
+      }}
       title={!isActive ? "Payment has not been completed" : ""}
       className={
         "relative rounded-brand md:rounded-lg lg:rounded-xl border overflow-hidden text-[--text-secondary] text-left grid grid-cols-5 md:grid-cols-5 h-[165px] md:h-[192px] hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm transitioning " +

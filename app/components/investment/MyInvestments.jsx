@@ -8,7 +8,13 @@ import LoadingView from "../LoadingView";
 import MyInvestmentCard from "./MyInvestmentCard";
 import MiniFetchStatusIndicator from "../MiniFetchStatusIndicator";
 
-function MyInvestments({ token, setTabState, params }) {
+function MyInvestments({
+  token,
+  setTabState,
+  params,
+  openInfo,
+  completed = false,
+}) {
   const queryParams = new URLSearchParams();
   queryParams.append("page", params.page);
   queryParams.append("limit", params.limit);
@@ -21,10 +27,11 @@ function MyInvestments({ token, setTabState, params }) {
         url: config.apiPaths.getMyInvestments,
         method: "GET",
         auth: token,
-        surfix: `?includeAsset=true&${queryParams.toString()}`,
+        surfix: `?includeAsset=true&completed=${completed}&${queryParams.toString()}`,
       }),
 
       enabled: !!token,
+      keepPreviousData: true,
     });
 
   if (isLoading && (data === null || data === undefined)) {
@@ -69,12 +76,16 @@ function MyInvestments({ token, setTabState, params }) {
         isError={isError}
         isSuccess={isSuccess}
         retry={refetch}
-        successText={`Showing ${data?.numItems} of ${data?.entries} investments`}
+        successText={`Showing ${data?.numItems} of ${data?.entries}`}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[60vh]  overflow-y-auto scrollbar-fix pr-3 min-h-[80px]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[80vh]  overflow-y-auto scrollbar-fix  min-h-[80px] p-2 pb-8">
         {data.items.map((investment, index) => (
-          <MyInvestmentCard key={index} investment={investment} />
+          <MyInvestmentCard
+            openInfo={openInfo}
+            key={index}
+            investment={investment}
+          />
         ))}
       </div>
     </>

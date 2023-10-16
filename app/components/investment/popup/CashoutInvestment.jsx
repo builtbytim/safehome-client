@@ -3,21 +3,6 @@
 import { MiniHero, InvestmentTab } from "../../investment";
 import { NumericFormat } from "react-number-format";
 
-const dubData = [
-  {
-    heading: "Total Capital",
-    content: "₦500,000",
-  },
-  {
-    heading: "Total Cashout",
-    content: "₦55,073.00",
-  },
-  {
-    heading: "Expected Returns",
-    content: "11% in 12 months",
-  },
-];
-
 const CashoutInvestment = ({ data, showAboutFunction }) => {
   return (
     <div className="h-full overflow-y-auto">
@@ -65,14 +50,20 @@ const CashoutInvestment = ({ data, showAboutFunction }) => {
             About this Oppurtunity
           </button>
         </div>
-        <div className="py-7 grid grid-cols-1 gap-3">
-          {dubData.map((data, index) => (
-            <InvestmentTab
-              key={index}
-              heading={data.heading}
-              content={data.content}
-            />
-          ))}
+        <div className="py-6 grid grid-cols-1  gap-y-2 md:gap-y-4">
+          <InvestmentTab heading="ROI" content={data.props.roi} />
+          <InvestmentTab
+            heading="Maturity Date"
+            content={data.props.maturityDate}
+          />
+          <InvestmentTab
+            heading="Investment ID"
+            content={data.props.investmentId}
+          />
+          <InvestmentTab
+            heading="Investment Exit"
+            content={data.props.investmentExit}
+          />
         </div>
       </div>
     </div>

@@ -5,19 +5,20 @@ import { VscLocation } from "react-icons/vsc";
 import { NumericFormat } from "react-number-format";
 import inv1 from "../../../assets/images/investment/inv1.png";
 
-const InvestibleAssetCard = ({
-  assetName,
-  pricePerUnit,
-  investors,
-  location,
-  availableUnits,
-  openInfo,
-}) => {
+const InvestibleAssetCard = ({ investibleAsset, openInfo }) => {
+  const {
+    assetName,
+    pricePerUnit,
+    investorCount,
+    location,
+    availableUnits,
+    soldOut,
+  } = investibleAsset;
   return (
     <div
       assetName="Click to view more details"
       className="relative  rounded-brand md:rounded-lg lg:rounded-xl border overflow-hidden text-[--text-secondary] text-left grid grid-cols-5 md:grid-cols-5 h-[165px] md:h-[192px] hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm transitioning"
-      onClick={() => openInfo()}
+      onClick={openInfo}
     >
       <div className="w-full h-full col-span-2 md:col-span-2 overflow-hidden">
         <Image
@@ -54,7 +55,7 @@ const InvestibleAssetCard = ({
           <div>
             <h3 className="text-[--text-brand] text-xs whitespace-nowrap   pb-1 font-medium">
               <NumericFormat
-                value={investors}
+                value={investorCount}
                 displayType={"text"}
                 thousandSeparator={true}
               />
@@ -64,12 +65,18 @@ const InvestibleAssetCard = ({
         </div>
       </div>
       <div className="absolute bottom-0 font-medium text-xs right-0 rounded-tl-xl py-1  px-2 text-white bg-[--green] ">
-        <NumericFormat
-          value={availableUnits}
-          displayType={"text"}
-          thousandSeparator={true}
-        />{" "}
-        Available
+        {soldOut ? (
+          "Sold Out"
+        ) : (
+          <>
+            <NumericFormat
+              value={availableUnits}
+              displayType={"text"}
+              thousandSeparator={true}
+            />{" "}
+            <span>Available</span>
+          </>
+        )}
       </div>
     </div>
   );

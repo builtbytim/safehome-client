@@ -1,54 +1,68 @@
 "use client";
 
-import { useState } from "react";
-
-import Image from "next/image";
+import inv1 from "../../../../assets/images/investment/inv1.png";
+import { NumericFormat } from "react-number-format";
 import { MiniHero, InvestmentTab } from "../../investment";
+import LoadingView from "../../LoadingView";
+import ErrorMessageView from "../../ErrorMessageView";
 
-const dubData = [
-  {
-    heading: "Total Capital",
-    content: "18% in 6 months",
-  },
-  {
-    heading: "Maturity Value",
-    content: "₦555,073",
-  },
-  {
-    heading: "Profit",
-    content: "₦55,073.00",
-  },
-  {
-    heading: "Purchased Units",
-    content: "100 Units",
-  },
-  {
-    heading: "Maturity Date",
-    content: "23rd of October, 2023",
-  },
-  {
-    heading: "Expected Returns",
-    content: "11% in 12 months",
-  },
-];
+const AlreadyInvested = ({
+  data,
+  showAboutFunction,
+  investNowFunction,
+  isLoading,
+  isError,
+  refetch,
+  userInvestmentData,
+}) => {
+  if (
+    isLoading &&
+    (userInvestmentData === null || userInvestmentData === undefined)
+  ) {
+    return (
+      <div className="py-10">
+        <LoadingView />
+      </div>
+    );
+  }
 
-const AlreadyInvested = ({ data, showAboutFunction, investNowFunction }) => {
+  if (
+    isError &&
+    (userInvestmentData === null || userInvestmentData === undefined)
+  ) {
+    return (
+      <div className="py-10">
+        <ErrorMessageView
+          refetch={refetch}
+          message="Something wrong while fetching your investment data"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="h-full overflow-y-auto">
-      <MiniHero img={data.img} title={data.title} quantity={data.quantity} />
+      <MiniHero
+        img={inv1}
+        title={data.assetName}
+        quantity={data.availableUnits}
+      />
       <div className="px-5">
         <div className="py-6 flex justify-between gap-5">
           <div>
-            <p className="text-lg leading-[1.6rem] max-h-[3.2rem] font-medium uppercase text-[--text-secondary]">
-              {data.title}
+            <p className="text-lg leading-[1.6rem] max-h-[3.2rem] font-medium capitalize truncate text-[--text-secondary]">
+              {data.assetName}
             </p>
-            <p className="text-sm text-[--primary] pt-2">
-              Smart Office Lapal House, Onikan, Lagos Island.
-            </p>
+            <p className="text-sm text-[--primary] pt-2">{data.location}</p>
           </div>
           <div className="text-right">
             <p className="text-[--text-brand] font-bold  text-xl md:text-2xl">
-              ₦{data.value}
+              <NumericFormat
+                value={data.pricePerUnit}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"₦ "}
+              />
             </p>
             <p className="text-[--placeholder] font-light mt-[-8px]">
               Per unit
@@ -58,49 +72,46 @@ const AlreadyInvested = ({ data, showAboutFunction, investNowFunction }) => {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 pb-7">
           <InvestmentTab
             heading="Effective Capital"
-            content="₦500,000"
+            content={userInvestmentData.amount}
             type="info"
           />
           <InvestmentTab
             heading="Maturity Value"
-            content="₦555,073"
+            content={userInvestmentData.amount}
             type="info"
           />
-          <InvestmentTab heading="Returns" content="11.0%" type="info" />
+          <InvestmentTab heading="Returns" content={data.roi} type="info" />
         </div>
         <div className="space-y-3">
           <button
-            className="block w-full py-2 px-5 rounded text-white bg-[--text-brand] border border-[--text-brand]"
+            className="btn-1-v2 block w-full py-2 px-5 "
             onClick={() => investNowFunction()}
           >
             Buy More Units
           </button>
           <button
-            className="block w-full py-2 px-5 rounded text-[--text-brand] border border-[--text-brand]"
+            className="btn-2-v2 block w-full py-2 px-5  "
             onClick={() => showAboutFunction()}
           >
-            About this Oppurtunity
+            About this Opportunity
           </button>
         </div>
 
         <div className="py-6 grid grid-cols-1  gap-y-2 md:gap-y-4">
-          {dubData.map((data, index) => (
-            <InvestmentTab
-              key={index}
-              heading={data.heading}
-              content={data.content}
-            />
-          ))}
+          <InvestmentTab heading="ROI" content={data.props.roi} />
+          <InvestmentTab
+            heading="Maturity Date"
+            content={data.props.maturityDate}
+          />
+          <InvestmentTab
+            heading="Investment ID"
+            content={data.props.investmentId}
+          />
+          <InvestmentTab
+            heading="Investment Exit"
+            content={data.props.investmentExit}
+          />
         </div>
-        {/* <div className="py-7 grid grid-cols-2 gap-3">
-          {dubData.map((data, index) => (
-            <InvestmentTab
-              key={index}
-              heading={data.heading}
-              content={data.content}
-            />
-          ))}
-        </div> */}
       </div>
     </div>
   );

@@ -48,22 +48,13 @@ function AssetList({
     );
   }
 
-  const investments = data.items;
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[60vh]  overflow-y-auto scrollbar-fix pr-3 min-h-[80px]">
-      {investments.map((investment, index) => (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[80vh]  overflow-y-auto scrollbar-fix  min-h-[80px] p-2 pb-8">
+      {data.items.map((item, index) => (
         <InvestibleAssetCard
           key={index}
-          img={investment.img}
-          assetName={investment.assetName}
-          roi={investment.roi}
-          price={investment.price}
-          investors={investment.investorCount}
-          pricePerUnit={investment.pricePerUnit}
-          location={investment.location}
-          units={investment.availableUnits}
-          availableUnits={investment.availableUnits}
-          openInfo={() => openInfo(index)}
+          investibleAsset={item}
+          openInfo={() => openInfo(item.uid)}
         />
       ))}
     </div>

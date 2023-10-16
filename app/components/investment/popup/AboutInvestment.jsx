@@ -6,12 +6,6 @@ const AboutInvestment = ({ data, investNowFunction }) => {
   return (
     <div>
       <div className="px-7 pb-8 space-y-8 text-[--text-secondary]">
-        {/* <div className="py-3 px-7 space-y-2 text-[--text-secondary]">
-					<h3 className="text-3xl text-[--text-brand] font-semibold">
-						About Investment
-					</h3>
-					<p>Use the form below to purchase enough investment units.</p>
-				</div> */}
         <div className="space-y-5">
           <div className="h-[250px] w-full">
             <Image

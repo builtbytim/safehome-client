@@ -7,20 +7,44 @@ import {
 } from "./popup";
 import { useRef } from "react";
 import useOutsideClickDetector from "../../utils/hooks/useOutsideClickDetector";
+import { useQuery } from "react-query";
+import queryKeys from "../../utils/queryKeys";
+import { createFetcher } from "../../utils/fetchUtils";
+import config from "../../utils/config";
 
 function InvestmentInfoPopup({
-  InvestmentState = "Investment Info",
-  investments,
-  dataId,
+  selectedAsset,
   closePopup,
   handleShowAboutInvestment,
   openInvestNow,
+  authenticatedUser,
+  token,
 }) {
   const infoRef = useRef(null);
+
+  const userAlreadyInvested = selectedAsset?.investors?.includes(
+    authenticatedUser?.uid
+  );
+
+  const investmentMatured = false;
 
   useOutsideClickDetector(infoRef, () => {
     closePopup();
   });
+
+  const { isLoading, isError, refetch, data, isSuccess, error, isFetching } =
+    useQuery({
+      queryKey: [queryKeys.getMyInvestments, token],
+      queryFn: createFetcher({
+        url: config.apiPaths.getMyInvestments,
+        method: "GET",
+        auth: token,
+        surfix: `?includeAsset=true&assetUid=${selectedAsset?.uid}`,
+      }),
+
+      enabled: !!token && userAlreadyInvested,
+      keepPreviousData: true,
+    });
 
   return (
     <div className="fixed  left-0 w-full  bg-black/50 z-20">
@@ -30,26 +54,30 @@ function InvestmentInfoPopup({
           ref={infoRef}
         >
           <div className="  w-full md:w-[493px] bg-white ">
-            {InvestmentState === "Matured Investment" ? (
+            {investmentMatured ? (
               <div className="">
                 <div className="">
                   <PopUpTopBar close={() => closePopup()} />
                 </div>
                 <div className="pt-6">
                   <CashoutInvestment
-                    data={investments[dataId]}
+                    data={selectedAsset}
                     showAboutFunction={handleShowAboutInvestment}
                   />
                 </div>
               </div>
-            ) : InvestmentState === "Already Invested" ? (
+            ) : userAlreadyInvested ? (
               <div className="">
                 <div className="">
                   <PopUpTopBar close={() => closePopup()} />
                 </div>
                 <div className="pt-6">
                   <AlreadyInvested
-                    data={investments[dataId]}
+                    data={selectedAsset}
+                    userInvestmentData={data?.items[0]}
+                    isLoading={isLoading}
+                    isError={isError}
+                    refetch={refetch}
                     showAboutFunction={handleShowAboutInvestment}
                     investNowFunction={() => openInvestNow()}
                   />
@@ -62,7 +90,7 @@ function InvestmentInfoPopup({
                 </div>
                 <div className="pt-6">
                   <InvestmentInfo
-                    data={investments[dataId]}
+                    data={selectedAsset}
                     showAboutFunction={handleShowAboutInvestment}
                     investNowFunction={() => openInvestNow()}
                   />
