@@ -9,6 +9,7 @@ import LoanImage from "../../../assets/images/icons/loan.svg";
 import ScrollLink from "../ScrollLink";
 import { NumericFormat } from "react-number-format";
 import useUserWallet from "../../utils/hooks/useUserWallet";
+import useUserInvestmentStats from "../../utils/hooks/useUserInvestmentStats";
 
 function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
   const { data, isLoading, isError, isSuccess, refetch } = useUserWallet(
@@ -17,12 +18,19 @@ function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
     null
   );
 
+  const {
+    data: data2,
+    isError: isError2,
+    isLoading: isLoading2,
+    isSuccess: isSuccess2,
+    refetch: refetch2,
+  } = useUserInvestmentStats(token, null, null, true);
+
   return (
     <section className="bg-white rounded-brand  md:p-8 space-y-4 lg:space-y-8">
       <div className="hidden md:flex flex-row justify-between items-center">
         <h1 className="text-[--text-secondary] capitalize text-xl sm:text-2xl md:text-3xl lg:text-3xl  font-medium">
-          {" "}
-          Overview{" "}
+          Overview
         </h1>
 
         <div className="hidden self-center md:flex justify-center items-center space-x-4">
@@ -93,14 +101,31 @@ function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
 
             <h2 className=" text-[--text-secondary] font-medium"> My Funds </h2>
 
-            <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
-              <NumericFormat
-                value={data ? data.balance : 0}
-                displayType={"text"}
-                thousandSeparator={true}
-                prefix={"₦ "}
-              />
-            </p>
+            <div className="flex flex-row items-center justify-start space-x-2">
+              <p className="text-[--text-secondary] self-center font-bold text-xl lg:text-2xl">
+                <NumericFormat
+                  value={data ? data.balance : 0}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"₦ "}
+                />
+              </p>
+
+              {isError && (
+                <button
+                  onClick={refetch}
+                  disabled={isLoading}
+                  className={
+                    "text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center " +
+                    cn({
+                      "pointer-events-none opacity-50": isLoading,
+                    })
+                  }
+                >
+                  <span className="self-center"> Retry </span>
+                </button>
+              )}
+            </div>
           </div>
 
           <div
@@ -134,9 +159,31 @@ function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
               Total Investments
             </h2>
 
-            <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
-              ₦0
-            </p>
+            <div className="flex flex-row items-center justify-start space-x-2">
+              <p className="text-[--text-secondary] self-center font-bold text-xl lg:text-2xl">
+                <NumericFormat
+                  value={data2 ? data2.balance : 0}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"₦ "}
+                />
+              </p>
+
+              {isError2 && (
+                <button
+                  onClick={refetch2}
+                  disabled={isLoading2}
+                  className={
+                    "text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center " +
+                    cn({
+                      "pointer-events-none opacity-50": isLoading2,
+                    })
+                  }
+                >
+                  <span className="self-center"> Retry </span>
+                </button>
+              )}
+            </div>
           </div>
 
           {/* <div

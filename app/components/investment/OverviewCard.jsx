@@ -6,8 +6,13 @@ import TrendImage from "../../../assets/images/icons/trend.svg";
 import LockImage from "../../../assets/images/icons/lock.svg";
 import ScrollLink from "../ScrollLink";
 import { BiChevronRight } from "react-icons/bi";
+import useUserInvestmentStats from "../../utils/hooks/useUserInvestmentStats";
+import { NumericFormat } from "react-number-format";
 
-function OverviewCard() {
+function OverviewCard({ token }) {
+  const { data, isError, isLoading, isSuccess, refetch } =
+    useUserInvestmentStats(token, null, null, true);
+
   return (
     <section className="bg-white rounded-brand  md:p-8 space-y-4 lg:space-y-8">
       <div className="hidden md:flex flex-row justify-between items-center">
@@ -69,9 +74,31 @@ function OverviewCard() {
               Total Balance
             </h2>
 
-            <p className="text-[--text-brand] font-bold text-xl lg:text-2xl">
-              ₦0
-            </p>
+            <div className="flex flex-row items-center justify-start space-x-2">
+              <p className="text-[--text-brand] self-center font-bold text-xl lg:text-2xl">
+                <NumericFormat
+                  value={data ? data.balance : 0}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"₦ "}
+                />
+              </p>
+
+              {isError && (
+                <button
+                  onClick={refetch}
+                  disabled={isLoading}
+                  className={
+                    "text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center " +
+                    cn({
+                      "pointer-events-none opacity-50": isLoading,
+                    })
+                  }
+                >
+                  <span className="self-center"> Retry </span>
+                </button>
+              )}
+            </div>
           </div>
 
           <div

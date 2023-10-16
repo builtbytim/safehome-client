@@ -30,6 +30,7 @@ const queryKeys = {
   getMyInvestments: "getMyInvestments",
   createInvestment: "createInvestment",
   getOneMyInvestment: "getOneMyInvestment",
+  getInvestmentStats: "getInvestmentStats",
 };
 
 export default queryKeys;

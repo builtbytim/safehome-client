@@ -45,6 +45,10 @@ const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
     queryClient.invalidateQueries({
       queryKey: [queryKeys.getMyInvestments],
     });
+
+    queryClient.invalidateQueries({
+      queryKey: [queryKeys.getInvestmentStats],
+    });
     closeSelf();
 
     if (vars.fundSource === fundingSources[1].value) {
