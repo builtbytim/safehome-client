@@ -3,6 +3,7 @@ import { create } from "zustand";
 const useDataStore = create((set) => ({
   data: {
     usr: null,
+    token: null,
   },
 
   setData: (obj) =>
@@ -10,6 +11,9 @@ const useDataStore = create((set) => ({
 
   setUserLocal: (usr) =>
     set((state) => ({ ...state, data: { ...state.data, usr } })),
+
+  setTokenLocal: (token) =>
+    set((state) => ({ ...state, data: { ...state.data, token } })),
 }));
 
 const useNotifyStore = create((set) => ({

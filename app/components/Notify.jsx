@@ -4,6 +4,9 @@ import { BsX } from "react-icons/bs";
 import Overlay from "./Overlay";
 import cn from "classnames";
 import { useNotifyStore } from "../utils/store";
+import { BsInfoCircle } from "react-icons/bs";
+import { useRef } from "react";
+import useOutsideClickDetector from "../utils/hooks/useOutsideClickDetector";
 
 export default function Notify() {
   const props = useNotifyStore((state) => state.notifyState);
@@ -21,7 +24,11 @@ export default function Notify() {
 
   //   console.log(props);
 
+  const ref = useRef(null);
+
   const hideMe = useNotifyStore((state) => state.hideNotify);
+
+  useOutsideClickDetector(ref, closeSelf);
 
   function closeSelf() {
     if (show && !working) {
@@ -47,22 +54,27 @@ export default function Notify() {
 
   return (
     <Overlay z={3}>
-      <div className="w-full bg-white mt-4 py-4 px-4">
+      <div ref={ref} className="w-full bg-white mt-4 py-3 px-4 rounded">
         {allowClose && (
-          <div className="flex flex-row justify-end items-center w-full">
-            <BsX
-              role="button"
-              className="text-3xl text-[#8d4000] hover:text-[#8d4000]/80 transition-flow"
-              onClick={closeSelf}
-            />
+          <div className="flex flex-row  justify-end items-center w-full">
+            <div className="p-1 rounded-full hover:bg-[--b1] cursor-pointer">
+              <BsX
+                role="button"
+                className="text-2xl lg:text-3xl  rounded-full text-[--primary] transitioning"
+                onClick={closeSelf}
+              />
+            </div>
           </div>
         )}
-        <p className="text-[--color-brand] font-bold text-lg    capitalize">
-          {" "}
-          Notification{" "}
-        </p>
 
-        <p className="text-[--primary] mt-2   first-letter:uppercase">
+        <div className="flex flex-row text-[--color-brand] justify-start space-x-2 items-center">
+          <BsInfoCircle className=" text-2xl self-center" />
+          <p className=" font-bold text-lg  self-center  capitalize">
+            Notification
+          </p>
+        </div>
+
+        <p className="text-[--primary] mt-3   first-letter:uppercase">
           {content}
         </p>
 

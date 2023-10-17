@@ -1,6 +1,7 @@
 import InvestibleAssetCard from "./InvestibleAssetCard";
 import ErrorMessageView from "../ErrorMessageView";
 import LoadingView from "../LoadingView";
+import Pagination from "../Pagination";
 
 function AssetList({
   data,
@@ -8,8 +9,10 @@ function AssetList({
   refetch,
   isError,
   isSuccess,
+  isFetching,
   error,
   openInfo,
+  setParamsPage,
 }) {
   if (isLoading && (data === null || data === undefined)) {
     return (
@@ -49,15 +52,25 @@ function AssetList({
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[80vh]  overflow-y-auto scrollbar-fix  min-h-[80px] p-2 pb-8">
-      {data.items.map((item, index) => (
-        <InvestibleAssetCard
-          key={index}
-          investibleAsset={item}
-          openInfo={() => openInfo(item.uid)}
-        />
-      ))}
-    </div>
+    <>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-8 lg:max-h-[80vh]  overflow-y-auto scrollbar-fix  min-h-[80px] p-2 pb-2">
+        {data.items.map((item, index) => (
+          <InvestibleAssetCard
+            key={index}
+            investibleAsset={item}
+            openInfo={() => openInfo(item.uid)}
+          />
+        ))}
+      </div>
+
+      <Pagination
+        setPage={setParamsPage}
+        data={data}
+        isSuccess={isSuccess}
+        isLoading={isLoading}
+        isFetching={isFetching}
+      />
+    </>
   );
 }
 

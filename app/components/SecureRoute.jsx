@@ -20,6 +20,7 @@ export default function SecureRoute(props) {
   const [propagatedSession, setPropagatedSession] = useState(false);
 
   const setUserLocal = useDataStore((state) => state.setUserLocal);
+  const setTokenLocal = useDataStore((state) => state.setTokenLocal);
 
   const { offspring: SecureChild, autoLogin = true, ...remProps } = props;
   const {
@@ -33,6 +34,7 @@ export default function SecureRoute(props) {
   useEffect(() => {
     if (authenticatedUser && !propagatedSession) {
       setUserLocal(authenticatedUser);
+      setTokenLocal(authenticationToken);
       setPropagatedSession(true);
     }
   }, [authenticatedUser]);

@@ -50,6 +50,11 @@ const config = {
     createInvestment: "/investments/assets/invest",
     getMyInvestments: "/investments",
     getUserInvestmentStats: "/investments/stats",
+    getMyNotifications: "/notifications",
+    getMyNotification: "/notifications",
+    getMyNotificationStats: "/notifications/stats",
+    markNotificationAsRead: "/notifications",
+    markAllNotificationsAsRead: "/notifications/mark-all-as-read",
   },
 
   signInModes: {

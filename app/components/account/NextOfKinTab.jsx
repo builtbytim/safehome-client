@@ -262,7 +262,7 @@ const NextOfKinTab = ({ token }) => {
                       <p className="account-form-text"> Allow Edits </p>
                       <div className="">
                         <SwitchField
-                          color="#1E0700"
+                          color="#8d4000"
                           defaultChecked={values.allowEdits}
                           handleChange={(v) => setFieldValue("allowEdits", v)}
                         />

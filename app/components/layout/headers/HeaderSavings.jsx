@@ -5,7 +5,7 @@ import { BiMenuAltLeft } from "react-icons/bi";
 import { useUiStore } from "../../../utils/store";
 import NotificationBell from "../../NotificationBell";
 
-function HeaderSavings({ title = "", extraClasses = "" }) {
+function HeaderSavings({ title = "", extraClasses = "", token }) {
   const toggleNotifications = useUiStore((state) => state.toggleNotifications);
 
   return (
@@ -24,7 +24,10 @@ function HeaderSavings({ title = "", extraClasses = "" }) {
         </div>
 
         <div className="flex flex-row justify-center items-center  space-x-4 md:space-x-8">
-          <NotificationBell toggleNotifications={toggleNotifications} />
+          <NotificationBell
+            token={token}
+            toggleNotifications={toggleNotifications}
+          />
 
           <div className="self-center hidden">
             <Image

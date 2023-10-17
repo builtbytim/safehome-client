@@ -8,8 +8,8 @@ import queryKeys from "../../utils/queryKeys";
 import { NumericFormat } from "react-number-format";
 import ErrorMessageView from "../ErrorMessageView";
 import LoadingView from "../LoadingView";
-import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 import cn from "classnames";
+import Pagination from "../Pagination";
 
 function TransactionHistoryTable({ token, params, setPageFilter }) {
   const queryParams = new URLSearchParams();
@@ -220,53 +220,13 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
           </table>
         </div>
 
-        {isSuccess && data && data.items && data.items.length > 0 && (
-          <div className="space-x-4 flex flex-row items-center justify-end pt-8 px-8">
-            {data.numPages > 0 && (
-              <span className="text-[--text-secondary] text-xs">
-                Page {data.page} of {data.numPages}
-              </span>
-            )}
-
-            {data.hasPrev && (
-              <div
-                onClick={() => {
-                  if (isFetching) return;
-                  setPageFilter(data.page - 1);
-                }}
-                className={
-                  "text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center space-x-1" +
-                  cn({
-                    "pointer-events-none opacity-50": isFetching,
-                  })
-                }
-              >
-                <BsChevronLeft className="inline-block  self-center" />
-
-                <span className="self-center">Prev</span>
-              </div>
-            )}
-
-            {data.hasNext && (
-              <div
-                onClick={() => {
-                  if (isFetching) return;
-
-                  setPageFilter(data.page + 1);
-                }}
-                className={
-                  "text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--lines] flex flex-row justify-center items-center space-x-1" +
-                  cn({
-                    "pointer-events-none opacity-50": isFetching,
-                  })
-                }
-              >
-                <span className="self-center">Next</span>
-                <BsChevronRight className="inline-block  self-center" />
-              </div>
-            )}
-          </div>
-        )}
+        <Pagination
+          setPage={setPageFilter}
+          data={data}
+          isSuccess={isSuccess}
+          isLoading={isLoading}
+          isFetching={isFetching}
+        />
       </section>
     );
 }

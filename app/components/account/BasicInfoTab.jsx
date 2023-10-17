@@ -1,8 +1,4 @@
-import Image from "next/image";
-import BarLoader from "../BarLoader";
-import { useNotifyStore } from "../../utils/store";
 import { Form, Formik, Field, ErrorMessage } from "formik";
-import { useMutation } from "react-query";
 import { parsePhoneNumber } from "awesome-phonenumber";
 import * as Yup from "yup";
 import GenericSelectField from "../forms/branded/GenericSelectField";
@@ -81,7 +77,7 @@ const BasicInfoTab = ({ user, token }) => {
         {({ isValid, setFieldValue }) => {
           return (
             <Form className="py-6 w-full">
-              <legend className="text-sm text-[--color-brand] pb-3">
+              <legend className="text-xs text-[--color-brand] pb-3">
                 {" "}
                 Your KYC is {user.kycStatus || " pending"}, if you wish to make
                 changes, please contact support.

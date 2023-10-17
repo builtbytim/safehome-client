@@ -27,7 +27,7 @@ function Page({ authenticationToken, authenticatedUser }) {
   const [tabState, setTabState] = useState(0);
   const [params, setParams] = useState({
     page: 1,
-    limit: 4,
+    limit: 8,
     ownersClub: "all",
   });
   const [showInvestmentInfo, setShowInvestmentInfo] = useState(false);
@@ -65,6 +65,10 @@ function Page({ authenticationToken, authenticatedUser }) {
     setShowInvestmentInfo(true);
   };
 
+  function setParamsPage(value) {
+    setParams((prev) => ({ ...prev, page: value }));
+  }
+
   function setOwnersFilter(value) {
     return () => {
       setParams((prev) => ({ ...prev, ownersClub: value }));
@@ -100,10 +104,14 @@ function Page({ authenticationToken, authenticatedUser }) {
 
   return (
     <main className="pb-8 md:pb-12 space-y-8 lg:space-y-10">
-      <HeaderInvestments title="Investments" extraClasses="text-[--primary]" />
+      <HeaderInvestments
+        token={authenticationToken}
+        title="Investments"
+        extraClasses="text-[--primary]"
+      />
 
       <OverviewCard token={authenticationToken} />
-      <section className="bg-white rounded-brand pt-6 pb-4 md:py-8 text-sm">
+      <section className="bg-white rounded-brand pt-6 pb-10 md:py-8 text-sm">
         <TabSwitch
           tabState={tabState}
           setTabState={(v) => {
@@ -139,6 +147,7 @@ function Page({ authenticationToken, authenticatedUser }) {
               setTabState={setTabState}
               params={params}
               openInfo={openInfo}
+              setParamsPage={setParamsPage}
             />
           )}
 
@@ -150,8 +159,10 @@ function Page({ authenticationToken, authenticatedUser }) {
               data={data}
               refetch={refetch}
               isSuccess={isSuccess}
+              isFetching={isFetching}
               error={error}
               openInfo={openInfo}
+              setParamsPage={setParamsPage}
             />
           )}
 
@@ -162,6 +173,7 @@ function Page({ authenticationToken, authenticatedUser }) {
               setTabState={setTabState}
               params={params}
               openInfo={openInfo}
+              setParamsPage={setParamsPage}
               completed
             />
           )}

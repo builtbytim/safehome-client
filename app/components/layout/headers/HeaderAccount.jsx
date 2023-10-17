@@ -5,7 +5,7 @@ import { useUiStore } from "../../../utils/store";
 import NotificationBell from "../../NotificationBell";
 import { useRouter, usePathname } from "next/navigation";
 
-function HeaderAccount({ title = "", extraClasses = "" }) {
+function HeaderAccount({ title = "", extraClasses = "", token }) {
   const toggleNotifications = useUiStore((state) => state.toggleNotifications);
 
   const router = useRouter();
@@ -36,7 +36,10 @@ function HeaderAccount({ title = "", extraClasses = "" }) {
         </div>
 
         <div className="flex flex-row justify-center items-center  space-x-4 md:space-x-8">
-          <NotificationBell toggleNotifications={toggleNotifications} />
+          <NotificationBell
+            token={token}
+            toggleNotifications={toggleNotifications}
+          />
         </div>
       </div>
     </header>
