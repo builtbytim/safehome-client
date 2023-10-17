@@ -185,7 +185,7 @@ function Page({ authenticatedUser, authenticationToken }) {
         </div>
       )}
 
-      <Header user={authenticatedUser} />
+      <Header token={authenticationToken} user={authenticatedUser} />
 
       <main className=" space-y-2 lg:space-y-10">
         <OverviewCard

@@ -20,14 +20,14 @@ const tabItems = [
   },
 ];
 
-function Page({ authenticatedUser }) {
+function Page({ authenticatedUser, authenticatedToken }) {
   return (
     <>
       {/* Pop ups starts  */}
 
       {/* Pop ups ends  */}
       <div className="space-y-2  lg:space-y-8 w-full min-h-screen pb-16">
-        <HeaderSavings user={authenticatedUser} />
+        <HeaderSavings token={authenticatedToken} user={authenticatedUser} />
 
         <main className=" space-y-2 lg:space-y-10">
           <OverviewCard />

@@ -7,7 +7,7 @@ import { useUiStore } from "../../../utils/store";
 import NotificationBell from "../../NotificationBell";
 import Link from "next/link";
 
-function Header({ user }) {
+function Header({ user, token }) {
   const toggleSidebar = useUiStore((state) => state.toggleSidebar);
   const showSidebar = useUiStore((state) => state.showSidebar);
   const toggleNotifications = useUiStore((state) => state.toggleNotifications);
@@ -48,7 +48,10 @@ function Header({ user }) {
         </div>
 
         <div className="flex flex-row justify-start space-x-4 lg:space-x-0">
-          <NotificationBell toggleNotifications={toggleNotifications} />
+          <NotificationBell
+            token={token}
+            toggleNotifications={toggleNotifications}
+          />
 
           <div className="self-center p-1 hidden md:block ">
             {showSidebar ? (

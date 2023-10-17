@@ -104,7 +104,11 @@ function Page({ authenticationToken, authenticatedUser }) {
 
   return (
     <main className="pb-8 md:pb-12 space-y-8 lg:space-y-10">
-      <HeaderInvestments title="Investments" extraClasses="text-[--primary]" />
+      <HeaderInvestments
+        token={authenticationToken}
+        title="Investments"
+        extraClasses="text-[--primary]"
+      />
 
       <OverviewCard token={authenticationToken} />
       <section className="bg-white rounded-brand pt-6 pb-10 md:py-8 text-sm">

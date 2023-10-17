@@ -31,6 +31,11 @@ const queryKeys = {
   createInvestment: "createInvestment",
   getOneMyInvestment: "getOneMyInvestment",
   getInvestmentStats: "getInvestmentStats",
+  getMyNotifications: "getMyNotifications",
+  getMyNotification: "getMyNotification",
+  getMyNotificationStats: "getMyNotificationStats",
+  markNotificationAsRead: "markNotificationAsRead",
+  markAllNotificationsAsRead: "markAllNotificationsAsRead",
 };
 
 export default queryKeys;

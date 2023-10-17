@@ -55,7 +55,7 @@ const tabItemsArr = [
     },
   ],
 ];
-function Page({ authenticatedUser }) {
+function Page({ authenticatedUser, authenticatedToken }) {
   const router = useRouter();
 
   const [showCreateSafeLock, setShowCreateSafeLock] = useState(false);
@@ -120,6 +120,7 @@ function Page({ authenticatedUser }) {
       <div className="space-y-2  lg:space-y-8 w-full min-h-screen pb-16">
         <HeaderSavings
           user={authenticatedUser}
+          token={authenticatedToken}
           title="Locked Savings"
           extraClasses="text-[--color-brand] border-[--color-brand]"
         />

@@ -55,7 +55,7 @@ const tabItemsArr = [
   ],
 ];
 
-function Page({ authenticatedUser }) {
+function Page({ authenticatedUser, authenticatedToken }) {
   const router = useRouter();
   const [showGoalCreationF1, setShowGoalCreationF1] = useState(false);
   const [showGoalCreationF2, setShowGoalCreationF2] = useState(false);
@@ -106,6 +106,7 @@ function Page({ authenticatedUser }) {
       <div className="space-y-2  lg:space-y-8 w-full min-h-screen pb-16">
         <HeaderSavings
           user={authenticatedUser}
+          token={authenticatedToken}
           title="Goal Savings"
           extraClasses="text-[--text-brand-2]"
         />
