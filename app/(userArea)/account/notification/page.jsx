@@ -14,6 +14,8 @@ import queryKeys from "../../../utils/queryKeys";
 import config from "../../../utils/config";
 import SecureRoute from "../../../components/SecureRoute";
 import { startTransition } from "react";
+import ErrorMessageView from "../../../components/ErrorMessageView";
+import LoadingView from "../../../components/LoadingView";
 
 function Page({ authenticationToken }) {
   const queryClient = useQueryClient();
@@ -31,7 +33,7 @@ function Page({ authenticationToken }) {
     });
   }
 
-  const { isLoading, isError, data, refetch } = useQuery({
+  const { isLoading, isError, data, refetch, isSuccess } = useQuery({
     queryKey: [queryKeys.getNotificationPreferences, authenticationToken],
 
     onSuccess(data) {
@@ -128,20 +130,21 @@ function Page({ authenticationToken }) {
         </h3>
         <p>Manage your notification settings</p>
       </div>
-
-      {isError ? (
-        <div className="flex h-[50vh] justify-center items-center  w-full">
-          <p className="text-[#FF3636]">
-            Unable to load notification preferences. Please{" "}
-            <span onClick={refetch} className="underline cursor-pointer ">
-              try again
-            </span>{" "}
-          </p>
+      {isError && (
+        <div className="py-16">
+          <ErrorMessageView
+            refetch={refetch}
+            message="Something went wrong while fetching your preferences"
+          />
         </div>
-      ) : (
+      )}{" "}
+      {!isError && isLoading && (
+        <div className="py-16">
+          <LoadingView />
+        </div>
+      )}
+      {isSuccess && data && (
         <div className="space-y-8 ">
-          {isError && <p className="text-[--danger]"> Unable to syc data </p>}
-
           <ToggleCard
             heading="Email Alerts"
             text="Get notifications via your registered email."
@@ -182,15 +185,6 @@ function Page({ authenticationToken }) {
               });
             }}
           />
-
-          {/* <div className="py-10 text-center flex flex-col justify-center items-center w-full px-6">
-          <button
-            type="submit"
-            className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
-          >
-            Save
-          </button>
-        </div> */}
         </div>
       )}
     </main>

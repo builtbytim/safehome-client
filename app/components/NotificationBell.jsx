@@ -48,7 +48,7 @@ function NotificationBell({ toggleNotifications, token }) {
       {isSuccess && data && data.unreadCount > 0 && (
         <span
           className={
-            "border rounded-full border-[--text-brand] bg-[--text-brand] p-[0.125rem] md:p-1 inline-block absolute top-0 right-0 "
+            "border rounded-full animate-bounce border-[--text-brand] bg-[--text-brand] p-[0.125rem] md:p-1 inline-block absolute top-0 right-0 "
           }
         ></span>
       )}

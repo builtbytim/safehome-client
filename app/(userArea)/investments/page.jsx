@@ -42,7 +42,7 @@ function Page({ authenticationToken, authenticatedUser }) {
 
   const { isLoading, isError, refetch, data, isSuccess, error, isFetching } =
     useQuery({
-      queryKey: [queryKeys.getTransactions, authenticationToken, params],
+      queryKey: [queryKeys.getInvestmentAssets, authenticationToken, params],
       queryFn: createFetcher({
         url: config.apiPaths.getInvestmentAssets,
         method: "GET",
