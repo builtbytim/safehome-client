@@ -36,6 +36,7 @@ const queryKeys = {
   getMyNotificationStats: "getMyNotificationStats",
   markNotificationAsRead: "markNotificationAsRead",
   markAllNotificationsAsRead: "markAllNotificationsAsRead",
+  clearMyNotifications: "clearMyNotifications",
 };
 
 export default queryKeys;

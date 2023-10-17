@@ -21,7 +21,7 @@ function Pagination({ data, setPage, isFetching, isSuccess, isLoading }) {
                 setPage(data.page - 1);
               }}
               className={
-                "text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--b1] flex flex-row justify-center items-center space-x-1 disabled:opacity-50 " +
+                "text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--b1] flex flex-row justify-center items-center space-x-1 disabled:opacity-40 " +
                 cn({
                   " pointer-events-none opacity-50 ": isFetching,
                 })
@@ -43,7 +43,7 @@ function Pagination({ data, setPage, isFetching, isSuccess, isLoading }) {
                 setPage(data.page + 1);
               }}
               className={
-                "text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--b1] flex flex-row justify-center items-center space-x-1 disabled:opacity-50 " +
+                "text-[--text-secondary] self-center text-xs  py-1 px-2 transitioning border border-[--lines] rounded-brand hover:cursor-pointer hover:bg-[--b1] flex flex-row justify-center items-center space-x-1 disabled:opacity-40 " +
                 cn({
                   " pointer-events-none  ": isFetching,
                 })

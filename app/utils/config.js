@@ -55,6 +55,7 @@ const config = {
     getMyNotificationStats: "/notifications/stats",
     markNotificationAsRead: "/notifications",
     markAllNotificationsAsRead: "/notifications/mark-all-as-read",
+    clearMyNotifications: "/notifications/clear-all",
   },
 
   signInModes: {
