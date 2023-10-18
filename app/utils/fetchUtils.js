@@ -68,6 +68,7 @@ export async function fetchUtil({
         };
       } else {
         const json = await res.json();
+        console.log("fetchUtil: ", json);
         return {
           success: false,
           errorMessage: json?.detail?.message || res.statusText,
@@ -119,7 +120,6 @@ export function extractErrorMessage(err) {
   const msg = getErrMsg(err);
 
   if (err instanceof String) return msg;
-
   return "An unexpected error occurred";
 }
 
