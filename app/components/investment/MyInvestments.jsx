@@ -55,10 +55,6 @@ function MyInvestments({
     );
   }
 
-  if (isSuccess && data && data.unfilteredEntries === 0) {
-    return <NoInvestment investNowFunc={() => setTabState(1)} />;
-  }
-
   if (
     isSuccess &&
     data &&
@@ -73,6 +69,10 @@ function MyInvestments({
         </p>
       </div>
     );
+  }
+
+  if (isSuccess && data && data.unfilteredEntries === 0 && !completed) {
+    return <NoInvestment investNowFunc={() => setTabState(1)} />;
   }
 
   if (isSuccess && data && data.entries === 0) {
