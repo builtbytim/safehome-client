@@ -83,6 +83,7 @@ function KYCForm({ user, token }) {
       state: values.state,
       documentType: values.documentType,
       IDNumber: values.IDNumber,
+      BVN: values.BVN,
     };
 
     // console.log(body);
