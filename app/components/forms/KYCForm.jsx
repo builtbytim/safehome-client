@@ -12,7 +12,6 @@ import {
 } from "../../utils/fetchUtils";
 import Reviewing from "../Reviewing";
 import queryKeys from "../../utils/queryKeys";
-import { useState, useEffect } from "react";
 import { useNotifyStore } from "../../utils/store";
 import GenericSelectFieldVariant1 from "./branded/GenericSelectFieldVariant1";
 import { states } from "../../utils/constants";
@@ -26,12 +25,12 @@ const modesOfIdentification = [
 
   {
     name: "International Passport",
-    value: "IP",
+    value: "PASSPORT",
   },
 
   {
     name: "Driver's License",
-    value: "DL",
+    value: "DRIVERS_LICENSE",
   },
 
   {
@@ -40,20 +39,8 @@ const modesOfIdentification = [
   },
 ];
 
-function KYCForm() {
-  const searchParams = useSearchParams();
+function KYCForm({ user, token }) {
   const setNotify = useNotifyStore((state) => state.setNotify);
-  const [authCode, setAuthCode] = useState(null);
-
-  useEffect(() => {
-    if (authCode) return;
-
-    if (searchParams.has("authCode")) {
-      const t = searchParams.get("authCode");
-
-      setAuthCode(t);
-    }
-  }, [searchParams, authCode]);
 
   const { isLoading, mutate, isSuccess } = useMutation({
     mutationKey: [queryKeys.addKycInfo],
@@ -62,9 +49,7 @@ function KYCForm() {
         url: makeUrl(config.apiPaths.addKycInfo),
         method: "POST",
         body,
-        headers: {
-          "X-AUTH-CODE": authCode,
-        },
+        auth: token,
       });
 
       // console.log(params);

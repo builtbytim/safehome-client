@@ -3,7 +3,7 @@
 import KYCForm from "../../components/forms/KYCForm";
 import SecureRoute from "../../components/SecureRoute";
 
-function Page({ authenticatedUser, authenticatedToken }) {
+function Page({ authenticatedUser, authenticationToken }) {
   return (
     <div className="">
       <div className="space-y-6 ">
@@ -16,7 +16,7 @@ function Page({ authenticatedUser, authenticatedToken }) {
           Ensure your name matches the names on documents you provide.
         </p>
 
-        <KYCForm token={authenticatedToken} user={authenticatedUser} />
+        <KYCForm token={authenticationToken} user={authenticatedUser} />
       </div>
     </div>
   );
