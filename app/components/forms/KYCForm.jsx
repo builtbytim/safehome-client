@@ -130,7 +130,7 @@ function KYCForm({ user, token }) {
 
             return isDigit(value);
           })
-          .length(11, "BVN number must be 10 digits"),
+          .length(11, "BVN number must be 11 digits"),
 
         IDNumber: Yup.string()
           .required("Required")
