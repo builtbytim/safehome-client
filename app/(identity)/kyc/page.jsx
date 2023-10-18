@@ -1,4 +1,4 @@
-import BVNNINForm from "../../components/forms/BVNNINForm";
+import KYCForm from "../../components/forms/KYCForm";
 
 function Page() {
   return (
@@ -13,7 +13,7 @@ function Page() {
           Ensure your name matches the names on documents you provide.
         </p>
 
-        <BVNNINForm />
+        <KYCForm />
       </div>
     </div>
   );

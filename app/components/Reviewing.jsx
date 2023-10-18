@@ -10,7 +10,7 @@ function Reviewing() {
   const router = useRouter();
 
   function onCountEnd() {
-    router.replace(config.loginUrl);
+    router.replace(config.authenticatedHome);
   }
   const { remainingTime } = useCountdown(Date.now() + 11 * 1000, onCountEnd);
 

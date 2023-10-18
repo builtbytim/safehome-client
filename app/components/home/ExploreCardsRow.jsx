@@ -8,14 +8,14 @@ const exploreItems = [
     title: "Complete your KYC",
     body: "Hello, Kindly finish your KYC so we can verify your identity and comply with regulatory requirements.",
     img: explore1,
-    link: "/account",
+    link: "/kyc",
   },
 
   {
     title: "Explore our Assets",
     body: "Explore our diverse Real Estate portfolio and get a feel of our asset options and performance history",
     img: explore2,
-    link: "/investments",
+    link: "/investments?tab=1",
   },
 
   {

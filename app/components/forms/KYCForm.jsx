@@ -18,7 +18,29 @@ import GenericSelectFieldVariant1 from "./branded/GenericSelectFieldVariant1";
 import { states } from "../../utils/constants";
 import { useSearchParams } from "next/navigation";
 
-function BVNNINForm() {
+const modesOfIdentification = [
+  {
+    name: "National Identity Number (NIN)",
+    value: "NIN",
+  },
+
+  {
+    name: "International Passport",
+    value: "IP",
+  },
+
+  {
+    name: "Driver's License",
+    value: "DL",
+  },
+
+  {
+    name: "Voter's Card",
+    value: "VC",
+  },
+];
+
+function KYCForm() {
   const searchParams = useSearchParams();
   const setNotify = useNotifyStore((state) => state.setNotify);
   const [authCode, setAuthCode] = useState(null);
@@ -75,13 +97,8 @@ function BVNNINForm() {
       residentialAddress: values.residentialAddress,
       state: values.state,
       documentType: values.documentType,
+      IDNumber: values.IDNumber,
     };
-
-    if (values.documentType === "BVN") {
-      body.BVN = values.BVN;
-    } else if (values.documentType === "NIN") {
-      body.NIN = values.NIN;
-    }
 
     // console.log(body);
     mutate(body);
@@ -92,17 +109,20 @@ function BVNNINForm() {
       initialValues={{
         residentialAddress: "",
         state: "",
-        documentType: "BVN",
+        documentType: "NIN",
+        IDNumber: "",
         BVN: "",
-        NIN: "",
       }}
       initialTouched={{
-        NIN: true,
-        BVN: true,
+        documentType: true,
       }}
       validationSchema={Yup.object().shape({
         documentType: Yup.string()
-          .oneOf(["BVN", "NIN"], "Invalid document type")
+          .oneOf(
+            modesOfIdentification.map((v) => v.value),
+
+            "Invalid document type"
+          )
           .required("Required"),
 
         state: Yup.string()
@@ -118,39 +138,28 @@ function BVNNINForm() {
           .max(100, "Must be 100 characters or less"),
 
         BVN: Yup.string()
-          .length(11, "BVN must be 11 digits")
-          .test("BVN-is-valid", "Invalid BVN", function (value) {
-            if (!value) return true;
-            return isDigit(value);
-          })
-          .test("bvn-is-required-when-selected", "Required", function (value) {
-            if (this.parent.documentType === "BVN") {
-              return !!value;
-            } else {
-              return true;
-            }
-          }),
-
-        NIN: Yup.string()
-          .length(11, "NIN must be 11 digits")
-          .test("NIN-is-valid", "Invalid BVN", function (value) {
+          .required("Required")
+          .test("bvn-num-is-valid", "Invalid BVN", function (value) {
             if (!value) return true;
 
             return isDigit(value);
           })
-          .test("nin-is-required-when-selected", "Required", function (value) {
-            if (this.parent.documentType === "NIN") {
-              return !!value;
-            } else {
-              return true;
-            }
-          }),
+          .length(11, "BVN number must be 10 digits"),
+
+        IDNumber: Yup.string()
+          .required("Required")
+          .min(10, "ID number must be at least 10 characters"),
+        // .test("ID-num-is-valid", "Invalid ID Number", function (value) {
+        //   if (!value) return true;
+
+        //   return isDigit(value);
+        // })
       })}
       onSubmit={handleSubmit}
     >
       {({ isValid, setFieldValue, values }) => {
         return (
-          <Form className="space-y-6 w-full">
+          <Form className="space-y-7 w-full">
             <BarLoader v={0} active={isLoading} />
 
             {isSuccess && <Reviewing />}
@@ -215,16 +224,7 @@ function BVNNINForm() {
                 handleChange={({ selectedItem }) => {
                   setFieldValue("documentType", selectedItem.value);
                 }}
-                items={[
-                  {
-                    name: "Bank Verification Number (BVN)",
-                    value: "BVN",
-                  },
-                  {
-                    name: "National Identity Number (NIN)",
-                    value: "NIN",
-                  },
-                ]}
+                items={modesOfIdentification}
               />
 
               <ErrorMessage
@@ -234,55 +234,49 @@ function BVNNINForm() {
               />
             </div>
 
-            {values.documentType === "BVN" && (
-              <div className="w-full  relative flex flex-col justify-center items-start space-y-2">
-                <label
-                  htmlFor="email"
-                  className="text-[--text-secondary] text-sm text-left"
-                >
-                  BVN
-                </label>
-                <Field
-                  name="BVN"
-                  inputMode="numeric"
-                  type="text"
-                  className="field-1"
-                  placeholder="Enter your BVN"
-                />
+            <div className="w-full  relative flex flex-col justify-center items-start space-y-2">
+              <label
+                htmlFor="IDNumber"
+                className="text-[--text-secondary] text-sm text-left"
+              >
+                ID Number
+              </label>
+              <Field
+                name="IDNumber"
+                type="text"
+                className="field-1"
+                placeholder="Enter ID number"
+              />
 
-                <ErrorMessage
-                  name="BVN"
-                  component="div"
-                  className="absolute  -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                />
-              </div>
-            )}
+              <ErrorMessage
+                name="IDNumber"
+                component="div"
+                className="absolute  -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+              />
+            </div>
 
-            {values.documentType === "NIN" && (
-              <div className="w-full  relative flex flex-col justify-center items-start space-y-2">
-                <label
-                  htmlFor="email"
-                  className="text-[--text-secondary] text-sm text-left"
-                >
-                  NIN
-                </label>
-                <Field
-                  name="NIN"
-                  inputMode="numeric"
-                  type="text"
-                  className="field-1"
-                  placeholder="Enter your NIN"
-                />
+            <div className="w-full  relative flex flex-col justify-center items-start space-y-2">
+              <label
+                htmlFor="BVN"
+                className="text-[--text-secondary] text-sm text-left"
+              >
+                BVN
+              </label>
+              <Field
+                name="BVN"
+                type="numeric"
+                className="field-1"
+                placeholder="Enter BVN"
+              />
 
-                <ErrorMessage
-                  name="NIN"
-                  component="div"
-                  className="absolute  -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                />
-              </div>
-            )}
+              <ErrorMessage
+                name="BVN"
+                component="div"
+                className="absolute  -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+              />
+            </div>
 
-            <div className="pt-6">
+            <div className="pt-4 ">
               <button
                 type="submit"
                 disabled={!isValid || isLoading}
@@ -298,4 +292,4 @@ function BVNNINForm() {
   );
 }
 
-export default BVNNINForm;
+export default KYCForm;
