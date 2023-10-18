@@ -116,6 +116,14 @@ export function createFetcher({
 }
 
 export function extractErrorMessage(err) {
+  const msg = getErrMsg(err);
+
+  if (err instanceof String) return msg;
+
+  return "An unexpected error occurred";
+}
+
+export function getErrMsg(err) {
   if (err instanceof Error) {
     return err.message;
   }
