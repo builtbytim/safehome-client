@@ -1,6 +1,9 @@
-import KYCForm from "../../components/forms/KYCForm";
+"use client";
 
-function Page() {
+import KYCForm from "../../components/forms/KYCForm";
+import SecureRoute from "../../components/SecureRoute";
+
+function Page({ authenticatedUser, authenticatedToken }) {
   return (
     <div className="">
       <div className="space-y-6 ">
@@ -13,10 +16,12 @@ function Page() {
           Ensure your name matches the names on documents you provide.
         </p>
 
-        <KYCForm />
+        <KYCForm token={authenticatedToken} user={authenticatedUser} />
       </div>
     </div>
   );
 }
 
-export default Page;
+export default function ProtectedPage(props) {
+  return <SecureRoute offspring={Page} {...props} />;
+}
