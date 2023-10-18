@@ -83,7 +83,7 @@ function DateFilter({ setDateFilter }) {
         <div
           ref={ref2}
           className={
-            "bg-white   -top-[2%]  px-4 py-4 rounded -left-[180%] min-w-[200px]  shadow z-20 " +
+            "bg-white w-[80%] max-w-xs  px-4 py-4 rounded   shadow z-20 " +
             cn({ " hidden": !show })
           }
         >
@@ -91,7 +91,7 @@ function DateFilter({ setDateFilter }) {
             <Calendar value={value} onChange={onChange} />
           ) : (
             <>
-              <div className="flex flex-row justify-between items-center">
+              <div className="w-full flex flex-row justify-between items-center ">
                 <h2 className="text-sm"> Filter by date </h2>
 
                 <span

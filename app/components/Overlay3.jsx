@@ -1,6 +1,9 @@
 import cn from "classnames";
+import useBodyScrollLock from "../utils/hooks/useBodyScrollLock";
 
 export default function Overlay3({ children, z = 1, active = true }) {
+  useBodyScrollLock(active);
+
   return (
     <>
       {active ? (

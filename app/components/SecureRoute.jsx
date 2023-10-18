@@ -6,14 +6,12 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { retreiveFromLocalStorage, clearLocalStorage } from "../utils/security";
 import Spinner from "./Spinner";
 import Overlay3 from "./Overlay3";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useDataStore } from "../utils/store";
-import { useNotifyStore } from "../utils/store";
 
 const MAX_WAIT_TIME = 30000;
 
 export default function SecureRoute(props) {
-  const setNotify = useNotifyStore((state) => state.setNotify);
   const authenticationToken = retreiveFromLocalStorage(
     `${config.localStorageKey}:token`
   );
@@ -44,16 +42,6 @@ export default function SecureRoute(props) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (!authenticating) return;
-      // setNotify({
-      //   show: true,
-      //   content: "This seems to be taking too long",
-      //   onAccept: () => {
-      //     if (authenticating) {
-      //       router.refresh();
-      //     }
-      //   },
-      //   onAcceptText: "Refresh",
-      // });
 
       console.log("This seems to be taking too long");
     }, MAX_WAIT_TIME);
@@ -68,6 +56,19 @@ export default function SecureRoute(props) {
 
   const newSearchParams = new URLSearchParams();
   let targetUrl = searchParams.get(config.redirectSearchParam);
+
+  const onSignOut = useCallback(() => {
+    clearLocalStorage(`${config.localStorageKey}:token`);
+    router.replace(config.loginUrl);
+  }, []);
+
+  const memoizedAuthenticatedSession = useMemo(() => {
+    return authenticatedSession;
+  }, [authenticatedSession]);
+
+  const memoizedAuthenticatedUser = useMemo(() => {
+    return authenticatedUser;
+  }, [authenticatedUser]);
 
   if (authenticating) {
     return <AuthLoader />;
@@ -93,13 +94,10 @@ export default function SecureRoute(props) {
     return (
       <SecureChild
         {...remProps}
-        authenticatedSession={authenticatedSession}
-        authenticatedUser={authenticatedUser}
+        authenticatedSession={memoizedAuthenticatedSession}
+        authenticatedUser={memoizedAuthenticatedUser}
         authenticationToken={authenticationToken}
-        signOut={() => {
-          clearLocalStorage(`${config.localStorageKey}:token`);
-          router.replace(config.loginUrl);
-        }}
+        signOut={onSignOut}
       />
     );
   }

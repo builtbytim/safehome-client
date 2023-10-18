@@ -71,7 +71,7 @@ function Page({ authenticatedUser, authenticationToken, signOut }) {
               ) : isError ? (
                 "Retry"
               ) : (
-                "Yes, Do It!"
+                "Sign out"
               )}
             </button>
 

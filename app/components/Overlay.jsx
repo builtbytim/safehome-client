@@ -1,4 +1,5 @@
 import cn from "classnames";
+import useBodyScrollLock from "../utils/hooks/useBodyScrollLock";
 
 export default function Overlay({
   children,
@@ -7,6 +8,8 @@ export default function Overlay({
   ClickBack = null,
   skipWrapper = false,
 }) {
+  useBodyScrollLock();
+
   return (
     <>
       <div
@@ -46,7 +49,7 @@ export default function Overlay({
 
           <div
             className={
-              "fixed  inset-y-0 mx-auto flex flex-col lg:justify-center items-center w-[95%] lg:w-[80%] max-w-lg inset-x-0 " +
+              "fixed  inset-y-0 mx-auto flex flex-col justify-center items-center w-[95%] lg:w-[80%] max-w-lg inset-x-0 " +
               cn({
                 " z-20 ": z === 1,
                 " z-30 ": z === 2,

@@ -10,6 +10,7 @@ import { useNotifyStore } from "../../utils/store";
 import { useRouter, useSearchParams } from "next/navigation";
 import { decodeFromBase64 } from "../../utils/security";
 import cn from "classnames";
+import config from "../../utils/config";
 
 const DELAY_MS = 30000;
 
@@ -24,6 +25,14 @@ function VerifyEmail({ email }) {
   const { remainingTime, setFutureTimestamp } = useCountdown(Date.now());
 
   const setNotify = useNotifyStore((state) => state.setNotify);
+
+  // trigger submission when otp is complete
+
+  useEffect(() => {
+    if (otp.length === 6) {
+      handleActionBtn();
+    }
+  }, [otp]);
 
   // extract auth code
 
@@ -99,12 +108,14 @@ function VerifyEmail({ email }) {
     setNotify({
       show: true,
       title: "OTP Confirmed",
-      content: "Your email has been confirmed. Proceed to KYC.",
-      onAcceptText: "Continue",
+      content: "Your email has been confirmed, you can now sign in.",
       allowClose: false,
       onAccept: () => {
-        router.replace(`/kyc?authCode=${data.code}`);
+        router.replace(
+          `/sign-in?${config.signInModeParam}=${config.signInModes.NEW_USER}`
+        );
       },
+      onAcceptText: "Sign In",
     });
   }
 

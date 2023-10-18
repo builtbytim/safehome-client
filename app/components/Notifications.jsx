@@ -95,24 +95,10 @@ export default function Notifications() {
 
   if (!showNotifications) return null;
 
-  if (isLoading && (data === null || data === undefined)) {
-    return (
-      <div className="py-16">
-        <LoadingView />
-      </div>
-    );
-  }
-
-  if (isError && (data === null || data === undefined)) {
-    return (
-      <div className="py-16">
-        <ErrorMessageView
-          refetch={refetch}
-          message="Something wrong while fetching  notifications"
-        />
-      </div>
-    );
-  }
+  const readCount =
+    isSuccess && data && data.numItems > 0
+      ? data.items.filter((v) => !v.read).length
+      : 0;
 
   return (
     <Overlay
@@ -149,20 +135,22 @@ export default function Notifications() {
               Notifications
             </p>
 
-            <button
-              onClick={() => {
-                if (isLoadingMarkAllAsRead || isLoading) return;
+            {isSuccess && data && data.numItems > 0 && readCount > 0 && (
+              <button
+                onClick={() => {
+                  if (isLoadingMarkAllAsRead || isLoading) return;
 
-                mutate();
-              }}
-              disabled={isFetching || isLoadingMarkAllAsRead}
-              type="button"
-              className="text-[--text-danger] transitioning hover:cursor-pointer text-sm hover:bg-[--b1] hover:text-[--primary] rounded-brand p-1 px-2 disabled:opacity-20 disabled:pointer-events-none "
-            >
-              {isLoadingMarkAllAsRead
-                ? "Marking all as read..."
-                : "Mark all as read"}
-            </button>
+                  mutate();
+                }}
+                disabled={isFetching || isLoadingMarkAllAsRead}
+                type="button"
+                className="text-[--text-danger] transitioning hover:cursor-pointer text-sm  hover:text-[--primary] rounded-brand p-1  disabled:opacity-20 disabled:pointer-events-none "
+              >
+                {isLoadingMarkAllAsRead
+                  ? "Marking all as read..."
+                  : "Mark all as read"}
+              </button>
+            )}
           </div>
           {/* Notification items  */}
 
@@ -195,6 +183,18 @@ export default function Notifications() {
               </div>
             )}
 
+            {isLoading && (data === null || data === undefined) && (
+              <div className="py-16">
+                <LoadingView />
+              </div>
+            )}
+
+            {isError && (data === null || data === undefined) && (
+              <div className="py-16">
+                <ErrorMessageView />
+              </div>
+            )}
+
             {data && data.unfilteredEntries > 0 && data.entries === 0 && (
               <div className="w-full flex h-full flex-col justify-center items-center">
                 <div className="h-full py-16   space-y-4  mt-4 flex flex-col justify-center items-center text-[--color-brand-2]">
@@ -206,7 +206,8 @@ export default function Notifications() {
               </div>
             )}
 
-            {data.numItems > 0 &&
+            {data &&
+              data.numItems > 0 &&
               data.items.map((item, i) => (
                 <div
                   key={i}
@@ -245,8 +246,8 @@ export default function Notifications() {
 
           {/* Buttons  */}
 
-          {data && data.numItems > 0 && (
-            <div className="bg-white absolute bottom-4 inset-x-0 px-4 pt-4 pb-4 w-full flex flex-col justify-center itens-center space-y-4 py-2">
+          {isSuccess && data && data.numItems > 0 && (
+            <div className="bg-white absolute bottom-8 md:bottom-6 lg:bottom-4 inset-x-0 px-4 pt-4 pb-4 w-full flex flex-col justify-center itemss-center space-y-4 py-2">
               <button
                 disabled={isFetching || isLoadingClearAll}
                 onClick={() => {

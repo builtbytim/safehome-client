@@ -122,12 +122,11 @@ function SignIn() {
             <legend className="font-bold text-center text-lg lg:text-xl text-[--color-brand]">
               {mode === config.signInModes.AUTH_FAILED &&
                 "Session Expired, Log in again"}
-              {mode === config.signInModes.REGULAR && "Log in to your account"}
+              {mode === config.signInModes.REGULAR && "Welcome Back"}
 
-              {mode === config.signInModes.NEW_USER &&
-                "Hey new user, Log in now"}
+              {mode === config.signInModes.NEW_USER && "Log in to your account"}
               {!Object.values(config.signInModes).includes(mode) &&
-                "Log in to your account"}
+                "Welcome Back"}
             </legend>
             <p className="text-center text-xs text-[--text-secondary] ">
               {" "}
