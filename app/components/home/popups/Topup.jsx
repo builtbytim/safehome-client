@@ -14,11 +14,12 @@ import { useMutation, useQueryClient } from "react-query";
 import config from "../../../utils/config";
 import Spinner from "../../Spinner";
 import FormattingField from "../../forms/branded/FormattingField";
+import { useUiStore } from "../../../utils/store";
 
 const Topup = ({ token, closeSelf }) => {
   const queryClient = useQueryClient();
   const setNotify = useNotifyStore((state) => state.setNotify);
-
+  const toggleSuperOverlay = useUiStore((state) => state.toggleSuperOverlay);
   function onSuccess(data) {
     queryClient.invalidateQueries({ queryKey: [queryKeys.getWallet, token] });
     queryClient.invalidateQueries({
@@ -26,6 +27,7 @@ const Topup = ({ token, closeSelf }) => {
     });
 
     closeSelf();
+    toggleSuperOverlay(true);
     window.location.href = data.redirectUrl;
   }
 

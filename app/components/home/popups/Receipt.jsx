@@ -13,6 +13,7 @@ import ErrorMessageView from "../../ErrorMessageView";
 import LoadingView from "../../LoadingView";
 import { useDataStore } from "../../../utils/store";
 import { NumericFormat } from "react-number-format";
+import { useRouter, usePathname } from "next/navigation";
 
 const txStatusColorMap = {
   successful: "success",
@@ -24,21 +25,22 @@ const TransactionReceipt = () => {
   const showReceiptArg = useSearchParams().get("showTx");
   const txRef = useSearchParams().get("txRef");
   const receiptRef = useRef(null);
-  const [showReceipt, setShowReceipt] = useState(!!showReceiptArg && !!txRef);
+  const showReceipt = !!showReceiptArg && !!txRef;
+
+  const pathname = usePathname();
+  const router = useRouter();
 
   const token = useDataStore((state) => state.data.token);
   const user = useDataStore((state) => state.data.usr);
 
-  useEffect(() => {
-    if (showReceiptArg && txRef) {
-      setShowReceipt(true);
-    }
-  }, [showReceiptArg, txRef]);
+  function handleClose() {
+    router.push(pathname);
+  }
 
   //   get transaction query
 
   const { isLoading, isError, data, isSuccess, refetch } = useQuery({
-    queryKey: [queryKeys.getTransaction],
+    queryKey: [queryKeys.getTransaction, txRef, token],
     queryFn: createFetcher({
       url: config.apiPaths.getTransaction,
       auth: token,
@@ -49,9 +51,7 @@ const TransactionReceipt = () => {
     enabled: showReceipt && !!token,
   });
 
-  useOutsideClickDetector(receiptRef, () => {
-    setShowReceipt(false);
-  });
+  useOutsideClickDetector(receiptRef, handleClose);
 
   if (!showReceipt) return null;
 
@@ -64,7 +64,7 @@ const TransactionReceipt = () => {
         <div className="  w-full md:w-[493px] bg-white ">
           <ReceiptTopBar
             token={token}
-            close={() => setShowReceipt(false)}
+            close={handleClose}
             title="Transaction Receipt"
           />
         </div>

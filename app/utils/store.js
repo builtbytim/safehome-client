@@ -50,6 +50,10 @@ const useUiStore = create((set) => ({
   showNotifications: false,
   showGoalCreationForm1: false,
   showGoalCreationForm2: false,
+  showSuperOverlay: false,
+
+  toggleSuperOverlay: (v) =>
+    set((state) => ({ ...state, showSuperOverlay: v })),
 
   toggleNotifications: () =>
     set((state) => ({ ...state, showNotifications: !state.showNotifications })),

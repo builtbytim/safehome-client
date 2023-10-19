@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import MiniSwitch from "../../MiniSwitch";
 import { createFetcher } from "../../../utils/fetchUtils";
 import { useMutation, useQueryClient } from "react-query";
-import { useNotifyStore } from "../../../utils/store";
+import { useNotifyStore, useUiStore } from "../../../utils/store";
 import config from "../../../utils/config";
 import queryKeys from "../../../utils/queryKeys";
 import Spinner from "../../Spinner";
@@ -28,6 +28,7 @@ const fundingSources = [
 const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
   const queryClient = useQueryClient();
   const setNotify = useNotifyStore((state) => state.setNotify);
+  const toggleSuperOverlay = useUiStore((state) => state.toggleSuperOverlay);
 
   function onSuccess(data, vars) {
     queryClient.invalidateQueries({
@@ -52,6 +53,7 @@ const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
     closeSelf();
 
     if (vars.fundSource === fundingSources[1].value) {
+      toggleSuperOverlay(true);
       window.location.href = data.redirectUrl;
     } else {
       setNotify({
