@@ -1,0 +1,95 @@
+"use client";
+
+import Overlay from "./Overlay3";
+import cn from "classnames";
+import { useDataStore, useUiStore } from "../utils/store";
+import useBodyScrollLock from "../utils/hooks/useBodyScrollLock";
+import { useMutation } from "react-query";
+import config from "../utils/config";
+import { createFetcher } from "../utils/fetchUtils";
+import queryKeys from "../utils/queryKeys";
+import Spinner from "./Spinner";
+
+export default function MembershipFeePrompt() {
+  const user = useDataStore((state) => state.data.usr);
+  useBodyScrollLock(user && !user.hasPaidMembershipfee);
+
+  const token = useDataStore((state) => state.data.token);
+
+  const toggleSuperOverlay = useUiStore((state) => state.toggleSuperOverlay);
+
+  // pay membership fee mutation
+
+  const {
+    mutate: payMembershipFee,
+    isLoading: payMembershipFeeLoading,
+    isError: payMembershipFeeError,
+    isSuccess: payMembershipFeeSuccess,
+    error: payMembershipFeeErrorData,
+  } = useMutation({
+    mutationFn: createFetcher({
+      url: config.apiPaths.payMembershipFee,
+      method: "POST",
+      auth: token,
+    }),
+
+    mutationKey: [queryKeys.payMembershipFee, token],
+
+    onSuccess: (data) => {
+      toggleSuperOverlay(true);
+      window.location.href = data["redirect_url"];
+    },
+
+    onError: (err) => {
+      console.log(err);
+    },
+  });
+
+  function handlePayClick() {
+    if (user && !user.hasPaidMembershipfee && !payMembershipFeeLoading) {
+      payMembershipFee();
+    }
+  }
+
+  if (user && !user.hasPaidMembershipfee && !payMembershipFeeSuccess) {
+    return (
+      <Overlay z={3}>
+        <div className="w-full bg-white mt-4 pt-10 pb-6 px-4 rounded ">
+          <div className="flex flex-row text-[--color-brand] justify-start  items-center">
+            <h1 className=" font-bold text-lg md:text-xl   self-center  capitalize">
+              Complete your Membership process
+            </h1>
+          </div>
+
+          {payMembershipFeeError && (
+            <div className="mt-2">
+              <p className="text-[--text-danger]">
+                {payMembershipFeeErrorData?.message}
+              </p>
+            </div>
+          )}
+
+          <p className="text-[--primary] mt-3   first-letter:uppercase">
+            Hello there! We are glad you signed up for SafeHome. However, you
+            must pay a one-time membership fee of{" "}
+            <span className="font-semibold">₦5,000</span> to complete your
+            membership process. You will be able to use all of SafeHome's
+            features after you make the payment.
+          </p>
+
+          <div className="mt-8 flex flex-row justify-end items-center w-full">
+            <button
+              onClick={handlePayClick}
+              disabled={payMembershipFeeLoading}
+              className="btn-1"
+            >
+              {payMembershipFeeLoading ? <Spinner /> : "Pay Now"}
+            </button>
+          </div>
+        </div>
+      </Overlay>
+    );
+  }
+
+  return null;
+}

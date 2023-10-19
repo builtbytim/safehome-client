@@ -6,6 +6,7 @@ import Notifications from "./components/Notifications";
 import RemoteDataProvider from "./utils/RemoteDataProvider";
 import TransactionReceipt from "./components/home/popups/Receipt";
 import SuperOverlay from "./components/SuperOverlay";
+import MembershipFeePrompt from "./components/MembershipFeePrompt";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default async function RootLayout({ children }) {
         <SuperOverlay />
         <Notify />
         <RemoteDataProvider>
+          <MembershipFeePrompt />
           <Notifications />
           <TransactionReceipt />
           {children}

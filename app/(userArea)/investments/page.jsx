@@ -71,7 +71,7 @@ function Page({ authenticationToken, authenticatedUser }) {
 
   function setOwnersFilter(value) {
     return () => {
-      setParams((prev) => ({ ...prev, ownersClub: value }));
+      setParams((prev) => ({ ...prev, ownersClub: value, page: 1 }));
     };
   }
 

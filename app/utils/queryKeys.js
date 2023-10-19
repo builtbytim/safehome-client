@@ -38,6 +38,7 @@ const queryKeys = {
   markNotificationAsRead: "markNotificationAsRead",
   markAllNotificationsAsRead: "markAllNotificationsAsRead",
   clearMyNotifications: "clearMyNotifications",
+  payMembershipFee: "payMembershipFee",
 };
 
 export default queryKeys;

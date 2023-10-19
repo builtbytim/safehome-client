@@ -57,6 +57,7 @@ const config = {
     markNotificationAsRead: "/notifications",
     markAllNotificationsAsRead: "/notifications/mark-all-as-read",
     clearMyNotifications: "/notifications/clear-all",
+    payMembershipFee: "/payments/membership",
   },
 
   signInModes: {
