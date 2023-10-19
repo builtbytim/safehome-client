@@ -60,7 +60,9 @@ function Page({ authenticationToken, authenticatedUser }) {
 
   const openInfo = (idOrAsset, skipFind = false) => {
     if (!skipFind) {
-      const selected = investibleAssets.find((asset) => asset.id === idOrAsset);
+      const selected = investibleAssets.find(
+        (asset) => asset.uid === idOrAsset
+      );
       setSelectedAsset(selected);
     } else {
       setSelectedAsset(idOrAsset);
