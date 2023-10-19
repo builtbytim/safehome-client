@@ -10,7 +10,7 @@ import useOutsideClickDetector from "../utils/hooks/useOutsideClickDetector";
 
 export default function Notify() {
   const props = useNotifyStore((state) => state.notifyState);
-  const {
+  let {
     content,
     title,
     show,
@@ -23,6 +23,10 @@ export default function Notify() {
   } = props;
 
   //   console.log(props);
+
+  if (content.toLowerCase() === "failed to fetch") {
+    content = "Please check your internet connection and try again.";
+  }
 
   const ref = useRef(null);
 

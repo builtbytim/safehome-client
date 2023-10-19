@@ -10,6 +10,7 @@ import ScrollLink from "../ScrollLink";
 import { NumericFormat } from "react-number-format";
 import useUserWallet from "../../utils/hooks/useUserWallet";
 import useUserInvestmentStats from "../../utils/hooks/useUserInvestmentStats";
+import cn from "classnames";
 
 function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
   const { data, isLoading, isError, isSuccess, refetch } = useUserWallet(

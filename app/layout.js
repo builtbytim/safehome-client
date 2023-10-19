@@ -4,6 +4,7 @@ import config from "./utils/config";
 import Notify from "./components/Notify";
 import Notifications from "./components/Notifications";
 import RemoteDataProvider from "./utils/RemoteDataProvider";
+import TransactionReceipt from "./components/home/popups/Receipt";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default async function RootLayout({ children }) {
         <RemoteDataProvider>
           <Notify />
           <Notifications />
+          <TransactionReceipt />
           {children}
         </RemoteDataProvider>
       </body>

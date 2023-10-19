@@ -10,9 +10,12 @@ import ErrorMessageView from "../ErrorMessageView";
 import LoadingView from "../LoadingView";
 import cn from "classnames";
 import Pagination from "../Pagination";
+import { useRouter, usePathname } from "next/navigation";
 
 function TransactionHistoryTable({ token, params, setPageFilter }) {
   const queryParams = new URLSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
   if (params.type) queryParams.append("type", params.type);
   if (params.startDate) queryParams.append("startDate", params.startDate);
@@ -20,6 +23,12 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
   if (params.fromLast) queryParams.append("fromLast", params.fromLast);
   if (params.page) queryParams.append("page", params.page);
   if (params.limit) queryParams.append("limit", params.limit);
+
+  function showTxReceiptFor(ref) {
+    return () => {
+      router.push(`${pathname}?showTx=true&txRef=${ref}`);
+    };
+  }
 
   const { isLoading, isError, refetch, data, isSuccess, error, isFetching } =
     useQuery({
@@ -85,7 +94,8 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
           {data.items.map((v, i) => (
             <div
               key={i}
-              className="flex flex-col justify-center items-start space-y-2 border-b border-[#e2e2e2] py-4"
+              onClick={showTxReceiptFor(v.reference)}
+              className="flex flex-col justify-center items-start space-y-2 border-b border-[#e2e2e2] py-4 cursor-pointer"
             >
               <div className="flex flex-row justify-between items-center w-full  overflow-x-auto max-w-full no-scrollbar">
                 <div className="flex max-w-[50%] flex-row justify-center items-center space-x-2 truncate">
@@ -153,7 +163,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
         </div>
 
         {/* For Desktops  */}
-        <div className="hidden md:block overflow-auto max-h-[482px] ">
+        <div className="hidden md:block overflow-auto max-h-[482px]  ">
           <table className="w-full  table text-[--text-secondary]  ">
             <thead className="w-full uppercase font-semibold">
               <tr className="table-row w-full ">
@@ -183,8 +193,9 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
             <tbody>
               {data.items.map((v, i) => (
                 <tr
+                  onClick={showTxReceiptFor(v.reference)}
                   key={i}
-                  className="table-row text-left text-sm odd:bg-[--b1]"
+                  className="table-row text-left text-sm odd:bg-[--b1] cursor-pointer"
                 >
                   <td className="py-4 text-left pl-8">{i + 1}</td>
                   <td className="py-4 text-left pl-8">

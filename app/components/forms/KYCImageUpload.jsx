@@ -78,7 +78,7 @@ function KYCImageUpload({ user, token }) {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <p className="text-[--placeholder] text-xs pb-4">
         {" "}
         Upload a clear picture of your{" "}

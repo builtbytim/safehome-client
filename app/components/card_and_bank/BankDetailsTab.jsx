@@ -4,50 +4,76 @@ import Image from "next/image";
 
 import bankLogo from "../../../assets/images/zenith-logo.svg";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
-import { GoPencil } from "react-icons/go";
+import { BsBank } from "react-icons/bs";
 import { TbArchive } from "react-icons/tb";
 import { createFetcher } from "../../utils/fetchUtils";
 import queryKeys from "../../utils/queryKeys";
 import { useQuery, useQueryClient, useMutation } from "react-query";
 import { useNotifyStore } from "../../utils/store";
 import config from "../../utils/config";
-import Spinner from "../Spinner";
 import LoadingView from "../LoadingView";
 import ErrorMessageView from "../ErrorMessageView";
+import useOutsideClickDetector from "../../utils/hooks/useOutsideClickDetector";
 
-const CardDisplay = ({ logo, name, bank, acct_num, id }) => {
+const CardDisplay = ({ name, bank, accountNumber, id, uid, token }) => {
   const [showPopup, setShowPopup] = useState(false);
 
   // Hide Popups when not clicked on
   const cardPopupRef = useRef(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        cardPopupRef.current &&
-        !cardPopupRef.current.contains(event.target)
-      ) {
-        setShowPopup(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside, true);
-    return () => {
-      document.removeEventListener("click", handleClickOutside, true);
-    };
-  }, [showPopup]);
+  useOutsideClickDetector(cardPopupRef, () => {
+    setShowPopup(false);
+  });
+
+  // delete bank mutation
+
+  const queryClient = useQueryClient();
+  const notify = useNotifyStore((state) => state.setNotify);
+
+  const { mutate, isLoading: isLoadingDeleteBank } = useMutation({
+    mutationKey: queryKeys.deleteBankAccount,
+    mutationFn: createFetcher({
+      url: config.apiPaths.deleteBankAccount,
+      method: "DELETE",
+      auth: token,
+      surfix: `/${uid}`,
+    }),
+    onSuccess: () => {
+      setShowPopup(false);
+
+      queryClient.invalidateQueries(queryKeys.getBankAccounts);
+      notify({
+        title: "Bank Account Deleted",
+        content: "Bank account deleted successfully.",
+        allowClose: true,
+        show: true,
+      });
+    },
+
+    onError: (error) => {
+      setShowPopup(false);
+
+      notify({
+        title: "An error occured",
+        content: error.message,
+        allowClose: true,
+        show: true,
+      });
+    },
+  });
+
+  function handleDelete() {
+    if (isLoadingDeleteBank) return;
+    mutate();
+  }
+
   return (
     <div
       className={`rounded-lg w-full h-[195px] p-5 pt-6 flex flex-col justify-between bg-[--b1] shadow`}
     >
       <div className="flex items-center justify-between gap-3 relative">
-        <div className="h-[50px] w-auto max-w-[75px]">
-          <Image
-            src={logo}
-            alt="card"
-            width="auto"
-            height="auto"
-            className="w-auto h-full object-contain"
-          />
+        <div className="">
+          <BsBank className="text-2xl lg:text-3xl" />
         </div>
         <PiDotsThreeVerticalBold
           className="text-xl cursor-pointer"
@@ -57,21 +83,24 @@ const CardDisplay = ({ logo, name, bank, acct_num, id }) => {
         {/* Popup */}
         {showPopup && (
           <div
-            className={`absolute w-full max-w-[250px] z-[100] right-0 translate-x-[-30px] translate-y-[25px]  overflow-hidden 
+            className={`absolute w-full max-w-[150px] z-20 right-0 translate-x-[-30px]   overflow-hidden 
 					${
             id % 2 === 0
               ? "md:left-[100%] md:translate-x-2"
               : "md:right-0 xl:left-[100%] md:translate-x-[-30px] xl:translate-x-2"
           }`}
           >
-            <div className="bg-white shadow-lg rounded" ref={cardPopupRef}>
-              {/* <button className="flex w-full gap-3 items-center py-5 px-5 hover:bg-[--color-brand] hover:text-white font-semibold">
-                <GoPencil className="text-lg" />
-                <p>Edit Bank Details</p>
-              </button> */}
-              <button className="flex w-full gap-3 items-center py-5 px-5 hover:bg-[--color-brand] hover:text-white font-semibold">
-                <TbArchive className="text-lg" />
-                <p>Delete Bank</p>
+            <div
+              className="bg-white border shadow-lg rounded"
+              ref={cardPopupRef}
+            >
+              <button
+                disabled={isLoadingDeleteBank}
+                onClick={handleDelete}
+                className="flex w-full rounded gap-3 items-center py-2 px-5 hover:bg-gray-50 disabled:opacity-40 transitioning "
+              >
+                <TbArchive className="text-sm" />
+                {isLoadingDeleteBank ? <p>Deleting...</p> : <p>Delete</p>}
               </button>
             </div>
           </div>
@@ -85,7 +114,7 @@ const CardDisplay = ({ logo, name, bank, acct_num, id }) => {
 
       <div className="flex justify-between gap-2 items-end font-medium">
         <p className="">{bank}</p>
-        <p>{acct_num}</p>
+        <p>{accountNumber}</p>
       </div>
     </div>
   );
@@ -112,13 +141,13 @@ const BankDetailsTab = ({ token }) => {
   return (
     <div className="w-full">
       {getBankAccountsLoading && (
-        <div className="flex h-[50vh] justify-center items-center  w-full">
+        <div className="flex py-16 justify-center items-center  w-full">
           <LoadingView />
         </div>
       )}
 
       {getBankAccountsError && (
-        <div className="flex h-[50vh] justify-center items-center  w-full">
+        <div className="flex py-16 justify-center items-center  w-full">
           <ErrorMessageView
             message="An error occured while fetching your bank accounts"
             refetch={getBankAccountsRefetch}
@@ -142,8 +171,10 @@ const BankDetailsTab = ({ token }) => {
               logo={bankLogo}
               name={data.accountName}
               bank={data.bankName}
-              acct_num={data.accountNumber}
+              accountNumber={data.accountNumber}
               id={index}
+              uid={data.uid}
+              token={token}
             />
           ))}
         </div>

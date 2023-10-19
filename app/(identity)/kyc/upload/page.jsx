@@ -5,8 +5,8 @@ import KYCImageUpload from "../../../components/forms/KYCImageUpload";
 
 function Page({ authenticatedUser, authenticationToken }) {
   return (
-    <div className="">
-      <div className="space-y-6 ">
+    <div className="w-full">
+      <div className="space-y-6 w-full">
         <h1 className="font-semibold  text-xl lg:text-2xl text-left text-[--color-brand]">
           {" "}
           KYC Verification

@@ -29,6 +29,10 @@ function KYCForm({ user, token }) {
         content: "Your KYC information is currently being reviewed. Thank you.",
         allowClose: false,
         show: true,
+        onAccept: () => {
+          router.replace("/");
+        },
+        onAcceptText: "Go Home",
       });
     }
 
@@ -47,6 +51,10 @@ function KYCForm({ user, token }) {
         content: "Your KYC information is approved. Thank you.",
         allowClose: false,
         show: true,
+        onAccept: () => {
+          router.replace("/");
+        },
+        onAcceptText: "Go Home",
       });
     }
   }, []);
