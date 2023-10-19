@@ -51,6 +51,8 @@ export default function MembershipFeePrompt() {
     }
   }
 
+  console.log(user);
+
   if (user && !user.hasPaidMembershipfee && !payMembershipFeeSuccess) {
     return (
       <Overlay z={3}>
@@ -73,7 +75,7 @@ export default function MembershipFeePrompt() {
             Hello there! We are glad you signed up for SafeHome. However, you
             must pay a one-time membership fee of{" "}
             <span className="font-semibold">₦5,000</span> to complete your
-            membership process. You will be able to use all of SafeHome's
+            membership process. You will be able to use all of SafeHome&apos;s
             features after you make the payment.
           </p>
 

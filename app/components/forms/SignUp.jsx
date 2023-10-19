@@ -186,14 +186,14 @@ function SignUp() {
                     htmlFor="surname"
                     className="text-[--text-secondary] text-sm text-left"
                   >
-                    Surname
+                    Last Name
                   </label>
 
                   <Field
                     name="surname"
                     type="text"
                     className="field-1"
-                    placeholder="Surname"
+                    placeholder="Last Name"
                   />
 
                   <ErrorMessage
