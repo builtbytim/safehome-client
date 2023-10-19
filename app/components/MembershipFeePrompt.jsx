@@ -12,7 +12,7 @@ import Spinner from "./Spinner";
 
 export default function MembershipFeePrompt() {
   const user = useDataStore((state) => state.data.usr);
-  useBodyScrollLock(user && !user.hasPaidMembershipfee);
+  useBodyScrollLock(user && !user.hasPaidMembershipFee);
 
   const token = useDataStore((state) => state.data.token);
 
@@ -46,14 +46,12 @@ export default function MembershipFeePrompt() {
   });
 
   function handlePayClick() {
-    if (user && !user.hasPaidMembershipfee && !payMembershipFeeLoading) {
+    if (user && !user.hasPaidMembershipFee && !payMembershipFeeLoading) {
       payMembershipFee();
     }
   }
 
-  console.log(user);
-
-  if (user && !user.hasPaidMembershipfee && !payMembershipFeeSuccess) {
+  if (user && !user.hasPaidMembershipFee && !payMembershipFeeSuccess) {
     return (
       <Overlay z={3}>
         <div className="w-full bg-white mt-4 pt-10 pb-6 px-4 rounded ">
@@ -65,7 +63,7 @@ export default function MembershipFeePrompt() {
 
           {payMembershipFeeError && (
             <div className="mt-2">
-              <p className="text-[--text-danger]">
+              <p className="text-sm text-[--text-danger]">
                 {payMembershipFeeErrorData?.message}
               </p>
             </div>
