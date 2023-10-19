@@ -10,10 +10,10 @@ import {
   AddBank,
 } from "../../../components/card_and_bank";
 import { PopUpTopBar } from "../../../components/security";
-import TabSwitch from "../../../components/savings/TabSwitch";
+import useTabParam from "../../../utils/hooks/useTabParam";
 
 function Page({ authenticatedUser, authenticationToken }) {
-  const [tabState, setTabState] = useState(0);
+  const { tab: tabState, setTab: setTabState } = useTabParam("tab", 0);
   const toggleRef = useRef();
   const [showAddCard, setShowAddCard] = useState(false);
   const [showAddBank, setShowAddBank] = useState(false);

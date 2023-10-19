@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Overlay from "../../Overlay2";
 import { ReceiptTopBar } from ".";
 import { useSearchParams } from "next/navigation";

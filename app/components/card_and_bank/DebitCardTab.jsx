@@ -41,11 +41,8 @@ const CardDisplay = ({ type, number, expiryDate, name }) => (
 const DebitCardTab = () => {
   return (
     <div className="w-full">
-      <div className="flex h-[50vh] justify-center items-center  w-full">
-        <p className="text-xl lg:text-2xl font-semibold text-[--placeholder]">
-          {" "}
-          Coming Soon
-        </p>
+      <div className="flex py-16 justify-center items-center  w-full">
+        <p className="text-xl text-[#C4C4C4] lg:text-2xl  "> Coming Soon</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[650px]">

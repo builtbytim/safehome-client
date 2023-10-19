@@ -6,23 +6,14 @@ import { NumericFormat } from "react-number-format";
 import inv1 from "../../../assets/images/investment/inv1.png";
 
 const MyInvestmentCard = ({ investment, openInfo }) => {
-  const {
-    assetInfo,
-    isActive,
-    completed,
-    createdAt,
-    amount,
-    paymentReference,
-    units,
-    assetUid,
-  } = investment;
+  const { assetInfo, isActive, createdAt, amount, units } = investment;
 
   const { assetName } = assetInfo;
 
   return (
     <div
       onClick={() => {
-        openInfo(assetUid);
+        openInfo(assetInfo, true);
       }}
       title={!isActive ? "Payment has not been completed" : ""}
       className={

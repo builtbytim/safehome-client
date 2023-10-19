@@ -2,12 +2,12 @@ import Image from "next/image";
 
 import closeIcon from "../../../../assets/images/icons/closeIcon.svg";
 
-const ReceiptTopBar = ({ close, title, desc }) => {
+const ReceiptTopBar = ({ close, title }) => {
   return (
-    <div className=" bg-white">
+    <div className=" bg-white ">
       <div className="px-4 flex justify-end items-center w-full py-6">
         <button
-          className="p-[4px] border-2 border-[--lines] rounded-full"
+          className="p-[4px] border-2 border-[--lines] hover:bg-[--lines] transitioning rounded-full"
           onClick={() => close()}
         >
           <Image

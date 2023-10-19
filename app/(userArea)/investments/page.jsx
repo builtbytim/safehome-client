@@ -22,9 +22,10 @@ import queryKeys from "../../utils/queryKeys";
 import config from "../../utils/config";
 import MyInvestments from "../../components/investment/MyInvestments";
 import MiniFetchStatusIndicator from "../../components/MiniFetchStatusIndicator";
+import useTabParam from "../../utils/hooks/useTabParam";
 
 function Page({ authenticationToken, authenticatedUser }) {
-  const [tabState, setTabState] = useState(0);
+  const { tab: tabState, setTab: setTabState } = useTabParam("tab", 0, [0, 2]);
   const [params, setParams] = useState({
     page: 1,
     limit: 8,
@@ -33,7 +34,7 @@ function Page({ authenticationToken, authenticatedUser }) {
   const [showInvestmentInfo, setShowInvestmentInfo] = useState(false);
   const [showInvestNow, setShowInvestNow] = useState(false);
   const [showAboutInvestment, setShowAboutInvestment] = useState(false);
-  const [selectedAssetUid, setSelectedAssetUid] = useState(null);
+  const [selectedAsset, setSelectedAsset] = useState(null);
 
   const queryParams = new URLSearchParams();
   queryParams.append("page", params.page);
@@ -57,11 +58,13 @@ function Page({ authenticationToken, authenticatedUser }) {
 
   const investibleAssets = data?.items || [];
 
-  const selectedAsset =
-    investibleAssets.find((asset) => asset.uid === selectedAssetUid) || null;
-
-  const openInfo = (id) => {
-    setSelectedAssetUid(id);
+  const openInfo = (idOrAsset, skipFind = false) => {
+    if (!skipFind) {
+      const selected = investibleAssets.find((asset) => asset.id === idOrAsset);
+      setSelectedAsset(selected);
+    } else {
+      setSelectedAsset(idOrAsset);
+    }
     setShowInvestmentInfo(true);
   };
 

@@ -70,6 +70,8 @@ const BasicInfoTab = ({ user, token }) => {
           dateOfBirth: user.dateOfBirth
             ? new Date(user.dateOfBirth * 1000).toISOString().split("T")[0]
             : new Date().toISOString().split("T")[0],
+          address: user.address || "",
+          state: user.state || "",
         }}
         onSubmit={() => {}}
         validationSchema={validationSchema}

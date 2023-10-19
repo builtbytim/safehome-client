@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-
+import useTabParam from "../../utils/hooks/useTabParam";
 import { BasicInfoTab, NextOfKinTab } from ".";
 
 function ProfileInformationArea({
@@ -9,7 +8,7 @@ function ProfileInformationArea({
   authenticationToken,
   signOut,
 }) {
-  const [tabState, setTabState] = useState(0);
+  const { tab: tabState, setTab: setTabState } = useTabParam("tab", 0);
 
   return (
     <main className=" space-y-8 lg:space-y-10 text-[--text-secondary] border border-[--lines] p-5 h-full rounded-2xl">

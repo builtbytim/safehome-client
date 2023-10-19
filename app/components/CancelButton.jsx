@@ -4,12 +4,14 @@ import { BsX } from "react-icons/bs";
 
 function CancelButton() {
   return (
-    <BsX
-      onClick={() => {
-        window.history.back();
-      }}
-      className="text-3xl transitioning hover:scale-[1.1] text-[#8D4000] cursor-pointer"
-    />
+    <div className="p-2 rounded-full cursor-pointer hover:bg-[--b1] transitioning">
+      <BsX
+        onClick={() => {
+          window.history.back();
+        }}
+        className="text-3xl  text-[#8D4000] "
+      />
+    </div>
   );
 }
 

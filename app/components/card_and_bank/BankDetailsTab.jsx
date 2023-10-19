@@ -157,7 +157,7 @@ const BankDetailsTab = ({ token }) => {
 
       {getBankAccountsSuccess && getBankAccountsData.length === 0 && (
         <div className="flex flex-col justify-center items-center py-16 space-y-4">
-          <p className="text-[#C4C4C4]">
+          <p className="text-[#C4C4C4] text-sm lg:text-lg">
             You have no bank accounts linked to your SafeHome
           </p>
         </div>

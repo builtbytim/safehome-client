@@ -64,7 +64,7 @@ export default function Notify() {
             <div className="p-1 rounded-full hover:bg-[--b1] cursor-pointer">
               <BsX
                 role="button"
-                className="text-2xl lg:text-3xl  rounded-full text-[--primary] transitioning"
+                className="text-3xl lg:text-3xl  rounded-full text-[--primary] transitioning"
                 onClick={closeSelf}
               />
             </div>
