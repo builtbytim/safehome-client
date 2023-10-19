@@ -77,11 +77,15 @@ const BasicInfoTab = ({ user, token }) => {
         {({ isValid, setFieldValue }) => {
           return (
             <Form className="py-6 w-full">
-              <legend className="text-xs text-[--color-brand] pb-3">
-                {" "}
-                Your KYC is {user.kycStatus || " pending"}, if you wish to make
-                changes, please contact support.
-              </legend>
+              {user.kycStatus && (
+                <legend className="text-xs text-[--color-brand] pb-3">
+                  {user.kycStatus === "APPROVED" &&
+                    "Your KYC is approved, you can not edit your profile anymore at this time. If you wish to make changes, please contact support."}
+
+                  {user.kycStatus === "PENDING" &&
+                    "Your KYC is pending, you can not edit your profile anymore at this time. If you wish to make changes, please contact support."}
+                </legend>
+              )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-x-5 md:gap-y-7">
                 <div className="relative">
                   <p className="account-form-text">First Name</p>

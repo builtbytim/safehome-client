@@ -57,7 +57,7 @@ function ExploreCardsRow({ user }) {
         className="flex   flex-row justify-between items-center overflow-x-auto whitespace-nowrap space-x-4 no-scrollbar text-sm lg:text-lg"
       >
         {exploreItems.map((item, i) => {
-          if (i === 0 && user.kycStatus === "approved") return null;
+          if (i === 0 && user.kycStatus === "APPROVED") return null;
           return (
             <ExploreCard
               key={i}

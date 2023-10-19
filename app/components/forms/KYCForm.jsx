@@ -15,7 +15,7 @@ import queryKeys from "../../utils/queryKeys";
 import { useNotifyStore } from "../../utils/store";
 import GenericSelectFieldVariant1 from "./branded/GenericSelectFieldVariant1";
 import { states } from "../../utils/constants";
-import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 const modesOfIdentification = [
   {
@@ -41,6 +41,35 @@ const modesOfIdentification = [
 
 function KYCForm({ user, token }) {
   const setNotify = useNotifyStore((state) => state.setNotify);
+
+  useEffect(() => {
+    if (user.kycStatus === "PENDING") {
+      setNotify({
+        title: "KYC Review Pending",
+        content: "Your KYC information is currently being reviewed. Thank you.",
+        allowClose: false,
+        show: true,
+      });
+    }
+
+    if (user.kycStatus === "REJECTED") {
+      setNotify({
+        title: "KYC Review Rejected",
+        content: "Your KYC information was rejected. Please try again.",
+        allowClose: true,
+        show: true,
+      });
+    }
+
+    if (user.kycStatus === "APPROVED") {
+      setNotify({
+        title: "KYC Review Approved",
+        content: "Your KYC information is approved. Thank you.",
+        allowClose: false,
+        show: true,
+      });
+    }
+  }, []);
 
   const { isLoading, mutate, isSuccess } = useMutation({
     mutationKey: [queryKeys.addKycInfo],

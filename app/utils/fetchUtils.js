@@ -116,31 +116,39 @@ export function createFetcher({
   };
 }
 
-export function extractErrorMessage(err) {
-  const msg = getErrMsg(err);
+export function extractErrorMessage(res) {
+  const msg = getErrMsg(res);
 
-  if (err instanceof String) return msg;
-  return "An unexpected error occurred";
+  if (typeof msg === "string") {
+    return msg;
+  }
+
+  if (typeof msg === "object") {
+    return JSON.stringify(msg);
+  }
+
+  return "An unknown error occurred";
 }
 
-export function getErrMsg(err) {
-  if (err instanceof Error) {
-    return err.message;
+export function getErrMsg(res) {
+  if (typeof res === "string") {
+    return res;
   }
 
-  if (err instanceof String) {
-    return err;
+  if (res instanceof Error) {
+    return res?.message;
   }
 
-  if (err instanceof Object) {
-    return (
-      err?.error?.detail ||
-      err?.error?.message ||
-      err?.error?.error ||
-      err?.error?.errorMessage ||
-      err?.error?.error_message ||
-      err?.errorMessage
-    );
+  if (typeof res.error === "object") {
+    return res.error.detail || res.error.message || res.error.error;
+  }
+
+  if (typeof res.errorMessage === "string") {
+    return res.errorMessage;
+  }
+
+  if (typeof res.statusText === "string") {
+    return res.statusText;
   }
 
   return err;
