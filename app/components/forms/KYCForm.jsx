@@ -10,36 +10,16 @@ import {
   isDigit,
   extractErrorMessage,
 } from "../../utils/fetchUtils";
-import Reviewing from "../Reviewing";
 import queryKeys from "../../utils/queryKeys";
 import { useNotifyStore } from "../../utils/store";
 import GenericSelectFieldVariant1 from "./branded/GenericSelectFieldVariant1";
 import { states } from "../../utils/constants";
 import { useEffect } from "react";
-
-const modesOfIdentification = [
-  {
-    name: "National Identity Number (NIN)",
-    value: "NIN",
-  },
-
-  {
-    name: "International Passport",
-    value: "PASSPORT",
-  },
-
-  {
-    name: "Driver's License",
-    value: "DRIVERS_LICENSE",
-  },
-
-  {
-    name: "Voter's Card",
-    value: "VC",
-  },
-];
+import { useRouter } from "next/navigation";
+import { kycModesOfIdentification } from "../../utils/constants";
 
 function KYCForm({ user, token }) {
+  const router = useRouter();
   const setNotify = useNotifyStore((state) => state.setNotify);
 
   useEffect(() => {
@@ -94,6 +74,21 @@ function KYCForm({ user, token }) {
       }
     },
 
+    onSuccess(data, vars) {
+      setNotify({
+        title: "KYC Information Submitted",
+        content:
+          "Your information was submitted successfully. Proceed to upload your documents.",
+        allowClose: false,
+        show: true,
+        onAccept: () => {
+          router.replace(`/kyc/upload?documentType=${vars.documentType}`);
+        },
+
+        onAcceptText: "Proceed",
+      });
+    },
+
     onError: function (error) {
       setNotify({
         title: "Something went wrong",
@@ -134,7 +129,7 @@ function KYCForm({ user, token }) {
       validationSchema={Yup.object().shape({
         documentType: Yup.string()
           .oneOf(
-            modesOfIdentification.map((v) => v.value),
+            kycModesOfIdentification.map((v) => v.value),
 
             "Invalid document type"
           )
@@ -176,8 +171,6 @@ function KYCForm({ user, token }) {
         return (
           <Form className="space-y-7 w-full">
             <BarLoader v={0} active={isLoading} />
-
-            {isSuccess && <Reviewing />}
 
             <div className="w-full  relative flex flex-col justify-center items-start space-y-2">
               <label
@@ -239,7 +232,7 @@ function KYCForm({ user, token }) {
                 handleChange={({ selectedItem }) => {
                   setFieldValue("documentType", selectedItem.value);
                 }}
-                items={modesOfIdentification}
+                items={kycModesOfIdentification}
               />
 
               <ErrorMessage

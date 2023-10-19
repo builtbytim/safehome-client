@@ -146,9 +146,7 @@ export default function Notifications() {
                 type="button"
                 className="text-[--text-danger] transitioning hover:cursor-pointer text-sm  hover:text-[--primary] rounded-brand p-1  disabled:opacity-20 disabled:pointer-events-none "
               >
-                {isLoadingMarkAllAsRead
-                  ? "Marking all as read..."
-                  : "Mark all as read"}
+                {isLoadingMarkAllAsRead ? "Marking..." : "Mark all as read"}
               </button>
             )}
           </div>
@@ -195,16 +193,16 @@ export default function Notifications() {
               </div>
             )}
 
-            {data && data.unfilteredEntries > 0 && data.entries === 0 && (
+            {/* {data && data.unfilteredEntries > 0 && data.entries === 0 && (
               <div className="w-full flex h-full flex-col justify-center items-center">
                 <div className="h-full py-16   space-y-4  mt-4 flex flex-col justify-center items-center text-[--color-brand-2]">
                   <FcEmptyFilter className="text-4xl text-[--color-brand-2] hover:text-[--color-brand-2]/80 transition-flow" />
-                  <p className="text-center text-lg md:text-xl">
+                  <p className="text-center text-sm md:text-lg">
                     No notifications match your filter at the moment
                   </p>
                 </div>
               </div>
-            )}
+            )} */}
 
             {data &&
               data.numItems > 0 &&

@@ -23,7 +23,7 @@ const config = {
     getSession: "/users/session",
     signIn: "/users/sign-in",
     uploadKycPicture: "/users/kyc/photo",
-    uploadKycID: "/users/kyc/document",
+    uploadKycID: "/users/kyc/upload",
     signOut: "/users/sign-out",
     changePassword: "/users/password/change",
     resetPassword: "/users/password/reset",

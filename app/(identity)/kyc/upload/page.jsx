@@ -1,6 +1,6 @@
 "use client";
 
-import SecureRoute from "../../components/SecureRoute";
+import SecureRoute from "../../../components/SecureRoute";
 import KYCImageUpload from "../../../components/forms/KYCImageUpload";
 
 function Page({ authenticatedUser, authenticationToken }) {
@@ -12,9 +12,7 @@ function Page({ authenticatedUser, authenticationToken }) {
           KYC Verification
         </h1>
 
-        <p className="text-[--text-secondary]">
-          Upload your KYC documents below
-        </p>
+        <p className="text-[--text-secondary]">Upload your documents below</p>
 
         <KYCImageUpload token={authenticationToken} user={authenticatedUser} />
       </div>

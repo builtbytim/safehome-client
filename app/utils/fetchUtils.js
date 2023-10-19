@@ -96,6 +96,7 @@ export function createFetcher({
   body = null,
   surfix = "",
   auth = null,
+  formEncoded = false,
 }) {
   return async (params = null) => {
     const res = await fetchUtil({
@@ -104,6 +105,7 @@ export function createFetcher({
       body: body || params,
       surfix,
       auth,
+      formEncoded,
     });
 
     if (res.success) {

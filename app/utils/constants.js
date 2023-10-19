@@ -131,3 +131,25 @@ export const navItems = [
     link: "/account/contact",
   },
 ];
+
+export const kycModesOfIdentification = [
+  {
+    name: "National Identity Number (NIN)",
+    value: "NIN",
+  },
+
+  {
+    name: "International Passport",
+    value: "PASSPORT",
+  },
+
+  {
+    name: "Driver's License",
+    value: "DRIVERS_LICENSE",
+  },
+
+  {
+    name: "Voter's Card",
+    value: "VC",
+  },
+];

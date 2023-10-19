@@ -38,7 +38,7 @@ function UserAvatarArea({ user, token }) {
       "image/png": [".png"],
       "image/jpg": [".jpeg", ".jpg"],
     },
-    maxFiles: 5,
+    maxFiles: 1,
     maxSize: 1024 * 1024 * 2,
   });
 
