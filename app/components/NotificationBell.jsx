@@ -8,7 +8,7 @@ import { useQuery } from "react-query";
 import cn from "classnames";
 import { useDataStore } from "../utils/store";
 
-const FIVE_SECONDS = 1000 * 5;
+const TEN_SECONDS = 1000 * 10;
 
 function NotificationBell({ toggleNotifications, token }) {
   const dataStoreToken = useDataStore(
@@ -23,7 +23,7 @@ function NotificationBell({ toggleNotifications, token }) {
       auth: token || dataStoreToken,
     }),
     enabled: !!token || !!dataStoreToken,
-    refetchInterval: FIVE_SECONDS,
+    refetchInterval: TEN_SECONDS,
   });
 
   return (
@@ -47,6 +47,7 @@ function NotificationBell({ toggleNotifications, token }) {
 
       {isSuccess && data && data.unreadCount > 0 && (
         <span
+          title={`${data.unreadCount} unread notifications`}
           className={
             "border rounded-full animate-bounce border-[--text-brand] bg-[--text-brand] p-[0.125rem] md:p-1 inline-block absolute top-0 right-0 "
           }

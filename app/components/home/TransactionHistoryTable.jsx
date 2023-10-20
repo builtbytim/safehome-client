@@ -196,7 +196,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
                 <tr
                   onClick={showTxReceiptFor(v.reference)}
                   key={i}
-                  className="table-row text-left text-sm odd:bg-[--b1] cursor-pointer"
+                  className="table-row text-left  text-sm odd:bg-[--b1] cursor-pointer hover:bg-[--platinum]"
                 >
                   <td className="py-4 text-left pl-8">{i + 1}</td>
                   <td className="py-4 text-left pl-8">

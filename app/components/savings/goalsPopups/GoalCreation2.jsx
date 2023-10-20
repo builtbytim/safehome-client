@@ -2,23 +2,113 @@
 
 import React from "react";
 import Overlay2 from "../../Overlay2";
-import { Slide } from "react-awesome-reveal";
 import { BiX } from "react-icons/bi";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import SwitchField from "../../forms/branded/SwitchField";
+import FormattingField from "../../forms/branded/FormattingField";
+import { FaNairaSign } from "react-icons/fa6";
+import GenericSelectFieldVariant1 from "../../forms/branded/GenericSelectFieldVariant1";
+import useOutsideClickDetector from "../../../utils/hooks/useOutsideClickDetector";
+import { useRef } from "react";
+import * as Yup from "yup";
+import { NumericFormat } from "react-number-format";
 
-function GoalCreation2({ show = false, toggleShow }) {
-  if (!show) return null;
+const intervals = [
+  {
+    name: "Daily",
+    value: "daily",
+  },
+  {
+    name: "Weekly",
+    value: "weekly",
+  },
+  {
+    name: "Monthly",
+    value: "monthly",
+  },
+  {
+    name: "Quarterly",
+    value: "quarterly",
+  },
+  {
+    name: "Yearly",
+    value: "yearly",
+  },
+];
+
+function GoalCreation2({
+  show = false,
+  toggleShow,
+  goBack,
+  formData,
+  handleSubmit,
+}) {
+  const validationSchema = Yup.object().shape({
+    preferredInterval: Yup.string()
+      .required("Required")
+      .oneOf(
+        intervals.map((interval) => interval.value),
+        "Invalid interval"
+      ),
+
+    amountToSaveOnDailyBasis: Yup.number()
+      .required("Required")
+      .min(1, "Amount must be greater than 0")
+      .typeError("Invalid amount")
+      .test(
+        "must-be-less-than-goal-amount",
+        "Amount must be less than goal amount",
+        (value) => {
+          const goalAmount = formData.goalAmount;
+          return value < goalAmount;
+        }
+      ),
+
+    startDate: Yup.date().required("Required"),
+
+    withdrawalDate: Yup.date()
+      .required("Required")
+      .test(
+        "is-greater-than-start-date",
+        "Must be later than the start date",
+        (value, context) => {
+          const startDate = context.parent.startDate;
+          const withdrawalDate = value;
+
+          if (!startDate || !withdrawalDate) return true;
+
+          const startDateObj = new Date(startDate);
+          const withdrawalDateObj = new Date(withdrawalDate);
+
+          return withdrawalDateObj > startDateObj;
+        }
+      ),
+
+    acceptTerms: Yup.boolean().isTrue(
+      "You must accept the terms and conditions to continue"
+    ),
+  });
+  const ref = useRef(null);
+
+  useOutsideClickDetector(ref, () => {
+    if (show) toggleShow();
+  });
+
+  function handleFormSubmit(values) {
+    console.log(values);
+  }
+
   return (
     <Overlay2 pos="center">
       <section
+        ref={ref}
         className={
           "w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40 px-6 py-6"
         }
       >
         <div className="flex flex-row justify-end items-center">
-          <div className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--lines] transitioning">
-            <BiX onClick={toggleShow} className="text-[--primary] text-xl" />
+          <div className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning">
+            <BiX onClick={toggleShow} className="text-[--primary] text-2xl" />
           </div>
         </div>
 
@@ -33,51 +123,77 @@ function GoalCreation2({ show = false, toggleShow }) {
           {/* Form now  */}
 
           <div>
-            <Formik initialValues={{}} onSubmit={() => {}}>
-              {({ isValid }) => {
+            <Formik
+              validationSchema={validationSchema}
+              initialValues={{
+                preferredInterval:
+                  formData.preferredInterval || intervals[0].value,
+
+                amountToSaveOnDailyBasis:
+                  formData.amountToSaveOnDailyBasis || "",
+
+                startDate: formData.startDate || "",
+                withdrawalDate: formData.withdrawalDate || "",
+                acceptTerms: formData.acceptTerms || false,
+              }}
+              initialTouched={{
+                acceptTerms: true,
+                preferredInterval: true,
+              }}
+              onSubmit={handleFormSubmit}
+            >
+              {({ isValid, setFieldValue }) => {
                 return (
                   <Form className="space-y-6">
                     <div className="w-full relative flex flex-col justify-center items-start space-y-2">
                       <label
-                        htmlFor="amountToSaveOnDailyBasis"
+                        htmlFor="preferredInterval"
                         className="text-[--text-secondary] font-medium text-sm text-left"
                       >
-                        Preferred amount to save on a daily basis
+                        Preferred Interval
                       </label>
 
-                      <Field
-                        name="amountToSaveOnDailyBasis"
-                        type="text"
-                        className="field-1"
-                        placeholder="Amount to save on daily basis"
+                      <GenericSelectFieldVariant1
+                        defaultSelectedItem={intervals[0]}
+                        handleChange={({ selectedItem }) => {
+                          setFieldValue(
+                            "preferredInterval",
+                            selectedItem.value,
+                            true
+                          );
+                        }}
+                        items={intervals}
                       />
 
                       <ErrorMessage
-                        name="amountToSaveOnDailyBasis"
+                        name="preferredInterval"
                         component="div"
-                        className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                        className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
                       />
                     </div>
 
                     <div className="w-full relative flex flex-col justify-center items-start space-y-2">
                       <label
-                        htmlFor="preferredTime"
+                        htmlFor="amountToSaveOnDailyBasis"
                         className="text-[--text-secondary] font-medium text-sm text-left"
                       >
-                        Preferred Time
+                        Preferred amount to save on interval basis
                       </label>
 
-                      <Field
-                        name="preferredTime"
-                        type="datetime-local"
+                      <FormattingField
+                        icon={FaNairaSign}
+                        type="text"
+                        inputMode="numeric"
                         className="field-1"
-                        placeholder=""
+                        name="amountToSaveOnDailyBasis"
+                        placeholder="Amount to save on interval basis"
+                        extraClasses="field-1"
                       />
 
                       <ErrorMessage
-                        name="preferredTime"
+                        name="amountToSaveOnDailyBasis"
                         component="div"
-                        className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                        className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
                       />
                     </div>
 
@@ -99,7 +215,7 @@ function GoalCreation2({ show = false, toggleShow }) {
                       <ErrorMessage
                         name="startDate"
                         component="div"
-                        className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                        className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
                       />
                     </div>
 
@@ -121,11 +237,11 @@ function GoalCreation2({ show = false, toggleShow }) {
                       <ErrorMessage
                         name="withdrawalDate"
                         component="div"
-                        className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                        className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
                       />
                     </div>
 
-                    <div className="w-full relative flex flex-col justify-center items-start space-y-2">
+                    {/* <div className="w-full relative flex flex-col justify-center items-start space-y-2">
                       <label
                         htmlFor="primarySource"
                         className="text-[--text-secondary] font-medium text-sm text-left"
@@ -147,43 +263,56 @@ function GoalCreation2({ show = false, toggleShow }) {
                       <ErrorMessage
                         name="primarySource"
                         component="div"
-                        className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                        className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
                       />
-                    </div>
+                    </div> */}
 
-                    <div className="w-full relative flex flex-col justify-center items-start space-y-2 ">
-                      <SwitchField />
+                    <div className="w-full pt-2 relative flex flex-col justify-center items-start space-y-2 ">
+                      <SwitchField
+                        handleChange={(value) => {
+                          setFieldValue("acceptTerms", value, true);
+                        }}
+                      />
                       <label
-                        htmlFor="acknowledgement"
+                        htmlFor="acceptTerms"
                         className="text-[--text-secondary] font-medium text-sm text-left"
                       >
                         I acknowledge and agree that in the event I do not
-                        achieve the Goal amount of (₦340,000.00) by the set
-                        withdrawal date, I will forfeit the interest accrued on
-                        this Goal savings. Additionally, I understand that
-                        breaking the Goal before the withdrawal date will result
-                        in the loss of all accrued interest and I will be
+                        achieve the Goal amount of{" "}
+                        <NumericFormat
+                          value={formData.goalAmount}
+                          prefix="₦ "
+                          displayType={"text"}
+                          thousandSeparator={true}
+                        />{" "}
+                        by the set withdrawal date, I will forfeit the interest
+                        accrued on this Goal savings. Additionally, I understand
+                        that breaking the Goal before the withdrawal date will
+                        result in the loss of all accrued interest and I will be
                         responsible for bearing the 1% payment gateway charge
                         for processing my deposits into this Goal
                       </label>
 
                       <ErrorMessage
-                        name="acknowledgement"
+                        name="acceptTerms"
                         component="div"
-                        className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                        className="absolute -bottom-[10%] left-0 text-[--text-danger] text-xs text-left"
                       />
                     </div>
 
                     <div className="pt-4 flex flex-col justify-center items-center space-y-4">
-                      <button className="btn-1 bg-[--text-brand-2] hover:bg-[--text-brand-2-hover] ">
+                      <button
+                        disabled={!isValid}
+                        type="submit"
+                        className="btn-1 bg-[--text-brand-2] hover:bg-[--text-brand-2-hover] "
+                      >
                         Create Goal
                       </button>
                       <button
-                        onClick={toggleShow}
+                        onClick={goBack}
                         className="btn-2 text-[--text-brand-2] border-[--text-brand-2] hover:bg-[#ff9100]/10"
                       >
-                        {" "}
-                        Cancel{" "}
+                        Back
                       </button>
                     </div>
                   </Form>

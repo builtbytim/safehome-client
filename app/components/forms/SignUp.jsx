@@ -180,13 +180,12 @@ function SignUp() {
                     className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                   />
                 </div>
-
                 <div className="w-full relative flex flex-col justify-center items-start space-y-2">
                   <label
                     htmlFor="surname"
                     className="text-[--text-secondary] text-sm text-left"
                   >
-                    Last Name
+                    Surname
                   </label>
 
                   <Field
@@ -202,73 +201,6 @@ function SignUp() {
                     className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                   />
                 </div>
-
-                <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                  <label
-                    htmlFor="gender"
-                    className="text-[--text-secondary] text-sm text-left"
-                  >
-                    Gender
-                  </label>
-
-                  <Field
-                    name="gender"
-                    type="text"
-                    as="select"
-                    className="field-1"
-                    placeholder="gender"
-                  >
-                    <option selected value="">
-                      Choose gender
-                    </option>
-
-                    <option value="MALE"> Male </option>
-                    <option value="FEMALE"> Female </option>
-                  </Field>
-
-                  <ErrorMessage
-                    name="gender"
-                    component="div"
-                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                  />
-                </div>
-
-                <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                  <label
-                    htmlFor="dateOfBirth"
-                    className="text-[--text-secondary] text-sm text-left"
-                  >
-                    Date of Birth
-                  </label>
-
-                  <Field
-                    name="dateOfBirth"
-                    type="date"
-                    max="2100-01-01"
-                    className="field-1"
-                  />
-
-                  <ErrorMessage
-                    name="dateOfBirth"
-                    component="div"
-                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                  />
-                </div>
-              </div>
-
-              {/* Slide 1 ends  */}
-
-              {/* Slide 2  */}
-
-              <div
-                className={
-                  "space-y-6 w-full " +
-                  cn({
-                    " block ": !isFirstSlide,
-                    " hidden ": isFirstSlide,
-                  })
-                }
-              >
                 <div className="w-full relative flex flex-col justify-center items-start space-y-2">
                   <label
                     htmlFor="email"
@@ -312,6 +244,72 @@ function SignUp() {
                     className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                   />
                 </div>
+              </div>
+
+              {/* Slide 1 ends  */}
+
+              {/* Slide 2  */}
+
+              <div
+                className={
+                  "space-y-6 w-full " +
+                  cn({
+                    " block ": !isFirstSlide,
+                    " hidden ": isFirstSlide,
+                  })
+                }
+              >
+                <div className="w-full relative flex flex-col justify-center items-start space-y-2">
+                  <label
+                    htmlFor="dateOfBirth"
+                    className="text-[--text-secondary] text-sm text-left"
+                  >
+                    Date of Birth
+                  </label>
+
+                  <Field
+                    name="dateOfBirth"
+                    type="date"
+                    max="2100-01-01"
+                    className="field-1"
+                  />
+
+                  <ErrorMessage
+                    name="dateOfBirth"
+                    component="div"
+                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                  />
+                </div>
+                <div className="w-full relative flex flex-col justify-center items-start space-y-2">
+                  <label
+                    htmlFor="gender"
+                    className="text-[--text-secondary] text-sm text-left"
+                  >
+                    Gender
+                  </label>
+
+                  <Field
+                    name="gender"
+                    type="text"
+                    as="select"
+                    className="field-1"
+                    placeholder="gender"
+                  >
+                    <option selected value="">
+                      Choose gender
+                    </option>
+
+                    <option value="MALE"> Male </option>
+                    <option value="FEMALE"> Female </option>
+                  </Field>
+
+                  <ErrorMessage
+                    name="gender"
+                    component="div"
+                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                  />
+                </div>
+
                 <div className="w-full relative flex flex-col justify-center items-start space-y-2">
                   <label
                     htmlFor="password"

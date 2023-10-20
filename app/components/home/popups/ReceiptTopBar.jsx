@@ -7,7 +7,7 @@ const ReceiptTopBar = ({ close, title }) => {
     <div className=" bg-white ">
       <div className="px-4 flex justify-end items-center w-full py-6">
         <button
-          className="p-[4px] border-2 border-[--lines] hover:bg-[--lines] transitioning rounded-full"
+          className="p-[4px] border-2 border-[--lines] hover:bg-[--b1] transitioning rounded-full"
           onClick={() => close()}
         >
           <Image

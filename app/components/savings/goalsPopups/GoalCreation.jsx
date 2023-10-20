@@ -2,18 +2,62 @@
 
 import React from "react";
 import Overlay2 from "../../Overlay2";
-import { Slide } from "react-awesome-reveal";
 import { BiX } from "react-icons/bi";
 import Image from "next/image";
 import GoalImage from "../../../../assets/images/investment/inv1.png";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import { useDropzone } from "react-dropzone";
+import { FaNairaSign } from "react-icons/fa6";
 import { useCallback, useState } from "react";
 import cn from "classnames";
+import GenericSelectFieldVariant1 from "../../forms/branded/GenericSelectFieldVariant1";
+import FormattingField from "../../forms/branded/FormattingField";
+import { useRef } from "react";
+import useOutsideClickDetector from "../../../utils/hooks/useOutsideClickDetector";
+import * as Yup from "yup";
 
-function GoalCreation({ show = false, toggleShow, handleSubmit }) {
-  const [imageFile, setImageFile] = useState(null);
-  const [rawFile, setRawFile] = useState(null);
+const savingsPrefs = [
+  {
+    name: "Wallet",
+    value: "wallet",
+  },
+  {
+    name: "Card",
+    value: "card",
+  },
+];
+
+const validationSchema = Yup.object().shape({
+  goalTitle: Yup.string()
+    .required("Required")
+    .min(3, "Too short")
+    .max(64, "Too long"),
+  goalPurpose: Yup.string()
+    .required("Required")
+    .min(64, "Too short")
+    .max(256, "Too long"),
+  goalAmount: Yup.number()
+    .required("Required")
+    .min(1000, "Too low")
+    .typeError("Invalid amount"),
+  savingsPreference: Yup.string()
+    .required("Required")
+    .oneOf(["wallet", "card"], "Invalid preference"),
+});
+
+function GoalCreation({ show = false, toggleShow, handleSubmit, formData }) {
+  const ref = useRef(null);
+
+  useOutsideClickDetector(ref, () => {
+    if (show) toggleShow();
+  });
+
+  const [imageFile, setImageFile] = useState(
+    formData.coverImageFile
+      ? URL.createObjectURL(formData.coverImageFile)
+      : null
+  );
+  const [rawFile, setRawFile] = useState(formData.coverImageFile || null);
 
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -26,21 +70,25 @@ function GoalCreation({ show = false, toggleShow, handleSubmit }) {
       "image/png": [".png"],
       "image/jpg": [".jpeg", ".jpg"],
     },
-    maxFiles: 2,
+    maxFiles: 1,
     maxSize: 1024 * 1024 * 2,
   });
 
-  if (!show) return null;
+  function handleSubmitClick(values) {
+    handleSubmit({ ...values, coverImageFile: rawFile });
+  }
+
   return (
     <Overlay2 pos="center">
       <section
+        ref={ref}
         className={
           "w-full md:max-w-[493px]  bg-white  md:h-[100vh] h-[100vh] z-40 px-6 py-6"
         }
       >
         <div className="flex flex-row justify-end items-center">
-          <div className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--lines] transitioning">
-            <BiX onClick={toggleShow} className="text-[--primary] text-xl" />
+          <div className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning">
+            <BiX onClick={toggleShow} className="text-[--primary] text-2xl" />
           </div>
         </div>
 
@@ -51,6 +99,9 @@ function GoalCreation({ show = false, toggleShow, handleSubmit }) {
           </h1>
           <p className="font-medium text-[--primary] text-sm md:text-base">
             Reach yours personal goals faster
+            <span className="text-xs block text-[--placeholder]">
+              Max. 2MB. JPG or PNG.
+            </span>
           </p>
 
           {/* Uploaded image view  */}
@@ -115,8 +166,21 @@ function GoalCreation({ show = false, toggleShow, handleSubmit }) {
           {/* Form now  */}
 
           <div>
-            <Formik initialValues={{}} onSubmit={handleSubmit}>
-              {({ isValid }) => {
+            <Formik
+              validationSchema={validationSchema}
+              initialValues={{
+                goalTitle: formData.goalTitle || "",
+                goalPurpose: formData.goalPurpose || "",
+                goalAmount: formData.goalAmount || "",
+                savingsPreference:
+                  formData.savingsPreference || savingsPrefs[0].value,
+              }}
+              initialTouched={{
+                savingsPreference: true,
+              }}
+              onSubmit={handleSubmitClick}
+            >
+              {({ isValid, setFieldValue }) => {
                 return (
                   <Form className="space-y-6">
                     <div className="w-full relative flex flex-col justify-center items-start space-y-2">
@@ -171,12 +235,14 @@ function GoalCreation({ show = false, toggleShow, handleSubmit }) {
                         Overall Goal Amount
                       </label>
 
-                      <Field
+                      <FormattingField
+                        icon={FaNairaSign}
                         name="goalAmount"
                         type="text"
                         inputMode="numeric"
                         className="field-1"
                         placeholder="Amount"
+                        extraClasses="field-1"
                       />
 
                       <ErrorMessage
@@ -194,16 +260,17 @@ function GoalCreation({ show = false, toggleShow, handleSubmit }) {
                         How would you prefer to save?
                       </label>
 
-                      <Field
-                        as="select"
-                        name="savingPreference"
-                        type="text"
-                        className="field-1"
-                        placeholder=""
-                      >
-                        <option value=""> Bank </option>
-                        <option value=""> Card </option>
-                      </Field>
+                      <GenericSelectFieldVariant1
+                        defaultSelectedItem={savingsPrefs[0]}
+                        handleChange={({ selectedItem }) => {
+                          setFieldValue(
+                            "savingsPreference",
+                            selectedItem.value,
+                            true
+                          );
+                        }}
+                        items={savingsPrefs}
+                      />
 
                       <ErrorMessage
                         name="savingPreference"
@@ -214,6 +281,7 @@ function GoalCreation({ show = false, toggleShow, handleSubmit }) {
 
                     <div className="pt-4 flex flex-col justify-center items-center space-y-4">
                       <button
+                        disabled={!isValid}
                         type="submit"
                         className="btn-1 bg-[--text-brand-2] hover:bg-[--text-brand-2-hover] "
                       >
@@ -225,8 +293,7 @@ function GoalCreation({ show = false, toggleShow, handleSubmit }) {
                         onClick={toggleShow}
                         className="btn-2 text-[--text-brand-2] border-[--text-brand-2] hover:bg-[#ff9100]/10"
                       >
-                        {" "}
-                        Cancel{" "}
+                        Cancel
                       </button>
                     </div>
                   </Form>

@@ -7,7 +7,7 @@ const PopUpTopBar = ({ close, title, desc }) => {
     <div className=" bg-white  ">
       <div className="px-5 flex justify-end items-center w-full h-[100px]">
         <button
-          className="p-[4px] border-2 border-[--lines] hover:bg-[--lines] transitioning rounded-full"
+          className="p-[4px] border-2 border-[--lines] hover:bg-[--b1] transitioning rounded-full"
           onClick={() => close()}
         >
           <Image

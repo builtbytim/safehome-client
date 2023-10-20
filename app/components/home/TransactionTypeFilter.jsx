@@ -93,7 +93,7 @@ function TransactionTypeFilter({ setTxTypeFilter }) {
               <div
                 key={i}
                 onClick={handleSelectItem(v)}
-                className="px-4 py-2 whitespace-nowrap text-[--text-secondary] hover:bg-gray-50 cursor-pointer text-sm "
+                className="px-4 w-full py-2 whitespace-nowrap text-[--text-secondary] hover:bg-gray-50 cursor-pointer text-sm "
               >
                 {v.name}
               </div>
