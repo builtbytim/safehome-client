@@ -10,11 +10,7 @@ import { useRouter } from "next/navigation";
 import SavingsSVG from "../../../components/svg/SavingsSVG";
 import LockSVG from "../../../components/svg/LockSVG";
 import TargetSVG from "../../../components/svg/TargetSVG";
-import {
-  GoalCreation,
-  GoalCreation2,
-  GoalOverview,
-} from "../../../components/savings/goalsPopups";
+import { GoalOverview } from "../../../components/savings/goalsPopups";
 import ScrollLink from "../../../components/ScrollLink";
 import { useState } from "react";
 import SavingsImage from "../../../../assets/images/icons/SavingsLite.svg";
@@ -58,7 +54,7 @@ const tabItemsArr = [
   ],
 ];
 
-function Page({ authenticatedUser }) {
+function Page({ authenticatedUser, authenticationToken }) {
   const router = useRouter();
   const [showGoalCreationF1, setShowGoalCreationF1] = useState(false);
   const [showGoalCreationF2, setShowGoalCreationF2] = useState(false);
@@ -93,6 +89,7 @@ function Page({ authenticatedUser }) {
         showForm2={showGoalCreationF2}
         toggleForm1={toggleGoalCreationF1}
         toggleForm2={toggleGoalCreationF2}
+        token={authenticationToken}
       />
 
       <GoalOverview show={showGoalOverview} toggleShow={toggleGoalOverview} />

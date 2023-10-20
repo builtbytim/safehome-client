@@ -16,6 +16,7 @@ const queryKeys = {
   setNotificationPreferences: "setNotificationPreferences",
   setNextOfKin: "setNextOfKin",
   getNextOfKin: "getNextOfKin",
+  uploadImage: "uploadImage",
   initiateTopUp: "initiateTopUp",
   getWallet: "getWallet",
   getSupportedBanks: "getSupportedBanks",
@@ -39,6 +40,8 @@ const queryKeys = {
   markAllNotificationsAsRead: "markAllNotificationsAsRead",
   clearMyNotifications: "clearMyNotifications",
   payMembershipFee: "payMembershipFee",
+  createGoalSavings: "createGoalSavings",
+  getMyGoalSavings: "getMyGoalSavings",
 };
 
 export default queryKeys;

@@ -153,3 +153,34 @@ export const kycModesOfIdentification = [
     value: "VC",
   },
 ];
+
+export const timeIntervals = [
+  {
+    name: "Daily",
+    value: "daily",
+  },
+  {
+    name: "Weekly",
+    value: "weekly",
+  },
+  {
+    name: "Monthly",
+    value: "monthly",
+  },
+  {
+    name: "Quarterly",
+    value: "quarterly",
+  },
+  {
+    name: "Yearly",
+    value: "yearly",
+  },
+];
+
+export const timeIntervalsToSeconds = {
+  daily: 86400,
+  weekly: 604800,
+  monthly: 2592000,
+  quarterly: 7776000,
+  yearly: 31536000,
+};

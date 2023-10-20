@@ -15,6 +15,11 @@ import FormattingField from "../../forms/branded/FormattingField";
 import { useRef } from "react";
 import useOutsideClickDetector from "../../../utils/hooks/useOutsideClickDetector";
 import * as Yup from "yup";
+import { useMutation } from "react-query";
+import queryKeys from "../../../utils/queryKeys";
+import { createFetcher } from "../../../utils/fetchUtils";
+import config from "../../../utils/config";
+import Spinner from "../../Spinner";
 
 const savingsPrefs = [
   {
@@ -45,7 +50,13 @@ const validationSchema = Yup.object().shape({
     .oneOf(["wallet", "card"], "Invalid preference"),
 });
 
-function GoalCreation({ show = false, toggleShow, handleSubmit, formData }) {
+function GoalCreation({
+  show = false,
+  toggleShow,
+  handleSubmit,
+  formData,
+  token,
+}) {
   const ref = useRef(null);
 
   useOutsideClickDetector(ref, () => {
@@ -58,11 +69,15 @@ function GoalCreation({ show = false, toggleShow, handleSubmit, formData }) {
       : null
   );
   const [rawFile, setRawFile] = useState(formData.coverImageFile || null);
+  const [fileUrl, setFileUrl] = useState(formData.goalImageUrl || null);
 
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
     setRawFile(file);
     setImageFile(URL.createObjectURL(file));
+    uploadCoverImage({
+      file,
+    });
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -74,8 +89,35 @@ function GoalCreation({ show = false, toggleShow, handleSubmit, formData }) {
     maxSize: 1024 * 1024 * 2,
   });
 
+  // mutation to upload cover image if it exists
+  const {
+    mutate: uploadCoverImage,
+    isLoading,
+    isError,
+  } = useMutation({
+    mutationKey: [queryKeys.uploadImage, token],
+    mutationFn: createFetcher({
+      url: config.apiPaths.uploadImage,
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      formEncoded: true,
+      auth: token,
+    }),
+
+    onSuccess: (data) => {
+      setFileUrl(data.secureUrl);
+    },
+
+    onError: (error) => {
+      setRawFile(null);
+      setImageFile(null);
+    },
+  });
+
   function handleSubmitClick(values) {
-    handleSubmit({ ...values, coverImageFile: rawFile });
+    handleSubmit({ ...values, goalImageUrl: fileUrl });
   }
 
   return (
@@ -107,19 +149,22 @@ function GoalCreation({ show = false, toggleShow, handleSubmit, formData }) {
           {/* Uploaded image view  */}
           {!!imageFile && (
             <div className="bg-[--b1] relative w-full   flex flex-col justify-center items-center">
-              <div className="absolute bg-black/60 inset-0  flex flex-col justify-center items-center">
-                {" "}
+              <div className="absolute text-white bg-black/60 inset-0  flex flex-col justify-center items-center">
+                {isLoading && <Spinner size="small" />}
               </div>
-              <div
-                onClick={() => {
-                  setRawFile(null);
-                  setImageFile(null);
-                }}
-                title="Remove"
-                className="absolute right-0 bottom-0 p-2 hover:cursor-pointer bg-[--text-brand-2] text-white   opacity-60 hover:opacity-80 transitioning z-10"
-              >
-                <BiX className=" text-2xl"></BiX>
-              </div>
+
+              {!isLoading && (
+                <div
+                  onClick={() => {
+                    setRawFile(null);
+                    setImageFile(null);
+                  }}
+                  title="Remove"
+                  className="absolute right-0 bottom-0 p-2 hover:cursor-pointer bg-[--text-brand-2] text-white   opacity-60 hover:opacity-80 transitioning z-10"
+                >
+                  <BiX className=" text-2xl"></BiX>
+                </div>
+              )}
 
               <Image
                 height="210"

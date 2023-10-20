@@ -1,6 +1,9 @@
 import { useEffect } from "react";
+import { useNotifyStore } from "../store";
 
 function useOutsideClickDetector(ref, callback, ignoreRefs = []) {
+  const notifyStore = useNotifyStore((state) => state.notifyState);
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
@@ -16,7 +19,9 @@ function useOutsideClickDetector(ref, callback, ignoreRefs = []) {
 
         if (!isIgnored) {
           if (typeof callback === "function") {
-            callback();
+            if (!notifyStore.show) {
+              callback();
+            }
           }
         }
       }

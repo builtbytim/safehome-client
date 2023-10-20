@@ -35,6 +35,7 @@ const config = {
     setAvatar: "/users/avatar",
     setNextOfKin: "/users/next-of-kin",
     getNextOfKin: "/users/next-of-kin",
+    uploadImage: "/uploads/images",
     initiateTopUp: "/wallet/top-up",
     initiateWithdrawal: "/wallet/withdraw",
     getWallet: "/wallet",
@@ -58,6 +59,8 @@ const config = {
     markAllNotificationsAsRead: "/notifications/mark-all-as-read",
     clearMyNotifications: "/notifications/clear-all",
     payMembershipFee: "/payments/membership",
+    createGoalSavings: "/savings/goals",
+    getMyGoalSavings: "/savings/goals",
   },
 
   signInModes: {

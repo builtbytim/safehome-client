@@ -11,8 +11,7 @@ import useOutsideClickDetector from "../utils/hooks/useOutsideClickDetector";
 export default function Notify() {
   const props = useNotifyStore((state) => state.notifyState);
   let {
-    content,
-    title,
+    content = "",
     show,
     working,
     onAccept,

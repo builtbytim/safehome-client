@@ -7,7 +7,7 @@ import Image from "next/image";
 import cn from "classnames";
 import { BsX } from "react-icons/bs";
 import BarLoader from "../BarLoader";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { createFetcher } from "../../utils/fetchUtils";
 import config from "../../utils/config";
 import queryKeys from "../../utils/queryKeys";
@@ -17,6 +17,7 @@ import { useSearchParams } from "next/navigation";
 import { kycModesOfIdentification } from "../../utils/constants";
 
 function KYCImageUpload({ user, token }) {
+  const queryClient = useQueryClient();
   const setNotify = useNotifyStore((state) => state.setNotify);
   const [imageFile, setImageFile] = useState(null);
   const [rawFile, setRawFile] = useState(null);
@@ -50,6 +51,10 @@ function KYCImageUpload({ user, token }) {
         allowClose: true,
         show: true,
       });
+    },
+
+    onSuccess(data) {
+      queryClient.invalidateQueries(queryKeys.getSession);
     },
   });
 

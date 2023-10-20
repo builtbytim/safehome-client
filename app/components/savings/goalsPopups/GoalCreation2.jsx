@@ -12,29 +12,11 @@ import useOutsideClickDetector from "../../../utils/hooks/useOutsideClickDetecto
 import { useRef } from "react";
 import * as Yup from "yup";
 import { NumericFormat } from "react-number-format";
-
-const intervals = [
-  {
-    name: "Daily",
-    value: "daily",
-  },
-  {
-    name: "Weekly",
-    value: "weekly",
-  },
-  {
-    name: "Monthly",
-    value: "monthly",
-  },
-  {
-    name: "Quarterly",
-    value: "quarterly",
-  },
-  {
-    name: "Yearly",
-    value: "yearly",
-  },
-];
+import Spinner from "../../Spinner";
+import {
+  timeIntervals as intervals,
+  timeIntervalsToSeconds,
+} from "../../../utils/constants";
 
 function GoalCreation2({
   show = false,
@@ -42,6 +24,7 @@ function GoalCreation2({
   goBack,
   formData,
   handleSubmit,
+  isLoading,
 }) {
   const validationSchema = Yup.object().shape({
     preferredInterval: Yup.string()
@@ -51,7 +34,7 @@ function GoalCreation2({
         "Invalid interval"
       ),
 
-    amountToSaveOnDailyBasis: Yup.number()
+    amountToSaveOnIntervalBasis: Yup.number()
       .required("Required")
       .min(1, "Amount must be greater than 0")
       .typeError("Invalid amount")
@@ -64,13 +47,36 @@ function GoalCreation2({
         }
       ),
 
-    startDate: Yup.date().required("Required"),
+    startDate: Yup.date()
+      .required("Required")
+      .test(
+        "is-in-future-by-1-day",
+        "Must be at least 1 day from now",
+        (value) => {
+          const now = new Date();
+          const withdrawalDate = new Date(value);
+          const ONE_DAY = 24 * 60 * 60 * 1000;
+
+          return withdrawalDate.getTime() - now.getTime() >= ONE_DAY;
+        }
+      ),
 
     withdrawalDate: Yup.date()
       .required("Required")
       .test(
-        "is-greater-than-start-date",
-        "Must be later than the start date",
+        "is-in-future-by-1-day",
+        "Must be at least 1 day from now",
+        (value) => {
+          const now = new Date();
+          const withdrawalDate = new Date(value);
+          const ONE_DAY = 24 * 60 * 60 * 1000;
+
+          return withdrawalDate.getTime() - now.getTime() >= ONE_DAY;
+        }
+      )
+      .test(
+        "is-greater-than-start-date-by-at-least-seven-days",
+        "Must be later than the start date by at least 7 days",
         (value, context) => {
           const startDate = context.parent.startDate;
           const withdrawalDate = value;
@@ -80,7 +86,38 @@ function GoalCreation2({
           const startDateObj = new Date(startDate);
           const withdrawalDateObj = new Date(withdrawalDate);
 
-          return withdrawalDateObj > startDateObj;
+          const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
+
+          return (
+            withdrawalDateObj.getTime() - startDateObj.getTime() >= SEVEN_DAYS
+          );
+        }
+      )
+      .test(
+        "time-diff-is-at-least-two-cycles-of-preferred-interval",
+        "Duration between start and withdrawal dates be at least 2 cycles of preferred interval ( e.g. 2 weeks for a preferred interval of weekly ) ",
+        (value, context) => {
+          const startDate = context.parent.startDate;
+          const withdrawalDate = value;
+
+          if (
+            !startDate ||
+            !withdrawalDate ||
+            !context.parent.preferredInterval
+          )
+            return true;
+
+          const startDateObj = new Date(startDate);
+          const withdrawalDateObj = new Date(withdrawalDate);
+
+          const timeDiff = withdrawalDateObj.getTime() - startDateObj.getTime();
+
+          const preferredInterval = context.parent.preferredInterval;
+
+          const preferredIntervalInSeconds =
+            timeIntervalsToSeconds[preferredInterval];
+
+          return timeDiff >= 2 * preferredIntervalInSeconds * 1000;
         }
       ),
 
@@ -95,7 +132,7 @@ function GoalCreation2({
   });
 
   function handleFormSubmit(values) {
-    console.log(values);
+    handleSubmit(values);
   }
 
   return (
@@ -129,8 +166,8 @@ function GoalCreation2({
                 preferredInterval:
                   formData.preferredInterval || intervals[0].value,
 
-                amountToSaveOnDailyBasis:
-                  formData.amountToSaveOnDailyBasis || "",
+                amountToSaveOnIntervalBasis:
+                  formData.amountToSaveOnIntervalBasis || "",
 
                 startDate: formData.startDate || "",
                 withdrawalDate: formData.withdrawalDate || "",
@@ -185,13 +222,13 @@ function GoalCreation2({
                         type="text"
                         inputMode="numeric"
                         className="field-1"
-                        name="amountToSaveOnDailyBasis"
+                        name="amountToSaveOnIntervalBasis"
                         placeholder="Amount to save on interval basis"
                         extraClasses="field-1"
                       />
 
                       <ErrorMessage
-                        name="amountToSaveOnDailyBasis"
+                        name="amountToSaveOnIntervalBasis"
                         component="div"
                         className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
                       />
@@ -237,7 +274,7 @@ function GoalCreation2({
                       <ErrorMessage
                         name="withdrawalDate"
                         component="div"
-                        className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
+                        className="  left-0 text-[--text-danger] text-xs text-left "
                       />
                     </div>
 
@@ -286,27 +323,27 @@ function GoalCreation2({
                           thousandSeparator={true}
                         />{" "}
                         by the set withdrawal date, I will forfeit the interest
-                        accrued on this Goal savings. Additionally, I understand
-                        that breaking the Goal before the withdrawal date will
+                        accrued on this goal savings. Additionally, I understand
+                        that breaking the goal before the withdrawal date will
                         result in the loss of all accrued interest and I will be
-                        responsible for bearing the 1% payment gateway charge
-                        for processing my deposits into this Goal
+                        responsible for bearing the payment gateway charge for
+                        processing my deposits into this goal.
                       </label>
 
                       <ErrorMessage
                         name="acceptTerms"
                         component="div"
-                        className="absolute -bottom-[10%] left-0 text-[--text-danger] text-xs text-left"
+                        className=" left-0 text-[--text-danger] text-xs text-left"
                       />
                     </div>
 
                     <div className="pt-4 flex flex-col justify-center items-center space-y-4">
                       <button
-                        disabled={!isValid}
+                        disabled={!isValid || isLoading}
                         type="submit"
                         className="btn-1 bg-[--text-brand-2] hover:bg-[--text-brand-2-hover] "
                       >
-                        Create Goal
+                        {isLoading ? <Spinner /> : "Create Goal"}
                       </button>
                       <button
                         onClick={goBack}

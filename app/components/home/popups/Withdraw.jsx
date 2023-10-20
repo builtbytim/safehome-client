@@ -5,12 +5,7 @@ import * as Yup from "yup";
 import queryKeys from "../../../utils/queryKeys";
 import { FaNairaSign } from "react-icons/fa6";
 import GenericComboField from "../../forms/branded/GenericComboxField";
-import {
-  fetchUtil,
-  makeUrl,
-  extractErrorMessage,
-  createFetcher,
-} from "../../../utils/fetchUtils";
+import { createFetcher } from "../../../utils/fetchUtils";
 import { useNotifyStore } from "../../../utils/store";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import config from "../../../utils/config";
@@ -64,30 +59,44 @@ const Withdraw = ({ token, closeSelf }) => {
   }
 
   function onError(err) {
-    setNotify({
-      show: true,
-      content: err.message,
-      allowClose: true,
-    });
+    const action = err.action;
+
+    switch (action) {
+      case "VERIFY_KYC":
+        setNotify({
+          show: true,
+          title: "KYC is required",
+          content: err?.message,
+          onAcceptText: "Verify Now",
+          allowClose: true,
+
+          onAccept: () => {
+            router.push(`/kyc`);
+          },
+        });
+
+        break;
+
+      default:
+        setNotify({
+          show: true,
+          title: "Unable to withdraw",
+          content: err?.message,
+        });
+
+        break;
+    }
   }
 
   const { mutate, isLoading } = useMutation({
     onSuccess,
     onError,
-    mutationFn: async function (body) {
-      const res = await fetchUtil({
-        url: makeUrl(config.apiPaths.initiateWithdrawal),
-        method: "POST",
-        body,
-        auth: token,
-      });
+    mutationFn: createFetcher({
+      url: config.apiPaths.initiateWithdrawal,
+      method: "POST",
+      auth: token,
+    }),
 
-      if (!res.success) {
-        throw new Error(extractErrorMessage(res));
-      }
-
-      return res.data;
-    },
     mutationKey: [queryKeys.initiateTopUp, token],
   });
 

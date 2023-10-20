@@ -114,7 +114,20 @@ export function createFetcher({
 
     console.log("createFetcher Error: ", res.error);
 
-    throw new Error(extractErrorMessage(res));
+    const extractedErrorMsg = extractErrorMessage(res);
+
+    let action = null;
+
+    if (res.headers && res.headers.has("X-ACTION")) {
+      action = res.headers.get("X-ACTION");
+    }
+
+    const errorObj = {
+      message: extractedErrorMsg,
+      action,
+    };
+
+    throw errorObj;
   };
 }
 

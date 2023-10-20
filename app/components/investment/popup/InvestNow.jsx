@@ -13,6 +13,7 @@ import { useNotifyStore, useUiStore } from "../../../utils/store";
 import config from "../../../utils/config";
 import queryKeys from "../../../utils/queryKeys";
 import Spinner from "../../Spinner";
+import { useRouter } from "next/navigation";
 
 const fundingSources = [
   {
@@ -26,6 +27,7 @@ const fundingSources = [
 ];
 
 const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
+  const router = useRouter();
   const queryClient = useQueryClient();
   const setNotify = useNotifyStore((state) => state.setNotify);
   const toggleSuperOverlay = useUiStore((state) => state.toggleSuperOverlay);
@@ -65,14 +67,36 @@ const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
   }
 
   function onError(err) {
-    setNotify({
-      show: true,
-      content: err.message,
-      allowClose: true,
-    });
+    const action = err.action;
+
+    switch (action) {
+      case "VERIFY_KYC":
+        setNotify({
+          show: true,
+          title: "KYC is required",
+          content: err?.message,
+          allowClose: true,
+          onAcceptText: "Verify Now",
+          onAccept: () => {
+            router.push(`/kyc`);
+          },
+        });
+
+        break;
+
+      default:
+        setNotify({
+          show: true,
+          title: "Unable to create investment",
+          content: err?.message,
+          allowClose: true,
+        });
+        reset();
+        break;
+    }
   }
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isLoading, reset } = useMutation({
     onSuccess,
     onError,
     mutationFn: createFetcher({
