@@ -52,6 +52,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
     debit: "error",
     investment: "success",
     membership_fee: "success",
+    savings_add_funds: "success",
   };
 
   const txStatusColorMap = {

@@ -64,6 +64,7 @@ function CreateGoalManager({
       goalDescription: data.goalPurpose,
       fundSource: data.savingsPreference,
       interval: data.preferredInterval,
+      paymentMode: data.paymentMode,
       startDate: new Date(data.startDate).getTime() / 1000,
       endDate: new Date(data.withdrawalDate).getTime() / 1000,
       amountToSaveAtInterval: data.amountToSaveOnIntervalBasis,

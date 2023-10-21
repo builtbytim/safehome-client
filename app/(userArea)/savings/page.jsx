@@ -4,7 +4,7 @@ import SecureRoute from "../../components/SecureRoute";
 import HeaderSavings from "../../components/layout/headers/HeaderSavings";
 import OverviewCard from "../../components/savings/OverviewCard";
 import TabSwitch from "../../components/savings/TabSwitch";
-import HomeTarget from "../../components/savings/HomeTarget";
+import HomeTarget from "../../components/savings/GoalSavingsCard";
 import Link from "next/link";
 import useTabParam from "../../utils/hooks/useTabParam";
 
@@ -17,7 +17,7 @@ const tabItems = [
   },
 ];
 
-function Page({ authenticatedUser }) {
+function Page({ authenticatedUser, authenticationToken }) {
   const { tab: tabState, setTab: setTabState } = useTabParam("tab", 0, [0, 1]);
 
   return (
@@ -29,7 +29,7 @@ function Page({ authenticatedUser }) {
         <HeaderSavings user={authenticatedUser} />
 
         <main className=" space-y-2 lg:space-y-10">
-          <OverviewCard />
+          <OverviewCard token={authenticationToken} />
           <section className="bg-white rounded-brand  py-8 md:p-8 space-y-4">
             <div className="flex flex-row justify-start items-center space-x-4 max-w-[70%] md:max-w-[60%] lg:max-w-[40%] ">
               <Link className="w-full" href="/savings/goals">

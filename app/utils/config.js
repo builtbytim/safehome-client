@@ -61,6 +61,8 @@ const config = {
     payMembershipFee: "/payments/membership",
     createGoalSavings: "/savings/goals",
     getMyGoalSavings: "/savings/goals",
+    fundGoalSavings: "/savings/goals/fund",
+    getUserSavingsStats: "/savings/stats",
   },
 
   signInModes: {

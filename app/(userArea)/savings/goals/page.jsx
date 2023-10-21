@@ -4,17 +4,20 @@ import SecureRoute from "../../../components/SecureRoute";
 import HeaderSavings from "../../../components/layout/headers/HeaderSavings";
 import TabSwitch from "../../../components/savings/TabSwitch";
 import Image from "next/image";
-import HomeTarget from "../../../components/savings/HomeTarget";
 import TargetIcon from "../../../../assets/images/icons/target.svg";
 import { useRouter } from "next/navigation";
 import SavingsSVG from "../../../components/svg/SavingsSVG";
 import LockSVG from "../../../components/svg/LockSVG";
 import TargetSVG from "../../../components/svg/TargetSVG";
-import { GoalOverview } from "../../../components/savings/goalsPopups";
 import ScrollLink from "../../../components/ScrollLink";
 import { useState } from "react";
 import SavingsImage from "../../../../assets/images/icons/SavingsLite.svg";
 import CreateGoalManager from "../../../components/savings/CreateGoalManager";
+import GoalSavingsGridList from "../../../components/savings/GoalSavingsGridList";
+import useTabParam from "../../../utils/hooks/useTabParam";
+import GoalOverviewManager from "../../../components/savings/GoalOverviewManager";
+import useUserSavingsStats from "../../../utils/hooks/useUserSavingsStats";
+import { NumericFormat } from "react-number-format";
 
 const tabItemsArr = [
   [
@@ -58,11 +61,20 @@ function Page({ authenticatedUser, authenticationToken }) {
   const router = useRouter();
   const [showGoalCreationF1, setShowGoalCreationF1] = useState(false);
   const [showGoalCreationF2, setShowGoalCreationF2] = useState(false);
-  const [showGoalOverview, setShowGoalOverview] = useState(false);
+  const [selectedGoal, setSelectedGoal] = useState(null);
+  const { setTab: setStatusTab, tab: statusTab } = useTabParam("tab2");
+  const { setTab: setStatusTab1, tab: statusTab1 } = useTabParam(
+    "tab1",
+    1,
+    [0, 2]
+  );
 
-  function toggleGoalOverview() {
-    setShowGoalOverview(!showGoalOverview);
-  }
+  const { data, isError, isLoading, isSuccess, refetch } = useUserSavingsStats(
+    authenticationToken,
+    null,
+    null,
+    true
+  );
 
   function toggleGoalCreationF1() {
     setShowGoalCreationF1(!showGoalCreationF1);
@@ -92,8 +104,13 @@ function Page({ authenticatedUser, authenticationToken }) {
         token={authenticationToken}
       />
 
-      <GoalOverview show={showGoalOverview} toggleShow={toggleGoalOverview} />
-
+      {selectedGoal && (
+        <GoalOverviewManager
+          token={authenticationToken}
+          selectedGoal={selectedGoal}
+          setSelectedGoal={setSelectedGoal}
+        />
+      )}
       <div className="space-y-2  lg:space-y-8 w-full min-h-screen pb-16">
         <HeaderSavings
           user={authenticatedUser}
@@ -105,10 +122,9 @@ function Page({ authenticatedUser, authenticationToken }) {
           <section className="bg-white  rounded-brand  pt-8  md:p-8 space-y-4">
             <div className="flex flex-row justify-between items-center space-x-8">
               <TabSwitch
-                tabParamName="tabGoals"
+                setTabState={setStatusTab1}
+                tabState={statusTab1}
                 tabItems={tabItemsArr[0]}
-                persistActiveTab={handleTabChange}
-                defaultTab={1}
                 extraClasses="text-[--text-brand-2]  border-[--text-brand-2]"
               />
 
@@ -158,7 +174,12 @@ function Page({ authenticatedUser, authenticationToken }) {
                   </h2>
 
                   <p className="text-[--text-brand-2] font-bold text-xl lg:text-2xl">
-                    ₦0
+                    <NumericFormat
+                      value={data ? data.balance : 0}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"₦ "}
+                    />
                   </p>
                 </div>
 
@@ -214,19 +235,18 @@ function Page({ authenticatedUser, authenticationToken }) {
 
           <section className="bg-white rounded-brand  pt-2 pb-8 md:p-8 space-y-4">
             <TabSwitch
+              setTabState={setStatusTab}
+              tabState={statusTab}
               tabItems={tabItemsArr[1]}
               extraClasses="text-[--text-brand-2]  border-[--text-brand-2]"
             />
 
-            {/* Home targets starts  */}
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 xl:gap-8 justify-center items-center">
-              {Array.from({ length: 4 })
-                .fill(0)
-                .map((v, i) => {
-                  return <HomeTarget key={i} />;
-                })}
-            </div>
+            <GoalSavingsGridList
+              launchCreateGoal={toggleGoalCreationF1}
+              token={authenticationToken}
+              completed={statusTab === 1}
+              setSelectedGoal={setSelectedGoal}
+            />
           </section>
         </main>
       </div>

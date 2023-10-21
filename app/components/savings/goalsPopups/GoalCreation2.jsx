@@ -136,7 +136,7 @@ function GoalCreation2({
   }
 
   return (
-    <Overlay2 pos="center">
+    <Overlay2 z={3}>
       <section
         ref={ref}
         className={

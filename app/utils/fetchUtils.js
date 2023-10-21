@@ -181,5 +181,5 @@ export function levelToColor(level) {
       return " text-green-500 ";
   }
 
-  return " bg-black ";
+  return " text-teal-600 ";
 }

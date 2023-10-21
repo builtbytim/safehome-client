@@ -1,12 +1,10 @@
 import Overlay2 from "../../Overlay2";
-import { Slide } from "react-awesome-reveal";
 import { BiX } from "react-icons/bi";
-import Image from "next/image";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 
-function GoalSetting({ toggleShow }) {
+function GoalSettings({ closeSelf }) {
   return (
-    <Overlay2 pos="center">
+    <Overlay2 z={3}>
       <section
         className={
           "w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40  "
@@ -14,10 +12,10 @@ function GoalSetting({ toggleShow }) {
       >
         <div className="flex p-6 flex-row justify-end items-center">
           <div
-            onClick={toggleShow}
-            className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--lines] transitioning"
+            onClick={closeSelf}
+            className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
           >
-            <BiX className="text-[--primary] text-xl" />
+            <BiX className="text-[--primary] text-2xl" />
           </div>
         </div>
 
@@ -90,7 +88,7 @@ function GoalSetting({ toggleShow }) {
                       disabled={isValid}
                       className="btn-1 w-full bg-[--text-brand-2] hover:bg-[--text-brand-2-hover] "
                     >
-                      Submit
+                      Update
                     </button>
                   </div>
                 </Form>
@@ -103,4 +101,4 @@ function GoalSetting({ toggleShow }) {
   );
 }
 
-export default GoalSetting;
+export default GoalSettings;

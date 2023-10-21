@@ -167,14 +167,14 @@ export const timeIntervals = [
     name: "Monthly",
     value: "monthly",
   },
-  {
-    name: "Quarterly",
-    value: "quarterly",
-  },
-  {
-    name: "Yearly",
-    value: "yearly",
-  },
+  // {
+  //   name: "Quarterly",
+  //   value: "quarterly",
+  // },
+  // {
+  //   name: "Yearly",
+  //   value: "yearly",
+  // },
 ];
 
 export const timeIntervalsToSeconds = {

@@ -109,7 +109,7 @@ const Topup = ({ token, closeSelf }) => {
               <div className="py-8">
                 <button
                   type="submit"
-                  disabled={!isValid}
+                  disabled={!isValid || isLoading}
                   className="btn-1 w-full text-white bg-[--color-brand] py-3 px-5 shadow rounded"
                 >
                   {isLoading ? <Spinner /> : "Continue"}

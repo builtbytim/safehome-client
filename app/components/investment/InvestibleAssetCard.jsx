@@ -17,7 +17,7 @@ const InvestibleAssetCard = ({ investibleAsset, openInfo }) => {
   return (
     <div
       assetName="Click to view more details"
-      className="relative  rounded-brand md:rounded-lg lg:rounded-xl border overflow-hidden text-[--text-secondary] text-left grid grid-cols-5 md:grid-cols-5 h-[165px] md:h-[192px] hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm transitioning"
+      className="relative  rounded-brand md:rounded-lg lg:rounded-xl border overflow-hidden text-[--text-secondary] text-left grid grid-cols-5 md:grid-cols-5 h-[165px] md:h-[192px] hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm "
       onClick={openInfo}
     >
       <div className="w-full h-full col-span-2 md:col-span-2 overflow-hidden">

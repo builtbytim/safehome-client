@@ -27,8 +27,8 @@ const savingsPrefs = [
     value: "wallet",
   },
   {
-    name: "Card",
-    value: "card",
+    name: "Bank",
+    value: "bank",
   },
 ];
 
@@ -39,7 +39,7 @@ const validationSchema = Yup.object().shape({
     .max(64, "Too long"),
   goalPurpose: Yup.string()
     .required("Required")
-    .min(64, "Too short")
+    .min(8, "Too short")
     .max(256, "Too long"),
   goalAmount: Yup.number()
     .required("Required")
@@ -47,7 +47,13 @@ const validationSchema = Yup.object().shape({
     .typeError("Invalid amount"),
   savingsPreference: Yup.string()
     .required("Required")
-    .oneOf(["wallet", "card"], "Invalid preference"),
+    .oneOf(
+      savingsPrefs.map((v) => v.value),
+      "Invalid preference"
+    ),
+  paymentMode: Yup.string()
+    .required("Required")
+    .oneOf(["manual", "auto"], "Invalid payment mode"),
 });
 
 function GoalCreation({
@@ -121,7 +127,7 @@ function GoalCreation({
   }
 
   return (
-    <Overlay2 pos="center">
+    <Overlay2 z={3}>
       <section
         ref={ref}
         className={
@@ -219,9 +225,11 @@ function GoalCreation({
                 goalAmount: formData.goalAmount || "",
                 savingsPreference:
                   formData.savingsPreference || savingsPrefs[0].value,
+                paymentMode: formData.paymentMode || "manual",
               }}
               initialTouched={{
                 savingsPreference: true,
+                paymentMode: true,
               }}
               onSubmit={handleSubmitClick}
             >
@@ -292,6 +300,42 @@ function GoalCreation({
 
                       <ErrorMessage
                         name="goalAmount"
+                        component="div"
+                        className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+                      />
+                    </div>
+
+                    <div className="w-full relative flex flex-col justify-center items-start space-y-2">
+                      <label
+                        htmlFor="paymentMode"
+                        className="text-[--text-secondary] font-medium text-sm text-left"
+                      >
+                        Payment Mode
+                      </label>
+
+                      <GenericSelectFieldVariant1
+                        defaultSelectedItem="manual"
+                        handleChange={({ selectedItem }) => {
+                          setFieldValue(
+                            "paymentMode",
+                            selectedItem.value,
+                            true
+                          );
+                        }}
+                        items={[
+                          {
+                            name: "Manual",
+                            value: "manual",
+                          },
+                          {
+                            name: "Auto",
+                            value: "auto",
+                          },
+                        ]}
+                      />
+
+                      <ErrorMessage
+                        name="savingPreference"
                         component="div"
                         className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                       />

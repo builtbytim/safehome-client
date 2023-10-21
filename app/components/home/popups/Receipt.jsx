@@ -39,7 +39,7 @@ const TransactionReceipt = () => {
 
   //   get transaction query
 
-  const { isLoading, isError, data, isSuccess, refetch } = useQuery({
+  const { isLoading, isError, data, isSuccess, refetch, isIdle } = useQuery({
     queryKey: [queryKeys.getTransaction, txRef, token],
     queryFn: createFetcher({
       url: config.apiPaths.getTransaction,
@@ -69,11 +69,12 @@ const TransactionReceipt = () => {
           />
         </div>
 
-        {isLoading && !isSuccess && (
-          <div className="flex flex-col justify-center items-center py-16 px-6">
-            <LoadingView />
-          </div>
-        )}
+        {(isLoading && !isSuccess) ||
+          (isIdle && !data && !isSuccess && (
+            <div className="flex flex-col justify-center items-center py-16 px-6">
+              <LoadingView />
+            </div>
+          ))}
 
         {isError && (
           <div className="flex flex-col justify-center items-center py-16 px-6">

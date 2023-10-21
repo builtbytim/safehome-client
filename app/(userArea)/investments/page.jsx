@@ -3,10 +3,8 @@
 import { useState, useRef } from "react";
 import SecureRoute from "../../components/SecureRoute";
 import Overlay from "../../components/Overlay2";
-import { NoInvestment } from "../../components/investment";
 import {
   AboutInvestment,
-  InvestNow,
   PopUpTopBar,
 } from "../../components/investment/popup";
 import HeaderInvestments from "../../components/layout/headers/HeaderInvestments";

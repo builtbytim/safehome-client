@@ -18,7 +18,7 @@ function SuperOverlay() {
   if (!show) return null;
 
   return (
-    <div className="fixed z-30 inset-0 bg-white/70 backdrop-blur-sm"></div>
+    <div className="fixed z-50 inset-0 bg-white/70 backdrop-blur-sm"></div>
   );
 }
 

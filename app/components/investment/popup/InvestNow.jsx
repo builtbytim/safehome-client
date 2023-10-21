@@ -21,8 +21,8 @@ const fundingSources = [
     value: "wallet",
   },
   {
-    name: "Bank Account",
-    value: "bank_account",
+    name: "Bank",
+    value: "bank",
   },
 ];
 
