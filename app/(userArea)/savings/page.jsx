@@ -4,9 +4,9 @@ import SecureRoute from "../../components/SecureRoute";
 import HeaderSavings from "../../components/layout/headers/HeaderSavings";
 import OverviewCard from "../../components/savings/OverviewCard";
 import TabSwitch from "../../components/savings/TabSwitch";
-import HomeTarget from "../../components/savings/GoalSavingsCard";
 import Link from "next/link";
 import useTabParam from "../../utils/hooks/useTabParam";
+import GoalSavingsGridList from "../../components/savings/GoalSavingsGridList";
 
 const tabItems = [
   {
@@ -48,13 +48,10 @@ function Page({ authenticatedUser, authenticationToken }) {
 
             {/* Home targets starts  */}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 lg:gap-6 xl:gap-8 justify-center items-center">
-              {Array.from({ length: 4 })
-                .fill(0)
-                .map((v, i) => {
-                  return <HomeTarget key={i} />;
-                })}
-            </div>
+            <GoalSavingsGridList
+              token={authenticationToken}
+              completed={tabState === 1}
+            />
           </section>
         </main>
       </div>
