@@ -10,6 +10,7 @@ import ScrollLink from "../ScrollLink";
 import { NumericFormat } from "react-number-format";
 import useUserWallet from "../../utils/hooks/useUserWallet";
 import useUserInvestmentStats from "../../utils/hooks/useUserInvestmentStats";
+import useUserSavingsStats from "../../utils/hooks/useUserSavingsStats";
 import cn from "classnames";
 
 function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
@@ -18,6 +19,14 @@ function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
     null,
     null
   );
+
+  const {
+    data: savingsData,
+    isError: savingsIsError,
+    isLoading: savingsIsLoading,
+    isSuccess: savingsIsSuccess,
+    refetch: savingsRefetch,
+  } = useUserSavingsStats(token, null, null, true);
 
   const {
     data: data2,
@@ -143,7 +152,12 @@ function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
             </h2>
 
             <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
-              ₦0
+              <NumericFormat
+                value={savingsData ? savingsData.balance : 0}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"₦ "}
+              />
             </p>
           </div>
 
