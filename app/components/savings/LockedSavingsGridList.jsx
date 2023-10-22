@@ -65,7 +65,7 @@ function LockedSavingsGridList({
   }
 
   if (isSuccess && data && data.unfilteredEntries === 0 && !completed) {
-    return <NoSavings saveNowFunc={launchCreateLockedPlan} />;
+    return <NoSavings saveNowFunc={launchCreateLockedPlan} isLocked />;
   }
 
   if (isSuccess && data && data.unfilteredEntries === 0 && completed) {
