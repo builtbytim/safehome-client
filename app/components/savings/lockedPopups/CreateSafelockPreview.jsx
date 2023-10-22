@@ -100,7 +100,7 @@ function CreateSafelockPreview({
               color="#8d4000"
             />
             <p className="text-[--text-secondary] font-medium text-sm text-left">
-              I authorize safeHome to I dont know what the fuck should be here!
+              I authorize SafeHome to I dont know what the fuck should be here!
             </p>
 
             {showErorMsg && (

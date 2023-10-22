@@ -63,6 +63,8 @@ const config = {
     getMyGoalSavings: "/savings/goals",
     fundGoalSavings: "/savings/goals/fund",
     getUserSavingsStats: "/savings/stats",
+    createLockedSavings: "/savings/locked",
+    getMyLockedSavings: "/savings/locked",
   },
 
   signInModes: {

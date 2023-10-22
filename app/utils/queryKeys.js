@@ -44,6 +44,8 @@ const queryKeys = {
   getMyGoalSavings: "getMyGoalSavings",
   fundGoalSavings: "fundGoalSavings",
   getSavingsStats: "getSavingsStats",
+  createLockedSavings: "createLockedSavings",
+  getMyLockedSavings: "getMyLockedSavings",
 };
 
 export default queryKeys;

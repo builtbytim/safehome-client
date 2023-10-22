@@ -27,21 +27,21 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
   }
 
   const { mutate, isLoading } = useMutation({
-    mutationKey: [queryKeys.createGoalSavings, token],
+    mutationKey: [queryKeys.createLockedSavings, token],
 
     mutationFn: createFetcher({
-      url: config.apiPaths.createGoalSavings,
+      url: config.apiPaths.createLockedSavings,
       method: "POST",
       auth: token,
     }),
 
     onSuccess: (data) => {
-      queryClient.invalidateQueries(queryKeys.getMyGoalSavings);
+      queryClient.invalidateQueries(queryKeys.getMyLockedSavings);
 
-      toggleForm2();
+      setShowFormOverview(false);
 
       setNotify({
-        content: "Savings Goal created successfully",
+        content: "Locked Savings plan created successfully",
         type: "success",
         show: true,
       });
@@ -86,20 +86,17 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
     toggleForm2();
   }
 
-  function handleSubmit(values) {
-    const data = { ...formData, ...values };
+  function handleSubmit() {
+    const data = formData;
 
     mutate({
-      goalName: data.goalTitle,
-      goalAmount: data.goalAmount,
-      goalImageUrl: data.goalImageUrl,
-      goalDescription: data.goalPurpose,
+      lockName: data.lockTitle,
+      paymentMode: data.paymentMode,
       fundSource: data.savingsPreference,
       interval: data.preferredInterval,
-      paymentMode: data.paymentMode,
-      startDate: new Date(data.startDate).getTime() / 1000,
-      endDate: new Date(data.withdrawalDate).getTime() / 1000,
+      lockDurationInMonths: data.lockDurationInMonths,
       amountToSaveAtInterval: data.amountToSaveOnIntervalBasis,
+      assetId: data.investibleAsset.uid,
     });
   }
 
