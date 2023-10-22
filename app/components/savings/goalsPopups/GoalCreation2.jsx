@@ -144,8 +144,11 @@ function GoalCreation2({
         }
       >
         <div className="flex flex-row justify-end items-center">
-          <div className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning">
-            <BiX onClick={toggleShow} className="text-[--primary] text-2xl" />
+          <div
+            onClick={toggleShow}
+            className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
+          >
+            <BiX className="text-[--primary] text-2xl" />
           </div>
         </div>
 
@@ -277,32 +280,6 @@ function GoalCreation2({
                         className="  left-0 text-[--text-danger] text-xs text-left "
                       />
                     </div>
-
-                    {/* <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                      <label
-                        htmlFor="primarySource"
-                        className="text-[--text-secondary] font-medium text-sm text-left"
-                      >
-                        Set a Primary Source
-                      </label>
-
-                      <Field
-                        as="select"
-                        name="primarySource"
-                        type="text"
-                        className="field-1"
-                        placeholder=""
-                      >
-                        <option value=""> Wallet </option>
-                        <option value=""> Reserve </option>
-                      </Field>
-
-                      <ErrorMessage
-                        name="primarySource"
-                        component="div"
-                        className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
-                      />
-                    </div> */}
 
                     <div className="w-full pt-2 relative flex flex-col justify-center items-start space-y-2 ">
                       <SwitchField

@@ -20,17 +20,7 @@ import queryKeys from "../../../utils/queryKeys";
 import { createFetcher } from "../../../utils/fetchUtils";
 import config from "../../../utils/config";
 import Spinner from "../../Spinner";
-
-const savingsPrefs = [
-  {
-    name: "Wallet",
-    value: "wallet",
-  },
-  {
-    name: "Bank",
-    value: "bank",
-  },
-];
+import { savingsPrefs } from "../../../utils/constants";
 
 const validationSchema = Yup.object().shape({
   goalTitle: Yup.string()
@@ -135,8 +125,11 @@ function GoalCreation({
         }
       >
         <div className="flex flex-row justify-end items-center">
-          <div className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning">
-            <BiX onClick={toggleShow} className="text-[--primary] text-2xl" />
+          <div
+            onClick={toggleShow}
+            className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
+          >
+            <BiX className="text-[--primary] text-2xl" />
           </div>
         </div>
 

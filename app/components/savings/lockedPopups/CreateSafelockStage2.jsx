@@ -5,6 +5,11 @@ import { useRef } from "react";
 import useOutsideClickDetector from "../../../utils/hooks/useOutsideClickDetector";
 import { FaNairaSign } from "react-icons/fa6";
 import FormattingField from "../../forms/branded/FormattingField";
+import GenericSelectFieldVariant1 from "../../forms/branded/GenericSelectFieldVariant1";
+import {
+  savingsPrefs,
+  timeIntervals as intervals,
+} from "../../../utils/constants";
 
 function CreateSafelock2({
   toggleShow,
@@ -31,8 +36,11 @@ function CreateSafelock2({
         }
       >
         <div className="flex p-6 flex-row justify-end items-center">
-          <div className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning">
-            <BiX onClick={toggleShow} className="text-[--primary] text-2xl" />
+          <div
+            onClick={toggleShow}
+            className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
+          >
+            <BiX className="text-[--primary] text-2xl" />
           </div>
         </div>
 
@@ -60,9 +68,9 @@ function CreateSafelock2({
             }}
             onSubmit={handleSubmit}
           >
-            {({ isValid, values }) => {
+            {({ isValid, values, setFieldValue }) => {
               return (
-                <Form className="space-y-6 p-6  ">
+                <Form className="space-y-6 px-6 pt-6  ">
                   <div className="w-full relative flex flex-col justify-center items-start space-y-2">
                     <label
                       htmlFor="lockTitle"
@@ -115,7 +123,7 @@ function CreateSafelock2({
                       htmlFor="amountToLock"
                       className="text-[--text-secondary] font-medium text-sm text-left"
                     >
-                      Amount to Lock
+                      Amount to Lock (Price of 1 unit of chosen property)
                     </label>
 
                     <FormattingField
@@ -138,21 +146,31 @@ function CreateSafelock2({
 
                   <div className="w-full relative flex flex-col justify-center items-start space-y-2">
                     <label
-                      htmlFor="paybackDate"
+                      htmlFor="paymentMode"
                       className="text-[--text-secondary] font-medium text-sm text-left"
                     >
-                      Payback Date
+                      Payment Mode
                     </label>
 
-                    <Field
-                      name="paybackDate"
-                      type="date"
-                      className="field-1"
-                      placeholder="Payback date"
+                    <GenericSelectFieldVariant1
+                      defaultSelectedItem="manual"
+                      handleChange={({ selectedItem }) => {
+                        setFieldValue("paymentMode", selectedItem.value, true);
+                      }}
+                      items={[
+                        {
+                          name: "Manual",
+                          value: "manual",
+                        },
+                        {
+                          name: "Auto",
+                          value: "auto",
+                        },
+                      ]}
                     />
 
                     <ErrorMessage
-                      name="paybackDate"
+                      name="savingPreference"
                       component="div"
                       className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                     />
@@ -160,31 +178,84 @@ function CreateSafelock2({
 
                   <div className="w-full relative flex flex-col justify-center items-start space-y-2">
                     <label
-                      htmlFor="primarySource"
+                      htmlFor="savingPreference"
                       className="text-[--text-secondary] font-medium text-sm text-left"
                     >
-                      Select a Primary Source
+                      How would you prefer to save?
                     </label>
 
-                    <Field
-                      as="select"
-                      name="primarySource"
-                      type="text"
-                      className="field-1"
-                      placeholder=""
-                    >
-                      <option value=""> Bank </option>
-                      <option value=""> Card </option>
-                    </Field>
+                    <GenericSelectFieldVariant1
+                      defaultSelectedItem={savingsPrefs[0]}
+                      handleChange={({ selectedItem }) => {
+                        setFieldValue(
+                          "savingsPreference",
+                          selectedItem.value,
+                          true
+                        );
+                      }}
+                      items={savingsPrefs}
+                    />
 
                     <ErrorMessage
-                      name="primarySource"
+                      name="savingPreference"
                       component="div"
                       className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                     />
                   </div>
 
-                  <div className="absolute w-[90%] space-y-2 inset-x-0 bottom-4  flex flex-col justify-center items-center  mx-auto">
+                  <div className="w-full relative flex flex-col justify-center items-start space-y-2">
+                    <label
+                      htmlFor="preferredInterval"
+                      className="text-[--text-secondary] font-medium text-sm text-left"
+                    >
+                      Preferred Interval
+                    </label>
+
+                    <GenericSelectFieldVariant1
+                      defaultSelectedItem={intervals[0]}
+                      handleChange={({ selectedItem }) => {
+                        setFieldValue(
+                          "preferredInterval",
+                          selectedItem.value,
+                          true
+                        );
+                      }}
+                      items={intervals}
+                    />
+
+                    <ErrorMessage
+                      name="preferredInterval"
+                      component="div"
+                      className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
+                    />
+                  </div>
+
+                  <div className="w-full relative flex flex-col justify-center items-start space-y-2">
+                    <label
+                      htmlFor="amountToSaveOnDailyBasis"
+                      className="text-[--text-secondary] font-medium text-sm text-left"
+                    >
+                      Preferred amount to save on interval basis
+                    </label>
+
+                    <FormattingField
+                      icon={FaNairaSign}
+                      type="text"
+                      inputMode="numeric"
+                      className="field-1"
+                      name="amountToSaveOnIntervalBasis"
+                      placeholder="Amount to save on interval basis"
+                      extraClasses="field-1"
+                    />
+
+                    <ErrorMessage
+                      name="amountToSaveOnIntervalBasis"
+                      component="div"
+                      className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
+                    />
+                  </div>
+
+                  <div className="pt-4  space-y-4   flex flex-col justify-center items-center  mx-auto">
                     <button type="submit" className="btn-1 w-full  ">
                       Continue
                     </button>

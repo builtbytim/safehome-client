@@ -32,8 +32,11 @@ function CreateSafelock({ toggleShow, handleSubmit, formData, show }) {
         }
       >
         <div className="flex p-6 flex-row justify-end items-center">
-          <div className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning">
-            <BiX onClick={toggleShow} className="text-[--primary] text-2xl" />
+          <div
+            onClick={toggleShow}
+            className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
+          >
+            <BiX className="text-[--primary] text-2xl" />
           </div>
         </div>
 
@@ -48,7 +51,7 @@ function CreateSafelock({ toggleShow, handleSubmit, formData, show }) {
             </p>
           </div>
 
-          <div className="px-6 space-y-2 md:space-y-4 lg:space-y-6 pt-6">
+          <div className="px-6 space-y-3 md:space-y-4  pt-6">
             {lockDurationsInMonths.map((v, i) => (
               <div
                 key={i}

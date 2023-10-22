@@ -15,9 +15,9 @@ function CreateSafelockPreview({ toggleShow, handleSubmit }) {
         <div className="flex p-6 flex-row justify-end items-center">
           <div
             onClick={toggleShow}
-            className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--lines] transitioning"
+            className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
           >
-            <BiX className="text-[--primary] text-xl" />
+            <BiX className="text-[--primary] text-2xl" />
           </div>
         </div>
 

@@ -184,3 +184,14 @@ export const timeIntervalsToSeconds = {
   quarterly: 7776000,
   yearly: 31536000,
 };
+
+export const savingsPrefs = [
+  {
+    name: "Wallet",
+    value: "wallet",
+  },
+  {
+    name: "Bank",
+    value: "bank",
+  },
+];

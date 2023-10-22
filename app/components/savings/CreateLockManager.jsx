@@ -6,8 +6,10 @@ import queryKeys from "../../utils/queryKeys";
 import { useNotifyStore } from "../../utils/store";
 import { CreateSafelock, CreateSafelockStage2 } from "./lockedPopups";
 import LockableAssetsOverview from "./lockedPopups/LockableAssetsOverview";
+import { useRouter } from "next/navigation";
 
 function CreateLockManager({ showForm1, toggleForm1, token }) {
+  const router = useRouter();
   const queryClient = useQueryClient();
   const setNotify = useNotifyStore((state) => state.setNotify);
 
@@ -45,11 +47,33 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
     },
 
     onError: (err) => {
-      setNotify({
-        content: err.message,
-        type: "error",
-        show: true,
-      });
+      const action = err.action;
+
+      switch (action) {
+        case "VERIFY_KYC":
+          setNotify({
+            show: true,
+            title: "KYC is required",
+            content: err?.message,
+            allowClose: true,
+            onAcceptText: "Verify Now",
+            onAccept: () => {
+              router.push(`/kyc`);
+            },
+          });
+
+          break;
+
+        default:
+          setNotify({
+            show: true,
+            title: "Unable to create lock",
+            content: err?.message,
+            allowClose: true,
+          });
+
+          break;
+      }
     },
   });
 

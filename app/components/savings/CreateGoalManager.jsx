@@ -5,8 +5,11 @@ import { createFetcher } from "../../utils/fetchUtils";
 import { useMutation, useQueryClient } from "react-query";
 import queryKeys from "../../utils/queryKeys";
 import { useNotifyStore } from "../../utils/store";
+import { useRouter } from "next/navigation";
 
 function CreateGoalManager({ showForm1, toggleForm1, token }) {
+  const router = useRouter();
+
   const [showForm2, setShowForm2] = useState(false);
 
   const queryClient = useQueryClient();
@@ -38,11 +41,33 @@ function CreateGoalManager({ showForm1, toggleForm1, token }) {
     },
 
     onError: (err) => {
-      setNotify({
-        content: err.message,
-        type: "error",
-        show: true,
-      });
+      const action = err.action;
+
+      switch (action) {
+        case "VERIFY_KYC":
+          setNotify({
+            show: true,
+            title: "KYC is required",
+            content: err?.message,
+            allowClose: true,
+            onAcceptText: "Verify Now",
+            onAccept: () => {
+              router.push(`/kyc`);
+            },
+          });
+
+          break;
+
+        default:
+          setNotify({
+            show: true,
+            title: "Unable to create goal",
+            content: err?.message,
+            allowClose: true,
+          });
+
+          break;
+      }
     },
   });
 
