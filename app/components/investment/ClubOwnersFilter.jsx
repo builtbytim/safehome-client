@@ -21,7 +21,7 @@ const ownersClubs = [
 
 function ClubOwnersFilter({ ownersClub, setOwnerFilter }) {
   return (
-    <div className="flex  flex-no-wrap space-x-4 items-center scrollbar-fix text-center filter-container  overflow-x-auto pb-2 no-scrollbar ">
+    <div className="flex  flex-no-wrap space-x-4 items-center scrollbar-fix text-center filter-container  overflow-x-auto pb-2 no-scrollbar max-w-[99%]">
       {ownersClubs.map((club) => {
         return (
           <button

@@ -48,8 +48,8 @@ function LockableAssetsOverview({
           "px-4  fixed pt-6  inset-y-0 mx-auto flex flex-col justify-center items-center w-full lg:w-[80%]   right-0 left-0    bg-white md:min-h-[95vh] h-[100vh] z-40  "
         }
       >
-        <div className="h-full pb-8 space-y-2">
-          <div className="space-y-2">
+        <div className="h-full pb-8 space-y-2  max-w-full">
+          <div className="space-y-2 ">
             <div className="flex flex-row justify-between items-center">
               <div className=" flex flex-row justify-start space-x-4 lg:space-x-6 items-center">
                 <h1 className="font-bold whitespace-nowrap  text-[--color-brand] text-lg md:text-xl">
