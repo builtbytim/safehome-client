@@ -18,6 +18,7 @@ import useTabParam from "../../../utils/hooks/useTabParam";
 
 import ScrollLink from "../../../components/ScrollLink";
 import SavingsImage from "../../../../assets/images/icons/SavingsLite.svg";
+import LockedSavingsGridList from "../../../components/savings/LockedSavingsGridList";
 const tabItemsArr = [
   [
     {
@@ -189,13 +190,10 @@ function Page({ authenticatedUser, authenticationToken }) {
               extraClasses="text-[--color-brand]  border-[--color-brand]"
             />
 
-            <div className="space-y-4 pt-4">
-              {Array(6)
-                .fill(2)
-                .map((v, i) => {
-                  return <LockedSavings key={i} />;
-                })}
-            </div>
+            <LockedSavingsGridList
+              token={authenticationToken}
+              launchCreateLockedPlan={toggleCreateLockF1}
+            />
           </section>
         </main>
       </div>
