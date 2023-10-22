@@ -4,7 +4,11 @@ import { createFetcher } from "../../utils/fetchUtils";
 import { useMutation, useQueryClient } from "react-query";
 import queryKeys from "../../utils/queryKeys";
 import { useNotifyStore } from "../../utils/store";
-import { CreateSafelock, CreateSafelockStage2 } from "./lockedPopups";
+import {
+  CreateSafelock,
+  CreateSafelockStage2,
+  CreateSafelockPreview,
+} from "./lockedPopups";
 import LockableAssetsOverview from "./lockedPopups/LockableAssetsOverview";
 import { useRouter } from "next/navigation";
 
@@ -16,13 +20,10 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
   const [showForm2, setShowForm2] = useState(false);
   const [showLockableAssetsOverview, setShowLockableAssetsOverview] =
     useState(false);
+  const [showFormOverview, setShowFormOverview] = useState(false);
 
   function toggleForm2() {
     setShowForm2(!showForm2);
-  }
-
-  function toggleLockableAssetsOverview() {
-    setShowLockableAssetsOverview(!showLockableAssetsOverview);
   }
 
   const { mutate, isLoading } = useMutation({
@@ -85,7 +86,7 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
     toggleForm2();
   }
 
-  function handleSubmitForm2(values) {
+  function handleSubmit(values) {
     const data = { ...formData, ...values };
 
     mutate({
@@ -116,7 +117,15 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
 
       {showForm2 && (
         <CreateSafelockStage2
-          handleSubmit={handleSubmitForm2}
+          handleSubmit={(values) => {
+            setFormData({
+              ...formData,
+              ...values,
+            });
+
+            setShowForm2(false);
+            setShowFormOverview(true);
+          }}
           toggleShow={toggleForm2}
           openAssetsOverview={() => {
             setShowLockableAssetsOverview(true);
@@ -126,7 +135,6 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
             toggleForm1();
             toggleForm2();
           }}
-          isLoading={isLoading}
           show={showForm2}
         />
       )}
@@ -146,6 +154,14 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
             setShowForm2(true);
           }}
           show={showLockableAssetsOverview}
+        />
+      )}
+
+      {showFormOverview && (
+        <CreateSafelockPreview
+          isLoading={isLoading}
+          formData={formData}
+          handleSubmit={handleSubmit}
         />
       )}
     </>

@@ -10,6 +10,7 @@ import {
   savingsPrefs,
   timeIntervals as intervals,
 } from "../../../utils/constants";
+import * as Yup from "yup";
 
 function CreateSafelock2({
   toggleShow,
@@ -19,6 +20,47 @@ function CreateSafelock2({
   show,
   openAssetsOverview,
 }) {
+  const validationSchema = Yup.object().shape({
+    lockTitle: Yup.string()
+      .required("Required")
+      .min(3, "Too short")
+      .max(64, "Too long"),
+
+    investibleAsset: Yup.object().required("Required"),
+
+    savingsPreference: Yup.string()
+      .required("Required")
+      .oneOf(
+        savingsPrefs.map((v) => v.value),
+        "Invalid preference"
+      ),
+    paymentMode: Yup.string()
+      .required("Required")
+      .oneOf(["manual", "auto"], "Invalid payment mode"),
+
+    preferredInterval: Yup.string()
+      .required("Required")
+      .oneOf(
+        intervals.map((interval) => interval.value),
+        "Invalid interval"
+      ),
+
+    amountToSaveOnIntervalBasis: Yup.number()
+      .required("Required")
+      .min(1, "Amount must be greater than 0")
+      .typeError("Invalid amount")
+      .test(
+        "must-be-less-than-price-per-unit",
+        "Amount must be less than amount to lock",
+        (value) => {
+          if (!formData.investibleAsset) return true;
+
+          const pricePerUnit = formData.investibleAsset.pricePerUnit;
+          return value < pricePerUnit;
+        }
+      ),
+  });
+
   const ref = useRef(null);
 
   useOutsideClickDetector(ref, () => {
@@ -57,15 +99,30 @@ function CreateSafelock2({
           </div>
 
           <Formik
+            initialTouched={{
+              paymentMode: true,
+              savingsPreference: true,
+              preferredInterval: true,
+            }}
             initialValues={{
               lockTitle: formData.lockTitle || "",
-              investibleAsset: formData.investibleAsset
-                ? formData.investibleAsset.assetName
-                : "",
+              investibleAsset: formData.investibleAsset || "",
+
+              preferredInterval:
+                formData.preferredInterval || intervals[0].value,
+
+              amountToSaveOnIntervalBasis:
+                formData.amountToSaveOnIntervalBasis || "",
+
+              savingsPreference:
+                formData.savingsPreference || savingsPrefs[0].value,
+              paymentMode: formData.paymentMode || "manual",
+
               amountToLock: formData.investibleAsset
                 ? formData.investibleAsset.pricePerUnit
                 : "",
             }}
+            validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
             {({ isValid, values, setFieldValue }) => {
@@ -104,7 +161,11 @@ function CreateSafelock2({
                     <input
                       onClick={openAssetsOverview}
                       name="investibleAsset"
-                      value={values.investibleAsset}
+                      value={
+                        values.investibleAsset
+                          ? values.investibleAsset.assetName
+                          : ""
+                      }
                       className="field-1 cursor-pointer capitalize"
                       type="text"
                       placeholder="Choose property"
@@ -256,7 +317,11 @@ function CreateSafelock2({
                   </div>
 
                   <div className="pt-4  space-y-4   flex flex-col justify-center items-center  mx-auto">
-                    <button type="submit" className="btn-1 w-full  ">
+                    <button
+                      disabled={!isValid}
+                      type="submit"
+                      className="btn-1 w-full  "
+                    >
                       Continue
                     </button>
 

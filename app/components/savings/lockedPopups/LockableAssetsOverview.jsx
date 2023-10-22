@@ -62,11 +62,13 @@ function LockableAssetsOverview({
                   placeholder="Search assets..."
                 />
               </div>
-              <div className="p-1 border  rounded-full hover:bg-[--b1] cursor-pointer">
+              <div
+                className="p-1 border  rounded-full hover:bg-[--b1] cursor-pointer"
+                onClick={goBack}
+              >
                 <BsX
                   role="button"
                   className="text-2xl lg:text-2xl  rounded-full text-[--primary] transitioning"
-                  onClick={goBack}
                 />
               </div>
             </div>
