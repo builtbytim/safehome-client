@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import BellImage from "../../../../assets/images/icons/bell.svg";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { useUiStore } from "../../../utils/store";
 import NotificationBell from "../../NotificationBell";
@@ -9,9 +8,9 @@ function HeaderSavings({ title = "", extraClasses = "", token }) {
   const toggleNotifications = useUiStore((state) => state.toggleNotifications);
 
   return (
-    <header className="w-full  ">
+    <header className="w-full ">
       <div className="w-full flex flex-row justify-between items-center ">
-        <div className="flex flex-row justify-start space-x-3">
+        <div className="flex flex-row justify-start ">
           <BiMenuAltLeft className="text-[--text-brand] self-center text-4xl hidden " />
           <h1
             className={

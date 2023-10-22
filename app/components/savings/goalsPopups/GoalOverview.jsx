@@ -24,7 +24,9 @@ function GoalOverview({
     interval,
   } = selectedGoal;
 
-  const daysLeft = Math.ceil((endDate - startDate) / (60 * 60 * 24));
+  const daysLeft = Math.ceil(
+    (endDate - new Date().getTime() / 1000) / (60 * 60 * 24)
+  );
   return (
     <>
       <Overlay2 z={3}>

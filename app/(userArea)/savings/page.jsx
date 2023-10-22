@@ -7,6 +7,9 @@ import TabSwitch from "../../components/savings/TabSwitch";
 import Link from "next/link";
 import useTabParam from "../../utils/hooks/useTabParam";
 import GoalSavingsGridList from "../../components/savings/GoalSavingsGridList";
+import CreateGoalManager from "../../components/savings/CreateGoalManager";
+import GoalOverviewManager from "../../components/savings/GoalOverviewManager";
+import { useState } from "react";
 
 const tabItems = [
   {
@@ -19,12 +22,36 @@ const tabItems = [
 
 function Page({ authenticatedUser, authenticationToken }) {
   const { tab: tabState, setTab: setTabState } = useTabParam("tab", 0, [0, 1]);
+  const [showGoalCreationF1, setShowGoalCreationF1] = useState(false);
+  const [showGoalCreationF2, setShowGoalCreationF2] = useState(false);
+  const [selectedGoal, setSelectedGoal] = useState(null);
+
+  function toggleGoalCreationF1() {
+    setShowGoalCreationF1(!showGoalCreationF1);
+  }
+
+  function toggleGoalCreationF2() {
+    setShowGoalCreationF2(!showGoalCreationF2);
+  }
 
   return (
     <>
-      {/* Pop ups starts  */}
+      <CreateGoalManager
+        showForm1={showGoalCreationF1}
+        showForm2={showGoalCreationF2}
+        toggleForm1={toggleGoalCreationF1}
+        toggleForm2={toggleGoalCreationF2}
+        token={authenticationToken}
+      />
 
-      {/* Pop ups ends  */}
+      {selectedGoal && (
+        <GoalOverviewManager
+          token={authenticationToken}
+          selectedGoal={selectedGoal}
+          setSelectedGoal={setSelectedGoal}
+        />
+      )}
+
       <div className="space-y-2  lg:space-y-8 w-full min-h-screen pb-16">
         <HeaderSavings user={authenticatedUser} />
 
@@ -46,11 +73,11 @@ function Page({ authenticatedUser, authenticationToken }) {
               setTabState={setTabState}
             />
 
-            {/* Home targets starts  */}
-
             <GoalSavingsGridList
               token={authenticationToken}
               completed={tabState === 1}
+              launchCreateGoal={toggleGoalCreationF1}
+              setSelectedGoal={setSelectedGoal}
             />
           </section>
         </main>

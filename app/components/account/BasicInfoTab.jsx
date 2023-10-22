@@ -77,6 +77,11 @@ const BasicInfoTab = ({ user, token }) => {
         validationSchema={validationSchema}
       >
         {({ isValid, setFieldValue }) => {
+          const disableForm =
+            !isValid ||
+            user.kycStatus === "PENDING" ||
+            user.kycStatus === "APPROVED";
+
           return (
             <Form className="py-6 w-full">
               {user.kycStatus && (
@@ -93,7 +98,7 @@ const BasicInfoTab = ({ user, token }) => {
                   <p className="account-form-text">First Name</p>
                   <Field
                     type="text"
-                    disabled
+                    disabled={disableForm}
                     placeholder="First Name"
                     name="firstName"
                     className="account-form-input"
@@ -108,7 +113,7 @@ const BasicInfoTab = ({ user, token }) => {
                 <div className="relative">
                   <p className="account-form-text">Surname</p>
                   <Field
-                    disabled
+                    disabled={disableForm}
                     type="text"
                     name="surname"
                     placeholder="Surname"
@@ -124,7 +129,7 @@ const BasicInfoTab = ({ user, token }) => {
                 <div className="relative">
                   <p className="account-form-text">Gender</p>
                   <GenericSelectField
-                    disabled
+                    disabled={disableForm}
                     items={[
                       {
                         name: "Male",
@@ -150,7 +155,7 @@ const BasicInfoTab = ({ user, token }) => {
                 <div className="relative">
                   <p className="account-form-text"> Date of Birth</p>
                   <Field
-                    disabled
+                    disabled={disableForm}
                     name="dateOfBirth"
                     type="date"
                     max="2100-01-01"
@@ -182,7 +187,7 @@ const BasicInfoTab = ({ user, token }) => {
                   <p className="account-form-text">Telephone</p>
                   <Field
                     type="text"
-                    disabled
+                    disabled={disableForm}
                     inputMode="numeric"
                     name="phone"
                     placeholder="+2348000000000"
@@ -199,7 +204,7 @@ const BasicInfoTab = ({ user, token }) => {
                   <p className="account-form-text">Address</p>
                   <Field
                     type="text"
-                    disabled
+                    disabled={disableForm}
                     name="address"
                     placeholder="Address"
                     className="account-form-input"
@@ -213,7 +218,7 @@ const BasicInfoTab = ({ user, token }) => {
 
                 <div className="relative">
                   <p className="account-form-text">State of Residence</p>
-                  <GenericSelectField disabled items={states} />
+                  <GenericSelectField disabled={disableForm} items={states} />
                   <ErrorMessage
                     name="state"
                     component="div"
@@ -223,7 +228,7 @@ const BasicInfoTab = ({ user, token }) => {
               </div>
               <div className="py-10 text-center flex flex-col justify-center items-center w-full">
                 <button
-                  disabled
+                  disabled={disableForm}
                   className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
                 >
                   Update profile

@@ -9,7 +9,13 @@ function TabSwitch({ tabItems, tabState, setTabState, extraClasses = "" }) {
       {tabItems.map((v, i) => {
         return (
           <div
-            onClick={() => setTabState(i)}
+            onClick={() => {
+              setTabState(i);
+
+              if (v.handleClick) {
+                v.handleClick();
+              }
+            }}
             key={i}
             className={
               "py-2 border-b md:border-b-2  hover:cursor-pointer transitioning group px-4 md:px-8 capitalize text-sm md:text-base md:font-medium text-center inline-flex flex-row justify-start space-x-2 after:" +

@@ -10,7 +10,7 @@ function HeaderInvestments({ title = "", extraClasses = "", token }) {
   return (
     <header className="w-full  ">
       <div className="w-full flex flex-row justify-between items-center ">
-        <div className="flex flex-row justify-start space-x-3">
+        <div className="flex flex-row justify-start ">
           <BiMenuAltLeft className="text-[--text-brand] self-center text-4xl hidden " />
           <h1
             className={

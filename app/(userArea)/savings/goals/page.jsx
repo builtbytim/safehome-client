@@ -25,14 +25,12 @@ const tabItemsArr = [
       name: "Savings",
       img: SavingsSVG,
       tabId: "savings",
-      url: "/savings",
       iconColor: "#ff9100",
     },
     {
       name: "Goal",
       img: TargetSVG,
       tabId: "goal",
-      url: "/savings/goals?tabGoals=goal",
       iconColor: "#ff9100",
     },
 
@@ -40,7 +38,6 @@ const tabItemsArr = [
       name: "Locked Savings",
       img: LockSVG,
       tabId: "locked",
-      url: "/savings/locked?tabGoals=locked",
       iconColor: "#8d4000",
     },
   ],
@@ -59,8 +56,12 @@ const tabItemsArr = [
 
 function Page({ authenticatedUser, authenticationToken }) {
   const router = useRouter();
+
+  tabItemsArr[0][0].handleClick = () => router.push("/savings");
+  tabItemsArr[0][1].handleClick = () => router.push("/savings/goals");
+  tabItemsArr[0][2].handleClick = () => router.push("/savings/locked");
+
   const [showGoalCreationF1, setShowGoalCreationF1] = useState(false);
-  const [showGoalCreationF2, setShowGoalCreationF2] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
   const { setTab: setStatusTab, tab: statusTab } = useTabParam("tab2");
   const { setTab: setStatusTab1, tab: statusTab1 } = useTabParam(
@@ -69,38 +70,17 @@ function Page({ authenticatedUser, authenticationToken }) {
     [0, 2]
   );
 
-  const { data, isError, isLoading, isSuccess, refetch } = useUserSavingsStats(
-    authenticationToken,
-    null,
-    null,
-    true
-  );
+  const { data } = useUserSavingsStats(authenticationToken, null, null, true);
 
   function toggleGoalCreationF1() {
     setShowGoalCreationF1(!showGoalCreationF1);
-  }
-
-  function toggleGoalCreationF2() {
-    setShowGoalCreationF2(!showGoalCreationF2);
-  }
-
-  function handleTabChange(tabId) {
-    if (tabId === tabItemsArr[0][0].tabId) {
-      return router.push("/savings");
-    }
-
-    if (tabId === tabItemsArr[0][2].tabId) {
-      return router.push("/savings/locked");
-    }
   }
 
   return (
     <>
       <CreateGoalManager
         showForm1={showGoalCreationF1}
-        showForm2={showGoalCreationF2}
         toggleForm1={toggleGoalCreationF1}
-        toggleForm2={toggleGoalCreationF2}
         token={authenticationToken}
       />
 
@@ -175,7 +155,7 @@ function Page({ authenticatedUser, authenticationToken }) {
 
                   <p className="text-[--text-brand-2] font-bold text-xl lg:text-2xl">
                     <NumericFormat
-                      value={data ? data.balance : 0}
+                      value={data ? data.goalSavingsBalance : 0}
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={"₦ "}

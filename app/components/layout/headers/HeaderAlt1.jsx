@@ -7,7 +7,7 @@ function Header() {
   return (
     <header className="w-full  ">
       <div className="w-full flex flex-row justify-between items-center ">
-        <div className="flex flex-row justify-start space-x-3">
+        <div className="flex flex-row justify-start ">
           <BiMenuAltLeft className="text-[--text-brand] self-center text-4xl md:hidden " />
           <h1 className="self-center text-[--text-brand] capitalize text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold">
             {" "}

@@ -120,7 +120,7 @@ export default function Notifications() {
           "fixed  inset-y-0  bg-white mx-auto flex flex-col lg:justify-center items-center w-full lg:w-[80%] max-w-lg inset-x-0  md:right-auto md:left-0  z-40"
         }
       >
-        <div className="w-full min-h-screen bg-white mt-4  px-4  space-y-4 relative">
+        <div className="w-full h-full bg-white mt-4  px-4  space-y-4 relative">
           <div className="  flex md:hidden  flex-row justify-end items-center w-full">
             <BsX
               role="button"
@@ -193,17 +193,6 @@ export default function Notifications() {
               </div>
             )}
 
-            {/* {data && data.unfilteredEntries > 0 && data.entries === 0 && (
-              <div className="w-full flex h-full flex-col justify-center items-center">
-                <div className="h-full py-16   space-y-4  mt-4 flex flex-col justify-center items-center text-[--color-brand-2]">
-                  <FcEmptyFilter className="text-4xl text-[--color-brand-2] hover:text-[--color-brand-2]/80 transition-flow" />
-                  <p className="text-center text-sm md:text-lg">
-                    No notifications match your filter at the moment
-                  </p>
-                </div>
-              </div>
-            )} */}
-
             {data &&
               data.numItems > 0 &&
               data.items.map((item, i) => (
@@ -245,7 +234,7 @@ export default function Notifications() {
           {/* Buttons  */}
 
           {isSuccess && data && data.numItems > 0 && (
-            <div className="bg-white absolute bottom-8 md:bottom-6 lg:bottom-4 inset-x-0 px-4 pt-4 pb-4 w-full flex flex-col justify-center itemss-center space-y-4 py-2">
+            <div className="bg-white absolute bottom-4  inset-x-0 px-4 pt-4 pb-4 w-full flex flex-col justify-center itemss-center space-y-4 py-2">
               <button
                 disabled={isFetching || isLoadingClearAll}
                 onClick={() => {

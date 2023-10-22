@@ -1,7 +1,6 @@
 import React from "react";
 import { PiQuestionFill } from "react-icons/pi";
 import cn from "classnames";
-import Spinner from "../Spinner";
 
 const ToggleCard = ({
   heading,
@@ -30,12 +29,6 @@ const ToggleCard = ({
         <p className="text-sm md:text-lg">{text}</p>
       </div>
 
-      {isLoading && (
-        <div className="flex justify-center items-center">
-          <Spinner size="mini" />
-        </div>
-      )}
-
       {toggleFunc && !isLoading && (
         <div className="">
           <button
@@ -44,14 +37,15 @@ const ToggleCard = ({
                 ? "You can't change this setting because it is required for your account."
                 : ""
             }
-            disabled={readOnly}
+            disabled={readOnly || isLoading}
             className={
               `h-[31px] w-[53px] rounded-3xl block p-[3px] ${
                 active ? "bg-[--green] text-right" : "bg-[--lines] text-left"
               }` +
               cn({
                 " cursor-pointer": !readOnly,
-                " cursor-not-allowed opacity-40": readOnly,
+                " cursor-not-allowed opacity-40 pointer-events-none ":
+                  readOnly || isLoading,
               })
             }
             onClick={() => toggleFunc()}

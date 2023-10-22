@@ -1,19 +1,26 @@
-import { GoalCreation, GoalCreation2 } from "./goalsPopups";
 import { useState } from "react";
 import config from "../../utils/config";
 import { createFetcher } from "../../utils/fetchUtils";
 import { useMutation, useQueryClient } from "react-query";
 import queryKeys from "../../utils/queryKeys";
 import { useNotifyStore } from "../../utils/store";
+import { CreateSafelock, CreateSafelockStage2 } from "./lockedPopups";
+import LockableAssetsOverview from "./lockedPopups/LockableAssetsOverview";
 
-function CreateGoalManager({ showForm1, toggleForm1, token }) {
-  const [showForm2, setShowForm2] = useState(false);
-
+function CreateLockManager({ showForm1, toggleForm1, token }) {
   const queryClient = useQueryClient();
   const setNotify = useNotifyStore((state) => state.setNotify);
 
+  const [showForm2, setShowForm2] = useState(false);
+  const [showLockableAssetsOverview, setShowLockableAssetsOverview] =
+    useState(false);
+
   function toggleForm2() {
     setShowForm2(!showForm2);
+  }
+
+  function toggleLockableAssetsOverview() {
+    setShowLockableAssetsOverview(!showLockableAssetsOverview);
   }
 
   const { mutate, isLoading } = useMutation({
@@ -74,7 +81,7 @@ function CreateGoalManager({ showForm1, toggleForm1, token }) {
   return (
     <>
       {showForm1 && (
-        <GoalCreation
+        <CreateSafelock
           token={token}
           handleSubmit={handleSubmitForm1}
           toggleShow={toggleForm1}
@@ -84,9 +91,12 @@ function CreateGoalManager({ showForm1, toggleForm1, token }) {
       )}
 
       {showForm2 && (
-        <GoalCreation2
+        <CreateSafelockStage2
           handleSubmit={handleSubmitForm2}
           toggleShow={toggleForm2}
+          openAssetsOverview={() => {
+            setShowLockableAssetsOverview(true);
+          }}
           formData={formData}
           goBack={() => {
             toggleForm1();
@@ -96,8 +106,26 @@ function CreateGoalManager({ showForm1, toggleForm1, token }) {
           show={showForm2}
         />
       )}
+
+      {showLockableAssetsOverview && (
+        <LockableAssetsOverview
+          formData={formData}
+          handleSubmit={(asset) => {
+            setFormData({ ...formData, investibleAsset: asset });
+            setShowLockableAssetsOverview(false);
+
+            setShowForm2(true);
+          }}
+          token={token}
+          goBack={() => {
+            setShowLockableAssetsOverview(false);
+            setShowForm2(true);
+          }}
+          show={showLockableAssetsOverview}
+        />
+      )}
     </>
   );
 }
 
-export default CreateGoalManager;
+export default CreateLockManager;

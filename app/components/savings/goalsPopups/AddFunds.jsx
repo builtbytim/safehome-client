@@ -42,6 +42,10 @@ function AddFunds({ closeSelf, token, selectedGoal }) {
       queryKey: [queryKeys.getMyGoalSavings],
     });
 
+    queryClient.invalidateQueries({
+      queryKey: [queryKeys.getSavingsStats],
+    });
+
     closeSelf();
 
     if (vars.fundSource === fundSources[1].value) {

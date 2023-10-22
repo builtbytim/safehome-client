@@ -28,6 +28,7 @@ function NotificationBell({ toggleNotifications, token }) {
 
   return (
     <div
+      title={`${data.unreadCount} unread notifications`}
       onClick={toggleNotifications}
       className={
         "self-center hover:cursor-pointer relative " +
@@ -47,7 +48,6 @@ function NotificationBell({ toggleNotifications, token }) {
 
       {isSuccess && data && data.unreadCount > 0 && (
         <span
-          title={`${data.unreadCount} unread notifications`}
           className={
             "border rounded-full animate-bounce border-[--text-brand] bg-[--text-brand] p-[0.125rem] md:p-1 inline-block absolute top-0 right-0 "
           }
