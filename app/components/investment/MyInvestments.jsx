@@ -64,7 +64,7 @@ function MyInvestments({
   ) {
     return (
       <div className="flex flex-col justify-center items-center py-6 space-y-4">
-        <p className="text-[#C4C4C4]">
+        <p className="text-xl text-[#C4C4C4] lg:text-2xl  ">
           You do not have any completed investments
         </p>
       </div>

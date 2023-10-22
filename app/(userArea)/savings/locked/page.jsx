@@ -193,6 +193,7 @@ function Page({ authenticatedUser, authenticationToken }) {
             <LockedSavingsGridList
               token={authenticationToken}
               launchCreateLockedPlan={toggleCreateLockF1}
+              completed={tab === 1}
             />
           </section>
         </main>

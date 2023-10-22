@@ -72,7 +72,7 @@ function LockedSavingsGridList({
     return (
       <div className="flex flex-col justify-center items-center py-6 space-y-4">
         <p className="text-xl text-[#C4C4C4] lg:text-2xl  ">
-          You do not have any completed savings plan.
+          You do not have any completed locked savings plan.
         </p>
       </div>
     );
