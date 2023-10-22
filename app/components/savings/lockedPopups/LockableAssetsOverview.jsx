@@ -58,7 +58,7 @@ function LockableAssetsOverview({
 
                 <input
                   type="text"
-                  className="px-2 pl-4 text-sm outline-none focus:border-[--invert] placeholder:text-[--placeholder] rounded-brand py-1 border self-center"
+                  className="px-2 w-[40vw] max-w-[30%] pl-4 text-sm outline-none focus:border-[--invert] placeholder:text-[--placeholder] rounded-brand py-1 border self-center"
                   placeholder="Search assets..."
                 />
               </div>
