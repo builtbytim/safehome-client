@@ -9,7 +9,7 @@ import useUserSavingsStats from "../../utils/hooks/useUserSavingsStats";
 import { NumericFormat } from "react-number-format";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
-function OverviewCard({ token }) {
+function OverviewCard({ token, launchCreateGoal, launchCreateLock }) {
   const { data, isError, isLoading, isSuccess, refetch } = useUserSavingsStats(
     token,
     null,
@@ -101,8 +101,7 @@ function OverviewCard({ token }) {
             </p>
           </div>
 
-          <Link
-            href="/savings/goals"
+          <div
             id="goal-savings"
             className="bg-[#FF91001A] w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6 "
           >
@@ -111,7 +110,11 @@ function OverviewCard({ token }) {
                 <Image src={TargetImage} alt="my funds" width="48" />
               </div>
 
-              <div className="flex flex-row justify-center items-center space-x-2 self-center text-[--text-secondary]">
+              <div
+                role="button"
+                onClick={launchCreateGoal}
+                className="flex flex-row justify-center items-center space-x-2 self-center text-[--text-secondary]"
+              >
                 <span> Create Goal </span>
 
                 <BiChevronRight className="inline-block text-2xl self-center" />
@@ -131,10 +134,9 @@ function OverviewCard({ token }) {
                 prefix={"₦ "}
               />
             </p>
-          </Link>
+          </div>
 
-          <Link
-            href="/savings/locked"
+          <div
             id="locked-savings"
             className="bg-[#ff6100]/10 w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6"
           >
@@ -143,7 +145,11 @@ function OverviewCard({ token }) {
                 <Image src={LockImage} alt="my funds" width="48" />
               </div>
 
-              <div className="flex flex-row justify-center items-center space-x-2 self-center text-[--text-secondary]">
+              <div
+                role="button"
+                onClick={launchCreateLock}
+                className="flex flex-row justify-center items-center space-x-2 self-center text-[--text-secondary]"
+              >
                 <span> Lock funds </span>
 
                 <BiChevronRight className="inline-block text-2xl self-center" />
@@ -162,7 +168,7 @@ function OverviewCard({ token }) {
                 prefix={"₦ "}
               />
             </p>
-          </Link>
+          </div>
 
           {/* <div
             id="interest-earned"

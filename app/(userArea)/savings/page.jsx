@@ -4,12 +4,12 @@ import SecureRoute from "../../components/SecureRoute";
 import HeaderSavings from "../../components/layout/headers/HeaderSavings";
 import OverviewCard from "../../components/savings/OverviewCard";
 import TabSwitch from "../../components/savings/TabSwitch";
-import Link from "next/link";
 import useTabParam from "../../utils/hooks/useTabParam";
 import GoalSavingsGridList from "../../components/savings/GoalSavingsGridList";
 import CreateGoalManager from "../../components/savings/CreateGoalManager";
 import GoalOverviewManager from "../../components/savings/GoalOverviewManager";
 import { useState } from "react";
+import CreateLockManager from "../../components/savings/CreateLockManager";
 
 const tabItems = [
   {
@@ -24,6 +24,7 @@ function Page({ authenticatedUser, authenticationToken }) {
   const { tab: tabState, setTab: setTabState } = useTabParam("tab", 0, [0, 1]);
   const [showGoalCreationF1, setShowGoalCreationF1] = useState(false);
   const [showGoalCreationF2, setShowGoalCreationF2] = useState(false);
+  const [showCreateLockF1, setShowCreateLockF1] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
 
   function toggleGoalCreationF1() {
@@ -34,6 +35,10 @@ function Page({ authenticatedUser, authenticationToken }) {
     setShowGoalCreationF2(!showGoalCreationF2);
   }
 
+  function toggleCreateLockF1() {
+    setShowCreateLockF1(!showCreateLockF1);
+  }
+
   return (
     <>
       <CreateGoalManager
@@ -41,6 +46,12 @@ function Page({ authenticatedUser, authenticationToken }) {
         showForm2={showGoalCreationF2}
         toggleForm1={toggleGoalCreationF1}
         toggleForm2={toggleGoalCreationF2}
+        token={authenticationToken}
+      />
+
+      <CreateLockManager
+        showForm1={showCreateLockF1}
+        toggleForm1={toggleCreateLockF1}
         token={authenticationToken}
       />
 
@@ -56,7 +67,11 @@ function Page({ authenticatedUser, authenticationToken }) {
         <HeaderSavings user={authenticatedUser} />
 
         <main className=" space-y-2 lg:space-y-10">
-          <OverviewCard token={authenticationToken} />
+          <OverviewCard
+            launchCreateGoal={toggleGoalCreationF1}
+            launchCreateLock={toggleCreateLockF1}
+            token={authenticationToken}
+          />
           <section className="bg-white rounded-brand  py-8 md:p-8 space-y-4">
             <TabSwitch
               tabItems={tabItems}

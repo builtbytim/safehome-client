@@ -3,17 +3,26 @@ import { BiX } from "react-icons/bi";
 import SmallDetailsCard from "./SmallDetailsCard";
 import SwitchField from "../../forms/branded/SwitchField";
 import { NumericFormat } from "react-number-format";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Spinner from "../../Spinner";
+import useOutsideClickDetector from "../../../utils/hooks/useOutsideClickDetector";
 
 function CreateSafelockPreview({
-  toggleShow,
+  closeSelf,
+  show,
   handleSubmit,
   formData,
   isLoading,
 }) {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [showErorMsg, setShowErorMsg] = useState(false);
+  const ref = useRef(null);
+
+  useOutsideClickDetector(ref, () => {
+    if (show) {
+      closeSelf();
+    }
+  });
 
   function onCreateLockClick() {
     if (!acceptTerms) {
@@ -29,13 +38,14 @@ function CreateSafelockPreview({
   return (
     <Overlay2 pos="center">
       <section
+        ref={ref}
         className={
           "w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40  "
         }
       >
         <div className="flex p-6 flex-row justify-end items-center">
           <div
-            onClick={toggleShow}
+            onClick={closeSelf}
             className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
           >
             <BiX className="text-[--primary] text-2xl" />
@@ -53,7 +63,6 @@ function CreateSafelockPreview({
           </div>
 
           <div className="px-6 gap-8 pt-6 grid grid-cols-2">
-            <SmallDetailsCard title="Title" value={formData.lockTitle} />
             <SmallDetailsCard
               title="Amount to Lock"
               value={
@@ -85,10 +94,6 @@ function CreateSafelockPreview({
               value={`${formData.lockDurationInMonths} ${
                 formData.lockDurationInMonths > 1 ? "months" : "month"
               }`}
-            />
-            <SmallDetailsCard
-              title="Mature into "
-              value={formData.investibleAsset.assetName}
             />
           </div>
 

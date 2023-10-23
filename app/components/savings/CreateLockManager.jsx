@@ -92,7 +92,6 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
     const data = formData;
 
     mutate({
-      lockName: data.lockTitle,
       paymentMode: data.paymentMode,
       fundSource: data.savingsPreference,
       interval: data.preferredInterval,
@@ -166,6 +165,11 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
           isLoading={isLoading}
           formData={formData}
           handleSubmit={handleSubmit}
+          closeSelf={() => {
+            setShowFormOverview(false);
+            setShowForm2(true);
+          }}
+          show={showFormOverview}
         />
       )}
     </>

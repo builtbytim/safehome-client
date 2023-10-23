@@ -149,7 +149,7 @@ function CreateSafelock2({
                       htmlFor="investibleAsset"
                       className="text-[--text-secondary] font-medium text-sm text-left"
                     >
-                      Choose the property you want to lock for
+                      Property you are locking for
                     </label>
 
                     <input
