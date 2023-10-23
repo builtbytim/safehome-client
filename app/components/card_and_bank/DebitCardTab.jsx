@@ -42,7 +42,10 @@ const DebitCardTab = () => {
   return (
     <div className="w-full">
       <div className="flex py-16 justify-center items-center  w-full">
-        <p className="text-xl text-[#C4C4C4] lg:text-2xl  "> Coming Soon</p>
+        <p className="text-sm lg:text-base  text-[#C4C4C4] xl:text-lg  ">
+          {" "}
+          Coming Soon
+        </>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[650px]">

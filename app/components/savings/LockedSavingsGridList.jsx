@@ -71,7 +71,7 @@ function LockedSavingsGridList({
   if (isSuccess && data && data.unfilteredEntries === 0 && completed) {
     return (
       <div className="flex flex-col justify-center items-center py-6 space-y-4">
-        <p className="text-xl text-[#C4C4C4] lg:text-2xl  ">
+        <p className="text-sm lg:text-base text-[#C4C4C4] xl:text-lg  ">
           You do not have any completed locked savings plan.
         </p>
       </div>
