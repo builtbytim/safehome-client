@@ -7,7 +7,6 @@ import ExtendedAssetList from "../../investment/ExtendedAssetList";
 import useBodyScrollLock from "../../../utils/hooks/useBodyScrollLock";
 import ClubOwnersFilter from "../../investment/ClubOwnersFilter";
 import { useState } from "react";
-import { useDebounce } from "react-use";
 
 function LockableAssetsOverview({
   goBack,
@@ -59,21 +58,19 @@ function LockableAssetsOverview({
                 </h1>
               </div>
 
-              <div className="flex flex-row justify-end items-center space-x-4">
-                <input
+              {/* <input
                   type="text"
-                  className="px-2 w-[40vw] transitioning text-stone-500 max-w-[30%] pl-4 text-sm outline-none focus:border-[--invert] placeholder:text-[--placeholder] rounded-brand py-2 border self-center"
+                  className="hidden px-2 w-[40vw] transitioning text-stone-500 max-w-[30%] pl-4 text-sm outline-none focus:border-[--invert] placeholder:text-[--placeholder] rounded-brand py-2 border self-center"
                   placeholder="Search assets..."
+                /> */}
+              <div
+                className="p-1 border  rounded-full hover:bg-[--b1] cursor-pointer"
+                onClick={goBack}
+              >
+                <BsX
+                  role="button"
+                  className="text-2xl lg:text-2xl  rounded-full text-[--primary] transitioning"
                 />
-                <div
-                  className="p-1 border  rounded-full hover:bg-[--b1] cursor-pointer"
-                  onClick={goBack}
-                >
-                  <BsX
-                    role="button"
-                    className="text-2xl lg:text-2xl  rounded-full text-[--primary] transitioning"
-                  />
-                </div>
               </div>
             </div>
             <ClubOwnersFilter
@@ -84,7 +81,7 @@ function LockableAssetsOverview({
                   key={club.value}
                   onClick={onClick}
                   className={cn({
-                    " text-sm  font-medium transitioning capitalize ": true,
+                    " text-sm whitespace-nowrap  font-medium transitioning capitalize ": true,
 
                     " text-[--color-brand] border-[--color-brand] ": active,
                     " text-[--placeholder] border-transparent hover:text-stone-500 ":

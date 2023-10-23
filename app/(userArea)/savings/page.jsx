@@ -58,15 +58,6 @@ function Page({ authenticatedUser, authenticationToken }) {
         <main className=" space-y-2 lg:space-y-10">
           <OverviewCard token={authenticationToken} />
           <section className="bg-white rounded-brand  py-8 md:p-8 space-y-4">
-            <div className="flex flex-row justify-start items-center space-x-4 max-w-[70%] md:max-w-[60%] lg:max-w-[40%] ">
-              <Link className="w-full" href="/savings/goals">
-                <button className="btn-1 text-sm "> Goal Savings </button>
-              </Link>
-
-              <Link className="w-full" href="/savings/locked">
-                <button className="btn-2 text-sm "> Locked Savings </button>
-              </Link>
-            </div>
             <TabSwitch
               tabItems={tabItems}
               tabState={tabState}

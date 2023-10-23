@@ -21,11 +21,6 @@ function CreateSafelock2({
   openAssetsOverview,
 }) {
   const validationSchema = Yup.object().shape({
-    lockTitle: Yup.string()
-      .required("Required")
-      .min(3, "Too short")
-      .max(64, "Too long"),
-
     investibleAsset: Yup.object().required("Required"),
 
     savingsPreference: Yup.string()
@@ -105,7 +100,6 @@ function CreateSafelock2({
               preferredInterval: true,
             }}
             initialValues={{
-              lockTitle: formData.lockTitle || "",
               investibleAsset: formData.investibleAsset || "",
 
               preferredInterval:
@@ -128,7 +122,7 @@ function CreateSafelock2({
             {({ isValid, values, setFieldValue }) => {
               return (
                 <Form className="space-y-6 px-6 pt-6  ">
-                  <div className="w-full relative flex flex-col justify-center items-start space-y-2">
+                  {/* <div className="w-full relative flex flex-col justify-center items-start space-y-2">
                     <label
                       htmlFor="lockTitle"
                       className="text-[--text-secondary] font-medium text-sm text-left"
@@ -148,7 +142,7 @@ function CreateSafelock2({
                       component="div"
                       className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                     />
-                  </div>
+                  </div> */}
 
                   <div className="w-full relative flex flex-col justify-center items-start space-y-2">
                     <label

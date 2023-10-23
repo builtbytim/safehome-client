@@ -7,6 +7,7 @@ import ScrollLink from "../ScrollLink";
 import { BiChevronRight } from "react-icons/bi";
 import useUserSavingsStats from "../../utils/hooks/useUserSavingsStats";
 import { NumericFormat } from "react-number-format";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 function OverviewCard({ token }) {
   const { data, isError, isLoading, isSuccess, refetch } = useUserSavingsStats(
@@ -23,6 +24,21 @@ function OverviewCard({ token }) {
           {" "}
           Overview{" "}
         </h1>
+
+        <div className="hidden self-center md:flex justify-center items-center space-x-4">
+          <Link
+            href="/savings/goals"
+            className="btn-1 px-6 flex justify-center whitespace-nowrap text-sm lg:text-base space-x-2 items-center"
+          >
+            <span>Goal Savings</span>
+          </Link>
+          <Link
+            href="/savings/locked"
+            className="btn-2 px-6 flex justify-center text-sm lg:text-base whitespace-nowrap space-x-2 items-center"
+          >
+            <span>Locked Savings</span>
+          </Link>
+        </div>
       </div>
 
       <div>
@@ -165,6 +181,22 @@ function OverviewCard({ token }) {
             </p>
           </div> */}
         </div>
+      </div>
+
+      <div className=" flex flex-row  md:hidden justify-between items-center space-x-4">
+        <Link
+          href="/savings/goals"
+          className="btn-2 py-3 flex justify-center whitespace-nowrap text-sm lg:text-base space-x-2 items-center"
+        >
+          <span>Goal Savings</span>
+        </Link>
+
+        <Link
+          href="/savings/locked"
+          className="btn-1 py-3 flex justify-center text-sm lg:text-base whitespace-nowrap space-x-2 items-center"
+        >
+          <span>Locked Savings</span>
+        </Link>
       </div>
     </section>
   );

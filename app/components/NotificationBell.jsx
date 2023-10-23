@@ -28,9 +28,7 @@ function NotificationBell({ toggleNotifications, token }) {
 
   return (
     <div
-      title={
-        isSuccess && data ? `${data.unreadCount} unread notifications` : ""
-      }
+      title={isSuccess && data ? `${data.unreadCount} unread ` : ""}
       onClick={toggleNotifications}
       className={
         "self-center hover:cursor-pointer relative " +

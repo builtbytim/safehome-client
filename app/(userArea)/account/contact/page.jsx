@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import SecureRoute from "../../../components/SecureRoute";
 
 import {
@@ -8,7 +8,8 @@ import {
   PiEnvelope,
   PiPhone,
   PiTwitterLogo,
-  PiInstagramLogoBold,
+  PiInstagramLogo,
+  PiWhatsappLogo,
 } from "react-icons/pi";
 import { RiFacebookFill } from "react-icons/ri";
 import { SlSocialLinkedin } from "react-icons/sl";
@@ -24,7 +25,7 @@ const InfoCard = ({ icon, text }) => (
   </div>
 );
 
-export default function Contact() {
+function Page() {
   const fileRef = useRef(null);
 
   const openFile = () => {
@@ -53,20 +54,31 @@ export default function Contact() {
         />
         <InfoCard
           icon={<PiPhone className="text-[--color-brand]" />}
-          text="+234 812 994 0742, +234 812 994 0741"
+          text={
+            <span>
+              {" "}
+              +234 812 994 0742 <br /> +234 812 994 0741{" "}
+            </span>
+          }
         />
       </div>
       <div className="space-x-6  border border-[--lines] rounded md:rounded-xl px-7 py-9 text-center">
         <div className="flex justify-center space-x-6 md:space-x-10 items-center">
           <PiTwitterLogo className="text-[--text-secondary] text-2xl md:text-3xl" />
-          <PiInstagramLogoBold className="text-[--text-secondary] text-2xl md:text-3xl" />
+          <PiInstagramLogo className="text-[--text-secondary] text-2xl md:text-3xl" />
           <RiFacebookFill className="text-[--text-secondary] text-2xl md:text-3xl" />
           <SlSocialLinkedin className="text-[--text-secondary] text-2xl md:text-3xl" />
+
+          <PiWhatsappLogo className="text-[--text-secondary] text-2xl md:text-3xl" />
         </div>
         <p className="py-4">
-          Follow us on social media for updates, news, and more:
+          Follow us on social media for updates, news, and more.
         </p>
       </div>
     </main>
   );
+}
+
+export default function ProtectedPage(props) {
+  return <SecureRoute offspring={Page} {...props} />;
 }

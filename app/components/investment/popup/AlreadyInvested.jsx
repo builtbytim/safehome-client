@@ -77,14 +77,9 @@ const AlreadyInvested = ({
             type="info"
           />
           <InvestmentTab
-            heading="Units"
+            heading="Units Purchased"
             content={userInvestmentData.units}
             formatAsNumber
-            type="info"
-          />
-          <InvestmentTab
-            heading="Returns"
-            content={data.props.roi}
             type="info"
           />
         </div>

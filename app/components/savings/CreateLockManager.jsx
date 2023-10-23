@@ -82,8 +82,10 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
 
   function handleSubmitForm1(values) {
     setFormData({ ...formData, ...values });
+
     toggleForm1();
-    toggleForm2();
+
+    setShowLockableAssetsOverview(true);
   }
 
   function handleSubmit() {
@@ -129,7 +131,7 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
           }}
           formData={formData}
           goBack={() => {
-            toggleForm1();
+            setShowLockableAssetsOverview(true);
             toggleForm2();
           }}
           show={showForm2}
@@ -148,7 +150,12 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
           token={token}
           goBack={() => {
             setShowLockableAssetsOverview(false);
-            setShowForm2(true);
+
+            if (formData.investibleAsset) {
+              setShowForm2(true);
+            } else {
+              toggleForm1();
+            }
           }}
           show={showLockableAssetsOverview}
         />

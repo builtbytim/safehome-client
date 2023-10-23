@@ -167,20 +167,32 @@ function Page({ authenticatedUser, authenticationToken }) {
                   id="interest-earned"
                   className="w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6 border border-[--lines]"
                 >
-                  <div>
-                    <Image src={SavingsImage} alt="my funds" width="48" />
-                  </div>
+                  <div className="flex flex-row justify-between items-center w-full">
+                    <div className="flex flex-col justify-center itenms-start space-y-6">
+                      <div>
+                        <Image src={SavingsImage} alt="my funds" width="48" />
+                      </div>
 
-                  <h2 className=" text-[--text-secondary] font-medium">
-                    Interest Earned
-                  </h2>
+                      <h2 className=" text-[--text-secondary] font-medium">
+                        Interest Earned
+                      </h2>
+                    </div>
+
+                    <div className="col-span-5 md:hidden py-2">
+                      <span className="text-[--text-brand-2] uppercase">
+                        {" "}
+                        Interest &nbsp;&nbsp;
+                      </span>{" "}
+                      <span className="text-[--text-secondary]"> 5% P.A </span>
+                    </div>
+                  </div>
 
                   <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
                     ₦0
                   </p>
                 </div>
 
-                <div
+                {/* <div
                   id="interest"
                   className="hidden self-stretch w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 md:flex flex-col justify-center items-start space-y-6 border border-[--lines]"
                 >
@@ -193,20 +205,14 @@ function Page({ authenticatedUser, authenticationToken }) {
                   <p className=" text-[--text-secondary] font-medium">
                     Per Annum
                   </p>
-                </div>
+                </div> */}
               </div>
 
               {/* Mobile Interest Info */}
-              <div className="col-span-5 md:hidden py-2">
-                <span className="text-[--text-brand-2] uppercase">
-                  {" "}
-                  Interest &nbsp;&nbsp;
-                </span>{" "}
-                <span className="text-[--text-secondary]"> 5% p.a </span>
-              </div>
+
               <div
                 onClick={toggleGoalCreationF1}
-                className="col-span-5 md:hidden"
+                className="col-span-5 md:hidden py-2"
               >
                 <button className="btn-3 ">Create a goal</button>
               </div>

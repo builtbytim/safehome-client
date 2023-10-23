@@ -105,7 +105,7 @@ export const navItems = [
   //   link: "/account/update",
   // },
   {
-    name: "Notification",
+    name: "Notifications",
     icon: NotificationSVG,
     link: "/account/notification",
   },
