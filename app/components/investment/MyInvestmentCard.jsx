@@ -17,22 +17,21 @@ const MyInvestmentCard = ({ investment, openInfo }) => {
       }}
       title={!isActive ? "Payment has not been completed" : ""}
       className={
-        "relative rounded-brand md:rounded-lg lg:rounded-xl border overflow-hidden text-[--text-secondary] text-left grid grid-cols-5 md:grid-cols-5 h-[165px] md:h-[192px] hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm transitioning " +
+        "relative rounded-brand md:rounded-lg lg:rounded-xl border overflow-hidden text-[--text-secondary] text-left grid grid-cols-5 md:grid-cols-5  hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm transitioning self-stretch" +
         cn({
           " opacity-50 pointer-events-none ": !isActive,
         })
       }
     >
-      <div className="w-full h-full col-span-2 md:col-span-2 overflow-hidden">
+      <div className="relative h-full min-h-[150px] col-span-2 md:col-span-2 overflow-hidden">
         <Image
           src={inv1}
+          fill
           alt={assetName}
-          className="object-cover w-full h-full group-hover:scale-110 transform transition-all duration-1000 ease-in-out "
-          width={200}
-          height={192}
+          className="object-cover h-full absolute group-hover:scale-110 transform transition-all duration-1000 ease-in-out "
         />
       </div>
-      <div className="p-4 md:px-4 xl:px-6 col-span-3 md:col-span-3 space-y-1">
+      <div className="px-4 pt-2 pb-8 md:px-4 xl:px-6  col-span-3 md:col-span-3 space-y-1">
         <h2 className="capitalize font-medium text-base md:text-lg text-left truncate ">
           {" "}
           {assetName}
@@ -60,7 +59,7 @@ const MyInvestmentCard = ({ investment, openInfo }) => {
       </div>
 
       {isActive ? (
-        <div className="absolute bottom-0 text-xs right-0 rounded-tl-xl py-1 md:py-2 px-3 text-white bg-[--green] ">
+        <div className="absolute bottom-0 font-medium text-xs right-0 rounded-tl-xl py-1  px-2 text-white bg-[--green] ">
           <NumericFormat
             value={units}
             displayType={"text"}

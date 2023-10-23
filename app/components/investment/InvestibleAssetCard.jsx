@@ -17,19 +17,18 @@ const InvestibleAssetCard = ({ investibleAsset, openInfo }) => {
   return (
     <div
       assetName="Click to view more details"
-      className="relative  rounded-brand md:rounded-lg lg:rounded-xl border overflow-hidden text-[--text-secondary] text-left grid grid-cols-5 md:grid-cols-5 h-[165px] md:h-[192px] hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm "
+      className="relative  rounded-brand md:rounded-lg lg:rounded-xl border overflow-hidden text-[--text-secondary] text-left grid grid-cols-5 md:grid-cols-5 self-stretch hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm "
       onClick={openInfo}
     >
-      <div className="w-full h-full col-span-2 md:col-span-2 overflow-hidden">
+      <div className=" h-full min-h-[150px] rounded-l-[16px] col-span-2 md:col-span-2 relative overflow-hidden">
         <Image
           src={inv1}
           alt={assetName}
-          className="object-cover w-full h-full group-hover:scale-110 transform transition-all duration-1000 ease-in-out "
-          width={200}
-          height={192}
+          className="object-cover  absolute rounded-l-[16px]  group-hover:scale-110 transform transition-all duration-1000 ease-in-out "
+          fill
         />
       </div>
-      <div className="p-4 md:px-4 xl:px-6 col-span-3 md:col-span-3 space-y-1">
+      <div className="px-4 pt-2 pb-8 md:px-4 xl:px-6 col-span-3 md:col-span-3 space-y-1">
         <h2 className="capitalize font-medium text-base md:text-lg text-left truncate ">
           {assetName}
         </h2>

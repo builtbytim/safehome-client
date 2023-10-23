@@ -20,7 +20,7 @@ const LockableAssetCard = ({ investibleAsset, onSelect }) => {
       assetName="Click to view more details"
       className="relative  rounded-brand md:rounded-lg lg:rounded-xl border overflow-hidden text-[--text-secondary] text-left grid grid-cols-5 md:grid-cols-5 hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm self-stretch"
     >
-      <div className=" h-full relative rounded-l-[16px] col-span-2 md:col-span-2 overflow-hidden">
+      <div className=" h-full min-h-[150px] relative rounded-l-[16px] col-span-2 md:col-span-2 overflow-hidden">
         <Image
           src={inv1}
           alt={assetName}
