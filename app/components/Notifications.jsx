@@ -70,6 +70,7 @@ export default function Notifications() {
     }),
     onSuccess: () => {
       queryClient.invalidateQueries(queryKeys.getMyNotifications);
+      queryClient.invalidateQueries(queryKeys.getMyNotificationStats);
     },
   });
 
@@ -152,7 +153,7 @@ export default function Notifications() {
           </div>
           {/* Notification items  */}
 
-          <div className="pb-32  max-h-[80vh] overflow-y-auto scrollbar-fix">
+          <div className="pb-32  max-h-[80vh] overflow-y-auto no-scrollbar">
             {data && data.unfilteredEntries === 0 && (
               <div className="w-full flex h-full flex-col justify-center items-center space-y-4">
                 <div className="h-full pt-16 pb-8   space-y-4  mt-4 flex flex-col justify-center items-center text-[--color-brand-2]">
@@ -244,7 +245,7 @@ export default function Notifications() {
                 }}
                 className="btn-2 text-[--color-brand-2] font-medium border-[--color-brand-2] hover:bg-[#1E0700]/10 capitalize"
               >
-                {isLoadingClearAll ? "Clearing all..." : "Clear all"}
+                {isLoadingClearAll ? "Clearing..." : "Clear all"}
               </button>
             </div>
           )}
