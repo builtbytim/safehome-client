@@ -2,7 +2,7 @@ import React from "react";
 
 function TabSwitch({ tabState, setTabState }) {
   return (
-    <div className="border-b border-[--lines] px-0 md:px-0 flex font-semibold">
+    <div className="border-b overflow-x-scroll no-scrollbar border-[--lines] px-0 md:px-0 flex font-semibold">
       <button
         className={
           "whitespace-nowrap " +

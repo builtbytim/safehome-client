@@ -49,31 +49,21 @@ function GoalCreation2({
 
     startDate: Yup.date()
       .required("Required")
-      .test(
-        "is-in-future-by-1-day",
-        "Must be at least 1 day from now",
-        (value) => {
-          const now = new Date();
-          const withdrawalDate = new Date(value);
-          const ONE_DAY = 24 * 60 * 60 * 1000;
+      .test("is-today-or-later", "Must be today or later", (value) => {
+        const now = new Date();
+        const startDate = new Date(value);
 
-          return withdrawalDate.getTime() - now.getTime() >= ONE_DAY;
-        }
-      ),
+        return startDate.getTime() >= now.getTime();
+      }),
 
     withdrawalDate: Yup.date()
       .required("Required")
-      .test(
-        "is-in-future-by-1-day",
-        "Must be at least 1 day from now",
-        (value) => {
-          const now = new Date();
-          const withdrawalDate = new Date(value);
-          const ONE_DAY = 24 * 60 * 60 * 1000;
+      .test("is-in-future", "Must be in the future", (value) => {
+        const now = new Date();
+        const withdrawalDate = new Date(value);
 
-          return withdrawalDate.getTime() - now.getTime() >= ONE_DAY;
-        }
-      )
+        return withdrawalDate.getTime() > now.getTime();
+      })
       .test(
         "is-greater-than-start-date-by-at-least-seven-days",
         "Must be later than the start date by at least 7 days",
