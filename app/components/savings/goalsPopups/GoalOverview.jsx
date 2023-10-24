@@ -5,6 +5,8 @@ import Image from "next/image";
 import GoalImage from "../../../../assets/images/investment/inv1.png";
 import SmallDetailsCard from "./SmallDetailsCard";
 import { NumericFormat } from "react-number-format";
+import useOutsideClickDetector from "../../../utils/hooks/useOutsideClickDetector";
+import { useRef } from "react";
 
 function GoalOverview({
   closeSelf,
@@ -22,7 +24,12 @@ function GoalOverview({
     endDate,
     amountToSaveAtInterval,
     interval,
+    completed,
   } = selectedGoal;
+
+  const ref = useRef(null);
+
+  // useOutsideClickDetector(ref, closeSelf);
 
   const daysLeft = Math.ceil(
     (endDate - new Date().getTime() / 1000) / (60 * 60 * 24)
@@ -31,6 +38,7 @@ function GoalOverview({
     <>
       <Overlay2 z={3}>
         <section
+          ref={ref}
           className={
             "w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40 "
           }
@@ -52,8 +60,11 @@ function GoalOverview({
                 fill
                 className="object-cover h-[210px] w-full"
               />
-              <div className="absolute bg-black/60 inset-0  flex flex-col justify-center items-center">
-                <span className="text-white text-center"> {goalName} </span>
+              <div className="absolute bg-black/60 inset-0  flex flex-col justify-center items-center truncate">
+                <h1 className="text-white font-bold truncate text-xl md:text-2xl xl:text-3xl text-center">
+                  {" "}
+                  {goalName}{" "}
+                </h1>
               </div>
             </div>
 
@@ -88,16 +99,26 @@ function GoalOverview({
                 </div>
               </div>
 
-              <div>
-                <button
-                  onClick={toggleShowAddFunds}
-                  className="btn-1-v1 md:py-3 text-center justify-center"
-                >
-                  Add Funds to Goal{" "}
-                </button>
-              </div>
+              {completed && (
+                <div className="pt-4">
+                  <p className="text-[--text-brand-2] text-lg md:text-xl font-bold text-center">
+                    You have completed this goal
+                  </p>
+                </div>
+              )}
 
-              <div className="flex hidden flex-col md:flex-row justify-center md:justify-between items-center space-y-4 md:space-y-0 md:space-x-6">
+              {!completed && (
+                <div>
+                  <button
+                    onClick={toggleShowAddFunds}
+                    className="btn-1-v1 md:py-3 text-center justify-center"
+                  >
+                    Add Funds to Goal{" "}
+                  </button>
+                </div>
+              )}
+
+              <div className=" hidden flex-col md:flex-row justify-center md:justify-between items-center space-y-4 md:space-y-0 md:space-x-6">
                 <button
                   onClick={toggleShowSettings}
                   className="btn-2-v1 hover:scale-[1.02] font-semibold rounded-[8px] bg-[#ff9100]/10 p-3 inline-flex flex-row justify-start items-center space-x-4"

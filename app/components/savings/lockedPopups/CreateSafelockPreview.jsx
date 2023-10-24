@@ -160,7 +160,7 @@ function CreateSafelockPreview({
               }
             />
             <SmallDetailsCard
-              title="Payment Mode"
+              title="Saving Preference"
               value={
                 <span className="capitalize"> {formData.paymentMode} </span>
               }

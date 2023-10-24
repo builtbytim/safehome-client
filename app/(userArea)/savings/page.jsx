@@ -10,6 +10,7 @@ import CreateGoalManager from "../../components/savings/CreateGoalManager";
 import GoalOverviewManager from "../../components/savings/GoalOverviewManager";
 import { useState } from "react";
 import CreateLockManager from "../../components/savings/CreateLockManager";
+import RecentSavingsActivityList from "../../components/savings/RecentSavingsActivityList";
 
 const tabItems = [
   {
@@ -73,18 +74,11 @@ function Page({ authenticatedUser, authenticationToken }) {
             token={authenticationToken}
           />
           <section className="bg-white rounded-brand  py-8 md:p-8 space-y-4">
-            <TabSwitch
-              tabItems={tabItems}
-              tabState={tabState}
-              setTabState={setTabState}
-            />
+            <h1 className="text-[--color-brand] capitalize text-xl sm:text-2xl lg:text-2xl  font-medium">
+              Recent Activity
+            </h1>
 
-            <GoalSavingsGridList
-              token={authenticationToken}
-              completed={tabState === 1}
-              launchCreateGoal={toggleGoalCreationF1}
-              setSelectedGoal={setSelectedGoal}
-            />
+            <RecentSavingsActivityList token={authenticationToken} />
           </section>
         </main>
       </div>

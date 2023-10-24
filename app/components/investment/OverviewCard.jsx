@@ -147,6 +147,10 @@ function OverviewCard({ token }) {
           </div>
         </div>
       </div>
+
+      <div className="col-span-5 lg:hidden py-2">
+        <button className="btn-1-v2 ">Invest Now</button>
+      </div>
     </section>
   );
 }

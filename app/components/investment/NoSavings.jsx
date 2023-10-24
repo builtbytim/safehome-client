@@ -12,7 +12,7 @@ const NoSavings = ({ saveNowFunc, isLocked = false }) => {
         </p>
         <div className="w-full  mx-auto space-y-3 pt-3 max-w-md">
           <button
-            className="btn-1-v2 block w-full "
+            className="btn-1-v2 hidden w-full lg:block "
             onClick={() => saveNowFunc()}
           >
             {isLocked ? "LOCK NOW" : "SAVE NOW"}

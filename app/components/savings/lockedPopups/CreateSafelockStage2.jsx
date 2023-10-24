@@ -27,11 +27,11 @@ function CreateSafelock2({
       .required("Required")
       .oneOf(
         savingsPrefs.map((v) => v.value),
-        "Invalid preference"
+        "Invalid payment method"
       ),
     paymentMode: Yup.string()
       .required("Required")
-      .oneOf(["manual", "auto"], "Invalid payment mode"),
+      .oneOf(["manual", "auto"], "Invalid saving preference"),
 
     preferredInterval: Yup.string()
       .required("Required")
@@ -204,7 +204,7 @@ function CreateSafelock2({
                       htmlFor="paymentMode"
                       className="text-[--text-secondary] font-medium text-sm text-left"
                     >
-                      Payment Mode
+                      How do you prefer to save?
                     </label>
 
                     <GenericSelectFieldVariant1
@@ -236,7 +236,7 @@ function CreateSafelock2({
                       htmlFor="savingPreference"
                       className="text-[--text-secondary] font-medium text-sm text-left"
                     >
-                      How would you prefer to save?
+                      Payment Method
                     </label>
 
                     <GenericSelectFieldVariant1

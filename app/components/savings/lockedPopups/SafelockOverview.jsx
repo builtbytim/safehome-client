@@ -81,7 +81,7 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
               }
             />
             <SmallDetailsCard
-              title="Payment Mode"
+              title="Saving Preference"
               value={<span className="capitalize"> {paymentMode} </span>}
             />
             <SmallDetailsCard
@@ -111,13 +111,15 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
         </div>
 
         <div className=" space-y-4 px-6 pt-4  flex flex-col justify-center items-center  mx-auto">
-          <button
-            onClick={handleAddFund}
-            type="button"
-            className="btn-1 w-full  "
-          >
-            Add Funds
-          </button>
+          {!completed && (
+            <button
+              onClick={handleAddFund}
+              type="button"
+              className="btn-1 w-full  "
+            >
+              Add Funds
+            </button>
+          )}
 
           <button type="button" onClick={closeSelf} className="btn-2 w-full  ">
             Close
