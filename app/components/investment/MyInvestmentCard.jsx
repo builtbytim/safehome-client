@@ -31,8 +31,8 @@ const MyInvestmentCard = ({ investment, openInfo }) => {
           className="object-cover h-full absolute group-hover:scale-110 transform transition-all duration-1000 ease-in-out "
         />
       </div>
-      <div className="px-4 pt-2 pb-8 md:px-4 xl:px-6  col-span-3 md:col-span-3 space-y-1">
-        <h2 className="capitalize font-medium text-base md:text-lg text-left truncate ">
+      <div className="px-4 pt-2 pb-8 md:px-4 xl:px-6  col-span-3 md:col-span-3 space-y-1 truncate">
+        <h2 className="capitalize  font-medium text-base md:text-lg text-left truncate ">
           {" "}
           {assetName}
         </h2>

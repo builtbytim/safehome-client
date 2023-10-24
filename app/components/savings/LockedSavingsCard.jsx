@@ -3,7 +3,7 @@ import ProgressBar from "./ProgressBar";
 import img from "../../../assets/images/investment/inv4.png";
 import Image from "next/image";
 
-function LockedSavings({
+function LockedSavingsCard({
   lockName,
   lockDurationInMonths,
   amountSaved,
@@ -30,9 +30,9 @@ function LockedSavings({
           />
         </div>
 
-        <div className="self-stretch rounded-r-[16px] col-span-3 py-1 lg:pt-3 lg:pb-4 px-2 md:px-4 space-y-4">
-          <div className="">
-            <h1 className="text-[--primary] text-left font-semibold capitalize xl:text-lg">
+        <div className="self-stretch rounded-r-[16px] col-span-3 py-1 lg:pt-3 lg:pb-4 px-2 md:px-4 space-y-4 truncate">
+          <div className="truncate">
+            <h1 className="text-[--primary] text-left font-semibold capitalize xl:text-lg truncate ">
               {lockName}
             </h1>
             {paymentMode === "auto" && (
@@ -87,4 +87,4 @@ function LockedSavings({
   );
 }
 
-export default LockedSavings;
+export default LockedSavingsCard;

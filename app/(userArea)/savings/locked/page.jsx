@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import SavingsSVG from "../../../components/svg/SavingsSVG";
 import LockSVG from "../../../components/svg/LockSVG";
 import TargetSVG from "../../../components/svg/TargetSVG";
-import LockedSavings from "../../../components/savings/LockedSavings";
+import LockedSavings from "../../../components/savings/LockedSavingsCard";
 import useUserSavingsStats from "../../../utils/hooks/useUserSavingsStats";
 import { NumericFormat } from "react-number-format";
 import CreateLockManager from "../../../components/savings/CreateLockManager";

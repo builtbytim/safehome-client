@@ -9,7 +9,7 @@ import queryKeys from "../../utils/queryKeys";
 import { useState } from "react";
 import MiniFetchStatusIndicator from "../MiniFetchStatusIndicator";
 import NoSavings from "../investment/NoSavings";
-import LockedSavings from "./LockedSavings";
+import LockedSavings from "./LockedSavingsCard";
 
 function LockedSavingsGridList({
   token,

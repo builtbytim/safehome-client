@@ -22,7 +22,7 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
   } = plan;
 
   return (
-    <Overlay2 pos="center">
+    <Overlay2 z={3}>
       <section
         ref={ref}
         className={
@@ -110,7 +110,7 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
           </div>
         </div>
 
-        <div className=" space-y-4 p-6  flex flex-col justify-center items-center  mx-auto">
+        <div className=" space-y-4 px-6 pt-4  flex flex-col justify-center items-center  mx-auto">
           <button
             onClick={handleAddFund}
             type="button"
