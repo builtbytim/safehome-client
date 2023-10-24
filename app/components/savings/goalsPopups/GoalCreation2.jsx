@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { startTransition } from "react";
 import Overlay2 from "../../Overlay2";
 import { BiX } from "react-icons/bi";
 import { Form, Formik, Field, ErrorMessage } from "formik";
@@ -162,8 +162,11 @@ function GoalCreation2({
                 amountToSaveOnIntervalBasis:
                   formData.amountToSaveOnIntervalBasis || "",
 
-                startDate: formData.startDate || "",
-                withdrawalDate: formData.withdrawalDate || "",
+                startDate:
+                  formData.startDate || new Date().toISOString().split("T")[0],
+                withdrawalDate:
+                  formData.withdrawalDate ||
+                  new Date().toISOString().split("T")[0],
                 acceptTerms: formData.acceptTerms || false,
               }}
               initialTouched={{
@@ -173,6 +176,41 @@ function GoalCreation2({
               onSubmit={handleFormSubmit}
             >
               {({ isValid, setFieldValue }) => {
+                // calculate the amount to pay on interval using the preferredInterval, startDate and withdrawalDate
+
+                // const amountToSaveOnIntervalBasis =
+                //   formData.amountToSaveOnIntervalBasis;
+
+                // const startDate = new Date(formData.startDate);
+                // const withdrawalDate = new Date(formData.withdrawalDate);
+
+                // const timeDiff = withdrawalDate.getTime() - startDate.getTime();
+
+                // const preferredInterval = formData.preferredInterval;
+
+                // const preferredIntervalInSeconds =
+                //   timeIntervalsToSeconds[preferredInterval];
+
+                // const numberOfIntervals =
+                //   timeDiff / (preferredIntervalInSeconds * 1000);
+
+                // const amountToSaveOnIntervalBasisCalculated = Math.ceil(
+                //   amountToSaveOnIntervalBasis / numberOfIntervals
+                // );
+
+                // if (
+                //   formData.amountToSaveOnIntervalBasis !==
+                //   amountToSaveOnIntervalBasisCalculated
+                // ) {
+                //   startTransition(() => {
+                //     setFieldValue(
+                //       "amountToSaveOnIntervalBasis",
+                //       amountToSaveOnIntervalBasisCalculated,
+                //       true
+                //     );
+                //   });
+                // }
+
                 return (
                   <Form className="space-y-6">
                     <div className="w-full relative flex flex-col justify-center items-start space-y-2">
@@ -197,31 +235,6 @@ function GoalCreation2({
 
                       <ErrorMessage
                         name="preferredInterval"
-                        component="div"
-                        className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
-                      />
-                    </div>
-
-                    <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                      <label
-                        htmlFor="amountToSaveOnDailyBasis"
-                        className="text-[--text-secondary] font-medium text-sm text-left"
-                      >
-                        Preferred amount to save on interval basis
-                      </label>
-
-                      <FormattingField
-                        icon={FaNairaSign}
-                        type="text"
-                        inputMode="numeric"
-                        className="field-1"
-                        name="amountToSaveOnIntervalBasis"
-                        placeholder="Amount to save on interval basis"
-                        extraClasses="field-1"
-                      />
-
-                      <ErrorMessage
-                        name="amountToSaveOnIntervalBasis"
                         component="div"
                         className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
                       />
@@ -268,6 +281,31 @@ function GoalCreation2({
                         name="withdrawalDate"
                         component="div"
                         className="  left-0 text-[--text-danger] text-xs text-left "
+                      />
+                    </div>
+
+                    <div className="w-full relative flex flex-col justify-center items-start space-y-2">
+                      <label
+                        htmlFor="amountToSaveOnDailyBasis"
+                        className="text-[--text-secondary] font-medium text-sm text-left"
+                      >
+                        Preferred amount to save on interval basis
+                      </label>
+
+                      <FormattingField
+                        icon={FaNairaSign}
+                        type="text"
+                        inputMode="numeric"
+                        className="field-1"
+                        name="amountToSaveOnIntervalBasis"
+                        placeholder="Amount to save on interval basis"
+                        extraClasses="field-1"
+                      />
+
+                      <ErrorMessage
+                        name="amountToSaveOnIntervalBasis"
+                        component="div"
+                        className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
                       />
                     </div>
 
