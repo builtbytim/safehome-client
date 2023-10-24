@@ -18,6 +18,7 @@ const config = {
 
   apiPaths: {
     createUser: "/users",
+    updateUser: "/users",
     requestEmailOtp: "/users/emails/verify",
     confirmEmailOtp: "/users/emails/confirm",
     getSession: "/users/session",
@@ -65,6 +66,7 @@ const config = {
     getUserSavingsStats: "/savings/stats",
     createLockedSavings: "/savings/locked",
     getMyLockedSavings: "/savings/locked",
+    fundLockedSavings: "/savings/locked/fund",
   },
 
   signInModes: {
@@ -77,7 +79,13 @@ const config = {
   signInModeParam: "mode",
   loginUrl: "/sign-in",
 
-  signInRedirectIgnore: ["/sign-in", "/sign-up"],
+  signInRedirectIgnore: [
+    "/sign-in",
+    "/sign-up",
+    "/password/reset",
+    "/password/reset/save",
+    "/sign-out",
+  ],
 
   authenticatedHome: "/",
 

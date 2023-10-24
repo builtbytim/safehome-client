@@ -80,7 +80,15 @@ function SignIn() {
 
     if (searchParams.has(config.redirectSearchParam)) {
       let targetUrl = searchParams.get(config.redirectSearchParam);
-      router.push(decodeURIComponent(targetUrl));
+
+      const decodedUrl = decodeURIComponent(targetUrl);
+
+      if (config.signInRedirectIgnore.includes(decodedUrl)) {
+        router.push(config.authenticatedHome);
+        return;
+      }
+
+      router.push(decodedUrl);
       return;
     }
 

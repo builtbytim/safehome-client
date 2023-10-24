@@ -15,7 +15,6 @@ export default function SecureRoute(props) {
   const authenticationToken = retreiveFromLocalStorage(
     `${config.localStorageKey}:token`
   );
-  const [propagatedSession, setPropagatedSession] = useState(false);
 
   const setUserLocal = useDataStore((state) => state.setUserLocal);
   const setTokenLocal = useDataStore((state) => state.setTokenLocal);
@@ -30,12 +29,11 @@ export default function SecureRoute(props) {
   } = useRemoteSession(authenticationToken);
 
   useEffect(() => {
-    if (authenticatedUser && !propagatedSession) {
+    if (authenticatedUser) {
       setUserLocal(authenticatedUser);
       setTokenLocal(authenticationToken);
-      setPropagatedSession(true);
     }
-  }, [authenticatedUser]);
+  }, [authenticatedUser, authenticationToken]);
 
   // if its taking too long, offer to refresh
 

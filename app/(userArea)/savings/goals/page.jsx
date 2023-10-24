@@ -178,17 +178,22 @@ function Page({ authenticatedUser, authenticationToken }) {
                       </h2>
                     </div>
 
-                    <div className="col-span-5 md:hidden py-2">
+                    <div className=" self-start py-2">
                       <span className="text-[--text-brand-2] uppercase">
                         {" "}
-                        Interest &nbsp;&nbsp;
+                        Up to &nbsp;&nbsp;
                       </span>{" "}
                       <span className="text-[--text-secondary]"> 5% P.A </span>
                     </div>
                   </div>
 
                   <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
-                    ₦0
+                    <NumericFormat
+                      value={0}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"₦ "}
+                    />
                   </p>
                 </div>
 

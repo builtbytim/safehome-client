@@ -4,6 +4,7 @@ import Image from "next/image";
 import Hero from "../../../assets/images/account-hero.png";
 import { useDataStore } from "../../utils/store";
 import { AvatarPlaceholder } from "../account/UserAvatarArea";
+import Link from "next/link";
 
 function UserSection() {
   const user = useDataStore((state) => state.data?.usr);
@@ -30,7 +31,9 @@ function UserSection() {
               className="w-full h-full object-cover"
             />
           ) : (
-            <AvatarPlaceholder width={96} height={96} />
+            <Link href="/account/profile?tab=0">
+              <AvatarPlaceholder width={96} height={96} />
+            </Link>
           )}
         </div>
       </div>

@@ -1,5 +1,6 @@
 const queryKeys = {
   signUp: "signUp",
+  updateUser: "updateUser",
   confirmEmailOtp: "confirmEmailOtp",
   requestEmailOtp: "requestEmailOtp",
   signIn: "signIn",
@@ -46,6 +47,7 @@ const queryKeys = {
   getSavingsStats: "getSavingsStats",
   createLockedSavings: "createLockedSavings",
   getMyLockedSavings: "getMyLockedSavings",
+  fundLockedSavings: "fundLockedSavings",
 };
 
 export default queryKeys;

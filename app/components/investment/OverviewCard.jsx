@@ -122,7 +122,12 @@ function OverviewCard({ token }) {
             </h2>
 
             <p className="text-[--text-brand] font-bold text-xl lg:text-2xl">
-              ₦0
+              <NumericFormat
+                value={0}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"₦ "}
+              />
             </p>
           </div>
 

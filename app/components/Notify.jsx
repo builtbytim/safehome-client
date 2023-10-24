@@ -5,8 +5,6 @@ import Overlay from "./Overlay";
 import cn from "classnames";
 import { useNotifyStore } from "../utils/store";
 import { BsInfoCircle } from "react-icons/bs";
-import { useRef } from "react";
-import useOutsideClickDetector from "../utils/hooks/useOutsideClickDetector";
 
 export default function Notify() {
   const props = useNotifyStore((state) => state.notifyState);
@@ -15,9 +13,9 @@ export default function Notify() {
     show,
     working,
     onAccept,
-    onAcceptText,
+    onAcceptText = "Ok",
     onReject,
-    onRejectText,
+    onRejectText = "Close",
     allowClose,
   } = props;
 
@@ -27,11 +25,7 @@ export default function Notify() {
     content = "Please check your internet connection and try again.";
   }
 
-  const ref = useRef(null);
-
   const hideMe = useNotifyStore((state) => state.hideNotify);
-
-  useOutsideClickDetector(ref, closeSelf);
 
   function closeSelf() {
     if (show && !working) {
@@ -56,9 +50,9 @@ export default function Notify() {
   if (!show) return null;
 
   return (
-    <Overlay z={4}>
-      <div ref={ref} className="w-full bg-white mt-4 py-3 px-4 rounded">
-        {allowClose && (
+    <Overlay pos="center" z={4}>
+      <div className="w-[90%] bg-white mt-4 pt-6 pb-4 max-w-sm px-4 rounded-[8px]">
+        {false && (
           <div className="flex flex-row  justify-end items-center w-full">
             <div className="p-1 rounded-full hover:bg-[--b1] cursor-pointer">
               <BsX
@@ -70,22 +64,37 @@ export default function Notify() {
           </div>
         )}
 
-        <div className="flex flex-row text-[--color-brand] justify-start space-x-2 items-center">
-          <BsInfoCircle className=" text-2xl self-center" />
-          <p className=" font-bold text-lg  self-center  capitalize">
+        <div className="flex flex-col text-[--placeholder] justify-center space items-center space-y-2">
+          <BsInfoCircle className=" text-3xl lg:text-4xl self-center" />
+          <p className=" font-bold text-[--sorta-dark] blur-[.5px] text-lg lg:text-xl  self-center  capitalize">
             Notification
           </p>
         </div>
 
-        <p className="text-[--primary] mt-3   first-letter:uppercase">
+        <p className="text-sm  md:text-base text-gray-400 text-center font-medium py-2   first-letter:uppercase">
           {content}
         </p>
 
-        <div className="mt-4 flex flex-row justify-end items-center w-full">
-          {onReject && (
+        <div className="mt-4 flex flex-col space-y-2 justify-center items-center w-full">
+          {onAccept && (
+            <button
+              onClick={handleAccept}
+              disabled={working}
+              className={cn(
+                "px-4 py-2 w-full text-sm  bg-[#F1F1F1] hover:bg-[#D1D1D1] transition text-gray-800 rounded-[8px]",
+                {
+                  "cursor-not-allowed": working,
+                }
+              )}
+            >
+              {onAcceptText}
+            </button>
+          )}
+
+          {(allowClose || onReject) && (
             <button
               className={cn(
-                "px-4 py-2 rounded-md text-sm font-semibold text-[#8d4000]/80 hover:text-[#8d4000]/60 transition-flow",
+                "px-4 py-2 w-full text-sm   transitioning text-gray-800 ",
                 {
                   "cursor-not-allowed": working,
                 }
@@ -94,21 +103,6 @@ export default function Notify() {
               disabled={working}
             >
               {onRejectText}
-            </button>
-          )}
-
-          {onAccept && (
-            <button
-              className={cn(
-                "px-4 py-2 rounded-md text-sm font-semibold text-[#8d4000]/80 hover:text-[#8d4000]/60 transition-flow ml-4",
-                {
-                  "cursor-not-allowed": working,
-                }
-              )}
-              onClick={handleAccept}
-              disabled={working}
-            >
-              {onAcceptText}
             </button>
           )}
         </div>

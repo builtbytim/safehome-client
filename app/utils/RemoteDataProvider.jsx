@@ -7,11 +7,16 @@ const queryClient = new QueryClient({
     queries: {
       refetchOnWindowFocus: false,
       retry: 1,
+      staleTime: 1000 * 60 * 5,
+      networkMode: "offlineFirst",
     },
 
     mutations: {
       retry: 0,
+      networkMode: "offlineFirst",
     },
+
+    networkMode: "offlineFirst",
   },
 });
 function RemoteDataProvider({ children }) {

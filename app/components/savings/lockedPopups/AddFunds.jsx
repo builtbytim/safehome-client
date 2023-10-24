@@ -23,7 +23,7 @@ const fundSources = [
   },
 ];
 
-function AddFunds({ closeSelf, token, selectedGoal }) {
+function AddFunds({ closeSelf, token, selectedLockedPlan }) {
   const queryClient = useQueryClient();
 
   const setNotify = useNotifyStore((state) => state.setNotify);
@@ -39,7 +39,7 @@ function AddFunds({ closeSelf, token, selectedGoal }) {
     });
 
     queryClient.invalidateQueries({
-      queryKey: [queryKeys.getMyGoalSavings],
+      queryKey: [queryKeys.getMyLockedSavings],
     });
 
     queryClient.invalidateQueries({
@@ -54,7 +54,7 @@ function AddFunds({ closeSelf, token, selectedGoal }) {
     } else {
       setNotify({
         show: true,
-        content: "You have successfully added funds to your savings goal.",
+        content: "You have successfully added funds to your locked savings.",
         allowClose: true,
       });
     }
@@ -91,9 +91,9 @@ function AddFunds({ closeSelf, token, selectedGoal }) {
   }
 
   const { mutate, isLoading, reset } = useMutation({
-    mutationKey: [queryKeys.fundGoalSavings, token],
+    mutationKey: [queryKeys.fundLockedSavings, token],
     mutationFn: createFetcher({
-      url: config.apiPaths.fundGoalSavings,
+      url: config.apiPaths.fundLockedSavings,
       method: "POST",
       auth: token,
     }),
@@ -107,7 +107,7 @@ function AddFunds({ closeSelf, token, selectedGoal }) {
     mutate({
       amountToAdd: values.amountToAdd,
       fundSource: values.fundingSource,
-      savingsId: selectedGoal.uid,
+      savingsId: selectedLockedPlan.uid,
     });
   }
 
@@ -129,7 +129,7 @@ function AddFunds({ closeSelf, token, selectedGoal }) {
 
         <div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-32">
           <div className="px-6">
-            <h1 className="font-bold  text-[--text-brand-2] text-lg md:text-xl">
+            <h1 className="font-bold  text-[--color-brand] text-lg md:text-xl">
               Add Funds
             </h1>
             <p className="text-[--primary] font-medium text-sm pt-2">
@@ -218,7 +218,7 @@ function AddFunds({ closeSelf, token, selectedGoal }) {
                     <button
                       type="submit"
                       disabled={!isValid || isLoading}
-                      className="btn-1 w-full bg-[--text-brand-2] hover:bg-[--text-brand-2-hover] "
+                      className="btn-1 w-full bg-[--color-brand]  "
                     >
                       {isLoading ? <Spinner /> : "Add Funds"}
                     </button>

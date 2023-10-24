@@ -10,7 +10,7 @@ export default function useRemoteSession(
   onError = null,
   onSuccess = null
 ) {
-  const { isError, data, isSuccess, isLoading } = useQuery({
+  const { isError, data, isSuccess, isLoading, isFetching } = useQuery({
     queryKey: [queryKeys.getSession, tokenObj],
 
     retry: false,
@@ -20,6 +20,8 @@ export default function useRemoteSession(
     keepPreviousData: true,
 
     queryFn: req,
+
+    refetchInterval: 30000,
 
     onSuccess(data) {
       if ("function" === typeof onSuccess) {
@@ -44,6 +46,7 @@ export default function useRemoteSession(
     authenticatedUser: data?.user,
     authenticatedSession: data?.session,
     authenticationFailed: isError || !tokenObj,
+    isFetching,
   };
 }
 

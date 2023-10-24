@@ -68,6 +68,10 @@ function Page({ authenticatedUser, authenticationToken }) {
   const [showCreateLockF1, setShowCreateLockF1] = useState(false);
   const [selectedLockedPlan, setSelectedLockedPlan] = useState(null);
 
+  function handleSelectLockedPlan(plan) {
+    setSelectedLockedPlan(plan);
+  }
+
   function toggleCreateLockF1() {
     setShowCreateLockF1(!showCreateLockF1);
   }
@@ -78,6 +82,8 @@ function Page({ authenticatedUser, authenticationToken }) {
         showForm1={showCreateLockF1}
         toggleForm1={toggleCreateLockF1}
         token={authenticationToken}
+        selectedLockedPlan={selectedLockedPlan}
+        setSelectedLockedPlan={setSelectedLockedPlan}
       />
 
       <div className="space-y-2  lg:space-y-8 w-full min-h-screen pb-16">
@@ -167,7 +173,12 @@ function Page({ authenticatedUser, authenticationToken }) {
                   </h2>
 
                   <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
-                    ₦0
+                    <NumericFormat
+                      value={0}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"₦ "}
+                    />
                   </p>
                 </div>
               </div>
@@ -193,6 +204,7 @@ function Page({ authenticatedUser, authenticationToken }) {
             <LockedSavingsGridList
               token={authenticationToken}
               launchCreateLockedPlan={toggleCreateLockF1}
+              selectLockedPlan={handleSelectLockedPlan}
               completed={tab === 1}
             />
           </section>

@@ -98,7 +98,7 @@ function GoalSavingsGridList({
         isSuccess={isSuccess}
         successText={data ? `Showing ${data.numItems} of ${data.entries} ` : ""}
       />
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 xl:gap-8 justify-center items-center">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6 xl:gap-8 justify-center items-center">
         {data.items.map((v, i) => {
           return (
             <GoalSavingsCard

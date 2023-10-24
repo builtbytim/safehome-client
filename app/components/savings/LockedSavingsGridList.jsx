@@ -14,12 +14,13 @@ import LockedSavings from "./LockedSavings";
 function LockedSavingsGridList({
   token,
   launchCreateLockedPlan,
-  setSelectedGoal,
+  selectLockedPlan,
   completed = false,
 }) {
   const [filters, setFilters] = useState({
     page: 1,
     limit: 10,
+    includeAsset: true,
   });
 
   const searchParams = new URLSearchParams();
@@ -27,6 +28,8 @@ function LockedSavingsGridList({
   if (filters.page) searchParams.append("page", filters.page);
   if (filters.limit) searchParams.append("limit", filters.limit);
   if (completed) searchParams.append("completed", completed);
+  if (filters.includeAsset)
+    searchParams.append("includeAsset", filters.includeAsset);
 
   function setPageParam(page) {
     setFilters((prev) => ({ ...prev, page }));
@@ -99,10 +102,17 @@ function LockedSavingsGridList({
         isSuccess={isSuccess}
         successText={data ? `Showing ${data.numItems} of ${data.entries} ` : ""}
       />
-      <div className="space-y-4 pt-4">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6 xl:gap-8 justify-center items-center">
         {data.items.map((v, i) => {
-          console.log(v);
-          return <LockedSavings {...v} key={i} />;
+          return (
+            <LockedSavings
+              {...v}
+              selectPlan={() => {
+                selectLockedPlan(v);
+              }}
+              key={i}
+            />
+          );
         })}
       </div>
 

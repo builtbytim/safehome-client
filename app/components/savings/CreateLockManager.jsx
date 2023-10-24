@@ -8,11 +8,19 @@ import {
   CreateSafelock,
   CreateSafelockStage2,
   CreateSafelockPreview,
+  SafelockOverview,
+  AddFunds,
 } from "./lockedPopups";
 import LockableAssetsOverview from "./lockedPopups/LockableAssetsOverview";
 import { useRouter } from "next/navigation";
 
-function CreateLockManager({ showForm1, toggleForm1, token }) {
+function CreateLockManager({
+  showForm1,
+  toggleForm1,
+  token,
+  selectedLockedPlan,
+  setSelectedLockedPlan,
+}) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const setNotify = useNotifyStore((state) => state.setNotify);
@@ -21,6 +29,7 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
   const [showLockableAssetsOverview, setShowLockableAssetsOverview] =
     useState(false);
   const [showFormOverview, setShowFormOverview] = useState(false);
+  const [showAddFund, setShowAddFund] = useState(false);
 
   function toggleForm2() {
     setShowForm2(!showForm2);
@@ -97,7 +106,7 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
       interval: data.preferredInterval,
       lockDurationInMonths: data.lockDurationInMonths,
       amountToSaveAtInterval: data.amountToSaveOnIntervalBasis,
-      assetId: data.investibleAsset.uid,
+      assetUid: data.investibleAsset.uid,
     });
   }
 
@@ -170,6 +179,30 @@ function CreateLockManager({ showForm1, toggleForm1, token }) {
             setShowForm2(true);
           }}
           show={showFormOverview}
+          selectedLockedPlan={selectedLockedPlan}
+        />
+      )}
+
+      {selectedLockedPlan && (
+        <SafelockOverview
+          closeSelf={() => {
+            if (showAddFund) return;
+            setSelectedLockedPlan(null);
+          }}
+          plan={selectedLockedPlan}
+          handleAddFund={() => {
+            setShowAddFund(true);
+          }}
+        />
+      )}
+
+      {showAddFund && (
+        <AddFunds
+          closeSelf={() => {
+            setShowAddFund(false);
+          }}
+          selectedLockedPlan={selectedLockedPlan}
+          token={token}
         />
       )}
     </>

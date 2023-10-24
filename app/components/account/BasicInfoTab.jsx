@@ -4,6 +4,12 @@ import * as Yup from "yup";
 import GenericSelectField from "../forms/branded/GenericSelectField";
 import { states } from "../../utils/constants";
 import UserAvatarArea from "./UserAvatarArea";
+import { useMutation, useQueryClient } from "react-query";
+import queryKeys from "../../utils/queryKeys";
+import config from "../../utils/config";
+import { createFetcher } from "../../utils/fetchUtils";
+import { useNotifyStore } from "../../utils/store";
+import Spinner from "../Spinner";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -56,6 +62,50 @@ const validationSchema = Yup.object().shape({
 });
 
 const BasicInfoTab = ({ user, token }) => {
+  const setNotify = useNotifyStore((state) => state.setNotify);
+  const queryClient = useQueryClient();
+  const { mutate, isLoading } = useMutation({
+    mutationFn: createFetcher({
+      url: config.apiPaths.updateUser,
+      method: "PUT",
+      auth: token,
+    }),
+
+    mutationKey: [queryKeys.updateUser, token],
+
+    onSuccess: (data) => {
+      queryClient.invalidateQueries(queryKeys.getSession);
+      setNotify({
+        show: true,
+        content: "Profile updated successfully",
+        allowClose: true,
+      });
+    },
+
+    onError: (error) => {
+      setNotify({
+        show: true,
+        content: error.message,
+        allowClose: true,
+      });
+    },
+  });
+
+  function handleSubmit(values) {
+    if (isLoading) return;
+
+    mutate({
+      firstName: values.firstName,
+      lastName: values.surname,
+      email: values.email,
+      phone: values.phone,
+      gender: values.gender,
+      dateOfBirth: new Date(values.dateOfBirth).getTime() / 1000,
+      residentialAddress: values.address,
+      state: values.state,
+    });
+  }
+
   return (
     <div className="py-7 space-y-5 font-medium">
       <UserAvatarArea user={user} token={token} />
@@ -73,14 +123,12 @@ const BasicInfoTab = ({ user, token }) => {
           address: user.address || "",
           state: user.state || "",
         }}
-        onSubmit={() => {}}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         {({ isValid, setFieldValue }) => {
           const disableForm =
-            !isValid ||
-            user.kycStatus === "PENDING" ||
-            user.kycStatus === "APPROVED";
+            user.kycStatus === "PENDING" || user.kycStatus === "APPROVED";
 
           return (
             <Form className="py-6 w-full">
@@ -140,7 +188,7 @@ const BasicInfoTab = ({ user, token }) => {
                         value: "FEMALE",
                       },
                     ]}
-                    handleChange={(selectedItem) => {
+                    handleChange={({ selectedItem }) => {
                       setFieldValue("gender", selectedItem.value);
                     }}
                   />
@@ -218,7 +266,16 @@ const BasicInfoTab = ({ user, token }) => {
 
                 <div className="relative">
                   <p className="account-form-text">State of Residence</p>
-                  <GenericSelectField disabled={disableForm} items={states} />
+                  <GenericSelectField
+                    handleChange={({ selectedItem }) => {
+                      setFieldValue("state", selectedItem.value);
+                    }}
+                    defaultSelectedItem={
+                      states.find((v) => v.value === user.state) || states[0]
+                    }
+                    disabled={disableForm}
+                    items={states}
+                  />
                   <ErrorMessage
                     name="state"
                     component="div"
@@ -228,10 +285,10 @@ const BasicInfoTab = ({ user, token }) => {
               </div>
               <div className="py-10 text-center flex flex-col justify-center items-center w-full">
                 <button
-                  disabled={disableForm}
+                  disabled={disableForm || !isValid || isLoading}
                   className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
                 >
-                  Update profile
+                  {isLoading ? <Spinner /> : "Save"}
                 </button>
               </div>
             </Form>

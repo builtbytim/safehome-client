@@ -43,7 +43,7 @@ export default function GoalSavingsCard(props) {
             </h1>
             {paymentMode === "auto" && (
               <p className="text-xs pt-1 font-light    text-[--placeholder]">
-                Auto Savings
+                Auto Save
               </p>
             )}
           </div>

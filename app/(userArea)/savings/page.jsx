@@ -16,7 +16,7 @@ const tabItems = [
     name: "Ongoing Savings",
   },
   {
-    name: "Competed",
+    name: "Completed",
   },
 ];
 
