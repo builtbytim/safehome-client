@@ -89,11 +89,14 @@ function Page({ authenticatedUser, authenticationToken }) {
                   <PopUpTopBar
                     close={() => setShowAddCard(false)}
                     title="Add a New Card"
-                    desc="Make sure you input the right information."
+                    desc="Enter your debit card details."
                   />
                 </div>
                 <div className="pt-6">
-                  <AddCard closeFunc={() => setShowAddCard(false)} />
+                  <AddCard
+                    token={authenticationToken}
+                    closeFunc={() => setShowAddCard(false)}
+                  />
                 </div>
               </div>
             </Overlay>
@@ -110,7 +113,7 @@ function Page({ authenticatedUser, authenticationToken }) {
                   <PopUpTopBar
                     close={() => setShowAddBank(false)}
                     title="Add a Bank"
-                    desc="Make sure you input the right information."
+                    desc="Enter your bank details."
                   />
                 </div>
                 <div className="pt-6">
