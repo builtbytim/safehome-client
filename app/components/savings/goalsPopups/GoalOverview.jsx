@@ -52,19 +52,21 @@ function GoalOverview({
             </div>
           </div>
 
-          <div className="overflow-y-auto scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8">
-            <div className={"relative h-[210px]  w-full"}>
-              <Image
-                src={goalImageUrl || GoalImage}
-                alt="goal image"
-                fill
-                className="object-cover h-[210px] w-full"
-              />
-              <div className="absolute bg-black/60 inset-0  flex flex-col justify-center items-center truncate">
-                <h1 className="text-white font-bold truncate text-xl md:text-2xl xl:text-3xl text-center">
-                  {" "}
-                  {goalName}{" "}
-                </h1>
+          <div className="overflow-y-auto scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8 ">
+            <div className="px-6 md:px-0">
+              <div className={"relative h-[210px]  w-full "}>
+                <Image
+                  src={goalImageUrl || GoalImage}
+                  alt="goal image"
+                  fill
+                  className="object-cover  h-[210px] w-full"
+                />
+                <div className="absolute bg-black/60  inset-0  flex flex-col justify-center items-center truncate">
+                  <h1 className="text-white font-bold truncate text-xl md:text-2xl xl:text-3xl text-center">
+                    {" "}
+                    {goalName}{" "}
+                  </h1>
+                </div>
               </div>
             </div>
 
@@ -100,8 +102,8 @@ function GoalOverview({
               </div>
 
               {completed && (
-                <div className="pt-4">
-                  <p className="text-[--text-brand-2] text-lg md:text-xl font-bold text-center">
+                <div className="">
+                  <p className="text-[--text-brand-2] text-lg md:text-xl font-semibold text-center">
                     You have completed this goal
                   </p>
                 </div>

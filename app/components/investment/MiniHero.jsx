@@ -2,7 +2,7 @@ import Image from "next/image";
 import verified from "../../../assets/images/icons/verified.png";
 import { NumericFormat } from "react-number-format";
 
-const MiniHero = ({ img, title, quantity }) => {
+const MiniHero = ({ img, title, quantity, soldOut }) => {
   return (
     <div>
       <div className="w-full h-[250px] relative">
@@ -18,16 +18,25 @@ const MiniHero = ({ img, title, quantity }) => {
             {title}
           </h2>
           <div className="flex gap-4 justify-between items-center">
-            <div className="bg-white font-medium py-1 px-5 rounded">
-              <span className="text-[--text-brand] font-semibold">
-                Available Units:
-              </span>{" "}
-              <NumericFormat
-                value={quantity}
-                displayType={"text"}
-                thousandSeparator={true}
-              />
-            </div>
+            {soldOut && (
+              <div className="bg-white font-medium py-1 px-5 rounded">
+                <span className="text-[--text-danger] font-semibold">
+                  Sold Out
+                </span>{" "}
+              </div>
+            )}
+            {!soldOut && (
+              <div className="bg-white font-medium py-1 px-5 rounded">
+                <span className="text-[--text-brand] font-semibold">
+                  Available Units:
+                </span>{" "}
+                <NumericFormat
+                  value={quantity}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                />
+              </div>
+            )}
             <Image
               src={verified}
               alt={title}

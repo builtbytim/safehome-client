@@ -69,7 +69,7 @@ const AlreadyInvested = ({
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 pb-7">
+        <div className="grid grid-cols-2  gap-3 pb-7">
           <InvestmentTab
             heading="Effective Capital"
             content={userInvestmentData.amount}

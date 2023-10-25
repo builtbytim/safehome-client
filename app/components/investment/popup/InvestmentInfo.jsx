@@ -10,6 +10,7 @@ const InvestmentInfo = ({ data, showAboutFunction, investNowFunction }) => {
         img={inv1}
         title={data.assetName}
         quantity={data.availableUnits}
+        soldOut={data.soldOut}
       />
       <div className="px-5">
         <div className="py-6 flex justify-between gap-5">
@@ -34,13 +35,6 @@ const InvestmentInfo = ({ data, showAboutFunction, investNowFunction }) => {
           </div>
         </div>
         <div className="space-y-3">
-          {soldOut && (
-            <div className="pt-4">
-              <p className="text-[--text-brand-2] text-lg md:text-xl font-bold text-center">
-                Investment Sold Out
-              </p>
-            </div>
-          )}
           {!data.soldOut && (
             <button
               className=" btn-1-v2 block w-full py-2 px-5 rounded "

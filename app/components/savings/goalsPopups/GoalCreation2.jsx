@@ -1,12 +1,9 @@
 "use client";
 
-import React, { startTransition } from "react";
 import Overlay2 from "../../Overlay2";
 import { BiX } from "react-icons/bi";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import SwitchField from "../../forms/branded/SwitchField";
-import FormattingField from "../../forms/branded/FormattingField";
-import { FaNairaSign } from "react-icons/fa6";
 import GenericSelectFieldVariant1 from "../../forms/branded/GenericSelectFieldVariant1";
 import useOutsideClickDetector from "../../../utils/hooks/useOutsideClickDetector";
 import { useRef } from "react";
@@ -17,6 +14,7 @@ import {
   timeIntervals as intervals,
   timeIntervalsToSeconds,
 } from "../../../utils/constants";
+import { AmountPerIntervalField } from "../AmountPerIntervalField";
 
 function GoalCreation2({
   show = false,
@@ -51,6 +49,7 @@ function GoalCreation2({
       .required("Required")
       .test("is-today-or-later", "Must be today or later", (value) => {
         const now = new Date();
+        now.setHours(0, 0, 0, 0);
         const startDate = new Date(value);
 
         return startDate.getTime() >= now.getTime();
@@ -60,6 +59,7 @@ function GoalCreation2({
       .required("Required")
       .test("is-in-future", "Must be in the future", (value) => {
         const now = new Date();
+
         const withdrawalDate = new Date(value);
 
         return withdrawalDate.getTime() > now.getTime();
@@ -75,6 +75,9 @@ function GoalCreation2({
 
           const startDateObj = new Date(startDate);
           const withdrawalDateObj = new Date(withdrawalDate);
+
+          withdrawalDateObj.setHours(0, 0, 0, 0);
+          startDateObj.setHours(0, 0, 0, 0);
 
           const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
 
@@ -172,45 +175,12 @@ function GoalCreation2({
               initialTouched={{
                 acceptTerms: true,
                 preferredInterval: true,
+                startDate: true,
+                withdrawalDate: true,
               }}
               onSubmit={handleFormSubmit}
             >
-              {({ isValid, setFieldValue }) => {
-                // calculate the amount to pay on interval using the preferredInterval, startDate and withdrawalDate
-
-                // const amountToSaveOnIntervalBasis =
-                //   formData.amountToSaveOnIntervalBasis;
-
-                // const startDate = new Date(formData.startDate);
-                // const withdrawalDate = new Date(formData.withdrawalDate);
-
-                // const timeDiff = withdrawalDate.getTime() - startDate.getTime();
-
-                // const preferredInterval = formData.preferredInterval;
-
-                // const preferredIntervalInSeconds =
-                //   timeIntervalsToSeconds[preferredInterval];
-
-                // const numberOfIntervals =
-                //   timeDiff / (preferredIntervalInSeconds * 1000);
-
-                // const amountToSaveOnIntervalBasisCalculated = Math.ceil(
-                //   amountToSaveOnIntervalBasis / numberOfIntervals
-                // );
-
-                // if (
-                //   formData.amountToSaveOnIntervalBasis !==
-                //   amountToSaveOnIntervalBasisCalculated
-                // ) {
-                //   startTransition(() => {
-                //     setFieldValue(
-                //       "amountToSaveOnIntervalBasis",
-                //       amountToSaveOnIntervalBasisCalculated,
-                //       true
-                //     );
-                //   });
-                // }
-
+              {({ isValid, setFieldValue, values, errors }) => {
                 return (
                   <Form className="space-y-6">
                     <div className="w-full relative flex flex-col justify-center items-start space-y-2">
@@ -284,30 +254,13 @@ function GoalCreation2({
                       />
                     </div>
 
-                    <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                      <label
-                        htmlFor="amountToSaveOnDailyBasis"
-                        className="text-[--text-secondary] font-medium text-sm text-left"
-                      >
-                        Preferred amount to save on interval basis
-                      </label>
-
-                      <FormattingField
-                        icon={FaNairaSign}
-                        type="text"
-                        inputMode="numeric"
-                        className="field-1"
-                        name="amountToSaveOnIntervalBasis"
-                        placeholder="Amount to save on interval basis"
-                        extraClasses="field-1"
-                      />
-
-                      <ErrorMessage
-                        name="amountToSaveOnIntervalBasis"
-                        component="div"
-                        className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
-                      />
-                    </div>
+                    <AmountPerIntervalField
+                      preferredInterval={values.preferredInterval}
+                      startDate={values.startDate}
+                      withdrawalDate={values.withdrawalDate}
+                      errors={errors}
+                      goalAmount={formData.goalAmount}
+                    />
 
                     <div className="w-full pt-2 relative flex flex-col justify-center items-start space-y-2 ">
                       <SwitchField

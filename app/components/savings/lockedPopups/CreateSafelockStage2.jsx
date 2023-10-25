@@ -11,6 +11,7 @@ import {
   timeIntervals as intervals,
 } from "../../../utils/constants";
 import * as Yup from "yup";
+import { AmountPerIntervalFieldForLock } from "../AmountPerIntervalFieldForLock";
 
 function CreateSafelock2({
   toggleShow,
@@ -119,31 +120,9 @@ function CreateSafelock2({
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
-            {({ isValid, values, setFieldValue }) => {
+            {({ isValid, values, setFieldValue, errors }) => {
               return (
                 <Form className="space-y-6 px-6 pt-6  ">
-                  {/* <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                    <label
-                      htmlFor="lockTitle"
-                      className="text-[--text-secondary] font-medium text-sm text-left"
-                    >
-                      Title of Lock
-                    </label>
-
-                    <Field
-                      name="lockTitle"
-                      type="text"
-                      className="field-1"
-                      placeholder="Title of lock"
-                    />
-
-                    <ErrorMessage
-                      name="lockTitle"
-                      component="div"
-                      className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                    />
-                  </div> */}
-
                   <div className="w-full relative flex flex-col justify-center items-start space-y-2">
                     <label
                       htmlFor="investibleAsset"
@@ -285,30 +264,12 @@ function CreateSafelock2({
                     />
                   </div>
 
-                  <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                    <label
-                      htmlFor="amountToSaveOnDailyBasis"
-                      className="text-[--text-secondary] font-medium text-sm text-left"
-                    >
-                      Preferred amount to save on interval basis
-                    </label>
-
-                    <FormattingField
-                      icon={FaNairaSign}
-                      type="text"
-                      inputMode="numeric"
-                      className="field-1"
-                      name="amountToSaveOnIntervalBasis"
-                      placeholder="Amount to save on interval basis"
-                      extraClasses="field-1"
-                    />
-
-                    <ErrorMessage
-                      name="amountToSaveOnIntervalBasis"
-                      component="div"
-                      className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
-                    />
-                  </div>
+                  <AmountPerIntervalFieldForLock
+                    errors={errors}
+                    preferredInterval={values.preferredInterval}
+                    lockDurationInMonths={formData.lockDurationInMonths}
+                    amountToLock={values.amountToLock}
+                  />
 
                   <div className="pt-4  space-y-4   flex flex-col justify-center items-center  mx-auto">
                     <button

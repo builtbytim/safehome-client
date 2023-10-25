@@ -86,6 +86,7 @@ export default function FormattingField({
                 onValueChange={(values) => {
                   // console.log(field);
                   form.setFieldValue(name, values.value);
+
                   if ("function" === typeof customOnChange) {
                     customOnChange(values.value);
                   }

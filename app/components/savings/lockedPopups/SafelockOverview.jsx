@@ -4,6 +4,8 @@ import { BiX } from "react-icons/bi";
 import SmallDetailsCard from "./SmallDetailsCard";
 import useOutsideClickDetector from "../../../utils/hooks/useOutsideClickDetector";
 import { useRef } from "react";
+import Image from "next/image";
+import GoalImage from "../../../../assets/images/investment/inv1.png";
 
 function SafelockOverview({ closeSelf, plan, handleAddFund }) {
   const ref = useRef(null);
@@ -39,24 +41,24 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
         </div>
 
         <div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8">
-          <div className="px-6">
-            <h1 className="font-bold capitalize text-[--primary] text-lg md:text-xl">
-              {lockName}
-            </h1>
-          </div>
-
-          <div className="p-6">
-            <h2 className="font-bold text-[--color-brand] text-2xl md:text-2xl text-center">
-              <NumericFormat
-                value={assetInfo.pricePerUnit}
-                displayType={"text"}
-                thousandSeparator={true}
-                prefix="₦ "
+          <div className="px-6 md:px-0">
+            <div className={"relative h-[210px]  w-full "}>
+              <Image
+                src={assetInfo.coverImageUrl || GoalImage}
+                alt="goal image"
+                fill
+                className="object-cover  h-[210px] w-full"
               />
-            </h2>
+              <div className="absolute bg-black/60  inset-0  flex flex-col justify-center items-center truncate">
+                <h1 className="text-white capitalize font-bold truncate text-xl md:text-2xl xl:text-3xl text-center">
+                  {" "}
+                  {lockName}
+                </h1>
+              </div>
+            </div>
           </div>
 
-          <div className="px-6 gap-8 pt-6 grid grid-cols-2">
+          <div className="px-6 gap-4 pt-6 grid grid-cols-2">
             <SmallDetailsCard
               title="Amount to Lock"
               value={
@@ -101,7 +103,7 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
             />
           </div>
 
-          <div className="pt-10">
+          <div className="pt-6">
             <p className="text-[--color-brand] text-lg md:text-xl font-bold text-center">
               {completed
                 ? "Safelock is Completed"

@@ -31,6 +31,8 @@ const queryKeys = {
   getAnInvestmentAsset: "getAnInvestmentAsset",
   createInvestmentAsset: "createInvestmentAsset",
   getMyInvestments: "getMyInvestments",
+  getInvestment: "getInvestment",
+  getInvestmentsForAsset: "getInvestmentsForAsset",
   createInvestment: "createInvestment",
   getOneMyInvestment: "getOneMyInvestment",
   getInvestmentStats: "getInvestmentStats",

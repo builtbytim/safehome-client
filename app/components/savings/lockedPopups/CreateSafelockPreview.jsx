@@ -80,15 +80,10 @@ function CreateSafelockPreview({
                 <div className="flex flex-row justify-start space-x-8 items-center w-full">
                   <div className="space-y-2">
                     <p className="text-[--text-secondary] font-light text-sm text-left">
-                      Group Balance
+                      Asset Name
                     </p>
-                    <p className="font-bold text-[--color-brand]">
-                      <NumericFormat
-                        value={formData.investibleAsset.pricePerUnit * 4}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"₦ "}
-                      />
+                    <p className="font-bold capitalize text-[--color-brand]">
+                      {formData.investibleAsset.assetName}
                     </p>
                   </div>
 
@@ -98,39 +93,13 @@ function CreateSafelockPreview({
                     </p>
                     <p className="font-bold text-[--color-brand]">
                       <NumericFormat
-                        value={formData.investibleAsset.pricePerUnit * 10}
+                        value={formData.investibleAsset.pricePerUnit}
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"₦ "}
                       />
                     </p>
                   </div>
-
-                  <div className="space-y-2">
-                    <p className="text-[--text-secondary] font-light text-sm text-left">
-                      Members
-                    </p>
-                    <p className="font-bold text-[--color-brand]">
-                      <NumericFormat
-                        value={10}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                      />
-                      /
-                      <NumericFormat
-                        value={24}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                      />
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-2 w-full">
-                  <p className="text-[--text-secondary] font-light text-sm text-left">
-                    Group Balance
-                  </p>
-                  <ProgressBar variant={1} percentage={67} />
                 </div>
 
                 <div className="space-y-2">

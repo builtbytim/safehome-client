@@ -8,6 +8,7 @@ import ScrollLink from "../ScrollLink";
 import { BiChevronRight } from "react-icons/bi";
 import useUserInvestmentStats from "../../utils/hooks/useUserInvestmentStats";
 import { NumericFormat } from "react-number-format";
+import cn from "classnames";
 
 function OverviewCard({ token }) {
   const { data, isError, isLoading, isSuccess, refetch } =
@@ -146,10 +147,6 @@ function OverviewCard({ token }) {
             <p className=" text-[--text-secondary]  font-medium">Per Annum</p>
           </div>
         </div>
-      </div>
-
-      <div className="col-span-5 lg:hidden py-2">
-        <button className="btn-1-v2 ">Invest Now</button>
       </div>
     </section>
   );

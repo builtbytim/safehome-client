@@ -24,7 +24,7 @@ function MyInvestments({
 
   const { isLoading, isError, refetch, data, isSuccess, error, isFetching } =
     useQuery({
-      queryKey: [queryKeys.getMyInvestments, token, params],
+      queryKey: [queryKeys.getMyInvestments, token, params, completed],
       queryFn: createFetcher({
         url: config.apiPaths.getMyInvestments,
         method: "GET",

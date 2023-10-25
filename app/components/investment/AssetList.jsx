@@ -10,7 +10,6 @@ function AssetList({
   isError,
   isSuccess,
   isFetching,
-  error,
   openInfo,
   setParamsPage,
 }) {

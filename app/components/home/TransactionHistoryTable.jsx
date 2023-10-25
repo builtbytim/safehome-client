@@ -1,6 +1,6 @@
 import Image from "next/image";
 import ArrowDownGreen from "../../../assets/images/icons/arrow-down.svg";
-import ArrowUpRed from "../../../assets/images/icons/minus.svg";
+import ArrowUpRed from "../../../assets/images/icons/arrow-up.svg";
 import { useQuery } from "react-query";
 import { createFetcher, levelToColor } from "../../utils/fetchUtils";
 import config from "../../utils/config";
@@ -117,7 +117,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
                       alt="arrow down"
                       width="24"
                       height="24"
-                      className="object-cover min-w-[24px] min-h-[24px] "
+                      className="object-contain min-w-[24px] min-h-[24px] "
                     />
                   </div>
 
@@ -126,11 +126,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
                       {shortenTextToEllipses(v.reference, 16)}
                     </span>
                     <span className=" text-sm capitalize truncate">
-                      <span
-                        className={
-                          levelToColor(txTypeColorMap[v.type]) + "  truncate"
-                        }
-                      >
+                      <span className={" text-[--primary]  truncate"}>
                         {v.description}
                       </span>
                     </span>

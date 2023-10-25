@@ -1,15 +1,14 @@
 import { createFetcher } from "../../utils/fetchUtils";
-import { useQuery, useQueryClient, useMutation } from "react-query";
+import { useQuery } from "react-query";
 import config from "../../utils/config";
 import queryKeys from "../../utils/queryKeys";
-import { useDataStore } from "../../utils/store";
 import LoadingView from "../LoadingView";
 import ErrorMessageView from "../ErrorMessageView";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import cn from "classnames";
-import Image from "next/image";
-import CampaignRoundedImage from "../../../assets/images/icons/campaign-rounded.svg";
+import { SavingsSVG } from "../svg";
+
+dayjs.extend(relativeTime);
 
 function RecentSavingsActivityList({ token }) {
   const { data, isFetching, isSuccess, isLoading, isError, refetch } = useQuery(
@@ -62,29 +61,19 @@ function RecentSavingsActivityList({ token }) {
   }
 
   return (
-    <div>
+    <div className="space-y-2   overflow-y-auto  max-h-[482px]">
       {data &&
         data.entries > 0 &&
         data.items.map((item, i) => (
           <div
             key={i}
             className={
-              "flex flex-row justify-between items-center w-full py-3 " +
-              cn({
-                "border-t border-[--b1] ": i !== 0,
-                " opacity-40 ": item.read,
-              })
+              "flex flex-row  md:odd:bg-[--b1] rounded md:pl-4 justify-between items-center w-full py-3 border-b border-[#E4E4E4] md:border-transparent"
             }
           >
             <div className="flex flex-row justify-between items-start space-x-4">
-              <div className="self-start  p-2 rounded-full bg-[#FF61000D] ">
-                <Image
-                  src={CampaignRoundedImage}
-                  alt="avatar"
-                  width="22"
-                  height="22"
-                  className="rounded-full min-h-[22px] min-w-[22px] object-contain"
-                />
+              <div className="self-start text-xl p-2 rounded-full bg-[#FF61000D] ">
+                <SavingsSVG fill={"#FF6100"} />
               </div>
 
               <div className="self-center space-y-1">

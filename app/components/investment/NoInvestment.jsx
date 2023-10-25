@@ -13,7 +13,7 @@ const NoInvestment = ({ investNowFunc }) => {
         </p>
         <div className="w-full  mx-auto space-y-3 pt-3 max-w-md">
           <button
-            className="btn-1-v2  w-full hidden lg:block"
+            className="btn-1-v2  w-full  block"
             onClick={() => investNowFunc()}
           >
             INVEST NOW

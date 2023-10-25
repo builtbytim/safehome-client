@@ -38,6 +38,7 @@ function Page({ authenticationToken, authenticatedUser }) {
   queryParams.append("page", params.page);
   queryParams.append("limit", params.limit);
   queryParams.append("ownersClub", params.ownersClub);
+  queryParams.append("completed", false);
 
   const { isLoading, isError, refetch, data, isSuccess, error, isFetching } =
     useQuery({

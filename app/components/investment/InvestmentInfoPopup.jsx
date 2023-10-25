@@ -27,9 +27,8 @@ function InvestmentInfoPopup({
   const infoRef = useRef(null);
   const investRef = useRef(null);
 
-  const userAlreadyInvested = selectedAsset?.investors?.includes(
-    authenticatedUser?.uid
-  );
+  const userAlreadyInvested =
+    !!selectedAsset && selectedAsset.investors.includes(authenticatedUser.uid);
 
   const investmentMatured = false;
 
@@ -41,22 +40,26 @@ function InvestmentInfoPopup({
     setShowInvestNow(false);
   });
 
-  const { isLoading, isError, refetch, data, isSuccess, error } = useQuery({
-    queryKey: [queryKeys.getMyInvestments, token],
+  const { isLoading, isError, refetch, data, isSuccess } = useQuery({
+    queryKey: [
+      queryKeys.getInvestmentsForAsset,
+      selectedAsset,
+      userAlreadyInvested,
+      token,
+    ],
     queryFn: createFetcher({
-      url: config.apiPaths.getMyInvestments,
+      url: config.apiPaths.getInvestmentsForAsset,
       method: "GET",
       auth: token,
-      surfix: `?includeAsset=true&assetUid=${selectedAsset?.uid}`,
+      surfix: `/${selectedAsset?.uid}/investments`,
     }),
 
-    enabled: !!token && userAlreadyInvested,
-    keepPreviousData: true,
+    enabled: !!selectedAsset && userAlreadyInvested,
   });
 
   return (
     <>
-      {show && (
+      {show && selectedAsset && (
         <div className="fixed  left-0 w-full  bg-black/50 z-20">
           <Overlay z={3}>
             <div
@@ -84,7 +87,9 @@ function InvestmentInfoPopup({
                     <div className="pt-6">
                       <AlreadyInvested
                         data={selectedAsset}
-                        userInvestmentData={data?.items[0]}
+                        userInvestmentData={
+                          data && data.entries > 0 ? data.items[0] : null
+                        }
                         isLoading={isLoading}
                         isError={isError}
                         refetch={refetch}
