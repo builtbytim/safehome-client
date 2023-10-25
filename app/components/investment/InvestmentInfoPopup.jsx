@@ -30,8 +30,6 @@ function InvestmentInfoPopup({
   const userAlreadyInvested =
     !!selectedAsset && selectedAsset.investors.includes(authenticatedUser.uid);
 
-  const investmentMatured = false;
-
   useOutsideClickDetector(infoRef, () => {
     closePopup();
   });
@@ -57,6 +55,8 @@ function InvestmentInfoPopup({
     enabled: !!selectedAsset && userAlreadyInvested,
   });
 
+  const investmentMatured =
+    data && data.entries > 0 ? data.items[0].matured : null;
   return (
     <>
       {show && selectedAsset && (
@@ -76,6 +76,14 @@ function InvestmentInfoPopup({
                       <CashoutInvestment
                         data={selectedAsset}
                         showAboutFunction={handleShowAboutInvestment}
+                        investNowFunction={openInvestNow}
+                        isLoading={isLoading}
+                        isError={isError}
+                        refetch={refetch}
+                        isSuccess={isSuccess}
+                        userInvestmentData={
+                          data && data.entries > 0 ? data.items[0] : null
+                        }
                       />
                     </div>
                   </div>

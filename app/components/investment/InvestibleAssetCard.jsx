@@ -4,6 +4,7 @@ import Image from "next/image";
 import { VscLocation } from "react-icons/vsc";
 import { NumericFormat } from "react-number-format";
 import inv1 from "../../../assets/images/investment/inv1.png";
+import cn from "classnames";
 
 const InvestibleAssetCard = ({ investibleAsset, openInfo }) => {
   const {
@@ -63,7 +64,15 @@ const InvestibleAssetCard = ({ investibleAsset, openInfo }) => {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 font-medium text-xs right-0 rounded-tl-xl py-1  px-2 text-white bg-[--green] ">
+      <div
+        className={
+          "absolute bottom-0 font-medium text-xs right-0 rounded-tl-xl py-1  px-2   " +
+          cn({
+            " bg-[--green] text-white ": !soldOut,
+            " bg-[--text-danger] text-white ": soldOut,
+          })
+        }
+      >
         {soldOut ? (
           "Sold Out"
         ) : (

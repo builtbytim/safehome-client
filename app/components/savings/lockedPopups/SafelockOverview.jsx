@@ -37,7 +37,7 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
             onClick={closeSelf}
             className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
           >
-            <BiX className="text-[--primary] text-2xl" />
+            <BiX className="text-[--primary] text-3xl" />
           </div>
         </div>
 
