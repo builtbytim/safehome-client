@@ -18,9 +18,10 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
     amountSaved,
     lockDurationInMonths,
     paymentMode,
+    readyForInvestment,
     interval,
     completed,
-    createdAt,
+    amountToSaveAtInterval,
   } = plan;
 
   return (
@@ -41,8 +42,8 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
         </div>
 
         <div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8">
-          <div className="px-6 md:px-0">
-            <div className={"relative h-[210px]  w-full "}>
+          <div className="px-6">
+            <div className={"relative h-[210px] truncate  w-full "}>
               <Image
                 src={assetInfo.coverImageUrl || GoalImage}
                 alt="goal image"
@@ -50,8 +51,7 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
                 className="object-cover  h-[210px] w-full"
               />
               <div className="absolute bg-black/60  inset-0  flex flex-col justify-center items-center truncate">
-                <h1 className="text-white capitalize font-bold truncate text-xl md:text-2xl xl:text-3xl text-center">
-                  {" "}
+                <h1 className="text-white capitalize  font-bold truncate text-xl md:text-2xl xl:text-3xl text-center">
                   {lockName}
                 </h1>
               </div>
@@ -92,8 +92,15 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
             />
 
             <SmallDetailsCard
-              title="Created"
-              value={new Date(createdAt * 1000).toDateString()}
+              title="Amount Per Interval"
+              value={
+                <NumericFormat
+                  value={amountToSaveAtInterval}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"₦ "}
+                />
+              }
             />
             <SmallDetailsCard
               title="Lock Duration"
@@ -107,13 +114,15 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
             <p className="text-[--color-brand] text-lg md:text-xl font-bold text-center">
               {completed
                 ? "Safelock is Completed"
+                : readyForInvestment
+                ? "Safelock is Ready for Investment"
                 : "Safelock is Currently Ongoing"}
             </p>
           </div>
         </div>
 
         <div className=" space-y-4 px-6 pt-4  flex flex-col justify-center items-center  mx-auto">
-          {!completed && (
+          {!completed && !readyForInvestment && (
             <button
               onClick={handleAddFund}
               type="button"

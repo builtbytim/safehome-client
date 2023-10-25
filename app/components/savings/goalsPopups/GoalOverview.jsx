@@ -53,7 +53,7 @@ function GoalOverview({
           </div>
 
           <div className="overflow-y-auto scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8 ">
-            <div className="px-6 md:px-0">
+            <div className="px-6">
               <div className={"relative h-[210px]  w-full "}>
                 <Image
                   src={goalImageUrl || GoalImage}
@@ -151,7 +151,7 @@ function GoalOverview({
                   value={new Date(endDate * 1000).toDateString()}
                 />
 
-                <SmallDetailsCard title="Frequency" value={interval} />
+                <SmallDetailsCard title="Interval" value={interval} />
                 <SmallDetailsCard
                   title="Goal Amount"
                   value={
@@ -164,7 +164,17 @@ function GoalOverview({
                   }
                 />
 
-                <SmallDetailsCard title="Interest Per Annum" value="20%" />
+                <SmallDetailsCard
+                  title="Amount Per Interval"
+                  value={
+                    <NumericFormat
+                      value={amountToSaveAtInterval}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"₦ "}
+                    />
+                  }
+                />
 
                 <SmallDetailsCard title="Days Left" value={daysLeft} />
               </div>

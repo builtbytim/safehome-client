@@ -118,9 +118,7 @@ function OverviewCard({ token }) {
               </div> */}
             </div>
 
-            <h2 className=" text-[--text-secondary] font-medium">
-              Interest Earned
-            </h2>
+            <h2 className=" text-[--text-secondary] font-medium">Returns</h2>
 
             <p className="text-[--text-brand] font-bold text-xl lg:text-2xl">
               <NumericFormat

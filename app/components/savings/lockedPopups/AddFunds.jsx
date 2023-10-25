@@ -23,7 +23,7 @@ const fundSources = [
   },
 ];
 
-function AddFunds({ closeSelf, token, selectedLockedPlan }) {
+function AddFunds({ closeSelf, closeAll, token, selectedLockedPlan }) {
   const queryClient = useQueryClient();
 
   const setNotify = useNotifyStore((state) => state.setNotify);
@@ -46,7 +46,7 @@ function AddFunds({ closeSelf, token, selectedLockedPlan }) {
       queryKey: [queryKeys.getSavingsStats],
     });
 
-    closeSelf();
+    closeAll();
 
     if (vars.fundSource === fundSources[1].value) {
       toggleSuperOverlay(true);

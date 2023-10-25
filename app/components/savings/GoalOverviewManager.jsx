@@ -53,6 +53,11 @@ function GoalOverviewManager({ token, selectedGoal, setSelectedGoal }) {
         <AddFunds
           show={showAddFunds}
           closeSelf={toggleShowAddFunds}
+          closeAll={() => {
+            toggleShowAddFunds();
+            toggleShowSettings();
+            closeAll();
+          }}
           token={token}
           selectedGoal={selectedGoal}
         />

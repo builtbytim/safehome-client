@@ -11,8 +11,9 @@ function LockedSavingsCard({
   paymentMode,
   selectPlan,
 }) {
-  const percentageSaved = Math.ceil(
-    (amountSaved / assetInfo.pricePerUnit) * 100
+  const percentageSaved = Math.min(
+    Math.ceil((amountSaved / assetInfo.pricePerUnit) * 100),
+    100
   );
 
   return (

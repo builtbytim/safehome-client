@@ -201,6 +201,10 @@ function CreateLockManager({
           closeSelf={() => {
             setShowAddFund(false);
           }}
+          closeAll={() => {
+            setShowAddFund(false);
+            setSelectedLockedPlan(null);
+          }}
           selectedLockedPlan={selectedLockedPlan}
           token={token}
         />

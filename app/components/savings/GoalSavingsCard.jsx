@@ -15,7 +15,10 @@ export default function GoalSavingsCard(props) {
     paymentMode,
   } = props;
 
-  const percentageSaved = Math.ceil((amountSaved / goalAmount) * 100);
+  const percentageSaved = Math.min(
+    Math.ceil((amountSaved / goalAmount) * 100),
+    100
+  );
 
   const daysLeft = Math.ceil(
     (endDate - new Date().getTime() / 1000) / (60 * 60 * 24)

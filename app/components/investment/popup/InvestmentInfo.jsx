@@ -12,8 +12,8 @@ const InvestmentInfo = ({ data, showAboutFunction, investNowFunction }) => {
         quantity={data.availableUnits}
         soldOut={data.soldOut}
       />
-      <div className="px-5">
-        <div className="py-6 flex justify-between gap-5">
+      <div className="px-6">
+        <div className="py-6 flex justify-between gap-y-5">
           <div>
             <p className="text-lg leading-[1.6rem] max-h-[3.2rem] font-medium capitalize truncate text-[--text-secondary]">
               {data.assetName}

@@ -1,8 +1,9 @@
 import { FaNairaSign } from "react-icons/fa6";
 import FormattingField from "../forms/branded/FormattingField";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useField, ErrorMessage } from "formik";
 import { timeIntervalsToSeconds } from "../../utils/constants";
+import { NumericFormat } from "react-number-format";
 
 export function AmountPerIntervalField({
   startDate,
@@ -13,9 +14,8 @@ export function AmountPerIntervalField({
 }) {
   const field = useField("amountToSaveOnIntervalBasis");
   const setValue = field[2].setValue;
-  const value = field[0].value;
-  const setError = field[2].setError;
-  const error = field[1].error;
+
+  let suggestedAmt = useRef(null);
 
   function calcAmount(
     startDate,
@@ -53,25 +53,7 @@ export function AmountPerIntervalField({
       errors
     );
 
-    if (amountToSaveOnIntervalBasisCalculated > value) {
-      setError(
-        `Amount must be at least ₦ ${amountToSaveOnIntervalBasisCalculated}`
-      );
-    } else {
-      if (error) setError(null);
-    }
-  }, [value]);
-
-  useEffect(() => {
-    const amountToSaveOnIntervalBasisCalculated = calcAmount(
-      startDate,
-      withdrawalDate,
-      preferredInterval,
-      goalAmount,
-      errors
-    );
-
-    setValue(amountToSaveOnIntervalBasisCalculated, true);
+    suggestedAmt.current = amountToSaveOnIntervalBasisCalculated;
   }, [startDate, withdrawalDate, preferredInterval, errors, goalAmount]);
 
   return (
@@ -81,6 +63,23 @@ export function AmountPerIntervalField({
         className="text-[--text-secondary] font-medium text-sm text-left"
       >
         Preferred amount to save on interval basis
+        {suggestedAmt.current > 0 && (
+          <div className="">
+            <button
+              type="button"
+              className="text-[--text-primary] border border-[--lines]  text-xs font-normal p-1 px-2 rounded-brand bg-[--lines]"
+              onClick={() => setValue(suggestedAmt.current)}
+            >
+              Suggested:{" "}
+              <NumericFormat
+                value={suggestedAmt.current}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"₦ "}
+              />
+            </button>
+          </div>
+        )}
       </label>
 
       <FormattingField

@@ -4,7 +4,7 @@ import { NumericFormat } from "react-number-format";
 
 const MiniHero = ({ img, title, quantity, soldOut }) => {
   return (
-    <div>
+    <div className="px-6">
       <div className="w-full h-[250px] relative">
         <Image
           src={img}
