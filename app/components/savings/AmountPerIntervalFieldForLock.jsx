@@ -29,7 +29,7 @@ export function AmountPerIntervalFieldForLock({
 
     const _withdrawalDate = new Date(_startDate);
 
-    _withdrawalDate.setMonth(_startDate.getMonth() + lockDurationInMonths);
+    _withdrawalDate.setDate(_startDate.getDate() + lockDurationInMonths * 30);
 
     const timeDiff = _withdrawalDate.getTime() - _startDate.getTime();
 
