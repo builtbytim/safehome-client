@@ -56,8 +56,8 @@ function Page({ authenticatedUser, authenticationToken }) {
 
         {tabState === 0 && <DebitCardTab token={authenticationToken} />}
         {tabState === 1 && <BankDetailsTab token={authenticationToken} />}
-        <div>
-          {tabState === 5 ? (
+        <div className="pt-10">
+          {tabState === 0 ? (
             <div className="py-10 text-center">
               <button
                 className="btn-1 w-full max-w-[400px]  text-white bg-[--color-brand] rounded text-lg"

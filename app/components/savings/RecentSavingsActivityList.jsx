@@ -61,7 +61,7 @@ function RecentSavingsActivityList({ token }) {
   }
 
   return (
-    <div className="space-y-2   overflow-y-auto  max-h-[482px]">
+    <div className="space-y-2   overflow-y-auto no-scrollbar  max-h-[482px]">
       {data &&
         data.entries > 0 &&
         data.items.map((item, i) => (

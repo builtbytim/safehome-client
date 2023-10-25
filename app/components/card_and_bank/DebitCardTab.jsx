@@ -41,26 +41,26 @@ const CardDisplay = ({ type, number, expiryDate, name }) => (
 const DebitCardTab = () => {
   return (
     <div className="w-full">
-      <div className="flex py-16 justify-center items-center  w-full">
+      {/* <div className="flex py-16 justify-center items-center  w-full">
         <p className="text-sm lg:text-base  text-[#C4C4C4] xl:text-lg  ">
           {" "}
           Coming Soon
         </p>
-      </div>
+      </div> */}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[650px]">
-        {/* <CardDisplay
-				type="visa"
-				number="41738787870000"
-				expiryDate="02/24"
-				name="Samson Sayed"
-			/>
-			<CardDisplay
-				type="mastercard"
-				number="41738787870000"
-				expiryDate="02/24"
-				name="Samson Sayed"
-			/> */}
+        <CardDisplay
+          type="visa"
+          number="41738787870000"
+          expiryDate="02/24"
+          name="Samson Sayed"
+        />
+        <CardDisplay
+          type="mastercard"
+          number="41738787870000"
+          expiryDate="02/24"
+          name="Samson Sayed"
+        />
       </div>
     </div>
   );
