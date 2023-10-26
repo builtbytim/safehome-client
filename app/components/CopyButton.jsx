@@ -12,15 +12,15 @@ const CopyButton = ({ link, type, additionalClasses }) => {
     setShowCopied(true);
     setTimeout(() => {
       setShowCopied(false);
-    }, 1000);
+    }, 1500);
   };
   return (
     <div className={`${additionalClasses} w-full`}>
       <button
-        className="rounded-[1.3rem] bg-[--b1] pl-7 space-x-7 flex items-center w-auto text-sm"
+        className="rounded-[1.3rem] truncate bg-[--b1] pl-7 space-x-7 flex items-center w-auto text-sm"
         onClick={() => copy(link)}
       >
-        <span className="block font-light">{link}</span>{" "}
+        <span className="block font-light truncate">{link}</span>{" "}
         <span className="capitalize bg-white px-5 py-3 rounded-[1.3rem] flex items-center border border-[--b1]">
           <BiSolidCopy className="block mr-2" />{" "}
           <span className="hidden lg:block">Copy {type}</span>

@@ -139,6 +139,7 @@ function Page({ authenticatedUser, authenticationToken: token }) {
           <div className="space-y-2">
             <div className="flex justify-end">
               <button
+                disabled={data.referralBonus <= 0}
                 onClick={handleWithdrawClick}
                 className="btn-1 max-w-[150px] bg-[--color-brand] flex text-white text-center justify-center items-center py-3 px-6 rounded-lg  space-x-2"
               >
@@ -216,31 +217,8 @@ function Page({ authenticatedUser, authenticationToken: token }) {
               />
             </div>
           </div>
-          <ReferralHistory token={token} data={referralsData} />
+          <ReferralHistory token={token} />
         </section>
-      )}
-
-      {showReceipt && (
-        <div className="fixed top-[-20vh] left-0 w-full h-[150vh] bg-black/50 z-[100]">
-          <div
-            className="fixed top-[0] right-0 w-full md:w-[450px] h-[105vh] pb-[5vh] bg-white overflow-y-auto shadow"
-            ref={receiptRef}
-          >
-            <div className="fixed top-0 right-0 z-[10] w-full md:w-[450px] bg-transparent pr-1">
-              <ReceiptTopBar
-                close={() => setShowReceipt(false)}
-                title="Transaction Type"
-                desc={receiptState}
-              />
-            </div>
-            <div className="pt-[230px] h-full">
-              <Receipt
-                btnFunc={() => console.log("withdraw")}
-                type={receiptState}
-              />
-            </div>
-          </div>
-        </div>
       )}
     </main>
   );
