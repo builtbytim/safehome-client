@@ -27,6 +27,7 @@ const useNotifyStore = create((set) => ({
     onAcceptText: "Ok",
     onReject: null,
     onRejectText: "Close",
+    isConfirmation: false,
   },
 
   showNotify: () =>

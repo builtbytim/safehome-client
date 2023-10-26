@@ -17,6 +17,7 @@ export default function Notify() {
     onReject,
     onRejectText = "Close",
     allowClose,
+    isConfirmation = false,
   } = props;
 
   //   console.log(props);
@@ -67,7 +68,7 @@ export default function Notify() {
         <div className="flex flex-col text-[--placeholder] justify-center space items-center space-y-2">
           <BsInfoCircle className=" text-3xl lg:text-4xl self-center" />
           <p className=" font-bold text-[--sorta-dark] blur-[.5px] text-lg lg:text-xl  self-center  capitalize">
-            Notification
+            {isConfirmation ? "Are you sure?" : "Notification"}
           </p>
         </div>
 

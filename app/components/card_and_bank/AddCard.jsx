@@ -127,6 +127,7 @@ const AddCard = ({ closeFunc, token }) => {
               </div>
               <div className="space-y-4 w-full pt-8 pb-3">
                 <button
+                  type="submit"
                   disabled={!isValid || addCardLoading}
                   className="btn-1 block w-full py-3 px-5 rounded text-white bg-[--color-brand] border border-[--color-brand]"
                 >

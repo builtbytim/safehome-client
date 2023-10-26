@@ -20,7 +20,7 @@ const exploreItems = [
 
   {
     title: "Refer and Earn",
-    body: "Earn $2,000 every successful referral.",
+    body: "Earn ₦2,000 every successful referral.",
     img: explore3,
     link: "/account/refer",
   },
