@@ -53,6 +53,9 @@ const queryKeys = {
   createLockedSavings: "createLockedSavings",
   getMyLockedSavings: "getMyLockedSavings",
   fundLockedSavings: "fundLockedSavings",
+  getReferralProfile: "getReferralprofile",
+  getMyReferrals: "getMyReferrals",
+  withdrawMyReferralBonus: "withdrawMyReferralBonus",
 };
 
 export default queryKeys;

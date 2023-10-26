@@ -71,6 +71,9 @@ const config = {
     createLockedSavings: "/savings/locked",
     getMyLockedSavings: "/savings/locked",
     fundLockedSavings: "/savings/locked/fund",
+    getReferralProfile: "/refer/profile",
+    getMyReferrals: "/refer/referrals",
+    withdrawMyReferralBonus: "/refer/withdraw",
   },
 
   signInModes: {
