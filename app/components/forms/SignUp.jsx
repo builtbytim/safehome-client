@@ -9,7 +9,7 @@ import { parsePhoneNumber } from "awesome-phonenumber";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import useSignUp from "../../utils/hooks/useSignUp";
 import { useNotifyStore } from "../../utils/store";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import BarLoader from "../BarLoader";
 
 const yupSchema = Yup.object({
@@ -67,7 +67,7 @@ function SignUp() {
   const [isFirstSlide, setIsFirstSlide] = useState(true);
 
   const setNotify = useNotifyStore((state) => state.setNotify);
-
+  const searchParams = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
 
   function toggleShowPassword() {
@@ -106,6 +106,10 @@ function SignUp() {
       password: values.cpassword,
     };
 
+    if (searchParams.has("referralCode")) {
+      body.referralCode = searchParams.get("referralCode");
+    }
+
     mutate(body);
   }
 
@@ -123,7 +127,7 @@ function SignUp() {
         firstName: "",
         surname: "",
         gender: "",
-        dateOfBirth: new Date().toISOString().split("T")[0],
+        dateOfBirth: new Date(2000, 0, 0).toISOString().split("T")[0],
         phone: "",
         email: "",
         password: "",

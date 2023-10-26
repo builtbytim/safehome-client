@@ -2,28 +2,75 @@
 
 import { createFetcher } from "../../utils/fetchUtils";
 import queryKeys from "../../utils/queryKeys";
-import { useQuery, useQueryClient, useMutation } from "react-query";
-import { useNotifyStore } from "../../utils/store";
+import { useQuery } from "react-query";
 import config from "../../utils/config";
 import LoadingView from "../LoadingView";
 import ErrorMessageView from "../ErrorMessageView";
+import Pagination from "../Pagination";
+import cn from "classnames";
 
-import { useState } from "react";
 import Image from "next/image";
 
 import { BsFilterRight } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import notFoundImg from "../../../assets/images/notFoundImg.png";
+import { useState } from "react";
 
 function ReferralHistory({ token }) {
-  const { isLoading, isError, refetch, data, isSuccess } = useQuery({
-    queryKey: [queryKeys.getMyReferrals, token],
-    queryFn: createFetcher({
-      url: config.apiPaths.getMyReferrals,
-      method: "GET",
-      auth: token,
-    }),
+  const [params, setParams] = useState({
+    page: 1,
+    limit: 10,
+    search: "",
   });
+
+  const [search, setSearch] = useState("");
+
+  const searchParams = new URLSearchParams(params);
+  searchParams.append("page", params.page);
+  searchParams.append("limit", params.limit);
+  searchParams.append("search", params.search);
+
+  const { isLoading, isError, refetch, data, isFetching, isSuccess } = useQuery(
+    {
+      queryKey: [queryKeys.getMyReferrals, token, params],
+      queryFn: createFetcher({
+        url: config.apiPaths.getMyReferrals,
+        method: "GET",
+        auth: token,
+        surfix: `?${searchParams.toString()}`,
+      }),
+
+      keepPreviousData: true,
+    }
+  );
+
+  function setPage(page) {
+    setParams({ ...params, page });
+  }
+
+  function debounce(func, delay) {
+    let timeoutId;
+
+    return function (...args) {
+      const context = this;
+
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        func.apply(context, args);
+      }, delay);
+    };
+  }
+
+  const handleSearch = debounce((e) => {
+    const v = e.target.value;
+
+    setParams({ ...params, search: v, page: 1 });
+  }, 700);
+
+  function onSearchChange(e) {
+    setSearch(e.target.value);
+    handleSearch(e);
+  }
 
   return (
     <div>
@@ -34,14 +81,27 @@ function ReferralHistory({ token }) {
         <div className="flex gap-3">
           <div className="w-full max-w-[300px] bg-[--b1] rounded-[1.1rem] flex gap-3 px-6 items-center">
             <FiSearch className="font-bold text-xl" />
-            <input
-              type="text"
-              placeholder="First Name"
-              className="block py-2 w-full rounded outline-none placeholder:text-[--placeholder] font-normal bg-transparent"
-            />
+            <div className="flex justify-center items-center">
+              <input
+                value={search}
+                onChange={onSearchChange}
+                type="text"
+                placeholder="Search by name, email"
+                className="block py-2 w-full text-sm rounded outline-none placeholder:text-[--placeholder] font-normal bg-transparent"
+              />
+
+              <span
+                className={
+                  "self-center  p-[2px] inline-block animate-ping rounded-full " +
+                  cn({
+                    " bg-[--green] ": isFetching,
+                  })
+                }
+              ></span>
+            </div>
           </div>
 
-          <button className="bg-[--b1] rounded-[1.1rem] flex gap-3 px-6 items-center">
+          <button className="bg-[--b1] text-sm rounded-[1.1rem] flex gap-3 px-6 items-center">
             <BsFilterRight className="font-bold text-xl" />
             <span className="hidden lg:block">Filter</span>
           </button>
@@ -63,7 +123,7 @@ function ReferralHistory({ token }) {
         </div>
       )}
 
-      {data && data.entries === 0 ? (
+      {data && data.unfilteredEntries === 0 ? (
         <div className="w-full flex flex-col items-center gap-8 pt-8 pb-4">
           <p className="max-w-[300px] text-center text-[--color-brand pt-4">
             You have not made any referral yet. Share your code to earn rewards
@@ -78,7 +138,7 @@ function ReferralHistory({ token }) {
             />
           </div>
         </div>
-      ) : data && data.numItems === 0 ? (
+      ) : data && data.entries === 0 ? (
         <div className="w-full flex flex-col items-center gap-8 pt-8 pb-4">
           <p className="max-w-[300px] text-center text-[--color-brand pt-4">
             No referral matches your search
@@ -96,38 +156,52 @@ function ReferralHistory({ token }) {
       ) : (
         data &&
         data.numItems > 0 && (
-          <div className="py-8">
-            <table className="w-full table text-[--text-secondary] font-normal ">
-              <thead className="w-full">
-                <tr className="table-row w-full uppercase bg-[--b1]">
-                  <th className=" text-center whitespace-nowrap  py-5 ">
-                    {" "}
-                    S/N{" "}
-                  </th>
-                  <th className=" text-left px-6 whitespace-nowrap  py-5 ">
-                    Date
-                  </th>
-                  <th className=" text-left px-6 whitespace-nowrap  py-5 ">
-                    Referral Name
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {data.items.map((item, i) => (
-                  <tr
-                    key={i}
-                    className={`table-row text-left text-sm ${
-                      i % 2 !== 0 && "py-5 uppercase bg-[--b1]"
-                    }`}
-                  >
-                    <td className="py-4 text-center">{i}</td>
-                    <td className="text-left px-6"> {item.date} </td>
-                    <td className="text-left px-6">{item.name}</td>
+          <div>
+            <div className="py-8 overflow-auto max-h-[482px]">
+              <table className="w-full table text-[--text-secondary] font-normal ">
+                <thead className="w-full">
+                  <tr className="table-row w-full uppercase bg-[--b1]">
+                    <th className=" text-center whitespace-nowrap  py-5 ">
+                      {" "}
+                      S/N{" "}
+                    </th>
+                    <th className=" text-left px-6 whitespace-nowrap  py-5 ">
+                      Date
+                    </th>
+                    <th className=" text-left px-6 whitespace-nowrap  py-5 ">
+                      Referral Name
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+
+                <tbody>
+                  {data.items.map((item, i) => (
+                    <tr
+                      key={i}
+                      className={`table-row text-left text-sm ${
+                        i % 2 !== 0 && "py-5  bg-[--b1]"
+                      }`}
+                    >
+                      <td className="py-4 text-center">{i + 1}</td>
+                      <td className="text-left px-6">
+                        {" "}
+                        {new Date(item.createdAt * 1000).toDateString()}{" "}
+                      </td>
+                      <td className="text-left px-6">
+                        {item.referredUserName}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <Pagination
+              data={data}
+              isFetching={isFetching}
+              isSuccess={isSuccess}
+              isLoading={isLoading}
+              setPage={setPage}
+            />
           </div>
         )
       )}

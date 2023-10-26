@@ -85,6 +85,7 @@ const config = {
   redirectSearchParam: "redirectUrl",
   signInModeParam: "mode",
   loginUrl: "/sign-in",
+  signUpUrl: "/sign-up",
 
   signInRedirectIgnore: [
     "/sign-in",
