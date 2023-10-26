@@ -18,30 +18,13 @@ import SecureRoute from "../../../components/SecureRoute.jsx";
 import { NumericFormat } from "react-number-format";
 import { useRouter, usePathname } from "next/navigation.js";
 
-import {
-  Withdraw,
-  Receipt,
-  ReceiptTopBar,
-} from "../../../components/home/popups";
-import { PopUpTopBar } from "../../../components/security";
 import useOutsideClickDetector from "../../../utils/hooks/useOutsideClickDetector";
-
-const referralsData = [];
 
 function Page({ authenticatedUser, authenticationToken: token }) {
   const setNotify = useNotifyStore((state) => state.setNotify);
   const router = useRouter();
   const pathname = usePathname();
   const queryClient = useQueryClient();
-
-  const [showReceipt, setShowReceipt] = useState(false);
-
-  const [receiptState, setReceiptState] = useState("");
-
-  // Hide Popups when not clicked on
-  const receiptRef = useRef(null);
-
-  useOutsideClickDetector(receiptRef, () => setShowReceipt(false));
 
   const {
     mutate: withdrawBonus,
@@ -64,12 +47,12 @@ function Page({ authenticatedUser, authenticationToken: token }) {
       setNotify({
         show: true,
         content: "We have transferred your referral bonus to your wallet.",
-        acceptText: "View receipt",
+        onAcceptText: "View receipt",
         onAccept: () => {
-          router.push(`${pathname}?showTx=true&txRef=${data.txRef}`);
+          router.push(`${pathname}?showTx=true&txRef=${data.reference}`);
         },
 
-        rejectText: "Close",
+        OnRejectText: "Close",
       });
     },
     onError(error) {
