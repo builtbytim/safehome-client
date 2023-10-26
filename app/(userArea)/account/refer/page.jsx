@@ -16,6 +16,7 @@ import LoadingView from "../../../components/LoadingView.jsx";
 import ErrorMessageView from "../../../components/ErrorMessageView.jsx";
 import SecureRoute from "../../../components/SecureRoute.jsx";
 import { NumericFormat } from "react-number-format";
+import { useRouter, usePathname } from "next/navigation.js";
 
 import {
   Withdraw,
@@ -28,17 +29,56 @@ import useOutsideClickDetector from "../../../utils/hooks/useOutsideClickDetecto
 const referralsData = [];
 
 function Page({ authenticatedUser, authenticationToken: token }) {
-  const [showWithdraw, setShowWithdraw] = useState(false);
+  const setNotify = useNotifyStore((state) => state.setNotify);
+  const router = useRouter();
+  const pathname = usePathname();
+  const queryClient = useQueryClient();
+
   const [showReceipt, setShowReceipt] = useState(false);
 
   const [receiptState, setReceiptState] = useState("");
 
   // Hide Popups when not clicked on
-  const withdrawRef = useRef(null);
   const receiptRef = useRef(null);
 
-  useOutsideClickDetector(withdrawRef, () => setShowWithdraw(false));
   useOutsideClickDetector(receiptRef, () => setShowReceipt(false));
+
+  const {
+    mutate: withdrawBonus,
+    isLoading: withdrawIsLoading,
+    isError: withdrawIsError,
+    data: withdrawData,
+    isSuccess: withdrawIsSuccess,
+  } = useMutation({
+    mutationKey: [queryKeys.withdrawMyReferralBonus, token],
+    mutationFn: createFetcher({
+      url: config.apiPaths.withdrawMyReferralBonus,
+      method: "POST",
+      auth: token,
+    }),
+
+    onSuccess(data) {
+      queryClient.invalidateQueries(queryKeys.getReferralProfile);
+      queryClient.invalidateQueries(queryKeys.getWallet);
+
+      setNotify({
+        show: true,
+        content: "We have transferred your referral bonus to your wallet.",
+        acceptText: "View receipt",
+        onAccept: () => {
+          router.push(`${pathname}?showTx=true&txRef=${data.txRef}`);
+        },
+
+        rejectText: "Close",
+      });
+    },
+    onError(error) {
+      setNotify({
+        show: true,
+        content: error.message,
+      });
+    },
+  });
 
   const { isLoading, isError, refetch, data, isSuccess } = useQuery({
     queryKey: [queryKeys.getReferralProfile, token],
@@ -48,6 +88,27 @@ function Page({ authenticatedUser, authenticationToken: token }) {
       auth: token,
     }),
   });
+
+  function handleWithdrawClick() {
+    if (withdrawIsLoading) return;
+
+    if (data.referralBonus < 5000) {
+      setNotify({
+        show: true,
+        content: "You have not earned up to ₦5,000",
+      });
+      return;
+    }
+
+    setNotify({
+      show: true,
+      isConfirmation: true,
+      content: "Proceed with withdrawal?",
+      onAccept: withdrawBonus,
+      onAcceptText: "Withdraw",
+      onRejectText: "Cancel",
+    });
+  }
 
   return (
     <main className=" space-y-2 lg:space-y-3 text-[--text-secondary] border border-[--lines] p-5 h-full min-h-[80vh] rounded-2xl">
@@ -67,7 +128,7 @@ function Page({ authenticatedUser, authenticationToken: token }) {
       {isError && (
         <div className="flex py-16 justify-center items-center  w-full">
           <ErrorMessageView
-            message="Something went wrong while fetching your referrals. Please try again."
+            message="Something went wrong. Please try again."
             refetch={refetch}
           />
         </div>
@@ -78,10 +139,11 @@ function Page({ authenticatedUser, authenticationToken: token }) {
           <div className="space-y-2">
             <div className="flex justify-end">
               <button
-                className="bg-[--color-brand] flex text-white py-3 px-6 rounded-lg items-center gap-2"
-                onClick={() => setShowWithdraw(true)}
+                onClick={handleWithdrawClick}
+                className="btn-1 max-w-[150px] bg-[--color-brand] flex text-white text-center justify-center items-center py-3 px-6 rounded-lg  space-x-2"
               >
-                <FaMoneyBill className="text-white text-2xl" /> Withdraw
+                <FaMoneyBill className="text-white text-2xl" />
+                <span>Withdraw</span>
               </button>
             </div>
             {/* Cards */}
@@ -140,7 +202,7 @@ function Page({ authenticatedUser, authenticationToken: token }) {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 space-y-4 text-[--text-secondary] pt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 space-y-4 md:space-y-0 text-[--text-secondary] pt-4">
               {/* Copy buttons */}
               <CopyButton
                 link={data.referralLink}
@@ -154,7 +216,7 @@ function Page({ authenticatedUser, authenticationToken: token }) {
               />
             </div>
           </div>
-          <ReferralHistory data={referralsData} />
+          <ReferralHistory token={token} data={referralsData} />
         </section>
       )}
 
