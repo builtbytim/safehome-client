@@ -29,7 +29,7 @@ const ToggleCard = ({
         <p className="text-sm md:text-lg">{text}</p>
       </div>
 
-      {toggleFunc && !isLoading && (
+      {toggleFunc && (
         <div className="">
           <button
             title={

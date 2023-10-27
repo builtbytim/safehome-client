@@ -95,6 +95,7 @@ function Page({ authenticationToken }) {
 
       return res.data;
     },
+
     mutationKey: [queryKeys.setNotificationPreferences, authenticationToken],
   });
 
