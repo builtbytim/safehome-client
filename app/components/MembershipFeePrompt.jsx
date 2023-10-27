@@ -1,7 +1,6 @@
 "use client";
 
 import Overlay from "./Overlay3";
-import cn from "classnames";
 import { useDataStore, useUiStore } from "../utils/store";
 import useBodyScrollLock from "../utils/hooks/useBodyScrollLock";
 import { useMutation } from "react-query";
@@ -53,10 +52,10 @@ export default function MembershipFeePrompt() {
 
   if (user && !user.hasPaidMembershipFee && !payMembershipFeeSuccess) {
     return (
-      <Overlay z={3}>
-        <div className="w-full bg-white mt-4 pt-10 pb-6 px-4 rounded ">
+      <Overlay z={4}>
+        <div className="w-[90%] max-w-sm bg-white mt-4 pt-6 md:pt-10 pb-6 px-4 rounded-[8px] ">
           <div className="flex flex-row text-[--color-brand] justify-start  items-center">
-            <h1 className=" font-bold text-lg md:text-xl   self-center  capitalize">
+            <h1 className=" font-semibold text-base md:text-lg xl:text-xl   self-center  capitalize">
               Complete your Membership process
             </h1>
           </div>
@@ -69,7 +68,7 @@ export default function MembershipFeePrompt() {
             </div>
           )}
 
-          <p className="text-[--primary] mt-3   first-letter:uppercase">
+          <p className="text-[--primary] mt-3  text-sm md:text-base first-letter:uppercase">
             Hello there! We are glad you signed up for SafeHome. However, you
             must pay a one-time membership fee of{" "}
             <span className="font-semibold">₦5,000</span> to complete your
@@ -77,11 +76,11 @@ export default function MembershipFeePrompt() {
             features after you make the payment.
           </p>
 
-          <div className="mt-8 flex flex-row justify-end items-center w-full">
+          <div className="mt-4 flex flex-row justify-end items-center w-full">
             <button
               onClick={handlePayClick}
               disabled={payMembershipFeeLoading}
-              className="btn-1"
+              className="btn-1 "
             >
               {payMembershipFeeLoading ? <Spinner /> : "Pay Now"}
             </button>
