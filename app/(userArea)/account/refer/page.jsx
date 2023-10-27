@@ -70,6 +70,10 @@ function Page({ authenticatedUser, authenticationToken: token }) {
       method: "GET",
       auth: token,
     }),
+
+    onSuccess(d) {
+      console.log(d);
+    },
   });
 
   function handleWithdrawClick() {
@@ -200,7 +204,7 @@ function Page({ authenticatedUser, authenticationToken: token }) {
               />
             </div>
           </div>
-          <ReferralHistory token={token} />
+          <ReferralHistory proceed={isSuccess} token={token} />
         </section>
       )}
     </main>

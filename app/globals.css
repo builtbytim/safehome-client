@@ -188,7 +188,7 @@
   }
 
   .account-form-icon-container input {
-    @apply account-form-field focus:border-[#8d4000]/40 transition-colors duration-[400] hover:border-[#8d4000]/20 border-2   border-[--lines];
+    @apply account-form-field;
   }
 
   .radio-btn-container {

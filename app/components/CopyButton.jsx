@@ -15,9 +15,9 @@ const CopyButton = ({ link, type, additionalClasses }) => {
     }, 1500);
   };
   return (
-    <div className={`${additionalClasses} w-full`}>
+    <div className={`${additionalClasses}  w-full truncate max-w-full`}>
       <button
-        className="rounded-[1.3rem] truncate bg-[--b1] pl-7 space-x-7 flex items-center w-auto text-sm"
+        className="rounded-[1.3rem] truncate bg-[--b1] pl-4  space-x-4 flex items-center justify-between md:justify-start md:space-x-6 text-sm"
         onClick={() => copy(link)}
       >
         <span className="block font-light truncate">{link}</span>{" "}

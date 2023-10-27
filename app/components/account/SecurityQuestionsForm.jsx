@@ -92,8 +92,7 @@ const SecurityQuestionsForm = ({ user, token, closeParent }) => {
         initialTouched={{
           question1: true,
           question2: true,
-          // answer1: true,
-          // answer2: true,
+
           allowEdits: true,
         }}
         validationSchema={Yup.object().shape({

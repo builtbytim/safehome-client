@@ -16,7 +16,7 @@ import { FiSearch } from "react-icons/fi";
 import notFoundImg from "../../../assets/images/notFoundImg.png";
 import { useState } from "react";
 
-function ReferralHistory({ token }) {
+function ReferralHistory({ token, proceed }) {
   const [params, setParams] = useState({
     page: 1,
     limit: 10,
@@ -39,6 +39,7 @@ function ReferralHistory({ token }) {
         auth: token,
         surfix: `?${searchParams.toString()}`,
       }),
+      enabled: proceed,
 
       keepPreviousData: true,
     }
@@ -75,7 +76,7 @@ function ReferralHistory({ token }) {
   return (
     <div>
       <div className="flex flex-col md:flex-row justify-between gap-5 items-center pt-8">
-        <p className="text-[--color-brand] font-medium text-lg px-5">
+        <p className="text-[--color-brand] px-1 self-start md:self-center font-semibold text-lg ">
           Referral History
         </p>
         <div className="flex gap-3">
