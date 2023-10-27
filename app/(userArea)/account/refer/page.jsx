@@ -71,9 +71,9 @@ function Page({ authenticatedUser, authenticationToken: token }) {
       auth: token,
     }),
 
-    onSuccess(d) {
-      console.log(d);
-    },
+    // onSuccess(d) {
+    //   console.log(d);
+    // },
   });
 
   function handleWithdrawClick() {
@@ -197,11 +197,11 @@ function Page({ authenticatedUser, authenticationToken: token }) {
                 type="link"
                 additionalClasses=""
               />
-              <CopyButton
+              {/* <CopyButton
                 link={data.referralCode}
                 type="code"
                 additionalClasses="flex md:justify-end"
-              />
+              /> */}
             </div>
           </div>
           <ReferralHistory proceed={isSuccess} token={token} />

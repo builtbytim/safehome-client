@@ -133,7 +133,7 @@ function GoalCreation({
           </div>
         </div>
 
-        <div className="space-y-4 mt-6 max-h-[90vh] md:max-h-[85vh] overflow-y-auto no-scrollbar pb-8">
+        <div className="space-y-4 mt-6 max-h-[85vh] md:max-h-[85vh] overflow-y-scroll no-scrollbar pb-16">
           <h1 className="text-[--text-brand-2] text-lg md:text-xl lg:text-2xl font-semibold">
             {" "}
             Create a Goal{" "}

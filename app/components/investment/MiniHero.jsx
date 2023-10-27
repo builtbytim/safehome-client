@@ -14,7 +14,7 @@ const MiniHero = ({ img, title, quantity, soldOut }) => {
           className="w-full h-full object-cover"
         />
         <div className="absolute top-0 left-0 h-full w-full flex flex-col justify-between bg-[rgba(0,0,0,0.5)] px-5 py-5">
-          <h2 className="text-white truncate capitalize font-semibold text-3xl w-[80%] py-2">
+          <h2 className="text-white  capitalize font-semibold text-3xl w-[80%] py-2">
             {title}
           </h2>
           <div className="flex gap-4 justify-between items-center">

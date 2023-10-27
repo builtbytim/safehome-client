@@ -258,10 +258,11 @@ const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
                     }}
                   />
                   <p>
-                    I agree to the{" "}
-                    <span className="text-[--text-brand] cursor-pointer">
-                      terms and conditions
-                    </span>
+                    I authorize SafeHome to Lorem ipsum dolor, sit amet
+                    consectetur adipisicing elit. Consectetur neque officiis
+                    numquam quis nobis corporis, impedit minima voluptatibus,
+                    illum aperiam magni odit placeat, qui dicta. Porro
+                    temporibus optio minima hic.
                   </p>
                 </div>
 

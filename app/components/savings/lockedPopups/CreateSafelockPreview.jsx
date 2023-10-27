@@ -9,6 +9,7 @@ import useOutsideClickDetector from "../../../utils/hooks/useOutsideClickDetecto
 import Image from "next/image";
 import dummyImage from "../../../../assets/images/investment/inv2.png";
 import ProgressBar from "../ProgressBar";
+import GoalImage from "../../../../assets/images/investment/inv1.png";
 
 function CreateSafelockPreview({
   closeSelf,
@@ -65,52 +66,18 @@ function CreateSafelockPreview({
             </p>
 
             {/* image area --------------------- */}
-
-            <div className="px-6 rounded-[8px]  pt-6 w-full relative min-h-[200px] overflow-hidden">
-              <Image
-                fill
-                className="absolute object-cover rounded-[8px] "
-                src={formData.investibleAsset.coverImageUrl || dummyImage}
-                alt={formData.investibleAsset.assetName}
-              />
-
-              {/* card on top  */}
-
-              <div className="bg-white w-[90%] h-[90%] absolute top-1/2 left-1/2 transform translate-x-[-50%] translate-y-[-50%]  z-10  flex flex-col justify-between items-start  p-4">
-                <div className="flex flex-row justify-start space-x-8 items-center w-full">
-                  <div className="space-y-2">
-                    <p className="text-[--text-secondary] font-light text-sm text-left">
-                      Asset Name
-                    </p>
-                    <p className="font-bold capitalize text-[--color-brand]">
-                      {formData.investibleAsset.assetName}
-                    </p>
-                  </div>
-
-                  <div className="space-y-2">
-                    <p className="text-[--text-secondary] font-light text-sm text-left">
-                      Target
-                    </p>
-                    <p className="font-bold text-[--color-brand]">
-                      <NumericFormat
-                        value={formData.investibleAsset.pricePerUnit}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"₦ "}
-                      />
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <p className="text-[--text-secondary] font-light text-sm text-left">
-                    Available Units:{" "}
-                    <NumericFormat
-                      value={formData.investibleAsset.availableUnits}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                    />
-                  </p>
+            <div className="">
+              <div className={"relative h-[210px] truncate  w-full "}>
+                <Image
+                  src={formData.investibleAsset.coverImageUrl || GoalImage}
+                  alt="goal image"
+                  fill
+                  className="object-cover  h-[210px] w-full"
+                />
+                <div className="absolute bg-black/60  inset-0  flex flex-col justify-center items-center truncate">
+                  <h1 className="text-white capitalize  font-bold truncate text-xl md:text-2xl xl:text-3xl text-center">
+                    {formData.investibleAsset.assetName}
+                  </h1>
                 </div>
               </div>
             </div>
