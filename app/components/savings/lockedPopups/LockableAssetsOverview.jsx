@@ -4,7 +4,6 @@ import cn from "classnames";
 import { useRef } from "react";
 import useOutsideClickDetector from "../../../utils/hooks/useOutsideClickDetector";
 import ExtendedAssetList from "../../investment/ExtendedAssetList";
-import useBodyScrollLock from "../../../utils/hooks/useBodyScrollLock";
 import ClubOwnersFilter from "../../investment/ClubOwnersFilter";
 import { useState } from "react";
 
@@ -32,8 +31,6 @@ function LockableAssetsOverview({
       });
     };
   }
-
-  useBodyScrollLock(true);
 
   useOutsideClickDetector(ref, () => {
     if (show) {

@@ -1,5 +1,4 @@
 import cn from "classnames";
-import useBodyScrollLock from "../utils/hooks/useBodyScrollLock";
 
 export default function Overlay({
   children,
@@ -8,8 +7,6 @@ export default function Overlay({
   ClickBack = null,
   skipWrapper = false,
 }) {
-  useBodyScrollLock();
-
   return (
     <>
       <div
