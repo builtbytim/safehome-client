@@ -110,6 +110,10 @@ function SignUp() {
       body.referralCode = searchParams.get("referralCode");
     }
 
+    if (searchParams.has("affiliateCode")) {
+      body.affiliateCode = searchParams.get("affiliateCode");
+    }
+
     mutate(body);
   }
 
