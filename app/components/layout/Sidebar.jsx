@@ -115,13 +115,13 @@ function Sidebar() {
       </ul>
 
       <div className="absolute left-0  pl-8 py-2 bottom-[5vh] flex flex-col justify-start items-start space-y-4 text-base">
-        <a href="/">
+        <a target="_blank" href="/">
           <div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
             <RiGuideLine className="text-xl text-[--primary]" />
             <span className="text-[--primary] font-medium"> Guidelines </span>
           </div>
         </a>
-        <a href={config.urlMaps.affiliate}>
+        <a target="_blank" href={config.urlMaps.affiliate}>
           <div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
             <BiLinkExternal className="text-xl text-[--primary]" />
             <span className="text-[--primary] font-medium"> Affiliates </span>

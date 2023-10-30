@@ -54,13 +54,13 @@ function MobileNavList() {
           );
         })}
 
-        <a href="/">
+        <a target="_blank" href="/">
           <div className="px-4 py-2   flex flex-row space-x-4 justify-start items-center hover:cursor-pointer w-full">
             <RiGuideLine className="text-2xl text-[--primary]" />
             <span className="text-[--primary] font-medium"> Guidelines </span>
           </div>
         </a>
-        <a href={config.urlMaps.affiliate}>
+        <a target="_blank" href={config.urlMaps.affiliate}>
           <div className="px-4 py-2   flex flex-row space-x-4 justify-start items-center hover:cursor-pointer w-full">
             <BiLinkExternal className="text-2xl text-[--primary]" />
             <span className="text-[--primary] font-medium"> Affiliates </span>
