@@ -1,10 +1,13 @@
 "use client";
 
-import { BiLogOut } from "react-icons/bi";
+import { MdOutlineLogout } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import { navItems as items } from "../../utils/constants";
 import Link from "next/link";
 import MobileNavListUserPanel from "./MobileNavListUserPanel";
+import { BiLinkExternal } from "react-icons/bi";
+import { RiGuideLine } from "react-icons/ri";
+import config from "../../utils/config";
 
 function MobileNavList() {
   const pathname = usePathname();
@@ -51,11 +54,24 @@ function MobileNavList() {
           );
         })}
 
+        <a href="/">
+          <div className="px-4 py-2   flex flex-row space-x-4 justify-start items-center hover:cursor-pointer w-full">
+            <RiGuideLine className="text-2xl text-[--primary]" />
+            <span className="text-[--primary] font-medium"> Guidelines </span>
+          </div>
+        </a>
+        <a href={config.urlMaps.affiliate}>
+          <div className="px-4 py-2   flex flex-row space-x-4 justify-start items-center hover:cursor-pointer w-full">
+            <BiLinkExternal className="text-2xl text-[--primary]" />
+            <span className="text-[--primary] font-medium"> Affiliates </span>
+          </div>
+        </a>
+
         <Link
           href="/sign-out"
-          className="px-4 pt-4 pb-10 bottom-[5vh] flex flex-row space-x-4 justify-start items-center hover:cursor-pointer w-full"
+          className="px-4 pt-4 pb-10  flex flex-row space-x-4 justify-start items-center hover:cursor-pointer w-full"
         >
-          <BiLogOut className="text-2xl text-[--text-danger]" />
+          <MdOutlineLogout className="text-2xl text-[--text-danger]" />
           <span className="text-[--text-danger] font-medium"> Log Out </span>
         </Link>
       </ul>
