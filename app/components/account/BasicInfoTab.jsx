@@ -10,6 +10,7 @@ import config from "../../utils/config";
 import { createFetcher } from "../../utils/fetchUtils";
 import { useNotifyStore } from "../../utils/store";
 import Spinner from "../Spinner";
+import Link from "next/link";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -140,6 +141,17 @@ const BasicInfoTab = ({ user, token }) => {
                   {user.kycStatus === "PENDING" &&
                     "Your KYC is pending, you can not edit your profile anymore at this time. If you wish to make changes, please contact support."}
                 </legend>
+              )}
+
+              {!user.kycStatus && (
+                <div className="pb-4">
+                  <Link
+                    href="/kyc"
+                    className=" ring-1 hover:ring-[--primary] font-normal ring-offset-2 bg-[--primary] text-white  transitioning  rounded-brand text-xs md:text-sm px-2 lg:px-2 items-center py-1"
+                  >
+                    Go to KYC
+                  </Link>
+                </div>
               )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-x-5 md:gap-y-7">
                 <div className="relative">

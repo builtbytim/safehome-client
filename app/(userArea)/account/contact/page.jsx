@@ -50,7 +50,7 @@ function Page() {
         />
         <InfoCard
           icon={<PiEnvelope className="text-[--color-brand]" />}
-          text="Send us a mail at support@safehomecoop.com"
+          text="Send us a mail at marketing@safehomecoop.com"
         />
         <InfoCard
           icon={<PiPhone className="text-[--color-brand]" />}

@@ -4,7 +4,9 @@ import LogoBrand from "../../../assets/images/logo_brand.png";
 import config from "../../utils/config";
 import Image from "next/image";
 import Link from "next/link";
-import { BiLogOut, BiX } from "react-icons/bi";
+import { BiX, BiLinkExternal } from "react-icons/bi";
+import { RiGuideLine } from "react-icons/ri";
+import { MdOutlineLogout } from "react-icons/md";
 import cn from "classnames";
 import { useUiStore } from "../../utils/store";
 import { usePathname } from "next/navigation";
@@ -62,7 +64,7 @@ function Sidebar() {
         </div>
       </a>
 
-      <ul className="space-y-6 flex flex-col justify-start items-start  w-full px-4">
+      <ul className="space-y-6  flex flex-col justify-start items-start  w-full px-4">
         {items.map((item, index) => {
           const Icon = item.icon;
           return (
@@ -112,12 +114,27 @@ function Sidebar() {
         })}
       </ul>
 
-      <Link href="/sign-out" as="/sign-out">
-        <div className="absolute left-0  px-6 py-2 bottom-[5vh] flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
-          <BiLogOut className="text-2xl text-[--text-danger]" />
-          <span className="text-[--text-danger] font-medium"> Log Out </span>
-        </div>
-      </Link>
+      <div className="absolute left-0  pl-8 py-2 bottom-[5vh] flex flex-col justify-start items-start space-y-4 text-base">
+        <a href="/">
+          <div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
+            <RiGuideLine className="text-xl text-[--primary]" />
+            <span className="text-[--primary] font-medium"> Guidelines </span>
+          </div>
+        </a>
+        <a href={config.urlMaps.affiliate}>
+          <div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
+            <BiLinkExternal className="text-xl text-[--primary]" />
+            <span className="text-[--primary] font-medium"> Affiliates </span>
+          </div>
+        </a>
+
+        <Link href="/sign-out" as="/sign-out">
+          <div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
+            <MdOutlineLogout className="text-xl text-[--text-danger]" />
+            <span className="text-[--text-danger] font-medium"> Log Out </span>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 }
