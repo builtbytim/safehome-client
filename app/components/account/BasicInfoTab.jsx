@@ -295,14 +295,17 @@ const BasicInfoTab = ({ user, token }) => {
                   />
                 </div>
               </div>
-              <div className="py-10 text-center flex flex-col justify-center items-center w-full">
-                <button
-                  disabled={disableForm || !isValid || isLoading}
-                  className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
-                >
-                  {isLoading ? <Spinner /> : "Save"}
-                </button>
-              </div>
+
+              {!disableForm && (
+                <div className="py-10 text-center flex flex-col justify-center items-center w-full">
+                  <button
+                    disabled={disableForm || !isValid || isLoading}
+                    className="btn-1 w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg"
+                  >
+                    {isLoading ? <Spinner /> : "Save"}
+                  </button>
+                </div>
+              )}
             </Form>
           );
         }}

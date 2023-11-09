@@ -12,7 +12,7 @@ function Reviewing() {
   function onCountEnd() {
     router.replace(config.authenticatedHome);
   }
-  const { remainingTime } = useCountdown(Date.now() + 11 * 1000, onCountEnd);
+  const { remainingTime } = useCountdown(Date.now() + 6 * 1000, onCountEnd);
 
   const { secondsNum } = remainingTime;
 
