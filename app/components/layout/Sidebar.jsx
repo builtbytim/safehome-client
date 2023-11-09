@@ -62,7 +62,7 @@ function Sidebar() {
         </div>
       </a>
 
-      <ul className="space-y-6  flex flex-col justify-start items-start  w-full px-4">
+      <ul className="space-y-6 overflow-y-scroll no-scrollbar flex flex-col justify-start items-start  w-full px-4 pb-10">
         {items.map((item, index) => {
           const Icon = item.icon;
           return (
