@@ -21,7 +21,7 @@ const InfoCard = ({ icon, text }) => (
         {icon}
       </div>
     </div>
-    <p className="self-center   ">{text}</p>
+    <p className="self-center break-words  ">{text}</p>
   </div>
 );
 
@@ -64,12 +64,19 @@ function Page() {
       </div>
       <div className="space-x-6  border border-[--lines] rounded md:rounded-xl px-7 py-9 text-center">
         <div className="flex justify-center space-x-6 md:space-x-10 items-center">
-          <PiTwitterLogo className="text-[--text-secondary] text-2xl md:text-3xl" />
-          <PiInstagramLogo className="text-[--text-secondary] text-2xl md:text-3xl" />
+          <a href="https://x.com/safehomecoop?s=21">
+            <PiTwitterLogo className="text-[--text-secondary] text-2xl md:text-3xl" />
+          </a>
+
+          <a href="https://instagram.com/safehomecoop?igshid=MmVlMjlkMTBhMg==">
+            <PiInstagramLogo className="text-[--text-secondary] text-2xl md:text-3xl" />
+          </a>
           <RiFacebookFill className="text-[--text-secondary] text-2xl md:text-3xl" />
           <SlSocialLinkedin className="text-[--text-secondary] text-2xl md:text-3xl" />
 
-          <PiWhatsappLogo className="text-[--text-secondary] text-2xl md:text-3xl" />
+          <a href="http://wa.me/2348129940741">
+            <PiWhatsappLogo className="text-[--text-secondary] text-2xl md:text-3xl" />
+          </a>
         </div>
         <p className="py-4">
           Follow us on social media for updates, news, and more.

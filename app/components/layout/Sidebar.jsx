@@ -4,9 +4,7 @@ import LogoBrand from "../../../assets/images/logo_brand.png";
 import config from "../../utils/config";
 import Image from "next/image";
 import Link from "next/link";
-import { BiX, BiLinkExternal } from "react-icons/bi";
-import { RiGuideLine } from "react-icons/ri";
-import { MdOutlineLogout } from "react-icons/md";
+import { BiX } from "react-icons/bi";
 import cn from "classnames";
 import { useUiStore } from "../../utils/store";
 import { usePathname } from "next/navigation";
@@ -88,18 +86,19 @@ function Sidebar() {
                         <Icon
                           fill={cn({
                             "#FFFFFF": routeIsActive(item.link),
-                            "#c7c7cd": !routeIsActive(item.link),
+                            "#162f43AA": !routeIsActive(item.link),
                           })}
                         />
                       </div>
                     </div>
 
-                    <div className="text-[--text-primary] text-sm font-medium">
+                    <div className=" text-sm font-medium">
                       <span
                         className={
-                          "text-[--invert] transitioning  text-base " +
+                          " transitioning  text-base " +
                           cn({
                             " text-white ": routeIsActive(item.link),
+                            " text-[#162f43]/80 ": !routeIsActive(item.link),
                           })
                         }
                       >
@@ -113,28 +112,6 @@ function Sidebar() {
           );
         })}
       </ul>
-
-      <div className="absolute left-0  pl-8 py-2 bottom-[5vh] flex flex-col justify-start items-start space-y-4 text-base">
-        <a target="_blank" href="/">
-          <div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
-            <RiGuideLine className="text-xl text-[--primary]" />
-            <span className="text-[--primary] font-medium"> Guidelines </span>
-          </div>
-        </a>
-        <a target="_blank" href={config.urlMaps.affiliate}>
-          <div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
-            <BiLinkExternal className="text-xl text-[--primary]" />
-            <span className="text-[--primary] font-medium"> Affiliates </span>
-          </div>
-        </a>
-
-        <Link href="/sign-out" as="/sign-out">
-          <div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
-            <MdOutlineLogout className="text-xl text-[--text-danger]" />
-            <span className="text-[--text-danger] font-medium"> Log Out </span>
-          </div>
-        </Link>
-      </div>
     </div>
   );
 }
