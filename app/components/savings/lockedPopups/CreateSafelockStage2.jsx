@@ -89,7 +89,7 @@ function CreateSafelock2({
               {formData.lockDurationInMonths > 1 ? "months" : "month"}
             </h1>
             <p className="text-[--primary] font-medium text-sm pt-2">
-              Create a Locked Savings for {formData.lockDurationInMonths}{" "}
+              Create an Investment Savings for {formData.lockDurationInMonths}{" "}
               {formData.lockDurationInMonths > 1 ? "months" : "month"}
             </p>
           </div>

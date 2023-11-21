@@ -54,7 +54,8 @@ function AddFunds({ closeSelf, closeAll, token, selectedLockedPlan }) {
     } else {
       setNotify({
         show: true,
-        content: "You have successfully added funds to your locked savings.",
+        content:
+          "You have successfully added funds to your investment savings.",
         allowClose: true,
       });
     }

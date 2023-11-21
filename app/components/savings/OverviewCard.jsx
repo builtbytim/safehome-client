@@ -36,7 +36,7 @@ function OverviewCard({ token, launchCreateGoal, launchCreateLock }) {
             href="/savings/locked"
             className="btn-2 px-6 flex justify-center text-sm lg:text-base whitespace-nowrap space-x-2 items-center"
           >
-            <span>Locked Savings</span>
+            <span>Investment Savings</span>
           </Link>
         </div>
       </div>
@@ -157,7 +157,7 @@ function OverviewCard({ token, launchCreateGoal, launchCreateLock }) {
             </div>
             <h2 className=" text-[--text-secondary] font-medium">
               {" "}
-              Locked Savings{" "}
+              Investment Savings{" "}
             </h2>
 
             <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
@@ -206,7 +206,7 @@ function OverviewCard({ token, launchCreateGoal, launchCreateLock }) {
           href="/savings/locked"
           className="btn-1 py-3 flex justify-center text-sm lg:text-base whitespace-nowrap space-x-2 items-center"
         >
-          <span>Locked Savings</span>
+          <span>Investment Savings</span>
         </Link>
       </div>
     </section>

@@ -27,7 +27,7 @@ function LockedSavingsCard({
             className="absolute w-full h-full object-cover rounded-[10px] lg:rounded-l-[16px] lg:rounded-r-0 group-hover:scale-110 transform transition-all duration-1000 ease-in-out"
             fill
             src={assetInfo.coverImageUrl ? assetInfo.coverImageUrl : img}
-            alt="locked savings plan"
+            alt="investment savings plan"
           />
         </div>
 

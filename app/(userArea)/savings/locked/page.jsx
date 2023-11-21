@@ -35,7 +35,7 @@ const tabItemsArr = [
     },
 
     {
-      name: "Locked Savings",
+      name: "Investment Savings",
       img: LockSVG,
       tabId: "locked",
       iconColor: "#8d4000",
@@ -89,7 +89,7 @@ function Page({ authenticatedUser, authenticationToken }) {
       <div className="space-y-2  lg:space-y-8 w-full min-h-screen pb-16">
         <HeaderSavings
           user={authenticatedUser}
-          title="Locked Savings"
+          title="Investment Savings"
           extraClasses="text-[--color-brand] border-[--color-brand]"
         />
 

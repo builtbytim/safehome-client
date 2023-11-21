@@ -67,7 +67,7 @@ function AccountSidebar() {
           >
             <div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
               <BiLinkExternal className="text-xl text-[--primary]" />
-              <span className="text-[--primary] font-medium"> Affiliates </span>
+              <span className="text-[--primary] font-medium"> Partners </span>
             </div>
           </a>
 

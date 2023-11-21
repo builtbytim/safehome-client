@@ -35,7 +35,7 @@ const tabItemsArr = [
     },
 
     {
-      name: "Locked Savings",
+      name: "Investment Savings",
       img: LockSVG,
       tabId: "locked",
       iconColor: "#8d4000",

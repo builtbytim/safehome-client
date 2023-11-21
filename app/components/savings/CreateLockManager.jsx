@@ -50,7 +50,7 @@ function CreateLockManager({
       setShowFormOverview(false);
 
       setNotify({
-        content: "Locked Savings plan created successfully",
+        content: "Investment Savings plan created successfully",
         type: "success",
         show: true,
       });
