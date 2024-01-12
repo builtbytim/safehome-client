@@ -60,7 +60,7 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
 
           <div className="px-6 gap-4 pt-6 grid grid-cols-2">
             <SmallDetailsCard
-              title="Amount to Lock"
+              title="Amount to Invest"
               value={
                 <NumericFormat
                   value={assetInfo.pricePerUnit}
@@ -103,7 +103,7 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
               }
             />
             <SmallDetailsCard
-              title="Lock Duration"
+              title="Investment Duration"
               value={`${lockDurationInMonths} ${
                 lockDurationInMonths > 1 ? "months" : "month"
               }`}

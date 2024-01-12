@@ -85,7 +85,7 @@ function CreateSafelockPreview({
 
           <div className="px-6 gap-8 pt-6 grid grid-cols-2">
             <SmallDetailsCard
-              title="Amount to Lock"
+              title="Amount to Invest"
               value={
                 <NumericFormat
                   value={formData.investibleAsset.pricePerUnit}
@@ -111,7 +111,7 @@ function CreateSafelockPreview({
               }
             />
             <SmallDetailsCard
-              title="Lock Duration"
+              title="Investment Duration"
               value={`${formData.lockDurationInMonths} ${
                 formData.lockDurationInMonths > 1 ? "months" : "month"
               }`}
@@ -146,7 +146,7 @@ function CreateSafelockPreview({
               type="submit"
               className="btn-1 w-full  "
             >
-              {isLoading ? <Spinner /> : "Lock funds"}
+              {isLoading ? <Spinner /> : "Invest funds"}
             </button>
 
             <button

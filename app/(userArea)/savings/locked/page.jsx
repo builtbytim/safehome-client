@@ -108,7 +108,7 @@ function Page({ authenticatedUser, authenticationToken }) {
                   onClick={toggleCreateLockF1}
                   className="btn-3 bg-[#8d4000] hover:bg-[#8d4000]/80 px-6 whitespace-nowrap "
                 >
-                  Lock your funds
+                  Invest your funds
                 </button>
               </div>
             </div>
@@ -187,7 +187,7 @@ function Page({ authenticatedUser, authenticationToken }) {
                   onClick={toggleCreateLockF1}
                   className="btn-3 bg-[#8d4000] hover:bg-[#8d4000]/80  "
                 >
-                  Lock your funds{" "}
+                  Invest your funds{" "}
                 </button>
               </div>
             </div>

@@ -15,7 +15,7 @@ const NoSavings = ({ saveNowFunc, isLocked = false }) => {
             className="btn-1-v2 hidden w-full lg:block "
             onClick={() => saveNowFunc()}
           >
-            {isLocked ? "LOCK NOW" : "SAVE NOW"}
+            {isLocked ? "INVEST FUND NOW" : "SAVE NOW"}
           </button>
           <button className="btn-2-v2 w-full ">LEARN MORE</button>
         </div>

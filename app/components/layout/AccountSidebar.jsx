@@ -54,12 +54,12 @@ function AccountSidebar() {
         })}
 
         <div className="  self-start px-4  bottom-[5vh] flex flex-col justify-start items-start space-y-4  ">
-          <a target="_blank" href="/" className="py-2 block  w-full">
+          <Link href="/account/guidelines" className="py-2 block  w-full">
             <div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
               <RiGuideLine className="text-xl text-[--primary]" />
               <span className="text-[--primary] font-medium"> Guidelines </span>
             </div>
-          </a>
+          </Link>
           <a
             target="_blank"
             href={config.urlMaps.affiliate}

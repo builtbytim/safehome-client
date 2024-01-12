@@ -150,7 +150,7 @@ function OverviewCard({ token, launchCreateGoal, launchCreateLock }) {
                 onClick={launchCreateLock}
                 className="flex flex-row justify-center items-center space-x-2 self-center text-[--text-secondary]"
               >
-                <span> Lock funds </span>
+                <span> Invest funds </span>
 
                 <BiChevronRight className="inline-block text-2xl self-center" />
               </div>

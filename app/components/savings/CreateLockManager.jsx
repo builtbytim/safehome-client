@@ -77,7 +77,7 @@ function CreateLockManager({
         default:
           setNotify({
             show: true,
-            title: "Unable to create lock",
+            title: "Unable to create invest fund",
             content: err?.message,
             allowClose: true,
           });

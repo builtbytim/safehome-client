@@ -47,7 +47,7 @@ function CreateSafelock2({
       .typeError("Invalid amount")
       .test(
         "must-be-less-than-price-per-unit",
-        "Amount must be less than amount to lock",
+        "Amount must be less than amount to invest",
         (value) => {
           if (!formData.investibleAsset) return true;
 
@@ -85,7 +85,7 @@ function CreateSafelock2({
         <div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8">
           <div className="px-6">
             <h1 className="font-bold  text-[--color-brand] text-lg md:text-xl">
-              Lock for {formData.lockDurationInMonths}{" "}
+              Invest for {formData.lockDurationInMonths}{" "}
               {formData.lockDurationInMonths > 1 ? "months" : "month"}
             </h1>
             <p className="text-[--primary] font-medium text-sm pt-2">
@@ -157,7 +157,7 @@ function CreateSafelock2({
                       htmlFor="amountToLock"
                       className="text-[--text-secondary] font-medium text-sm text-left"
                     >
-                      Amount to Lock (Price of 1 unit of chosen property)
+                      Amount to Invest (Price of 1 unit of chosen property)
                     </label>
 
                     <FormattingField
@@ -166,7 +166,7 @@ function CreateSafelock2({
                       type="text"
                       inputMode="numeric"
                       className="field-1"
-                      placeholder="Amount to lock"
+                      placeholder="Amount to invest"
                       extraClasses="field-1"
                       readOnly
                     />

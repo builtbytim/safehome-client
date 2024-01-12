@@ -43,10 +43,10 @@ function CreateSafelock({ toggleShow, handleSubmit, formData, show }) {
         <div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8">
           <div className="px-6">
             <h1 className="font-bold  text-[--color-brand] text-lg md:text-xl">
-              How long do you want to lock funds?
+              How long do you want to invest funds?
             </h1>
             <p className="text-[--primary] font-medium text-sm pt-2">
-              Select a duration that you want to lock your funds before it is
+              Select a duration that you want to invest your funds before it is
               invested in an investment of your choice
             </p>
           </div>

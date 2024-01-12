@@ -66,7 +66,7 @@ function LockedSavingsCard({
                   : `${lockDurationInMonths} month`}
               </span>
               <span className="text-[--primary] text-right  capitalize text-[0.8rem] leading-[0.88rem] md:text-sm  ">
-                Lock Duration
+                Investment Duration
               </span>
             </div>
           </div>
