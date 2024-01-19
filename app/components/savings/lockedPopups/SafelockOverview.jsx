@@ -113,10 +113,10 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
           <div className="pt-6">
             <p className="text-[--color-brand] text-lg md:text-xl font-bold text-center">
               {completed
-                ? "Safelock is Completed"
+                ? "Savings is Completed"
                 : readyForInvestment
-                ? "Safelock is Ready for Investment"
-                : "Safelock is Currently Ongoing"}
+                ? "Savings is Ready for Investment"
+                : "Savings is Currently Ongoing"}
             </p>
           </div>
         </div>

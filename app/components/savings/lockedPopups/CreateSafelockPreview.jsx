@@ -59,10 +59,10 @@ function CreateSafelockPreview({
         <div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8">
           <div className="px-6 space-y-2">
             <h1 className="font-bold  text-[--color-brand] text-lg md:text-xl">
-              Safelock Preview
+              Savings Investment Preview
             </h1>
             <p className="text-[--primary] font-medium text-sm ">
-              Preview details of safelock
+              Preview details of investment
             </p>
 
             {/* image area --------------------- */}
