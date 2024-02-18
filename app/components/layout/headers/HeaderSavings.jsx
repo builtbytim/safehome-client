@@ -14,7 +14,7 @@ function HeaderSavings({ title = "", extraClasses = "", token }) {
           <BiMenuAltLeft className="text-[--text-brand] self-center text-4xl hidden " />
           <h1
             className={
-              "self-center text-[--text-secondary] capitalize text-2xl md:text-3xl lg:text-4xl  font-bold " +
+              "self-center text-[--text-secondary] capitalize text-2xl md:text-3xl lg:text-4xl  font-semibold " +
               extraClasses
             }
           >
