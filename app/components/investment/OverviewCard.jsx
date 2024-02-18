@@ -57,7 +57,7 @@ function OverviewCard({ token }) {
         >
           <div
             id="total-balance"
-            className="w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] self-stretch  rounded-[8px] md:rounded-[16px] border border-[--lines] p-6 flex flex-col justify-center items-start space-y-6"
+            className="w-full bg-[#1E07001A] min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] self-stretch  rounded-[8px] md:rounded-[16px]  border-[--lines] p-6 flex flex-col justify-center items-start space-y-6"
           >
             <div className="w-full flex flex-row justify-between items-center">
               <div className="self-center">
@@ -104,7 +104,7 @@ function OverviewCard({ token }) {
 
           <div
             id="expected-returns"
-            className="w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] self-stretch  rounded-[8px] md:rounded-[16px] border border-[--lines] p-6 flex flex-col justify-center items-start space-y-6"
+            className="w-full bg-[#FF91001A] min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] self-stretch  rounded-[8px] md:rounded-[16px]  border-[--lines] p-6 flex flex-col justify-center items-start space-y-6"
           >
             <div className="w-full flex flex-row justify-between items-center">
               <div className="self-center">
@@ -132,7 +132,7 @@ function OverviewCard({ token }) {
 
           <div
             id="expected-roi"
-            className="w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] self-stretch  rounded-[8px] md:rounded-[16px] border border-[--lines] p-6 flex flex-col justify-center items-start space-y-6"
+            className="w-full bg-[#ff6100]/10 min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] self-stretch  rounded-[8px] md:rounded-[16px]  border-[--lines] p-6 flex flex-col justify-center items-start space-y-6"
           >
             <h2 className=" text-[--text-secondary] uppercase font-medium">
               Expected ROI
