@@ -24,7 +24,7 @@ function MobileNavListUserPanel() {
         )}
       </div>
       <div>
-        <h2 className="font-bold text-base text-[--color-brand-2] text-left">
+        <h2 className="font-bold text-base text-[--text-secondary] text-left">
           {user ? `${user.firstName} ${user.lastName}` : `Loading...`}
         </h2>
         <h3 className="text-sm text-[--text-brand-2] text-left">

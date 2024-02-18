@@ -241,7 +241,7 @@
   }
 
   .btn-1-v2 {
-    @apply btn-1 bg-[--text-brand] hover:bg-[#ff6100]/80;
+    @apply btn-1 bg-[--text-brand] hover:bg-[#8d4000cc];
   }
 
   .btn-2 {
