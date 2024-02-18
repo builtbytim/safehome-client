@@ -367,8 +367,7 @@ function GoalCreation({
                         type="submit"
                         className="btn-1 bg-[--text-brand-2] hover:bg-[--text-brand-2-hover] "
                       >
-                        {" "}
-                        Continue Setup
+                        Next
                       </button>
                       <button
                         type="button"

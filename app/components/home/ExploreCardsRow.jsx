@@ -49,7 +49,7 @@ const ExploreCard = ({ title, body, img, link }) => {
 function ExploreCardsRow({ user }) {
   return (
     <>
-      <h2 className="text-xl  pt-6 md lg:text-2xl xl:text-3xl text-left text-[--sorta-dark] font-bold ">
+      <h2 className="text-xl  pt-6 md lg:text-2xl xl:text-3xl text-left text-[--text-secondary] font-medium ">
         Explore
       </h2>
       <div

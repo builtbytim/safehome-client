@@ -25,13 +25,15 @@ const tabItemsArr = [
       name: "Savings",
       img: SavingsSVG,
       tabId: "savings",
-      iconColor: "#ff9100",
+      // iconColor: "#ff9100",
+      iconColor: "#8d4000",
     },
     {
-      name: "Goal",
+      name: "Goal Savings",
       img: TargetSVG,
       tabId: "goal",
-      iconColor: "#ff9100",
+      // iconColor: "#ff9100",
+      iconColor: "#8d4000",
     },
 
     {

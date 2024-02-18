@@ -20,7 +20,7 @@ function LoadingBar({ v = 1 }) {
           })
         }
         style={{
-          animation: "roundTrip 1.5s linear infinite",
+          animation: "slideLeft 0.75s easein infinite",
           width: "100%",
         }}
       ></div>
