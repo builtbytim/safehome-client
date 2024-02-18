@@ -20,7 +20,7 @@ function LoadingBar({ v = 1 }) {
           })
         }
         style={{
-          animation: "slideLeft 0.75s easein infinite",
+          animation: "slideLeft 0.75s linear infinite",
           width: "100%",
         }}
       ></div>
