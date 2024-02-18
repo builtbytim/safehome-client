@@ -150,7 +150,7 @@ function Page({ authenticatedUser, authenticationToken }) {
                     Total Balance
                   </h2>
 
-                  <p className="text-[--color-brand] font-bold text-xl lg:text-2xl">
+                  <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
                     <NumericFormat
                       value={data ? data.lockedSavingsBalance : 0}
                       displayType={"text"}

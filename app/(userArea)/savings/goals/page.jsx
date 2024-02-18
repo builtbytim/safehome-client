@@ -97,7 +97,7 @@ function Page({ authenticatedUser, authenticationToken }) {
         <HeaderSavings
           user={authenticatedUser}
           title="Goal Savings"
-          extraClasses="text-[--text-brand-2]"
+          extraClasses=" text-[--text-brand-2]"
         />
 
         <main className=" space-y-2 md:space-y-10">
@@ -155,7 +155,7 @@ function Page({ authenticatedUser, authenticationToken }) {
                     Total Balance
                   </h2>
 
-                  <p className="text-[--text-brand-2] font-bold text-xl lg:text-2xl">
+                  <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
                     <NumericFormat
                       value={data ? data.goalSavingsBalance : 0}
                       displayType={"text"}

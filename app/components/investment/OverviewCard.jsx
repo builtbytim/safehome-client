@@ -76,7 +76,7 @@ function OverviewCard({ token }) {
             </h2>
 
             <div className="flex flex-row items-center justify-start space-x-2">
-              <p className="text-[--text-brand] self-center font-bold text-xl lg:text-2xl">
+              <p className="text-[--text-secondary] self-center font-bold text-xl lg:text-2xl">
                 <NumericFormat
                   value={data ? data.balance : 0}
                   displayType={"text"}
@@ -120,7 +120,7 @@ function OverviewCard({ token }) {
 
             <h2 className=" text-[--text-secondary] font-medium">Returns</h2>
 
-            <p className="text-[--text-brand] font-bold text-xl lg:text-2xl">
+            <p className="text-[--text-secondary] font-bold text-xl lg:text-2xl">
               <NumericFormat
                 value={0}
                 displayType={"text"}
