@@ -28,7 +28,7 @@ const tabItemsArr = [
       iconColor: "#8d4000",
     },
     {
-      name: "Goal",
+      name: "Goal Savings",
       img: TargetSVG,
       tabId: "goal",
       iconColor: "#8d4000",
