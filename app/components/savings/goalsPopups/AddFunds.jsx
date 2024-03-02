@@ -11,6 +11,8 @@ import config from "../../../utils/config";
 import queryKeys from "../../../utils/queryKeys";
 import { useUiStore, useNotifyStore } from "../../../utils/store";
 import Spinner from "../../Spinner";
+import useUserWallet from "../../../utils/hooks/useUserWallet";
+import { NumericFormat } from "react-number-format";
 
 const fundSources = [
   {
@@ -28,6 +30,12 @@ function AddFunds({ closeAll, closeSelf, token, selectedGoal }) {
 
   const setNotify = useNotifyStore((state) => state.setNotify);
   const toggleSuperOverlay = useUiStore((state) => state.toggleSuperOverlay);
+  const { data: walletData, isSuccess: walletSuccess } = useUserWallet(
+    token,
+    null,
+    null,
+    true
+  );
 
   function onSuccess(data, vars) {
     queryClient.invalidateQueries({
@@ -185,6 +193,18 @@ function AddFunds({ closeAll, closeSelf, token, selectedGoal }) {
                       component="div"
                       className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                     />
+
+                    {walletSuccess && (
+                      <span className="text-xs font-light text-[green]">
+                        Your balance:{" "}
+                        <NumericFormat
+                          value={walletData.balance}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"₦ "}
+                        />
+                      </span>
+                    )}
                   </div>
 
                   <div className="w-full relative flex flex-col justify-center items-start space-y-2">

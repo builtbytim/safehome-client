@@ -4,7 +4,7 @@ import React from "react";
 import Overlay2 from "../../Overlay2";
 import { BiX } from "react-icons/bi";
 import Image from "next/image";
-import GoalImage from "../../../../assets/images/investment/inv1.png";
+import GoalImage from "../../../../assets/images/savings_cover.jpeg";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import { useDropzone } from "react-dropzone";
 import { FaNairaSign } from "react-icons/fa6";
@@ -83,6 +83,7 @@ function GoalCreation({
     },
     maxFiles: 1,
     maxSize: 1024 * 1024 * 2,
+    disabled: true,
   });
 
   // mutation to upload cover image if it exists
@@ -199,10 +200,7 @@ function GoalCreation({
                   Drag the files here{" "}
                 </span>
               ) : (
-                <span className="text-white text-center">
-                  {" "}
-                  Change image (Optional){" "}
-                </span>
+                <span className="text-white text-center">Save Now</span>
               )}
             </div>
           </div>
