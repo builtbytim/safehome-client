@@ -13,6 +13,7 @@ import { useUiStore, useNotifyStore } from "../../../utils/store";
 import Spinner from "../../Spinner";
 import useUserWallet from "../../../utils/hooks/useUserWallet";
 import { NumericFormat } from "react-number-format";
+import { useRouter } from "next/navigation";
 
 const fundSources = [
   {
@@ -27,6 +28,8 @@ const fundSources = [
 
 function AddFunds({ closeAll, closeSelf, token, selectedGoal }) {
   const queryClient = useQueryClient();
+
+  const router = useRouter();
 
   const setNotify = useNotifyStore((state) => state.setNotify);
   const toggleSuperOverlay = useUiStore((state) => state.toggleSuperOverlay);
@@ -81,6 +84,20 @@ function AddFunds({ closeAll, closeSelf, token, selectedGoal }) {
           onAcceptText: "Verify Now",
           onAccept: () => {
             router.push(`/kyc`);
+          },
+        });
+
+        break;
+
+      case "FUND_ACCOUNT":
+        setNotify({
+          show: true,
+          title: "Insufficient balance",
+          content: err?.message,
+          allowClose: true,
+          onAcceptText: "Add fund",
+          onAccept: () => {
+            router.push(`/?action=fund`);
           },
         });
 

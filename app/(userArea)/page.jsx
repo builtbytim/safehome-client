@@ -8,14 +8,27 @@ import Overlay from "../components/Overlay2";
 import TransactionHistoryTable from "../components/home/TransactionHistoryTable";
 import { PopUpTopBar } from "../components/security";
 import { Withdraw, Topup } from "../components/home/popups";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import FilterGroup from "../components/home/FilterGroup";
 import ExploreCardsRow from "../components/home/ExploreCardsRow";
 import useOutsideClickDetector from "../utils/hooks/useOutsideClickDetector";
+import { useSearchParams } from "next/navigation";
 
 function Page({ authenticatedUser, authenticationToken }) {
   const [showTopup, setShowTopup] = useState(false);
   const [showWithdraw, setShowWithdraw] = useState(false);
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("action") === "fund") {
+      setShowTopup(true);
+    }
+
+    if (searchParams.get("action") === "withdraw") {
+      setShowWithdraw(true);
+    }
+  }, [searchParams]);
 
   // Transaction Filters and Params area
 
