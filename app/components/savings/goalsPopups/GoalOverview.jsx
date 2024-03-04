@@ -2,7 +2,7 @@ import Overlay2 from "../../Overlay2";
 import { BiX } from "react-icons/bi";
 import { BsCalendar2PlusFill, BsGearFill } from "react-icons/bs";
 import Image from "next/image";
-import GoalImage from "../../../../assets/images/investment/inv1.png";
+import GoalImage from "../../../../assets/images/savings_cover.jpeg";
 import SmallDetailsCard from "./SmallDetailsCard";
 import { NumericFormat } from "react-number-format";
 import useOutsideClickDetector from "../../../utils/hooks/useOutsideClickDetector";
@@ -62,7 +62,7 @@ function GoalOverview({
                   className="object-cover  h-[210px] w-full"
                 />
                 <div className="absolute bg-black/60  inset-0  flex flex-col justify-center items-center truncate">
-                  <h1 className="text-white font-bold truncate text-xl md:text-2xl xl:text-3xl text-center">
+                  <h1 className="text-white  truncate text-xl md:text-2xl xl:text-3xl text-center">
                     {" "}
                     {goalName}{" "}
                   </h1>
@@ -104,7 +104,7 @@ function GoalOverview({
               {completed && (
                 <div className="">
                   <p className="text-[--text-brand-2] text-lg md:text-xl font-semibold text-center">
-                    You have completed this goal
+                    Congratulations! You have completed this goal.
                   </p>
                 </div>
               )}

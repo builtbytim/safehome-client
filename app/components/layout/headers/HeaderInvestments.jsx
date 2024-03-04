@@ -14,7 +14,7 @@ function HeaderInvestments({ title = "", extraClasses = "", token }) {
           <BiMenuAltLeft className="text-[--text-brand] self-center text-4xl hidden " />
           <h1
             className={
-              "self-center text-[--color-brand-2] capitalize text-2xl md:text-3xl lg:text-4xl  font-semibold " +
+              "self-center text-[--text-secondary] capitalize text-2xl md:text-3xl lg:text-4xl  font-semibold " +
               extraClasses
             }
           >

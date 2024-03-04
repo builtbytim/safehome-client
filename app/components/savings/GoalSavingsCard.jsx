@@ -1,5 +1,5 @@
 import Image from "next/image";
-import img from "../../../assets/images/target-home.jpeg";
+import img from "../../../assets/images/savings_cover.jpeg";
 import { NumericFormat } from "react-number-format";
 import ProgressBar from "./ProgressBar";
 

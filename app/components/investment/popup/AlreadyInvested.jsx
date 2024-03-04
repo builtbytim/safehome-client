@@ -1,6 +1,8 @@
 "use client";
 
-import inv1 from "../../../../assets/images/investment/inv1.png";
+import LandOwnersImage from "../../../../assets/images/LandOwnersClubImage.png";
+import OfficeOwnersImage from "../../../../assets/images/OfficeOwnersClubImage.png";
+import HomeOwnersImage from "../../../../assets/images/HomeOwnersClubImage.png";
 import { NumericFormat } from "react-number-format";
 import { MiniHero, InvestmentTab } from "../../investment";
 import LoadingView from "../../LoadingView";
@@ -40,10 +42,18 @@ const AlreadyInvested = ({
     );
   }
 
+  const ownerClub = data.ownerClub;
+
   return (
     <div className="h-full overflow-y-auto">
       <MiniHero
-        img={inv1}
+        img={
+          ownerClub === "land_owners_club"
+            ? LandOwnersImage
+            : ownerClub === "office_owners_club"
+            ? OfficeOwnersImage
+            : HomeOwnersImage
+        }
         title={data.assetName}
         quantity={data.availableUnits}
       />

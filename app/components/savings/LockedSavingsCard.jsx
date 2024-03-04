@@ -1,6 +1,6 @@
 import { NumericFormat } from "react-number-format";
 import ProgressBar from "./ProgressBar";
-import img from "../../../assets/images/investment/inv4.png";
+import img from "../../../assets/images/investment_savings.jpeg";
 import Image from "next/image";
 
 function LockedSavingsCard({

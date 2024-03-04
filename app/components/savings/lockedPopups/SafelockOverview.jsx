@@ -5,7 +5,7 @@ import SmallDetailsCard from "./SmallDetailsCard";
 import useOutsideClickDetector from "../../../utils/hooks/useOutsideClickDetector";
 import { useRef } from "react";
 import Image from "next/image";
-import GoalImage from "../../../../assets/images/investment/inv1.png";
+import GoalImage from "../../../../assets/images/investment_savings.jpeg";
 
 function SafelockOverview({ closeSelf, plan, handleAddFund }) {
   const ref = useRef(null);
@@ -51,7 +51,7 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
                 className="object-cover  h-[210px] w-full"
               />
               <div className="absolute bg-black/60  inset-0  flex flex-col justify-center items-center truncate">
-                <h1 className="text-white capitalize  font-bold truncate text-xl md:text-2xl xl:text-3xl text-center">
+                <h1 className="text-white capitalize   truncate text-xl md:text-2xl xl:text-3xl text-center">
                   {lockName}
                 </h1>
               </div>

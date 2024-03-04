@@ -3,12 +3,14 @@
 import Image from "next/image";
 import cn from "classnames";
 import { NumericFormat } from "react-number-format";
-import inv1 from "../../../assets/images/investment/inv1.png";
+import LandOwnersImage from "../../../assets/images/LandOwnersClubImage.png";
+import OfficeOwnersImage from "../../../assets/images/OfficeOwnersClubImage.png";
+import HomeOwnersImage from "../../../assets/images/HomeOwnersClubImage.png";
 
 const MyInvestmentCard = ({ investment, openInfo }) => {
   const { assetInfo, isActive, createdAt, amount, units } = investment;
 
-  const { assetName } = assetInfo;
+  const { assetName, ownerClub } = assetInfo;
 
   return (
     <div
@@ -25,7 +27,13 @@ const MyInvestmentCard = ({ investment, openInfo }) => {
     >
       <div className="relative h-full min-h-[150px] col-span-2 md:col-span-2 overflow-hidden">
         <Image
-          src={inv1}
+          src={
+            ownerClub === "land_owners_club"
+              ? LandOwnersImage
+              : ownerClub === "office_owners_club"
+              ? OfficeOwnersImage
+              : HomeOwnersImage
+          }
           fill
           alt={assetName}
           className="object-cover h-full absolute group-hover:scale-110 transform transition-all duration-1000 ease-in-out "

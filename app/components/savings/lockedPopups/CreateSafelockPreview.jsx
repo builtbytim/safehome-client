@@ -126,10 +126,10 @@ function CreateSafelockPreview({
               color="#8d4000"
             />
             <p className="text-[--text-secondary] font-medium text-sm text-left">
-              I authorize SafeHome to Lorem ipsum dolor, sit amet consectetur
-              adipisicing elit. Consectetur neque officiis numquam quis nobis
-              corporis, impedit minima voluptatibus, illum aperiam magni odit
-              placeat, qui dicta. Porro temporibus optio minima hic.
+              I hereby acknowledge and authorize SafeHome to invest my funds
+              into the designated property. This authorization signifies my
+              approval for SafeHome to proceed with the investment on my behalf,
+              adhering to the agreed terms and conditions.
             </p>
 
             {showErorMsg && (

@@ -14,6 +14,7 @@ import config from "../../../utils/config";
 import queryKeys from "../../../utils/queryKeys";
 import Spinner from "../../Spinner";
 import { useRouter } from "next/navigation";
+import useUserWallet from "../../../utils/hooks/useUserWallet";
 
 const fundingSources = [
   {
@@ -31,6 +32,13 @@ const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
   const queryClient = useQueryClient();
   const setNotify = useNotifyStore((state) => state.setNotify);
   const toggleSuperOverlay = useUiStore((state) => state.toggleSuperOverlay);
+
+  const { data: walletData, isSuccess: walletSuccess } = useUserWallet(
+    token,
+    null,
+    null,
+    true
+  );
 
   function onSuccess(data, vars) {
     queryClient.invalidateQueries({
@@ -232,6 +240,18 @@ const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
                   component="div"
                   className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                 />
+
+                {walletSuccess && (
+                  <span className="text-xs font-light text-[green]">
+                    Your balance:{" "}
+                    <NumericFormat
+                      value={walletData.balance}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"₦ "}
+                    />
+                  </span>
+                )}
               </div>
               <div className="relative">
                 <p className="form-text">Fund Source</p>
@@ -258,11 +278,11 @@ const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
                     }}
                   />
                   <p>
-                    I authorize SafeHome to Lorem ipsum dolor, sit amet
-                    consectetur adipisicing elit. Consectetur neque officiis
-                    numquam quis nobis corporis, impedit minima voluptatibus,
-                    illum aperiam magni odit placeat, qui dicta. Porro
-                    temporibus optio minima hic.
+                    I hereby acknowledge and authorize SafeHome to invest my
+                    funds into the designated property. This authorization
+                    signifies my approval for SafeHome to proceed with the
+                    investment on my behalf, adhering to the agreed terms and
+                    conditions.
                   </p>
                 </div>
 

@@ -3,7 +3,9 @@
 import Image from "next/image";
 import { VscLocation } from "react-icons/vsc";
 import { NumericFormat } from "react-number-format";
-import inv1 from "../../../assets/images/investment/inv1.png";
+import LandOwnersImage from "../../../assets/images/LandOwnersClubImage.png";
+import OfficeOwnersImage from "../../../assets/images/OfficeOwnersClubImage.png";
+import HomeOwnersImage from "../../../assets/images/HomeOwnersClubImage.png";
 import cn from "classnames";
 
 const InvestibleAssetCard = ({ investibleAsset, openInfo }) => {
@@ -14,6 +16,7 @@ const InvestibleAssetCard = ({ investibleAsset, openInfo }) => {
     location,
     availableUnits,
     soldOut,
+    ownerClub,
   } = investibleAsset;
   return (
     <div
@@ -23,7 +26,13 @@ const InvestibleAssetCard = ({ investibleAsset, openInfo }) => {
     >
       <div className=" h-full min-h-[150px] rounded-l-[16px] col-span-2 md:col-span-2 relative overflow-hidden">
         <Image
-          src={inv1}
+          src={
+            ownerClub === "land_owners_club"
+              ? LandOwnersImage
+              : ownerClub === "office_owners_club"
+              ? OfficeOwnersImage
+              : HomeOwnersImage
+          }
           alt={assetName}
           className="object-cover  absolute rounded-l-[16px]  group-hover:scale-110 transform transition-all duration-1000 ease-in-out "
           fill
@@ -31,7 +40,7 @@ const InvestibleAssetCard = ({ investibleAsset, openInfo }) => {
       </div>
       <div className="px-4 pt-2 pb-8 md:px-4 xl:px-6 col-span-3 md:col-span-3 space-y-1">
         <h2 className="capitalize font-medium text-base md:text-lg text-left truncate ">
-          {assetName}
+          {assetName} {ownerClub}
         </h2>
 
         <div className="text-[--text-secondary] py-2 inline-flex justify-start items-center space-x-2  ">

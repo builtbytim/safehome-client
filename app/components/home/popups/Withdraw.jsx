@@ -15,6 +15,7 @@ import useUserWallet from "../../../utils/hooks/useUserWallet";
 import { useRouter } from "next/navigation";
 import ErrorMessageView from "../../ErrorMessageView";
 import LoadingView from "../../LoadingView";
+import { NumericFormat } from "react-number-format";
 
 const Withdraw = ({ token, closeSelf }) => {
   const queryClient = useQueryClient();
@@ -200,6 +201,18 @@ const Withdraw = ({ token, closeSelf }) => {
                       component="div"
                       className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
                     />
+
+                    {walletSuccess && (
+                      <span className="text-xs font-light text-[green]">
+                        Your balance:{" "}
+                        <NumericFormat
+                          value={walletData.balance}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"₦ "}
+                        />
+                      </span>
+                    )}
                   </div>
 
                   <div className="relative">
