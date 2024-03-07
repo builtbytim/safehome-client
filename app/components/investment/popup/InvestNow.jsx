@@ -92,6 +92,20 @@ const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
 
         break;
 
+      case "FUND_ACCOUNT":
+        setNotify({
+          show: true,
+          title: "Insufficient balance",
+          content: err?.message,
+          allowClose: true,
+          onAcceptText: "Add fund",
+          onAccept: () => {
+            router.push(`/?action=fund`);
+          },
+        });
+
+        break;
+
       default:
         setNotify({
           show: true,
