@@ -10,7 +10,8 @@ function Page() {
 
       <div className="text-base space-y-6   text-[--text-secondary]  font-normal  ">
         <p className="pt-2">
-          You must adhere to these rules in order to use SafeHome's services:
+          You must adhere to these rules in order to use SafeHome&apos;s
+          services:
         </p>
         <div className="space-y-2">
           <p>
