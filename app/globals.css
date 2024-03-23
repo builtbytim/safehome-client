@@ -42,6 +42,10 @@
 
   --card-bg-1: rgba(255, 145, 0, 0.1);
   --card-bg-2: rgba(141, 64, 0, 0.1);
+
+  --button: #8d4000;
+  --header: #8d4000;
+  --text: #1e0700;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -50,6 +54,10 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+}
+
+p, div, label{
+  @apply text-[--text]
 }
 
 /* Pure ClassName CSS Fixes  */
@@ -233,7 +241,7 @@
   }
 
   .btn-1 {
-    @apply bg-[--color-brand] disabled:pointer-events-none disabled:opacity-60  transitioning  hover:bg-[--color-brand-hover] text-white rounded-[4px] px-2 py-2  w-full;
+    @apply bg-[--button] disabled:pointer-events-none disabled:opacity-60  transitioning  hover:bg-[--color-brand-hover] text-white rounded-[4px] px-2 py-2  w-full;
   }
 
   .btn-1-v1 {
