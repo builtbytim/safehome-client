@@ -6,7 +6,7 @@ import BalanceIcon from "../../../assets/images/icons/investment_balance.svg";
 
 const Balance = () => {
 	return (
-		<main className="p-5 md:p-8 bg-white rounded-2xl lg:rounded-3xl text-[--text-secondary]">
+		<main className="p-5 md:p-8 bg-white rounded-2xl lg:rounded-3xl text-[--text]">
 			<div className="space-y-6 border border-[--lines] rounded-xl lg:rounded-2xl p-6 md:p-10">
 				<Image
 					src={BalanceIcon}

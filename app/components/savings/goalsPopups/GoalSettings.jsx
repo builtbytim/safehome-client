@@ -3,102 +3,102 @@ import { BiX } from "react-icons/bi";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 
 function GoalSettings({ closeSelf }) {
-  return (
-    <Overlay2 z={3}>
-      <section
-        className={
-          "w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40  "
-        }
-      >
-        <div className="flex p-6 flex-row justify-end items-center">
-          <div
-            onClick={closeSelf}
-            className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
-          >
-            <BiX className="text-[--primary] text-3xl" />
-          </div>
-        </div>
+	return (
+		<Overlay2 z={3}>
+			<section
+				className={
+					"w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40  "
+				}
+			>
+				<div className="flex p-6 flex-row justify-end items-center">
+					<div
+						onClick={closeSelf}
+						className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
+					>
+						<BiX className="text-[--primary] text-3xl" />
+					</div>
+				</div>
 
-        <div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8">
-          <div className="px-6">
-            <h1 className="font-bold  text-[--text-brand-2] text-lg md:text-xl">
-              Goal Settings
-            </h1>
-            <p className="text-[--primary] font-medium text-sm pt-2">
-              Update your goal settings
-            </p>
-          </div>
+				<div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8">
+					<div className="px-6">
+						<h1 className="font-bold  text-[--text-brand-2] text-lg md:text-xl">
+							Goal Settings
+						</h1>
+						<p className="text-[--primary] font-medium text-sm pt-2">
+							Update your goal settings
+						</p>
+					</div>
 
-          <Formik initialValues={{}} onSubmit={() => {}}>
-            {({ isValid }) => {
-              return (
-                <Form className="space-y-6 p-6  ">
-                  <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                    <label
-                      htmlFor="goalName"
-                      className="text-[--text-secondary] font-medium text-sm text-left"
-                    >
-                      Goal Name
-                    </label>
+					<Formik initialValues={{}} onSubmit={() => {}}>
+						{({ isValid }) => {
+							return (
+								<Form className="space-y-6 p-6  ">
+									<div className="w-full relative flex flex-col justify-center items-start space-y-2">
+										<label
+											htmlFor="goalName"
+											className="text-[--text] font-medium text-sm text-left"
+										>
+											Goal Name
+										</label>
 
-                    <Field
-                      name="goalName"
-                      type="text"
-                      inputMode="numeric"
-                      className="field-1"
-                      placeholder="Goal name"
-                    />
+										<Field
+											name="goalName"
+											type="text"
+											inputMode="numeric"
+											className="field-1"
+											placeholder="Goal name"
+										/>
 
-                    <ErrorMessage
-                      name="goalName"
-                      component="div"
-                      className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                    />
-                  </div>
+										<ErrorMessage
+											name="goalName"
+											component="div"
+											className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+										/>
+									</div>
 
-                  <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                    <label
-                      htmlFor="fundingSource"
-                      className="text-[--text-secondary] font-medium text-sm text-left"
-                    >
-                      Change Funding Source
-                    </label>
+									<div className="w-full relative flex flex-col justify-center items-start space-y-2">
+										<label
+											htmlFor="fundingSource"
+											className="text-[--text] font-medium text-sm text-left"
+										>
+											Change Funding Source
+										</label>
 
-                    <Field
-                      as="select"
-                      name="fundingSource"
-                      type="text"
-                      className="field-1"
-                      placeholder=""
-                    >
-                      <option value=""> Bank </option>
-                      <option value=""> Wallet </option>
-                    </Field>
+										<Field
+											as="select"
+											name="fundingSource"
+											type="text"
+											className="field-1"
+											placeholder=""
+										>
+											<option value=""> Bank </option>
+											<option value=""> Wallet </option>
+										</Field>
 
-                    <ErrorMessage
-                      name="fundingSource"
-                      component="div"
-                      className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                    />
-                  </div>
+										<ErrorMessage
+											name="fundingSource"
+											component="div"
+											className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+										/>
+									</div>
 
-                  <div className="absolute w-[90%]  inset-x-0 bottom-4  flex flex-col justify-center items-center  mx-auto">
-                    <button
-                      type="submit"
-                      disabled={isValid}
-                      className="btn-1 w-full bg-[--text-brand-2] hover:bg-[--text-brand-2-hover] "
-                    >
-                      Update
-                    </button>
-                  </div>
-                </Form>
-              );
-            }}
-          </Formik>
-        </div>
-      </section>
-    </Overlay2>
-  );
+									<div className="absolute w-[90%]  inset-x-0 bottom-4  flex flex-col justify-center items-center  mx-auto">
+										<button
+											type="submit"
+											disabled={isValid}
+											className="btn-1 w-full bg-[--text-brand-2] hover:bg-[--text-brand-2-hover] "
+										>
+											Update
+										</button>
+									</div>
+								</Form>
+							);
+						}}
+					</Formik>
+				</div>
+			</section>
+		</Overlay2>
+	);
 }
 
 export default GoalSettings;

@@ -12,155 +12,155 @@ import ProgressBar from "../ProgressBar";
 import GoalImage from "../../../../assets/images/investment/inv1.png";
 
 function CreateSafelockPreview({
-  closeSelf,
-  show,
-  handleSubmit,
-  formData,
-  isLoading,
+	closeSelf,
+	show,
+	handleSubmit,
+	formData,
+	isLoading,
 }) {
-  const [acceptTerms, setAcceptTerms] = useState(false);
-  const [showErorMsg, setShowErorMsg] = useState(false);
-  const ref = useRef(null);
+	const [acceptTerms, setAcceptTerms] = useState(false);
+	const [showErorMsg, setShowErorMsg] = useState(false);
+	const ref = useRef(null);
 
-  useOutsideClickDetector(ref, () => {
-    if (show) {
-      closeSelf();
-    }
-  });
+	useOutsideClickDetector(ref, () => {
+		if (show) {
+			closeSelf();
+		}
+	});
 
-  function onCreateLockClick() {
-    if (!acceptTerms) {
-      setShowErorMsg(true);
-      return;
-    }
+	function onCreateLockClick() {
+		if (!acceptTerms) {
+			setShowErorMsg(true);
+			return;
+		}
 
-    if (isLoading) return;
+		if (isLoading) return;
 
-    handleSubmit();
-  }
+		handleSubmit();
+	}
 
-  return (
-    <Overlay2 pos="center">
-      <section
-        ref={ref}
-        className={
-          "w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40  "
-        }
-      >
-        <div className="flex p-6 flex-row justify-end items-center">
-          <div
-            onClick={closeSelf}
-            className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
-          >
-            <BiX className="text-[--primary] text-3xl" />
-          </div>
-        </div>
+	return (
+		<Overlay2 pos="center">
+			<section
+				ref={ref}
+				className={
+					"w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40  "
+				}
+			>
+				<div className="flex p-6 flex-row justify-end items-center">
+					<div
+						onClick={closeSelf}
+						className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
+					>
+						<BiX className="text-[--primary] text-3xl" />
+					</div>
+				</div>
 
-        <div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8">
-          <div className="px-6 space-y-2">
-            <h1 className="font-bold  text-[--color-brand] text-lg md:text-xl">
-              Savings Investment Preview
-            </h1>
-            <p className="text-[--primary] font-medium text-sm ">
-              Preview details of investment
-            </p>
+				<div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8">
+					<div className="px-6 space-y-2">
+						<h1 className="font-bold  text-[--header] text-lg md:text-xl">
+							Savings Investment Preview
+						</h1>
+						<p className="text-[--primary] font-medium text-sm ">
+							Preview details of investment
+						</p>
 
-            {/* image area --------------------- */}
-            <div className="">
-              <div className={"relative h-[210px] truncate  w-full "}>
-                <Image
-                  src={formData.investibleAsset.coverImageUrl || GoalImage}
-                  alt="goal image"
-                  fill
-                  className="object-cover  h-[210px] w-full"
-                />
-                <div className="absolute bg-black/60  inset-0  flex flex-col justify-center items-center truncate">
-                  <h1 className="text-white capitalize  font-bold truncate text-xl md:text-2xl xl:text-3xl text-center">
-                    {formData.investibleAsset.assetName}
-                  </h1>
-                </div>
-              </div>
-            </div>
-          </div>
+						{/* image area --------------------- */}
+						<div className="">
+							<div className={"relative h-[210px] truncate  w-full "}>
+								<Image
+									src={formData.investibleAsset.coverImageUrl || GoalImage}
+									alt="goal image"
+									fill
+									className="object-cover  h-[210px] w-full"
+								/>
+								<div className="absolute bg-black/60  inset-0  flex flex-col justify-center items-center truncate">
+									<h1 className="text-white capitalize  font-bold truncate text-xl md:text-2xl xl:text-3xl text-center">
+										{formData.investibleAsset.assetName}
+									</h1>
+								</div>
+							</div>
+						</div>
+					</div>
 
-          <div className="px-6 gap-8 pt-6 grid grid-cols-2">
-            <SmallDetailsCard
-              title="Amount to Invest"
-              value={
-                <NumericFormat
-                  value={formData.investibleAsset.pricePerUnit}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  prefix={"₦ "}
-                />
-              }
-            />
-            <SmallDetailsCard
-              title="Saving Preference"
-              value={
-                <span className="capitalize"> {formData.paymentMode} </span>
-              }
-            />
-            <SmallDetailsCard
-              title="Interval"
-              value={
-                <span className="capitalize">
-                  {" "}
-                  {formData.preferredInterval}{" "}
-                </span>
-              }
-            />
-            <SmallDetailsCard
-              title="Investment Duration"
-              value={`${formData.lockDurationInMonths} ${
-                formData.lockDurationInMonths > 1 ? "months" : "month"
-              }`}
-            />
-          </div>
+					<div className="px-6 gap-8 pt-6 grid grid-cols-2">
+						<SmallDetailsCard
+							title="Amount to Invest"
+							value={
+								<NumericFormat
+									value={formData.investibleAsset.pricePerUnit}
+									displayType={"text"}
+									thousandSeparator={true}
+									prefix={"₦ "}
+								/>
+							}
+						/>
+						<SmallDetailsCard
+							title="Saving Preference"
+							value={
+								<span className="capitalize"> {formData.paymentMode} </span>
+							}
+						/>
+						<SmallDetailsCard
+							title="Interval"
+							value={
+								<span className="capitalize">
+									{" "}
+									{formData.preferredInterval}{" "}
+								</span>
+							}
+						/>
+						<SmallDetailsCard
+							title="Investment Duration"
+							value={`${formData.lockDurationInMonths} ${
+								formData.lockDurationInMonths > 1 ? "months" : "month"
+							}`}
+						/>
+					</div>
 
-          <div className="w-full relative flex flex-col justify-center items-start space-y-2 p-6">
-            <SwitchField
-              handleChange={(v) => {
-                setAcceptTerms(v);
-              }}
-              color="#8d4000"
-            />
-            <p className="text-[--text-secondary] font-medium text-sm text-left">
-              I hereby acknowledge and authorize SafeHome to invest my funds
-              into the designated property. This authorization signifies my
-              approval for SafeHome to proceed with the investment on my behalf,
-              adhering to the agreed terms and conditions.
-            </p>
+					<div className="w-full relative flex flex-col justify-center items-start space-y-2 p-6">
+						<SwitchField
+							handleChange={(v) => {
+								setAcceptTerms(v);
+							}}
+							color="#8d4000"
+						/>
+						<p className="text-[--text] font-medium text-sm text-left">
+							I hereby acknowledge and authorize SafeHome to invest my funds
+							into the designated property. This authorization signifies my
+							approval for SafeHome to proceed with the investment on my behalf,
+							adhering to the agreed terms and conditions.
+						</p>
 
-            {showErorMsg && (
-              <p className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left">
-                You must accept the terms and conditions to continue
-              </p>
-            )}
-          </div>
+						{showErorMsg && (
+							<p className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left">
+								You must accept the terms and conditions to continue
+							</p>
+						)}
+					</div>
 
-          <div className="pt-4  px-6  flex flex-col justify-center items-center space-y-4  mx-auto">
-            <button
-              disabled={!acceptTerms || isLoading}
-              onClick={onCreateLockClick}
-              type="submit"
-              className="btn-1 w-full  "
-            >
-              {isLoading ? <Spinner /> : "Invest funds"}
-            </button>
+					<div className="pt-4  px-6  flex flex-col justify-center items-center space-y-4  mx-auto">
+						<button
+							disabled={!acceptTerms || isLoading}
+							onClick={onCreateLockClick}
+							type="submit"
+							className="btn-1 w-full  "
+						>
+							{isLoading ? <Spinner /> : "Invest funds"}
+						</button>
 
-            <button
-              onClick={closeSelf}
-              type="button"
-              className="btn-2 w-full  "
-            >
-              Go Back
-            </button>
-          </div>
-        </div>
-      </section>
-    </Overlay2>
-  );
+						<button
+							onClick={closeSelf}
+							type="button"
+							className="btn-2 w-full  "
+						>
+							Go Back
+						</button>
+					</div>
+				</div>
+			</section>
+		</Overlay2>
+	);
 }
 
 export default CreateSafelockPreview;
