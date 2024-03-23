@@ -136,7 +136,7 @@ function SignIn() {
 							{!Object.values(config.signInModes).includes(mode) &&
 								"Welcome Back"}
 						</legend>
-						<p className="text-center text-xs">
+						<p className="text-center text-xs text-[--highlight]">
 							{" "}
 							Securely log in to your SafeHome{" "}
 						</p>

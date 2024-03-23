@@ -5,10 +5,10 @@ import { useMutation } from "react-query";
 import BarLoader from "../BarLoader";
 import config from "../../utils/config";
 import {
-  fetchUtil,
-  makeUrl,
-  isDigit,
-  extractErrorMessage,
+	fetchUtil,
+	makeUrl,
+	isDigit,
+	extractErrorMessage,
 } from "../../utils/fetchUtils";
 import queryKeys from "../../utils/queryKeys";
 import { useNotifyStore } from "../../utils/store";
@@ -19,293 +19,290 @@ import { useRouter } from "next/navigation";
 import { kycModesOfIdentification } from "../../utils/constants";
 
 function KYCForm({ user, token }) {
-  const router = useRouter();
-  const setNotify = useNotifyStore((state) => state.setNotify);
+	const router = useRouter();
+	const setNotify = useNotifyStore((state) => state.setNotify);
 
-  useEffect(() => {
-    if (user.kycStatus === "PENDING") {
-      setNotify({
-        title: "KYC Review Pending",
-        content: "Your KYC information is currently being reviewed. Thank you.",
-        allowClose: false,
-        show: true,
-        onAccept: () => {
-          router.replace("/");
-        },
-        onAcceptText: "Go Home",
-      });
-    }
+	useEffect(() => {
+		if (user.kycStatus === "PENDING") {
+			setNotify({
+				title: "KYC Review Pending",
+				content: "Your KYC information is currently being reviewed. Thank you.",
+				allowClose: false,
+				show: true,
+				onAccept: () => {
+					router.replace("/");
+				},
+				onAcceptText: "Go Home",
+			});
+		}
 
-    if (user.kycStatus === "REJECTED") {
-      setNotify({
-        title: "KYC Review Rejected",
-        content: "Your KYC information was rejected. Please try again.",
-        allowClose: true,
-        show: true,
-      });
-    }
+		if (user.kycStatus === "REJECTED") {
+			setNotify({
+				title: "KYC Review Rejected",
+				content: "Your KYC information was rejected. Please try again.",
+				allowClose: true,
+				show: true,
+			});
+		}
 
-    if (user.kycStatus === "APPROVED") {
-      setNotify({
-        title: "KYC Review Approved",
-        content: "Your KYC information is approved. Thank you.",
-        allowClose: false,
-        show: true,
-        onAccept: () => {
-          router.replace("/");
-        },
-        onAcceptText: "Go Home",
-      });
-    }
-  }, []);
+		if (user.kycStatus === "APPROVED") {
+			setNotify({
+				title: "KYC Review Approved",
+				content: "Your KYC information is approved. Thank you.",
+				allowClose: false,
+				show: true,
+				onAccept: () => {
+					router.replace("/");
+				},
+				onAcceptText: "Go Home",
+			});
+		}
+	}, []);
 
-  const { isLoading, mutate, isSuccess } = useMutation({
-    mutationKey: [queryKeys.addKycInfo],
-    mutationFn: async function req(body) {
-      const res = await fetchUtil({
-        url: makeUrl(config.apiPaths.addKycInfo),
-        method: "POST",
-        body,
-        auth: token,
-      });
+	const { isLoading, mutate, isSuccess } = useMutation({
+		mutationKey: [queryKeys.addKycInfo],
+		mutationFn: async function req(body) {
+			const res = await fetchUtil({
+				url: makeUrl(config.apiPaths.addKycInfo),
+				method: "POST",
+				body,
+				auth: token,
+			});
 
-      // console.log(params);
+			// console.log(params);
 
-      if (res.success) {
-        return res.data;
-      } else {
-        const errMessage = extractErrorMessage(res);
-        console.log(errMessage);
-        throw {
-          message: extractErrorMessage(res),
-        };
-      }
-    },
+			if (res.success) {
+				return res.data;
+			} else {
+				const errMessage = extractErrorMessage(res);
+				console.log(errMessage);
+				throw {
+					message: extractErrorMessage(res),
+				};
+			}
+		},
 
-    onSuccess(data, vars) {
-      setNotify({
-        title: "KYC Information Submitted",
-        content:
-          "Your information was submitted successfully. Proceed to upload your documents.",
-        allowClose: false,
-        show: true,
-        onAccept: () => {
-          router.replace(`/kyc/upload?documentType=${vars.documentType}`);
-        },
+		onSuccess(data, vars) {
+			setNotify({
+				title: "KYC Information Submitted",
+				content:
+					"Your information was submitted successfully. Proceed to upload your documents.",
+				allowClose: false,
+				show: true,
+				onAccept: () => {
+					router.replace(`/kyc/upload?documentType=${vars.documentType}`);
+				},
 
-        onAcceptText: "Proceed",
-      });
-    },
+				onAcceptText: "Proceed",
+			});
+		},
 
-    onError: function (error) {
-      setNotify({
-        title: "Something went wrong",
-        content: error.message,
-        allowClose: true,
-        show: true,
-      });
-    },
-  });
+		onError: function (error) {
+			setNotify({
+				title: "Something went wrong",
+				content: error.message,
+				allowClose: true,
+				show: true,
+			});
+		},
+	});
 
-  function handleSubmit(values) {
-    if (isLoading) return;
+	function handleSubmit(values) {
+		if (isLoading) return;
 
-    const body = {
-      residentialAddress: values.residentialAddress,
-      state: values.state,
-      documentType: values.documentType,
-      IDNumber: values.IDNumber,
-      BVN: values.BVN,
-    };
+		const body = {
+			residentialAddress: values.residentialAddress,
+			state: values.state,
+			documentType: values.documentType,
+			IDNumber: values.IDNumber,
+			BVN: values.BVN,
+		};
 
-    // console.log(body);
-    mutate(body);
-  }
+		// console.log(body);
+		mutate(body);
+	}
 
-  return (
-    <Formik
-      initialValues={{
-        residentialAddress: "",
-        state: "",
-        documentType: "NIN",
-        IDNumber: "",
-        BVN: "",
-      }}
-      initialTouched={{
-        documentType: true,
-      }}
-      validationSchema={Yup.object().shape({
-        documentType: Yup.string()
-          .oneOf(
-            kycModesOfIdentification.map((v) => v.value),
+	return (
+		<Formik
+			initialValues={{
+				residentialAddress: "",
+				state: "",
+				documentType: "NIN",
+				IDNumber: "",
+				BVN: "",
+			}}
+			initialTouched={{
+				documentType: true,
+			}}
+			validationSchema={Yup.object().shape({
+				documentType: Yup.string()
+					.oneOf(
+						kycModesOfIdentification.map((v) => v.value),
 
-            "Invalid document type"
-          )
-          .required("Required"),
+						"Invalid document type"
+					)
+					.required("Required"),
 
-        state: Yup.string()
-          .required("Required")
-          .oneOf(
-            states.map((state) => state.value),
-            "Invalid state selected"
-          ),
+				state: Yup.string()
+					.required("Required")
+					.oneOf(
+						states.map((state) => state.value),
+						"Invalid state selected"
+					),
 
-        residentialAddress: Yup.string()
-          .required("Required")
-          .min(10, "Must be 10 characters or more")
-          .max(100, "Must be 100 characters or less"),
+				residentialAddress: Yup.string()
+					.required("Required")
+					.min(10, "Must be 10 characters or more")
+					.max(100, "Must be 100 characters or less"),
 
-        BVN: Yup.string()
-          .required("Required")
-          .test("bvn-num-is-valid", "Invalid BVN", function (value) {
-            if (!value) return true;
+				BVN: Yup.string()
+					.required("Required")
+					.test("bvn-num-is-valid", "Invalid BVN", function (value) {
+						if (!value) return true;
 
-            return isDigit(value);
-          })
-          .length(11, "BVN number must be 11 digits"),
+						return isDigit(value);
+					})
+					.length(11, "BVN number must be 11 digits"),
 
-        IDNumber: Yup.string()
-          .required("Required")
-          .min(10, "ID number must be at least 10 characters"),
-        // .test("ID-num-is-valid", "Invalid ID Number", function (value) {
-        //   if (!value) return true;
+				IDNumber: Yup.string()
+					.required("Required")
+					.min(10, "ID number must be at least 10 characters"),
+				// .test("ID-num-is-valid", "Invalid ID Number", function (value) {
+				//   if (!value) return true;
 
-        //   return isDigit(value);
-        // })
-      })}
-      onSubmit={handleSubmit}
-    >
-      {({ isValid, setFieldValue, values }) => {
-        return (
-          <Form className="space-y-7 w-full">
-            <BarLoader v={0} active={isLoading} />
+				//   return isDigit(value);
+				// })
+			})}
+			onSubmit={handleSubmit}
+		>
+			{({ isValid, setFieldValue, values }) => {
+				return (
+					<Form className="space-y-7 w-full">
+						<BarLoader v={0} active={isLoading} />
 
-            <div className="w-full  relative flex flex-col justify-center items-start space-y-2">
-              <label
-                htmlFor="residentialAddress"
-                className="text-[--text-secondary] text-sm text-left"
-              >
-                Residential Address
-              </label>
-              <Field
-                name="residentialAddress"
-                type="text"
-                className="field-1"
-                placeholder="Enter your address"
-              />
+						<div className="w-full  relative flex flex-col justify-center items-start space-y-2">
+							<label
+								htmlFor="residentialAddress"
+								className="text-[--text] text-sm text-left"
+							>
+								Residential Address
+							</label>
+							<Field
+								name="residentialAddress"
+								type="text"
+								className="field-1"
+								placeholder="Enter your address"
+							/>
 
-              <ErrorMessage
-                name="residentialAddress"
-                component="div"
-                className="absolute  -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-              />
-            </div>
+							<ErrorMessage
+								name="residentialAddress"
+								component="div"
+								className="absolute  -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+							/>
+						</div>
 
-            <div className="w-full  relative flex flex-col justify-center items-start space-y-2">
-              <label
-                htmlFor="state"
-                className="text-[--text-secondary] text-sm text-left"
-              >
-                State
-              </label>
-              <GenericSelectFieldVariant1
-                items={states}
-                handleChange={({ selectedItem }) => {
-                  setFieldValue("state", selectedItem.value);
-                }}
-                name="state"
-                type="text"
-                className="field-1"
-                placeholder="State of Residence"
-              />
+						<div className="w-full  relative flex flex-col justify-center items-start space-y-2">
+							<label
+								htmlFor="state"
+								className="text-[--text] text-sm text-left"
+							>
+								State
+							</label>
+							<GenericSelectFieldVariant1
+								items={states}
+								handleChange={({ selectedItem }) => {
+									setFieldValue("state", selectedItem.value);
+								}}
+								name="state"
+								type="text"
+								className="field-1"
+								placeholder="State of Residence"
+							/>
 
-              <ErrorMessage
-                name="state"
-                component="div"
-                className="absolute  -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-              />
-            </div>
+							<ErrorMessage
+								name="state"
+								component="div"
+								className="absolute  -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+							/>
+						</div>
 
-            <div className="w-full  relative flex flex-col justify-center items-start space-y-2">
-              <label
-                htmlFor="documentType"
-                className="text-[--text-secondary] text-sm text-left"
-              >
-                Select Document Type
-              </label>
-              <GenericSelectFieldVariant1
-                name="documentType"
-                type="text"
-                className="field-1"
-                handleChange={({ selectedItem }) => {
-                  setFieldValue("documentType", selectedItem.value);
-                }}
-                items={kycModesOfIdentification}
-              />
+						<div className="w-full  relative flex flex-col justify-center items-start space-y-2">
+							<label
+								htmlFor="documentType"
+								className="text-[--text] text-sm text-left"
+							>
+								Select Document Type
+							</label>
+							<GenericSelectFieldVariant1
+								name="documentType"
+								type="text"
+								className="field-1"
+								handleChange={({ selectedItem }) => {
+									setFieldValue("documentType", selectedItem.value);
+								}}
+								items={kycModesOfIdentification}
+							/>
 
-              <ErrorMessage
-                name="documentType"
-                component="div"
-                className="absolute  -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-              />
-            </div>
+							<ErrorMessage
+								name="documentType"
+								component="div"
+								className="absolute  -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+							/>
+						</div>
 
-            <div className="w-full  relative flex flex-col justify-center items-start space-y-2">
-              <label
-                htmlFor="IDNumber"
-                className="text-[--text-secondary] text-sm text-left"
-              >
-                ID Number
-              </label>
-              <Field
-                name="IDNumber"
-                type="text"
-                className="field-1"
-                placeholder="Enter ID number"
-              />
+						<div className="w-full  relative flex flex-col justify-center items-start space-y-2">
+							<label
+								htmlFor="IDNumber"
+								className="text-[--text] text-sm text-left"
+							>
+								ID Number
+							</label>
+							<Field
+								name="IDNumber"
+								type="text"
+								className="field-1"
+								placeholder="Enter ID number"
+							/>
 
-              <ErrorMessage
-                name="IDNumber"
-                component="div"
-                className="absolute  -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-              />
-            </div>
+							<ErrorMessage
+								name="IDNumber"
+								component="div"
+								className="absolute  -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+							/>
+						</div>
 
-            <div className="w-full  relative flex flex-col justify-center items-start space-y-2">
-              <label
-                htmlFor="BVN"
-                className="text-[--text-secondary] text-sm text-left"
-              >
-                BVN
-              </label>
-              <Field
-                name="BVN"
-                type="numeric"
-                className="field-1"
-                placeholder="Enter BVN"
-              />
+						<div className="w-full  relative flex flex-col justify-center items-start space-y-2">
+							<label htmlFor="BVN" className="text-[--text] text-sm text-left">
+								BVN
+							</label>
+							<Field
+								name="BVN"
+								type="numeric"
+								className="field-1"
+								placeholder="Enter BVN"
+							/>
 
-              <ErrorMessage
-                name="BVN"
-                component="div"
-                className="absolute  -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-              />
-            </div>
+							<ErrorMessage
+								name="BVN"
+								component="div"
+								className="absolute  -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+							/>
+						</div>
 
-            <div className="pt-4 ">
-              <button
-                type="submit"
-                disabled={!isValid || isLoading}
-                className="btn-1"
-              >
-                <span> Submit </span>
-              </button>
-            </div>
-          </Form>
-        );
-      }}
-    </Formik>
-  );
+						<div className="pt-4 ">
+							<button
+								type="submit"
+								disabled={!isValid || isLoading}
+								className="btn-1"
+							>
+								<span> Submit </span>
+							</button>
+						</div>
+					</Form>
+				);
+			}}
+		</Formik>
+	);
 }
 
 export default KYCForm;

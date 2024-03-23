@@ -149,7 +149,7 @@ function SignUp() {
 							<legend className="font-bold text-center text-lg lg:text-xl text-[--header]">
 								Create a new account
 							</legend>
-							<p className="text-center text-xs">
+							<p className="text-center text-xs text-[--highlight]">
 								{" "}
 								Securely sign up for SafeHome{" "}
 							</p>

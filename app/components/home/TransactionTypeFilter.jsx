@@ -5,104 +5,104 @@ import { useRef, useState } from "react";
 import useOutsideClickDetector from "../../utils/hooks/useOutsideClickDetector";
 
 function TransactionTypeFilter({ setTxTypeFilter }) {
-  const [show, setShow] = useState(false);
-  const ref = useRef(null);
-  const ref2 = useRef(null);
-  const ref3 = useRef(null);
+	const [show, setShow] = useState(false);
+	const ref = useRef(null);
+	const ref2 = useRef(null);
+	const ref3 = useRef(null);
 
-  const items = [
-    {
-      name: "All",
-      value: "all",
-    },
-    {
-      name: "Funding",
-      value: "topup",
-    },
-    {
-      name: "Withdrawal",
-      value: "withdrawal",
-    },
+	const items = [
+		{
+			name: "All",
+			value: "all",
+		},
+		{
+			name: "Funding",
+			value: "topup",
+		},
+		{
+			name: "Withdrawal",
+			value: "withdrawal",
+		},
 
-    {
-      name: "Investment",
-      value: "investment",
-    },
-  ];
+		{
+			name: "Investment",
+			value: "investment",
+		},
+	];
 
-  const [selected, setSelected] = useState(null);
+	const [selected, setSelected] = useState(null);
 
-  function handleSelectItem(item) {
-    return () => {
-      setSelected(item);
-      setTxTypeFilter(item.value);
-      setShow(false);
-    };
-  }
+	function handleSelectItem(item) {
+		return () => {
+			setSelected(item);
+			setTxTypeFilter(item.value);
+			setShow(false);
+		};
+	}
 
-  function toggleShow() {
-    setShow((show) => !show);
-  }
+	function toggleShow() {
+		setShow((show) => !show);
+	}
 
-  useOutsideClickDetector(
-    ref,
-    () => {
-      setShow(false);
-    },
-    [ref2, ref3]
-  );
+	useOutsideClickDetector(
+		ref,
+		() => {
+			setShow(false);
+		},
+		[ref2, ref3]
+	);
 
-  return (
-    <div className="relative self-stretch">
-      <span className="hidden rounded-[8px]  px-2  mb-2 text-xs py-1 bg-[--lines]">
-        {" "}
-        Transaction Type{" "}
-      </span>
-      <div
-        ref={ref2}
-        onClick={toggleShow}
-        className="flex cursor-pointer justify-start text-[--text-secondary] items-center gap-2 text-sm  text-center"
-      >
-        <span className="self-center ">
-          {" "}
-          {selected ? selected.name : "Type"}{" "}
-        </span>
+	return (
+		<div className="relative self-stretch">
+			<span className="hidden rounded-[8px]  px-2  mb-2 text-xs py-1 bg-[--lines]">
+				{" "}
+				Transaction Type{" "}
+			</span>
+			<div
+				ref={ref2}
+				onClick={toggleShow}
+				className="flex cursor-pointer justify-start text-[--text] items-center gap-2 text-sm  text-center"
+			>
+				<span className="self-center ">
+					{" "}
+					{selected ? selected.name : "Type"}{" "}
+				</span>
 
-        {/* <FiType className="self-center lg:hidden" /> */}
+				{/* <FiType className="self-center lg:hidden" /> */}
 
-        {show ? (
-          <BsChevronUp className=" self-center" />
-        ) : (
-          <BsChevronDown className=" self-center" />
-        )}
-      </div>
+				{show ? (
+					<BsChevronUp className=" self-center" />
+				) : (
+					<BsChevronDown className=" self-center" />
+				)}
+			</div>
 
-      <div
-        ref={ref}
-        className={
-          "absolute rounded-brand min-w-max bg-white mt-1 shadow-md max-h-80 overflow-y-auto p-0 z-10 text-sm  " +
-          (show ? "" : " hidden")
-        }
-      >
-        <div
-          ref={ref3}
-          className="flex flex-col w-full justify-center items-start"
-        >
-          {items.map((v, i) => {
-            return (
-              <div
-                key={i}
-                onClick={handleSelectItem(v)}
-                className="px-4 w-full py-2 whitespace-nowrap text-[--text-secondary] hover:bg-gray-50 cursor-pointer text-sm "
-              >
-                {v.name}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
+			<div
+				ref={ref}
+				className={
+					"absolute rounded-brand min-w-max bg-white mt-1 shadow-md max-h-80 overflow-y-auto p-0 z-10 text-sm  " +
+					(show ? "" : " hidden")
+				}
+			>
+				<div
+					ref={ref3}
+					className="flex flex-col w-full justify-center items-start"
+				>
+					{items.map((v, i) => {
+						return (
+							<div
+								key={i}
+								onClick={handleSelectItem(v)}
+								className="px-4 w-full py-2 whitespace-nowrap text-[--text] hover:bg-gray-50 cursor-pointer text-sm "
+							>
+								{v.name}
+							</div>
+						);
+					})}
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default TransactionTypeFilter;

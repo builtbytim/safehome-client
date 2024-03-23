@@ -25,7 +25,7 @@ const Authenticator = ({ saveFunc, closeFunc }) => {
 			</p>
 			<p className="font-medium text-lg">
 				NE5L 4ABV VNXH 266P{" "}
-				<IoCopySharp className="text-[--text-secondary] inline-block ml-3" />
+				<IoCopySharp className="text-[--text] inline-block ml-3" />
 			</p>
 			<input
 				type="text"
@@ -40,7 +40,7 @@ const Authenticator = ({ saveFunc, closeFunc }) => {
 					Save
 				</button>
 				<button
-					className="block w-full py-3 px-5 rounded text-[--color-brand] border border-[--color-brand]"
+					className="block w-full py-3 px-5 rounded text-[--header] border border-[--color-brand]"
 					onClick={() => closeFunc()}
 				>
 					Close

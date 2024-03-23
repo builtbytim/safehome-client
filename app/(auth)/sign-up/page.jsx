@@ -9,7 +9,7 @@ export const metadata = {
 export default function Page() {
 	return (
 		<>
-			<div className="bg-white relative  w-[448px] max-w-[95%] sm:max-w-[80%] lg:max-w-sm min-h-[300px] rounded-brand py-8 px-4 sm:p-8 ">
+			<div className="bg-white relative w-[448px] max-w-[95%] sm:max-w-[80%] lg:max-w-sm min-h-[300px] rounded-brand py-8 px-4 sm:p-8 ">
 				<SignUp />
 			</div>
 
@@ -18,7 +18,7 @@ export default function Page() {
 					Already have an account?{" "}
 					<Link
 						href="/sign-in"
-						className="text-[--color-brand-2] sm:text-white font-semibold sm:hover:text-[--lines] cursor-pointer "
+						className="text-[--highlight] sm:text-white font-semibold sm:hover:text-[--lines] cursor-pointer "
 					>
 						Log in
 					</Link>

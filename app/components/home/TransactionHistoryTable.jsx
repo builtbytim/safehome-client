@@ -13,238 +13,245 @@ import Pagination from "../Pagination";
 import { useRouter, usePathname } from "next/navigation";
 
 function TransactionHistoryTable({ token, params, setPageFilter }) {
-  const queryParams = new URLSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
+	const queryParams = new URLSearchParams();
+	const router = useRouter();
+	const pathname = usePathname();
 
-  if (params.type) queryParams.append("type", params.type);
-  if (params.startDate) queryParams.append("startDate", params.startDate);
-  if (params.endDate) queryParams.append("endDate", params.endDate);
-  if (params.fromLast) queryParams.append("fromLast", params.fromLast);
-  if (params.page) queryParams.append("page", params.page);
-  if (params.limit) queryParams.append("limit", params.limit);
+	if (params.type) queryParams.append("type", params.type);
+	if (params.startDate) queryParams.append("startDate", params.startDate);
+	if (params.endDate) queryParams.append("endDate", params.endDate);
+	if (params.fromLast) queryParams.append("fromLast", params.fromLast);
+	if (params.page) queryParams.append("page", params.page);
+	if (params.limit) queryParams.append("limit", params.limit);
 
-  function showTxReceiptFor(ref) {
-    return () => {
-      router.push(`${pathname}?showTx=true&txRef=${ref}`);
-    };
-  }
+	function showTxReceiptFor(ref) {
+		return () => {
+			router.push(`${pathname}?showTx=true&txRef=${ref}`);
+		};
+	}
 
-  const { isLoading, isError, refetch, data, isSuccess, error, isFetching } =
-    useQuery({
-      queryKey: [queryKeys.getTransactions, token, params],
-      queryFn: createFetcher({
-        url: config.apiPaths.getTransactions,
-        method: "GET",
-        auth: token,
-        surfix: `?${queryParams.toString()}`,
-      }),
+	const {
+		isLoading,
+		isError,
+		refetch,
+		data,
+		isSuccess,
+		error,
+		isFetching,
+	} = useQuery({
+		queryKey: [queryKeys.getTransactions, token, params],
+		queryFn: createFetcher({
+			url: config.apiPaths.getTransactions,
+			method: "GET",
+			auth: token,
+			surfix: `?${queryParams.toString()}`,
+		}),
 
-      enabled: !!token,
+		enabled: !!token,
 
-      keepPreviousData: true,
-    });
+		keepPreviousData: true,
+	});
 
-  const txTypeColorMap = {
-    topup: "success",
-    withdrawal: "error",
-    credit: "success",
-    debit: "error",
-    investment: "success",
-    membership_fee: "success",
-    savings_add_funds: "success",
-  };
+	const txTypeColorMap = {
+		topup: "success",
+		withdrawal: "error",
+		credit: "success",
+		debit: "error",
+		investment: "success",
+		membership_fee: "success",
+		savings_add_funds: "success",
+	};
 
-  const txStatusColorMap = {
-    successful: "success",
-    failed: "error",
-    pending: "warning",
-  };
+	const txStatusColorMap = {
+		successful: "success",
+		failed: "error",
+		pending: "warning",
+	};
 
-  if (isLoading && (data === null || data === undefined)) {
-    return <LoadingView />;
-  }
+	if (isLoading && (data === null || data === undefined)) {
+		return <LoadingView />;
+	}
 
-  if (isError) {
-    return <ErrorMessageView refetch={refetch} message={error.message} />;
-  }
+	if (isError) {
+		return <ErrorMessageView refetch={refetch} message={error.message} />;
+	}
 
-  if (isSuccess && data && data.unfilteredEntries === 0) {
-    return (
-      <div className="flex flex-col justify-center items-center py-6 space-y-4">
-        <p className="text-[#C4C4C4]">No transactions yet</p>
-      </div>
-    );
-  }
+	if (isSuccess && data && data.unfilteredEntries === 0) {
+		return (
+			<div className="flex flex-col justify-center items-center py-6 space-y-4">
+				<p className="text-[#C4C4C4]">No transactions yet</p>
+			</div>
+		);
+	}
 
-  if (isSuccess && data && data.entries === 0) {
-    return (
-      <div className="flex flex-col justify-center items-center py-6 space-y-4">
-        <p className="text-[#C4C4C4]">
-          No transactions found for the selected filters
-        </p>
-      </div>
-    );
-  }
+	if (isSuccess && data && data.entries === 0) {
+		return (
+			<div className="flex flex-col justify-center items-center py-6 space-y-4">
+				<p className="text-[#C4C4C4]">
+					No transactions found for the selected filters
+				</p>
+			</div>
+		);
+	}
 
-  if (isSuccess && data)
-    return (
-      <section>
-        {/* For Mobile */}
+	if (isSuccess && data)
+		return (
+			<section>
+				{/* For Mobile */}
 
-        <div className=" md:hidden overflow-y-auto overflow-x-scroll max-w-full max-h-[482px]">
-          {data.items.map((v, i) => (
-            <div
-              key={i}
-              onClick={showTxReceiptFor(v.reference)}
-              className="flex flex-col justify-center items-start space-y-2 border-b border-[#e2e2e2] py-4 cursor-pointer"
-            >
-              <div className="flex flex-row justify-between items-center w-full  overflow-x-auto max-w-full no-scrollbar">
-                <div className="flex max-w-[50%] flex-row justify-center items-center space-x-2 truncate">
-                  <div
-                    className={
-                      " flex-1 p-2 rounded-full border border-transparent " +
-                      cn({
-                        "bg-[#E5FFE5]": v.direction === "incoming",
-                        "bg-[#FFE5E5]": v.direction === "outgoing",
-                      })
-                    }
-                  >
-                    <Image
-                      src={
-                        v.direction === "incoming" ? ArrowDownGreen : ArrowUpRed
-                      }
-                      alt="arrow down"
-                      width="24"
-                      height="24"
-                      className="object-contain min-w-[24px] min-h-[24px] "
-                    />
-                  </div>
+				<div className=" md:hidden overflow-y-auto overflow-x-scroll max-w-full max-h-[482px]">
+					{data.items.map((v, i) => (
+						<div
+							key={i}
+							onClick={showTxReceiptFor(v.reference)}
+							className="flex flex-col justify-center items-start space-y-2 border-b border-[#e2e2e2] py-4 cursor-pointer"
+						>
+							<div className="flex flex-row justify-between items-center w-full  overflow-x-auto max-w-full no-scrollbar">
+								<div className="flex max-w-[50%] flex-row justify-center items-center space-x-2 truncate">
+									<div
+										className={
+											" flex-1 p-2 rounded-full border border-transparent " +
+											cn({
+												"bg-[#E5FFE5]": v.direction === "incoming",
+												"bg-[#FFE5E5]": v.direction === "outgoing",
+											})
+										}
+									>
+										<Image
+											src={
+												v.direction === "incoming" ? ArrowDownGreen : ArrowUpRed
+											}
+											alt="arrow down"
+											width="24"
+											height="24"
+											className="object-contain min-w-[24px] min-h-[24px] "
+										/>
+									</div>
 
-                  <div className="flex  flex-col justify-center items-start space-y-1 truncate">
-                    <span className="text-[--color-brand-2] truncate text-sm">
-                      {shortenTextToEllipses(v.reference, 16)}
-                    </span>
-                    <span className=" text-sm capitalize truncate">
-                      <span className={" text-[--primary]  truncate"}>
-                        {v.description}
-                      </span>
-                    </span>
-                  </div>
-                </div>
+									<div className="flex  flex-col justify-center items-start space-y-1 truncate">
+										<span className="text-[--color-brand-2] truncate text-sm">
+											{shortenTextToEllipses(v.reference, 16)}
+										</span>
+										<span className=" text-sm capitalize truncate">
+											<span className={" text-[--primary]  truncate"}>
+												{v.description}
+											</span>
+										</span>
+									</div>
+								</div>
 
-                <div className="flex px-2 flex-col justify-center items-end space-y-1">
-                  <span className="text-[--text-secondary] font-semibold text-sm">
-                    <NumericFormat
-                      value={v.amount}
-                      prefix="₦ "
-                      displayType={"text"}
-                      thousandSeparator={true}
-                    />
-                  </span>
-                  <span className="text-[--placeholder] text-xs">
-                    {new Date(v.createdAt * 1000).toLocaleString()}
-                  </span>
+								<div className="flex px-2 flex-col justify-center items-end space-y-1">
+									<span className="text-[--text] font-semibold text-sm">
+										<NumericFormat
+											value={v.amount}
+											prefix="₦ "
+											displayType={"text"}
+											thousandSeparator={true}
+										/>
+									</span>
+									<span className="text-[--placeholder] text-xs">
+										{new Date(v.createdAt * 1000).toLocaleString()}
+									</span>
 
-                  <span
-                    className={
-                      levelToColor(txStatusColorMap[v.status]) +
-                      "text-xs capitalize"
-                    }
-                  >
-                    {v.status}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+									<span
+										className={
+											levelToColor(txStatusColorMap[v.status]) +
+											"text-xs capitalize"
+										}
+									>
+										{v.status}
+									</span>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
 
-        {/* For Desktops  */}
-        <div className="hidden md:block overflow-auto max-h-[482px]  ">
-          <table className="w-full  table text-[--text-secondary]  ">
-            <thead className="w-full uppercase font-semibold">
-              <tr className="table-row w-full ">
-                <th className="pl-8 py-4 text-left  whitespace-nowrap font-semibold">
-                  S/N
-                </th>
-                <th className="pl-8 py-4 text-left  whitespace-nowrap font-semibold">
-                  {" "}
-                  Date & Time{" "}
-                </th>
-                <th className=" text-left  px-6 whitespace-nowrap font-semibold">
-                  Description
-                </th>
-                <th className=" text-left  px-6 whitespace-nowrap font-semibold">
-                  Amount
-                </th>
-                <th className=" text-left  px-6 whitespace-nowrap font-semibold">
-                  Transaction Reference{" "}
-                </th>
+				{/* For Desktops  */}
+				<div className="hidden md:block overflow-auto max-h-[482px]  ">
+					<table className="w-full  table text-[--text]  ">
+						<thead className="w-full uppercase font-semibold">
+							<tr className="table-row w-full ">
+								<th className="pl-8 py-4 text-left  whitespace-nowrap font-semibold">
+									S/N
+								</th>
+								<th className="pl-8 py-4 text-left  whitespace-nowrap font-semibold">
+									{" "}
+									Date & Time{" "}
+								</th>
+								<th className=" text-left  px-6 whitespace-nowrap font-semibold">
+									Description
+								</th>
+								<th className=" text-left  px-6 whitespace-nowrap font-semibold">
+									Amount
+								</th>
+								<th className=" text-left  px-6 whitespace-nowrap font-semibold">
+									Transaction Reference{" "}
+								</th>
 
-                <th className=" text-left  px-6 whitespace-nowrap font-semibold">
-                  Status
-                </th>
-              </tr>
-            </thead>
+								<th className=" text-left  px-6 whitespace-nowrap font-semibold">
+									Status
+								</th>
+							</tr>
+						</thead>
 
-            <tbody>
-              {data.items.map((v, i) => (
-                <tr
-                  onClick={showTxReceiptFor(v.reference)}
-                  key={i}
-                  className="table-row text-left  text-sm odd:bg-[--b1] cursor-pointer hover:bg-[--platinum]"
-                >
-                  <td className="py-4 text-left pl-8">{i + 1}</td>
-                  <td className="py-4 text-left pl-8">
-                    {new Date(v.createdAt * 1000).toLocaleString()}
-                  </td>
-                  <td className="text-left px-6 truncate capitalize font-medium">
-                    <span
-                      className={
-                        levelToColor(txTypeColorMap[v.type]) + "  truncate"
-                      }
-                    >
-                      {v.description}
-                    </span>
-                  </td>
-                  <td className="text-left px-6">
-                    <NumericFormat
-                      value={v.amount}
-                      prefix="₦ "
-                      displayType={"text"}
-                      thousandSeparator={true}
-                    />
-                  </td>
-                  <td className="text-left px-6">{v.reference}</td>
+						<tbody>
+							{data.items.map((v, i) => (
+								<tr
+									onClick={showTxReceiptFor(v.reference)}
+									key={i}
+									className="table-row text-left  text-sm odd:bg-[--b1] cursor-pointer hover:bg-[--platinum]"
+								>
+									<td className="py-4 text-left pl-8">{i + 1}</td>
+									<td className="py-4 text-left pl-8">
+										{new Date(v.createdAt * 1000).toLocaleString()}
+									</td>
+									<td className="text-left px-6 truncate capitalize font-medium">
+										<span
+											className={
+												levelToColor(txTypeColorMap[v.type]) + "  truncate"
+											}
+										>
+											{v.description}
+										</span>
+									</td>
+									<td className="text-left px-6">
+										<NumericFormat
+											value={v.amount}
+											prefix="₦ "
+											displayType={"text"}
+											thousandSeparator={true}
+										/>
+									</td>
+									<td className="text-left px-6">{v.reference}</td>
 
-                  <td className="text-left  font-medium capitalize px-6">
-                    <span className={levelToColor(txStatusColorMap[v.status])}>
-                      {v.status}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+									<td className="text-left  font-medium capitalize px-6">
+										<span className={levelToColor(txStatusColorMap[v.status])}>
+											{v.status}
+										</span>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
 
-        <Pagination
-          setPage={setPageFilter}
-          data={data}
-          isSuccess={isSuccess}
-          isLoading={isLoading}
-          isFetching={isFetching}
-        />
-      </section>
-    );
+				<Pagination
+					setPage={setPageFilter}
+					data={data}
+					isSuccess={isSuccess}
+					isLoading={isLoading}
+					isFetching={isFetching}
+				/>
+			</section>
+		);
 }
 
 export default TransactionHistoryTable;
 
 function shortenTextToEllipses(text, maxLength) {
-  if (text.length <= maxLength) {
-    return text;
-  }
-  return text.substring(0, maxLength - 3) + "...";
+	if (text.length <= maxLength) {
+		return text;
+	}
+	return text.substring(0, maxLength - 3) + "...";
 }
