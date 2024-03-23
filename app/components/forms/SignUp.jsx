@@ -13,412 +13,388 @@ import { useRouter, useSearchParams } from "next/navigation";
 import BarLoader from "../BarLoader";
 
 const yupSchema = Yup.object({
-  firstName: Yup.string()
-    .min(3, "Must be 3 characters or more")
-    .required("Required"),
+	firstName: Yup.string()
+		.min(3, "Must be 3 characters or more")
+		.required("Required"),
 
-  surname: Yup.string()
-    .min(3, "Must be 3 characters or more")
-    .required("Required"),
+	surname: Yup.string()
+		.min(3, "Must be 3 characters or more")
+		.required("Required"),
 
-  phone: Yup.string()
-    .required("Required")
-    .min(10, "Must be 10 characters or more")
-    .test("phone-is-valid", "Invalid phone number", function (value) {
-      const result = parsePhoneNumber(value, { regionCode: "NG" });
-      return result.valid;
-    }),
+	phone: Yup.string()
+		.required("Required")
+		.min(10, "Must be 10 characters or more")
+		.test("phone-is-valid", "Invalid phone number", function (value) {
+			const result = parsePhoneNumber(value, { regionCode: "NG" });
+			return result.valid;
+		}),
 
-  gender: Yup.string()
-    .required("Required")
-    .oneOf(["MALE", "FEMALE"], "Invalid gender selected"),
+	gender: Yup.string()
+		.required("Required")
+		.oneOf(["MALE", "FEMALE"], "Invalid gender selected"),
 
-  dateOfBirth: Yup.date()
-    .required("Required")
-    .test(
-      "date-is-valid",
-      "You must be 18 years or older to use this service",
-      function (value) {
-        const now = new Date();
-        const dob = new Date(value);
-        const diff = now.getTime() - dob.getTime();
-        const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
-        return age >= 18;
-      }
-    ),
+	dateOfBirth: Yup.date()
+		.required("Required")
+		.test(
+			"date-is-valid",
+			"You must be 18 years or older to use this service",
+			function (value) {
+				const now = new Date();
+				const dob = new Date(value);
+				const diff = now.getTime() - dob.getTime();
+				const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+				return age >= 18;
+			}
+		),
 
-  email: Yup.string().email("Invalid email address").required("Required"),
-  password: Yup.string()
-    .min(8, "Must be 8 characters or more")
-    .max(25, "Too long")
-    .required("Required"),
+	email: Yup.string().email("Invalid email address").required("Required"),
+	password: Yup.string()
+		.min(8, "Must be 8 characters or more")
+		.max(25, "Too long")
+		.required("Required"),
 
-  cpassword: Yup.string()
-    .min(8, "Must be 8 characters or more")
-    .max(25, "Too long")
-    .required("Required")
-    .test("passwords-match", "Passwords must match", function (value) {
-      return this.parent.password === value;
-    }),
+	cpassword: Yup.string()
+		.min(8, "Must be 8 characters or more")
+		.max(25, "Too long")
+		.required("Required")
+		.test("passwords-match", "Passwords must match", function (value) {
+			return this.parent.password === value;
+		}),
 });
 
 function SignUp() {
-  const router = useRouter();
-  const [isFirstSlide, setIsFirstSlide] = useState(true);
+	const router = useRouter();
+	const [isFirstSlide, setIsFirstSlide] = useState(true);
 
-  const setNotify = useNotifyStore((state) => state.setNotify);
-  const searchParams = useSearchParams();
-  const [showPassword, setShowPassword] = useState(false);
+	const setNotify = useNotifyStore((state) => state.setNotify);
+	const searchParams = useSearchParams();
+	const [showPassword, setShowPassword] = useState(false);
 
-  function toggleShowPassword() {
-    setShowPassword(!showPassword);
-  }
+	function toggleShowPassword() {
+		setShowPassword(!showPassword);
+	}
 
-  const { mutate, isLoading, reset } = useSignUp(onError, onSuccess);
-  function onError(err) {
-    setNotify({
-      show: true,
-      title: "Unable to Sign Up",
-      content: err?.message,
-    });
-    reset();
-  }
+	const { mutate, isLoading, reset } = useSignUp(onError, onSuccess);
+	function onError(err) {
+		setNotify({
+			show: true,
+			title: "Unable to Sign Up",
+			content: err?.message,
+		});
+		reset();
+	}
 
-  function onSuccess(result) {
-    const data = result.data;
-    const headers = result.headers;
-    const authCode = headers.get("X-AUTH-CODE");
+	function onSuccess(result) {
+		const data = result.data;
+		const headers = result.headers;
+		const authCode = headers.get("X-AUTH-CODE");
 
-    router.push(`/verify-email/${data.email}?authCode=${authCode}`);
-  }
+		router.push(`/verify-email/${data.email}?authCode=${authCode}`);
+	}
 
-  async function handleSubmit(values) {
-    if (isLoading) return;
+	async function handleSubmit(values) {
+		if (isLoading) return;
 
-    const body = {
-      firstName: values.firstName,
-      lastName: values.surname,
-      gender: values.gender,
-      dateOfBirth:
-        Date.parse(new Date(values.dateOfBirth).toUTCString()) / 1000,
-      phone: parsePhoneNumber(values.phone, { regionCode: "NG" }).number.e164,
-      email: values.email,
-      password: values.cpassword,
-    };
+		const body = {
+			firstName: values.firstName,
+			lastName: values.surname,
+			gender: values.gender,
+			dateOfBirth:
+				Date.parse(new Date(values.dateOfBirth).toUTCString()) / 1000,
+			phone: parsePhoneNumber(values.phone, { regionCode: "NG" }).number.e164,
+			email: values.email,
+			password: values.cpassword,
+		};
 
-    if (searchParams.has("referralCode")) {
-      body.referralCode = searchParams.get("referralCode");
-    }
+		if (searchParams.has("referralCode")) {
+			body.referralCode = searchParams.get("referralCode");
+		}
 
-    if (searchParams.has("affiliateCode")) {
-      body.affiliateCode = searchParams.get("affiliateCode");
-    }
+		if (searchParams.has("affiliateCode")) {
+			body.affiliateCode = searchParams.get("affiliateCode");
+		}
 
-    mutate(body);
-  }
+		mutate(body);
+	}
 
-  function toNext() {
-    setIsFirstSlide(false);
-  }
+	function toNext() {
+		setIsFirstSlide(false);
+	}
 
-  function toPrev() {
-    setIsFirstSlide(true);
-  }
+	function toPrev() {
+		setIsFirstSlide(true);
+	}
 
-  return (
-    <Formik
-      initialValues={{
-        firstName: "",
-        surname: "",
-        gender: "",
-        dateOfBirth: new Date(2000, 0, 0).toISOString().split("T")[0],
-        phone: "",
-        email: "",
-        password: "",
-        cpassword: "",
-      }}
-      validationSchema={yupSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ isValid }) => {
-        return (
-          <Form className="flex flex-col justify-center items-center space-y-4">
-            <BarLoader active={isLoading} />
+	return (
+		<Formik
+			initialValues={{
+				firstName: "",
+				surname: "",
+				gender: "",
+				dateOfBirth: new Date(2000, 0, 0).toISOString().split("T")[0],
+				phone: "",
+				email: "",
+				password: "",
+				cpassword: "",
+			}}
+			validationSchema={yupSchema}
+			onSubmit={handleSubmit}
+		>
+			{({ isValid }) => {
+				return (
+					<Form className="flex flex-col justify-center items-center space-y-4">
+						<BarLoader active={isLoading} />
 
-            <div>
-              <legend className="font-bold text-center text-lg lg:text-xl text-[--color-brand]">
-                Create a new account
-              </legend>
-              <p className="text-center text-xs text-[--text-secondary] ">
-                {" "}
-                Securely sign up for SafeHome{" "}
-              </p>
-            </div>
+						<div>
+							<legend className="font-bold text-center text-lg lg:text-xl text-[--header]">
+								Create a new account
+							</legend>
+							<p className="text-center text-xs">
+								{" "}
+								Securely sign up for SafeHome{" "}
+							</p>
+						</div>
 
-            <div className="flex flex-col justify-center items-center  w-full">
-              {/* Slide 1  */}
+						<div className="flex flex-col justify-center items-center  w-full">
+							{/* Slide 1  */}
 
-              <div
-                className={
-                  "space-y-6 w-full " +
-                  cn({
-                    " block ": isFirstSlide,
-                    " hidden ": !isFirstSlide,
-                  })
-                }
-              >
-                <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                  <label
-                    htmlFor="firstName"
-                    className="text-[--text-secondary] text-sm text-left"
-                  >
-                    First Name
-                  </label>
+							<div
+								className={
+									"space-y-6 w-full " +
+									cn({
+										" block ": isFirstSlide,
+										" hidden ": !isFirstSlide,
+									})
+								}
+							>
+								<div className="w-full relative flex flex-col justify-center items-start space-y-2">
+									<label htmlFor="firstName" className=" text-sm text-left">
+										First Name
+									</label>
 
-                  <Field
-                    name="firstName"
-                    type="text"
-                    className="field-1"
-                    placeholder="First Name"
-                  />
+									<Field
+										name="firstName"
+										type="text"
+										className="field-1"
+										placeholder="First Name"
+									/>
 
-                  <ErrorMessage
-                    name="firstName"
-                    component="div"
-                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                  />
-                </div>
-                <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                  <label
-                    htmlFor="surname"
-                    className="text-[--text-secondary] text-sm text-left"
-                  >
-                    Surname
-                  </label>
+									<ErrorMessage
+										name="firstName"
+										component="div"
+										className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+									/>
+								</div>
+								<div className="w-full relative flex flex-col justify-center items-start space-y-2">
+									<label htmlFor="surname" className=" text-sm text-left">
+										Surname
+									</label>
 
-                  <Field
-                    name="surname"
-                    type="text"
-                    className="field-1"
-                    placeholder="Last Name"
-                  />
+									<Field
+										name="surname"
+										type="text"
+										className="field-1"
+										placeholder="Last Name"
+									/>
 
-                  <ErrorMessage
-                    name="surname"
-                    component="div"
-                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                  />
-                </div>
-                <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                  <label
-                    htmlFor="email"
-                    className="text-[--text-secondary] text-sm text-left"
-                  >
-                    Email Address
-                  </label>
+									<ErrorMessage
+										name="surname"
+										component="div"
+										className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+									/>
+								</div>
+								<div className="w-full relative flex flex-col justify-center items-start space-y-2">
+									<label htmlFor="email" className=" text-sm text-left">
+										Email Address
+									</label>
 
-                  <Field
-                    name="email"
-                    type="email"
-                    className="field-1"
-                    placeholder="Email"
-                  />
+									<Field
+										name="email"
+										type="email"
+										className="field-1"
+										placeholder="Email"
+									/>
 
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                  />
-                </div>{" "}
-                <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                  <label
-                    htmlFor="phone"
-                    className="text-[--text-secondary] text-sm text-left"
-                  >
-                    Phone Number
-                  </label>
+									<ErrorMessage
+										name="email"
+										component="div"
+										className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+									/>
+								</div>{" "}
+								<div className="w-full relative flex flex-col justify-center items-start space-y-2">
+									<label htmlFor="phone" className=" text-sm text-left">
+										Phone Number
+									</label>
 
-                  <Field
-                    name="phone"
-                    type="tel"
-                    className="field-1"
-                    placeholder="Phone number"
-                  />
+									<Field
+										name="phone"
+										type="tel"
+										className="field-1"
+										placeholder="Phone number"
+									/>
 
-                  <ErrorMessage
-                    name="phone"
-                    inputMode="tel"
-                    component="div"
-                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                  />
-                </div>
-              </div>
+									<ErrorMessage
+										name="phone"
+										inputMode="tel"
+										component="div"
+										className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+									/>
+								</div>
+							</div>
 
-              {/* Slide 1 ends  */}
+							{/* Slide 1 ends  */}
 
-              {/* Slide 2  */}
+							{/* Slide 2  */}
 
-              <div
-                className={
-                  "space-y-6 w-full " +
-                  cn({
-                    " block ": !isFirstSlide,
-                    " hidden ": isFirstSlide,
-                  })
-                }
-              >
-                <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                  <label
-                    htmlFor="dateOfBirth"
-                    className="text-[--text-secondary] text-sm text-left"
-                  >
-                    Date of Birth
-                  </label>
+							<div
+								className={
+									"space-y-6 w-full " +
+									cn({
+										" block ": !isFirstSlide,
+										" hidden ": isFirstSlide,
+									})
+								}
+							>
+								<div className="w-full relative flex flex-col justify-center items-start space-y-2">
+									<label htmlFor="dateOfBirth" className=" text-sm text-left">
+										Date of Birth
+									</label>
 
-                  <Field
-                    name="dateOfBirth"
-                    type="date"
-                    max="2100-01-01"
-                    className="field-1"
-                  />
+									<Field
+										name="dateOfBirth"
+										type="date"
+										max="2100-01-01"
+										className="field-1"
+									/>
 
-                  <ErrorMessage
-                    name="dateOfBirth"
-                    component="div"
-                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                  />
-                </div>
-                <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                  <label
-                    htmlFor="gender"
-                    className="text-[--text-secondary] text-sm text-left"
-                  >
-                    Gender
-                  </label>
+									<ErrorMessage
+										name="dateOfBirth"
+										component="div"
+										className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+									/>
+								</div>
+								<div className="w-full relative flex flex-col justify-center items-start space-y-2">
+									<label htmlFor="gender" className=" text-sm text-left">
+										Gender
+									</label>
 
-                  <Field
-                    name="gender"
-                    type="text"
-                    as="select"
-                    className="field-1"
-                    placeholder="gender"
-                  >
-                    <option selected value="">
-                      Choose gender
-                    </option>
+									<Field
+										name="gender"
+										type="text"
+										as="select"
+										className="field-1"
+										placeholder="gender"
+									>
+										<option selected value="">
+											Choose gender
+										</option>
 
-                    <option value="MALE"> Male </option>
-                    <option value="FEMALE"> Female </option>
-                  </Field>
+										<option value="MALE"> Male </option>
+										<option value="FEMALE"> Female </option>
+									</Field>
 
-                  <ErrorMessage
-                    name="gender"
-                    component="div"
-                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                  />
-                </div>
+									<ErrorMessage
+										name="gender"
+										component="div"
+										className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+									/>
+								</div>
 
-                <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                  <label
-                    htmlFor="password"
-                    className="text-[--text-secondary] text-sm text-left"
-                  >
-                    Password
-                  </label>
+								<div className="w-full relative flex flex-col justify-center items-start space-y-2">
+									<label htmlFor="password" className=" text-sm text-left">
+										Password
+									</label>
 
-                  <div className="relative w-full">
-                    <Field
-                      name="password"
-                      type={showPassword ? "text" : "password"}
-                      className="field-1"
-                      placeholder="Password"
-                    />
+									<div className="relative w-full">
+										<Field
+											name="password"
+											type={showPassword ? "text" : "password"}
+											className="field-1"
+											placeholder="Password"
+										/>
 
-                    <div
-                      className="absolute top-[50%] -translate-y-[50%] right-[5%] text-[--text-secondary] text-xl text-right cursor-pointer"
-                      onClick={toggleShowPassword}
-                    >
-                      {showPassword ? <BsEyeSlashFill /> : <BsEyeFill />}
-                    </div>
-                  </div>
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                  />
-                </div>
-                <div className="w-full relative flex flex-col justify-center items-start space-y-2">
-                  <label
-                    htmlFor="cpassword"
-                    className="text-[--text-secondary] text-sm text-left"
-                  >
-                    Confirm Password
-                  </label>
+										<div
+											className="absolute top-[50%] -translate-y-[50%] right-[5%]  text-xl text-right cursor-pointer"
+											onClick={toggleShowPassword}
+										>
+											{showPassword ? <BsEyeSlashFill /> : <BsEyeFill />}
+										</div>
+									</div>
+									<ErrorMessage
+										name="password"
+										component="div"
+										className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+									/>
+								</div>
+								<div className="w-full relative flex flex-col justify-center items-start space-y-2">
+									<label htmlFor="cpassword" className=" text-sm text-left">
+										Confirm Password
+									</label>
 
-                  <div className="relative w-full">
-                    <Field
-                      name="cpassword"
-                      type={showPassword ? "text" : "password"}
-                      className="field-1"
-                      placeholder="Confirm Password"
-                    />
+									<div className="relative w-full">
+										<Field
+											name="cpassword"
+											type={showPassword ? "text" : "password"}
+											className="field-1"
+											placeholder="Confirm Password"
+										/>
 
-                    <div
-                      className="absolute top-[50%] -translate-y-[50%] right-[5%] text-[--text-secondary] text-xl text-right cursor-pointer"
-                      onClick={toggleShowPassword}
-                    >
-                      {showPassword ? <BsEyeSlashFill /> : <BsEyeFill />}
-                    </div>
-                  </div>
-                  <ErrorMessage
-                    name="cpassword"
-                    component="div"
-                    className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
-                  />
-                </div>
-              </div>
+										<div
+											className="absolute top-[50%] -translate-y-[50%] right-[5%]  text-xl text-right cursor-pointer"
+											onClick={toggleShowPassword}
+										>
+											{showPassword ? <BsEyeSlashFill /> : <BsEyeFill />}
+										</div>
+									</div>
+									<ErrorMessage
+										name="cpassword"
+										component="div"
+										className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+									/>
+								</div>
+							</div>
 
-              {/* Slide 2 ends  */}
-            </div>
+							{/* Slide 2 ends  */}
+						</div>
 
-            {isFirstSlide ? (
-              <div className="flex flex-col justify-center items-center w-full pt-8 space-y-4  ">
-                <button
-                  onClick={toNext}
-                  role="button"
-                  type="button"
-                  className="btn-1 inline-flex justify-center space-x-2 items-center"
-                >
-                  <span>Next</span>
+						{isFirstSlide ? (
+							<div className="flex flex-col justify-center items-center w-full pt-8 space-y-4  ">
+								<button
+									onClick={toNext}
+									role="button"
+									type="button"
+									className="btn-1 inline-flex justify-center space-x-2 items-center"
+								>
+									<span>Next</span>
 
-                  <BsArrowRight className="text-xl lg:text-2xl" />
-                </button>
-              </div>
-            ) : (
-              <div className="flex flex-col justify-center items-center w-full   space-y-2 pt-2">
-                <button
-                  onClick={toPrev}
-                  type="button"
-                  role="button"
-                  className="btn-1 self-stretch px-0 bg-white hover:bg-white  border-[--color-brand] rounded-r-none  inline-flex justify-start  items-center"
-                >
-                  <BsArrowLeftShort className="text-[--color-brand] hover:text-[--color-brand-hover] text-3xl transitioning border rounded-full" />
-                </button>
-                <button
-                  disabled={!isValid}
-                  role="form"
-                  type="submit"
-                  className="btn-1 "
-                >
-                  Create Account
-                </button>
-              </div>
-            )}
-          </Form>
-        );
-      }}
-    </Formik>
-  );
+									<BsArrowRight className="text-xl lg:text-2xl" />
+								</button>
+							</div>
+						) : (
+							<div className="flex flex-col justify-center items-center w-full   space-y-2 pt-2">
+								<button
+									onClick={toPrev}
+									type="button"
+									role="button"
+									className="btn-1 self-stretch px-0 bg-white hover:bg-white  border-[--color-brand] rounded-r-none  inline-flex justify-start  items-center"
+								>
+									<BsArrowLeftShort className="text-[--button] hover:text-[--color-brand-hover] text-3xl transitioning border rounded-full" />
+								</button>
+								<button
+									disabled={!isValid}
+									role="form"
+									type="submit"
+									className="btn-1"
+								>
+									Create Account
+								</button>
+							</div>
+						)}
+					</Form>
+				);
+			}}
+		</Formik>
+	);
 }
 
 export default SignUp;
