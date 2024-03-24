@@ -74,7 +74,7 @@ function Page({ authenticatedUser, authenticationToken }) {
 						token={authenticationToken}
 					/>
 					<section className="bg-white rounded-brand  py-8 md:p-8 space-y-4">
-						<h1 className="text-[--header] capitalize text-xl sm:text-2xl lg:text-2xl  font-medium">
+						<h1 className="text-[--header] capitalize text-base md:text-xl  font-semibold">
 							Recent Activity
 						</h1>
 

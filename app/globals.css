@@ -139,27 +139,19 @@ p, div, label{
 @layer components {
   /* investment page custom styles */
   .tab-button {
-    @apply text-sm md:text-lg text-[--placeholder] px-3 pb-2 lg:px-7 lg:pb-2 border-b border-[--lines] hover:border-[--placeholder] mb-[-1px];
+    @apply whitespace-nowrap text-base md:text-lg px-3 md:px-7 pb-1 w-auto block transitioning border-b-2 mb-[-1px] z-[10000] cursor-pointer;
+  }
+
+  .tab-button-not-active {
+    @apply text-[--placeholder] border-[--lines] hover:border-[--placeholder] font-medium border-b-[#00000000];
   }
 
   .tab-button-active {
-    @apply text-sm md:text-lg text-[--text-brand] px-3 pb-2 lg:px-7 lg:pb-2  border-b border-[--text-brand] min-w-[100px] mb-[-1px];
+    @apply text-[--button] border-[--button];
   }
 
   .tab-button-2 {
-    @apply text-sm md:text-lg text-[--placeholder] px-3 pb-2 lg:px-7 lg:pb-2 border-b-2 border-[--placeholder] hover:border-[--placeholder] mb-[-1px];
-  }
-
-  .tab-button-active-2 {
-    @apply text-sm md:text-lg text-[--header] px-3 pb-2 lg:px-7 lg:pb-2  border-b-2 border-[--color-brand] min-w-[100px] mb-[-1px];
-  }
-
-  .tab-button-2 {
-    @apply text-sm md:text-lg text-[--placeholder] px-3 pb-2 lg:px-7 lg:pb-2 border-b-2 border-[--placeholder] hover:border-[--placeholder] mb-[-1px];
-  }
-
-  .tab-button-active-2 {
-    @apply text-sm md:text-lg text-[--header] px-3 pb-2 lg:px-7 lg:pb-2  border-b-2 border-[--color-brand] min-w-[100px] mb-[-1px];
+    @apply whitespace-nowrap text-base md:text-lg px-3 md:px-4 pb-1 w-auto block transitioning border-b-2 mb-[-1px] z-[10000] cursor-pointer;
   }
 
   .filter-btn {
@@ -167,7 +159,7 @@ p, div, label{
   }
 
   .filter-btn-active {
-    @apply filter-btn hover:bg-white text-[--text-brand] hover:text-[--text-brand] cursor-default  hover:border-[--text-brand] border border-[--text-brand];
+    @apply filter-btn hover:bg-white text-[--button] hover:text-[--button] cursor-default  hover:border-[--button] border border-[--button];
   }
 
   .form-text {
@@ -261,7 +253,7 @@ p, div, label{
   }
 
   .btn-1-v2 {
-    @apply btn-1 bg-[--text-brand] hover:bg-[-button-hover];
+    @apply btn-1 bg-[--button] hover:bg-[--button-hover];
   }
 
   .btn-2 {
@@ -273,11 +265,19 @@ p, div, label{
   }
 
   .btn-2-v2 {
-    @apply btn-2 text-[--text-brand] border-[--text-brand] hover:bg-[#ff6100]/10;
+    @apply btn-2 text-[--button] border-[--button] hover:bg-[#ff6100]/10;
   }
 
   .btn-3 {
     @apply bg-[--button] disabled:pointer-events-none disabled:opacity-60  transitioning  hover:bg-[--button-hover] text-white rounded-[4px] p-2 w-full;
+  }
+
+  .scroll-link{
+    @apply inline-block rounded-full border p-1
+  }
+
+  .scroll-link-active{
+    @apply inline-block rounded-full  w-[8px] bg-[--button] border-[--button] p-1
   }
 }
 

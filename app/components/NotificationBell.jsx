@@ -11,50 +11,50 @@ import { useDataStore } from "../utils/store";
 const TEN_SECONDS = 1000 * 10;
 
 function NotificationBell({ toggleNotifications, token }) {
-  const dataStoreToken = useDataStore(
-    (state) => state.data && state.data.token
-  );
+	const dataStoreToken = useDataStore(
+		(state) => state.data && state.data.token
+	);
 
-  const { data, isFetching, isSuccess } = useQuery({
-    queryKey: [queryKeys.getMyNotificationStats, token || dataStoreToken],
-    queryFn: createFetcher({
-      url: config.apiPaths.getMyNotificationStats,
-      method: "GET",
-      auth: token || dataStoreToken,
-    }),
-    enabled: !!token || !!dataStoreToken,
-    refetchInterval: TEN_SECONDS,
-  });
+	const { data, isFetching, isSuccess } = useQuery({
+		queryKey: [queryKeys.getMyNotificationStats, token || dataStoreToken],
+		queryFn: createFetcher({
+			url: config.apiPaths.getMyNotificationStats,
+			method: "GET",
+			auth: token || dataStoreToken,
+		}),
+		enabled: !!token || !!dataStoreToken,
+		refetchInterval: TEN_SECONDS,
+	});
 
-  return (
-    <div
-      title={isSuccess && data ? `${data.unreadCount} unread ` : ""}
-      onClick={toggleNotifications}
-      className={
-        "self-center hover:cursor-pointer relative " +
-        cn({
-          " animate-pulse ": isFetching,
-        })
-      }
-    >
-      <Image
-        src={BellImage}
-        width="48"
-        height="48"
-        priority
-        alt="Notification Logo"
-        className="w-[30px]  h-[30px] md:w-[40px] md:h-[40px] object-contain"
-      />
+	return (
+		<div
+			title={isSuccess && data ? `${data.unreadCount} unread ` : ""}
+			onClick={toggleNotifications}
+			className={
+				"self-center hover:cursor-pointer relative " +
+				cn({
+					" animate-pulse ": isFetching,
+				})
+			}
+		>
+			<Image
+				src={BellImage}
+				width="48"
+				height="48"
+				priority
+				alt="Notification Logo"
+				className="w-[30px]  h-[30px] md:w-[40px] md:h-[40px] object-contain"
+			/>
 
-      {isSuccess && data && data.unreadCount > 0 && (
-        <span
-          className={
-            "border rounded-full animate-bounce border-[--text-brand] bg-[--text-brand] p-[0.125rem] md:p-1 inline-block absolute top-0 right-0 "
-          }
-        ></span>
-      )}
-    </div>
-  );
+			{isSuccess && data && data.unreadCount > 0 && (
+				<span
+					className={
+						"border rounded-full animate-bounce border-[--highlight] bg-[--highlight] p-[0.125rem] md:p-1 inline-block absolute top-0 right-0 "
+					}
+				></span>
+			)}
+		</div>
+	);
 }
 
 export default NotificationBell;
