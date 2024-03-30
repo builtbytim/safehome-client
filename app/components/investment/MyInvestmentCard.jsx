@@ -19,13 +19,13 @@ const MyInvestmentCard = ({ investment, openInfo }) => {
 			}}
 			title={!isActive ? "Payment has not been completed" : ""}
 			className={
-				"relative rounded-brand md:rounded-lg lg:rounded-xl border overflow-hidden text-[--text] text-left grid grid-cols-5 md:grid-cols-5  hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm transitioning self-stretch" +
+				"relative rounded-[10px] lg:rounded-[16px] p-1 lg:p-0 border overflow-hidden text-[--text] text-left grid grid-cols-5 md:grid-cols-5  hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm transitioning self-stretch cursor-pointer" +
 				cn({
 					" opacity-50 pointer-events-none ": !isActive,
 				})
 			}
 		>
-			<div className="relative h-full min-h-[150px] col-span-2 md:col-span-2 overflow-hidden">
+			<div className="relative h-full min-h-[150px] col-span-2 md:col-span-2 overflow-hidden rounded-[10px] lg:rounded-l-[16px] lg:rounded-r-none">
 				<Image
 					src={
 						ownerClub === "land_owners_club"
@@ -36,18 +36,18 @@ const MyInvestmentCard = ({ investment, openInfo }) => {
 					}
 					fill
 					alt={assetName}
-					className="object-cover h-full absolute group-hover:scale-110 transform transition-all duration-1000 ease-in-out "
+					className="object-cover h-full absolute group-hover:scale-110 transform transition-all duration-1000 ease-in-out rounded-[10px] lg:rounded-l-[16px] lg:rounded-r-none"
 				/>
 			</div>
 			<div className="px-4 pt-2 pb-8 md:px-4 xl:px-6  col-span-3 md:col-span-3 space-y-1 truncate">
-				<h2 className="capitalize  font-medium text-base md:text-lg text-left truncate ">
+				<h2 className="capitalize  font-semibold text-base md:text-lg text-left truncate">
 					{" "}
 					{assetName}
 				</h2>
 
 				<div className="flex gap-4 md:gap-6 pt-2 ">
 					<div>
-						<h3 className="text-[--text-brand] whitespace-nowrap text-xs  pb-1 font-medium">
+						<h3 className="!text-[--highlight] whitespace-nowrap text-xs  pb-1 font-medium">
 							<NumericFormat
 								value={amount}
 								displayType={"text"}
@@ -58,7 +58,7 @@ const MyInvestmentCard = ({ investment, openInfo }) => {
 						<p className="mt-[-4px] text-xs">Amount</p>
 					</div>
 					<div>
-						<h3 className="text-[--text-brand] whitespace-nowrap text-xs  pb-1 font-medium">
+						<h3 className="text-[--highlight] whitespace-nowrap text-xs  pb-1 font-medium">
 							{new Date(createdAt * 1000).toLocaleDateString()}
 						</h3>
 						<p className="mt-[-4px] text-xs"> Purchase Date </p>

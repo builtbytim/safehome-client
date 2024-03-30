@@ -34,22 +34,22 @@ function OverviewCard({ token }) {
 				<div className="md:hidden pb-1 flex flex-row justify-end items-center space-x-1 px-2">
 					<ScrollLink
 						containerId="scroll-indicators"
-						activeClass="inline-block rounded-full  w-[8px] bg-[--text-brand] p-1"
-						className="inline-block rounded-full border p-1 "
+						activeClass="scroll-link-active"
+						className="scroll-link"
 						to="total-balance"
 					></ScrollLink>
 
 					<ScrollLink
 						containerId="scroll-indicators"
-						activeClass="inline-block rounded-full  w-[8px] bg-[--text-brand] p-1"
-						className="inline-block rounded-full border p-1 "
+						activeClass="scroll-link-active"
+						className="scroll-link"
 						to="expected-returns"
 					></ScrollLink>
 
 					<ScrollLink
 						containerId="scroll-indicators"
-						activeClass="inline-block rounded-full  w-[8px] bg-[--text-brand] p-1"
-						className="inline-block rounded-full border p-1 "
+						activeClass="scroll-link-active"
+						className="scroll-link"
 						to="expected-roi"
 					></ScrollLink>
 				</div>
@@ -137,15 +137,11 @@ function OverviewCard({ token }) {
 						id="expected-roi"
 						className="w-full bg-[#ff6100]/10 min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] self-stretch  rounded-[8px] md:rounded-[16px]  border-[--lines] p-6 flex flex-col justify-center items-start space-y-6"
 					>
-						<h2 className=" text-[--text] uppercase font-medium">
-							Expected ROI
-						</h2>
+						<h2 className="uppercase font-semibold">Expected ROI</h2>
 
-						<p className="text-[--text-brand] font-bold text-xl lg:text-2xl">
-							Up to 20%
-						</p>
+						<p className="font-semibold text-xl lg:text-2xl">Up to 20%</p>
 
-						<p className=" text-[--text]  font-medium">Per Annum</p>
+						<p className="font-medium">Per Annum</p>
 					</div>
 				</div>
 			</div>

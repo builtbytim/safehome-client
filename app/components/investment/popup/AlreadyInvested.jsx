@@ -45,7 +45,7 @@ const AlreadyInvested = ({
 	const ownerClub = data.ownerClub;
 
 	return (
-		<div className="h-full overflow-y-auto">
+		<div className="h-full overflow-y-auto overflow-x-hidden space-y-6">
 			<MiniHero
 				img={
 					ownerClub === "land_owners_club"
@@ -57,16 +57,16 @@ const AlreadyInvested = ({
 				title={data.assetName}
 				quantity={data.availableUnits}
 			/>
-			<div className="px-5">
-				<div className="py-6 flex justify-between gap-5">
+			<div className="popup-px space-y-7">
+				<div className="flex justify-between gap-5">
 					<div>
-						<p className="text-lg leading-[1.6rem] max-h-[3.2rem] font-medium capitalize truncate text-[--text]">
+						<p className="text-lg leading-[1.6rem] max-h-[3.2rem] font-semibold capitalize truncate text-[--text]">
 							{data.assetName}
 						</p>
-						<p className="text-sm text-[--text] pt-2">{data.location}</p>
+						<p className="text-sm text-[--text] pt-1">{data.location}</p>
 					</div>
 					<div className="text-right">
-						<p className="text-[--text-brand] font-bold  text-xl md:text-2xl">
+						<p className="text-[--highlight] font-semibold  text-lg md:text-xl">
 							<NumericFormat
 								value={data.pricePerUnit}
 								displayType={"text"}
@@ -74,12 +74,10 @@ const AlreadyInvested = ({
 								prefix={"₦ "}
 							/>
 						</p>
-						<p className="text-[--placeholder] font-light mt-[-8px]">
-							Per unit
-						</p>
+						<p className="text-[--text] text-sm mt-[-8px] pt-2">Per unit</p>
 					</div>
 				</div>
-				<div className="grid grid-cols-2  gap-3 pb-7">
+				<div className="grid grid-cols-2 gap-3">
 					<InvestmentTab
 						heading="Effective Capital"
 						content={userInvestmentData.amount}
@@ -110,7 +108,7 @@ const AlreadyInvested = ({
 					</button>
 				</div>
 
-				<div className="py-6 grid grid-cols-1  gap-y-2 md:gap-y-4">
+				<div className="grid grid-cols-1  gap-y-2 md:gap-y-4">
 					<InvestmentTab heading="ROI" content={data.props.roi} />
 					<InvestmentTab
 						heading="Maturity Date"

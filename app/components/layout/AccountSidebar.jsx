@@ -31,16 +31,16 @@ function AccountSidebar() {
 											<div className="text-xl">
 												<Icon
 													fill={`${
-														pathname === item.link ? "#8d4000" : "#1a374d"
+														pathname === item.link ? "#ff9100" : "#1e0700"
 													}`}
 												/>
 											</div>
 										</div>
 
-										<div className="text-[--text-primary] text-sm font-medium">
+										<div className="text-[--button] text-sm font-medium">
 											<span
 												className={`transitioning  text-base ${
-													pathname === item.link && "text-[--header]"
+													pathname === item.link && "text-[--highlight]"
 												}`}
 											>
 												{item.name}
@@ -56,8 +56,19 @@ function AccountSidebar() {
 				<div className="  self-start px-4  bottom-[5vh] flex flex-col justify-start items-start space-y-4  ">
 					<Link href="/account/guidelines" className="py-2 block  w-full">
 						<div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
-							<RiGuideLine className="text-xl text-[--text]" />
-							<span className="text-[--text] font-medium"> Guidelines </span>
+							<RiGuideLine
+								className={`transitioning  text-xl ${
+									pathname === "/account/guidelines" && "text-[--highlight]"
+								}`}
+							/>
+							<span
+								className={`transitioning ${
+									pathname === "/account/guidelines" && "text-[--highlight]"
+								}`}
+							>
+								{" "}
+								Guidelines{" "}
+							</span>
 						</div>
 					</Link>
 					<a
@@ -66,8 +77,19 @@ function AccountSidebar() {
 						className="py-2 block w-full"
 					>
 						<div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
-							<BiLinkExternal className="text-xl text-[--text]" />
-							<span className="text-[--text] font-medium"> Partners </span>
+							<BiLinkExternal
+								className={`transitioning  text-xl ${
+									pathname === config.urlMaps.affiliate && "text-[--highlight]"
+								}`}
+							/>
+							<span
+								className={`transitioning ${
+									pathname === config.urlMaps.affiliate && "text-[--highlight]"
+								}`}
+							>
+								{" "}
+								Partners{" "}
+							</span>
 						</div>
 					</a>
 

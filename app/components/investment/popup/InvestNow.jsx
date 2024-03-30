@@ -143,13 +143,13 @@ const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
 	}
 
 	return (
-		<div className="px-7 pb-8 space-y-8 text-[--text]">
+		<div className="popup-px pb-8 space-y-8 text-[--text] overflow-x-hidden">
 			<div className="flex justify-between gap-5">
-				<p className="text-xl truncate leading-[1.65rem] max-h-[3.3rem] font-medium capitalize text-[--text] ">
+				<p className="text-xl truncate leading-[1.65rem] max-h-[3.3rem] font-semibold capitalize text-[--text] ">
 					{data.assetName}
 				</p>
 				<div className="text-right">
-					<p className="text-[--text-brand] whitespace-nowrap font-medium text-2xl">
+					<p className="text-[--highlight] leading-[1.65rem] whitespace-nowrap font-semibold text-xl">
 						<NumericFormat
 							value={data.pricePerUnit}
 							displayType={"text"}
@@ -157,7 +157,7 @@ const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
 							prefix={"₦ "}
 						/>
 					</p>
-					<p className="text-[--placeholder] font-light mt-[-8px]">Per unit</p>
+					<p className="">Per unit</p>
 				</div>
 			</div>
 
@@ -197,7 +197,7 @@ const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
 			>
 				{({ isValid, setFieldValue, values }) => {
 					return (
-						<Form className="space-y-6">
+						<Form className="space-y-7">
 							<div className="relative">
 								<p className="form-text">How many units?</p>
 
@@ -252,7 +252,7 @@ const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
 								<ErrorMessage
 									name="amount"
 									component="div"
-									className="absolute -bottom-[30%] left-0 text-[--text-danger] text-xs text-left"
+									className="absolute -bottom-[20%] left-0 text-[--text-danger] text-xs text-left"
 								/>
 
 								{walletSuccess && (
@@ -303,7 +303,7 @@ const InvestNow = ({ data, token, closeSelf, userAlreadyInvested }) => {
 								<ErrorMessage
 									name="acceptTerms"
 									component="div"
-									className="absolute -bottom-[70%] left-0 text-[--text-danger] text-xs text-left"
+									className="absolute pt-2 left-0 text-[--text-danger] text-xs text-left"
 								/>
 							</div>
 

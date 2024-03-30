@@ -41,7 +41,7 @@ function UserSection() {
 				{user ? `${user?.lastName}  ${user?.firstName}` : "Loading..."}
 			</h2>
 
-			<h3 className="text-sm pb-4 text-[--text-brand-2] text-center">
+			<h3 className="text-sm pb-4 text-[--highlight] text-center">
 				{user ? user.email : `Loading...`}
 			</h3>
 		</div>
