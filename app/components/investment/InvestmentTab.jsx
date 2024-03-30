@@ -5,7 +5,7 @@ const InvestmentTab = ({ heading, content, type, formatAsNumber = false }) => {
 		<div>
 			{type === "info" ? (
 				<div className="p-3 border border-[--lines] rounded text-[--text] space-y-1 h-full w-full">
-					<p className="text-sm text-[--text-brand]">{heading}</p>
+					<p className="text-sm text-[--highlight]">{heading}</p>
 					<p className="font-semibold">
 						{formatAsNumber ? (
 							<NumericFormat
@@ -20,7 +20,7 @@ const InvestmentTab = ({ heading, content, type, formatAsNumber = false }) => {
 				</div>
 			) : (
 				<div className="p-3 border border-[--lines] rounded text-[--text] space-y-1 h-full w-full">
-					<p className="text-sm font-light">{heading}</p>
+					<p className="text-sm text-[--placeholder]">{heading}</p>
 					<p className="font-medium">
 						{formatAsNumber ? (
 							<NumericFormat

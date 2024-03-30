@@ -35,9 +35,7 @@ const ExploreCard = ({ title, body, img, link }) => {
 			className="bg-[#FF910019] transitioning hover:bg-[#BF810019] w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] self-stretch rounded-brand p-6 py-12 flex flex-row justify-between items-center space-x-6 whitespace-normal"
 		>
 			<div className="space-y-4 ">
-				<h2 className="text-xl lg:text-2xl text-left text-[--sorta-dark] ">
-					{title}
-				</h2>
+				<h2 className="text-lg lg:text-xl text-left">{title}</h2>
 
 				<p className="text-sm">{body}</p>
 			</div>

@@ -21,10 +21,10 @@ const InvestibleAssetCard = ({ investibleAsset, openInfo }) => {
 	return (
 		<div
 			assetName="Click to view more details"
-			className="relative  rounded-brand md:rounded-lg lg:rounded-xl border overflow-hidden text-[--text] text-left grid grid-cols-5 md:grid-cols-5 self-stretch hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm "
+			className="relative rounded-[10px] lg:rounded-[16px] p-1 lg:p-0 border overflow-hidden text-[--text] text-left grid grid-cols-5 md:grid-cols-5 self-stretch hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm cursor-pointer"
 			onClick={openInfo}
 		>
-			<div className=" h-full min-h-[150px] rounded-l-[16px] col-span-2 md:col-span-2 relative overflow-hidden">
+			<div className=" h-full min-h-[150px] rounded-[10px] lg:rounded-l-[16px] lg:rounded-r-none col-span-2 md:col-span-2 relative overflow-hidden">
 				<Image
 					src={
 						ownerClub === "land_owners_club"
@@ -34,12 +34,12 @@ const InvestibleAssetCard = ({ investibleAsset, openInfo }) => {
 							: HomeOwnersImage
 					}
 					alt={assetName}
-					className="object-cover  absolute rounded-l-[16px]  group-hover:scale-110 transform transition-all duration-1000 ease-in-out "
+					className="object-cover  absolute rounded-[10px] lg:rounded-l-[16px] lg:rounded-r-none  group-hover:scale-110 transform transition-all duration-1000 ease-in-out "
 					fill
 				/>
 			</div>
 			<div className="px-4 pt-2 pb-8 md:px-4 xl:px-6 col-span-3 md:col-span-3 space-y-1">
-				<h2 className="capitalize font-medium text-base md:text-lg text-left truncate ">
+				<h2 className="capitalize font-semibold text-base md:text-lg text-left truncate ">
 					{assetName} {ownerClub}
 				</h2>
 
@@ -51,7 +51,7 @@ const InvestibleAssetCard = ({ investibleAsset, openInfo }) => {
 
 				<div className="flex gap-4 md:gap-6 pt-2 ">
 					<div>
-						<h3 className="text-[--text-brand] text-xs whitespace-nowrap  pb-1 font-medium">
+						<h3 className="text-[--highlight] text-xs whitespace-nowrap  pb-1 font-medium">
 							<NumericFormat
 								value={pricePerUnit}
 								displayType={"text"}
@@ -62,7 +62,7 @@ const InvestibleAssetCard = ({ investibleAsset, openInfo }) => {
 						<p className="mt-[-4px] text-xs">Per unit</p>
 					</div>
 					<div>
-						<h3 className="text-[--text-brand] text-xs whitespace-nowrap   pb-1 font-medium">
+						<h3 className="text-[--highlight] text-xs whitespace-nowrap   pb-1 font-medium">
 							<NumericFormat
 								value={investorCount}
 								displayType={"text"}

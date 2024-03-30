@@ -18,7 +18,7 @@ const Balance = () => {
 
 				<div className="space-y-2">
 					<p className="font-medium lg:text-lg">Total Balance</p>
-					<p className="font-medium text-2xl lg:text-3xl text-[--text-brand]">
+					<p className="font-medium text-2xl lg:text-3xl text-[--highlight]">
 						₦1,000,000.00
 					</p>
 				</div>

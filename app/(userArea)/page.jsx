@@ -160,7 +160,7 @@ function Page({ authenticatedUser, authenticationToken }) {
 				<ExploreCardsRow user={authenticatedUser} />
 				<section className="bg-white rounded-brand  pt-7 md:p-8 space-y-4">
 					<div className="w-full flex flex-col xl:flex-row justify-between xl:items-center xl:gap-16 xl:pb-1">
-						<h1 className="text-[--text] capitalize text-xl sm:text-2xl lg:text-2xl  font-medium">
+						<h1 className="text-[--text] capitalize text-xl sm:text-2xl lg:text-2xl xl:text-3xl font-medium">
 							Transactions
 						</h1>
 

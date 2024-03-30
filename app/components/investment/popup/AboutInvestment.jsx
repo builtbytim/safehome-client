@@ -5,7 +5,7 @@ import inv1 from "../../../../assets/images/investment/inv1.png";
 const AboutInvestment = ({ data, investNowFunction }) => {
 	return (
 		<div>
-			<div className="px-7 pb-8 space-y-8 text-[--text]">
+			<div className="popup-px pb-8 space-y-8 text-[--text]">
 				<div className="space-y-5">
 					<div className="h-[250px] w-full">
 						<Image
@@ -13,7 +13,7 @@ const AboutInvestment = ({ data, investNowFunction }) => {
 							alt={data.assetName}
 							width={429}
 							height={240}
-							className="w-full h-full"
+							className="w-full h-full object-cover"
 						/>
 					</div>
 					<p className="pb-3">{data.about}</p>

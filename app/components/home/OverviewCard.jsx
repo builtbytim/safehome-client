@@ -68,22 +68,22 @@ function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
 				<div className="md:hidden pb-1 flex flex-row justify-end items-center space-x-1 px-2">
 					<ScrollLink
 						containerId="scroll-indicators"
-						activeClass="inline-block rounded-full  w-[8px] bg-[--text-brand] p-1"
-						className="inline-block rounded-full border p-1 "
+						activeClass="scroll-link-active"
+						className="scroll-link"
 						to="my-funds"
 					></ScrollLink>
 
 					<ScrollLink
 						containerId="scroll-indicators"
-						activeClass="inline-block rounded-full  w-[8px] bg-[--text-brand] p-1"
-						className="inline-block rounded-full border p-1 "
+						activeClass="scroll-link-active"
+						className="scroll-link"
 						to="total-savings"
 					></ScrollLink>
 
 					<ScrollLink
 						containerId="scroll-indicators"
-						activeClass="inline-block rounded-full  w-[8px] bg-[--text-brand] p-1"
-						className="inline-block rounded-full border p-1 "
+						activeClass="scroll-link-active"
+						className="scroll-link"
 						to="total-investments"
 					></ScrollLink>
 

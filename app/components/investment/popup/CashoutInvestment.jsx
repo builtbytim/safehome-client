@@ -64,7 +64,7 @@ const CashoutInvestment = ({
 						{data.assetName}
 					</p>
 					<div className="text-right">
-						<p className="text-[--text-brand] font-medium text-xl">
+						<p className="text-[--highlight] font-medium text-xl">
 							<NumericFormat
 								value={data.pricePerUnit}
 								displayType={"text"}
