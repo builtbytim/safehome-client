@@ -132,7 +132,7 @@ export default function Update() {
 			</div>
 
 			<div className="py-10 text-center">
-				<button className="w-full max-w-[400px] px-5 py-3 text-white bg-[--color-brand] rounded text-lg">
+				<button className="w-full max-w-[400px] px-5 py-3 text-white bg-[--button] rounded text-lg">
 					Update Profile
 				</button>
 			</div>

@@ -1,6 +1,6 @@
 "use client";
 
-import LogoBrand from "../../../assets/images/logo_brand.png";
+import LogoBrand from "../../../assets/images/logo_alt1.svg";
 import config from "../../utils/config";
 import Image from "next/image";
 import Link from "next/link";

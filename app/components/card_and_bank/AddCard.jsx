@@ -129,12 +129,12 @@ const AddCard = ({ closeFunc, token }) => {
 								<button
 									type="submit"
 									disabled={!isValid || addCardLoading}
-									className="btn-1 block w-full py-3 px-5 rounded text-white bg-[--color-brand] border border-[--color-brand]"
+									className="btn-1 block w-full py-3 px-5 rounded text-white bg-[--button] border border-[--button]"
 								>
 									{addCardLoading ? <Spinner /> : "Add Card"}
 								</button>
 								<button
-									className="btn-2 block w-full py-3 px-5 rounded text-[--header] border border-[--color-brand]"
+									className="btn-2 block w-full py-3 px-5 rounded text-[--header] border border-[--button]"
 									onClick={() => closeFunc()}
 								>
 									Close

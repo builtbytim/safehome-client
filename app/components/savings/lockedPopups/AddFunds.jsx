@@ -258,7 +258,7 @@ function AddFunds({ closeSelf, closeAll, token, selectedLockedPlan }) {
 										<button
 											type="submit"
 											disabled={!isValid || isLoading}
-											className="btn-1 w-full bg-[--color-brand]  "
+											className="btn-1 w-full bg-[--button]  "
 										>
 											{isLoading ? <Spinner /> : "Add Funds"}
 										</button>

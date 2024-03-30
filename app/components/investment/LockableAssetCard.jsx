@@ -20,7 +20,7 @@ const LockableAssetCard = ({ investibleAsset, onSelect }) => {
 		<div
 			onClick={onSelect}
 			assetName="Click to view more details"
-			className="relative  rounded-brand md:rounded-lg lg:rounded-xl border overflow-hidden text-[--text] text-left grid grid-cols-5 md:grid-cols-5 hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm self-stretch"
+			className="relative  rounded-[16px]  border overflow-hidden text-[--text] text-left grid grid-cols-5 md:grid-cols-5 hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm self-stretch cursor-pointer"
 		>
 			<div className=" h-full min-h-[150px] relative rounded-l-[16px] col-span-2 md:col-span-2 overflow-hidden">
 				<Image
@@ -37,7 +37,7 @@ const LockableAssetCard = ({ investibleAsset, onSelect }) => {
 				/>
 			</div>
 			<div className="px-4 pt-2 pb-8 md:px-4 xl:px-6 col-span-3 md:col-span-3 space-y-1">
-				<h2 className="capitalize font-medium text-base md:text-lg text-left truncate ">
+				<h2 className="capitalize font-semibold text-base md:text-lg text-left truncate ">
 					{assetName}
 				</h2>
 
@@ -49,7 +49,7 @@ const LockableAssetCard = ({ investibleAsset, onSelect }) => {
 
 				<div className="flex gap-4 md:gap-6 pt-2 ">
 					<div>
-						<h3 className="text-[--text-brand] text-xs whitespace-nowrap  pb-1 font-medium">
+						<h3 className="text-[--highlight] text-xs whitespace-nowrap  pb-1 font-medium">
 							<NumericFormat
 								value={pricePerUnit}
 								displayType={"text"}
@@ -60,7 +60,7 @@ const LockableAssetCard = ({ investibleAsset, onSelect }) => {
 						<p className="mt-[-4px] text-xs">Per unit</p>
 					</div>
 					<div>
-						<h3 className="text-[--text-brand] text-xs whitespace-nowrap   pb-1 font-medium">
+						<h3 className="text-[--highlight] text-xs whitespace-nowrap   pb-1 font-medium">
 							<NumericFormat
 								value={investorCount}
 								displayType={"text"}

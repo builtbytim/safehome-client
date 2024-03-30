@@ -31,7 +31,7 @@ function CreateSafelock({ toggleShow, handleSubmit, formData, show }) {
 					"w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40  "
 				}
 			>
-				<div className="flex p-6 flex-row justify-end items-center">
+				<div className="flex popup-px py-6 flex-row justify-end items-center">
 					<div
 						onClick={toggleShow}
 						className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
@@ -42,16 +42,16 @@ function CreateSafelock({ toggleShow, handleSubmit, formData, show }) {
 
 				<div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8">
 					<div className="px-6">
-						<h1 className="font-bold  text-[--header] text-lg md:text-xl">
+						<h1 className="popup-miniheader">
 							How long do you want to invest funds?
 						</h1>
-						<p className="text-[--primary] font-medium text-sm pt-2">
+						<p className="font-medium text-sm pt-2">
 							Select a duration that you want to invest your funds before it is
 							invested in an investment of your choice
 						</p>
 					</div>
 
-					<div className="px-6 space-y-3 md:space-y-4  pt-6">
+					<div className="popup-px space-y-3 md:space-y-4  pt-6">
 						{lockDurationsInMonths.map((v, i) => (
 							<div
 								key={i}
@@ -64,7 +64,7 @@ function CreateSafelock({ toggleShow, handleSubmit, formData, show }) {
 									})
 								}
 							>
-								<span className="text-[--primary]">
+								<span className="">
 									{v} {v > 1 ? "months" : "month"}{" "}
 								</span>
 

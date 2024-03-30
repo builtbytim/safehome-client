@@ -43,27 +43,21 @@ function CreateSafelockPreview({
 		<Overlay2 pos="center">
 			<section
 				ref={ref}
-				className={
-					"w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40  "
-				}
+				className={"w-full md:max-w-[493px] bg-white h-[100vh] z-40"}
 			>
-				<div className="flex p-6 flex-row justify-end items-center">
+				<div className="flex popup-px py-6 flex-row justify-end items-center">
 					<div
 						onClick={closeSelf}
 						className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
 					>
-						<BiX className="text-[--primary] text-3xl" />
+						<BiX className="text-3xl" />
 					</div>
 				</div>
 
-				<div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8">
-					<div className="px-6 space-y-2">
-						<h1 className="font-bold  text-[--header] text-lg md:text-xl">
-							Savings Investment Preview
-						</h1>
-						<p className="text-[--primary] font-medium text-sm ">
-							Preview details of investment
-						</p>
+				<div className="overflow-y-auto popup-px scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8 space-y-7">
+					<div className="space-y-0">
+						<h1 className="popup-miniheader">Savings Investment Preview</h1>
+						<p className="font-medium pb-5">Preview details of investment</p>
 
 						{/* image area --------------------- */}
 						<div className="">
@@ -75,7 +69,7 @@ function CreateSafelockPreview({
 									className="object-cover  h-[210px] w-full"
 								/>
 								<div className="absolute bg-black/60  inset-0  flex flex-col justify-center items-center truncate">
-									<h1 className="text-white capitalize  font-bold truncate text-xl md:text-2xl xl:text-3xl text-center">
+									<h1 className="text-white capitalize  font-semibold truncate text-xl md:text-2xl xl:text-3xl text-center">
 										{formData.investibleAsset.assetName}
 									</h1>
 								</div>
@@ -83,7 +77,7 @@ function CreateSafelockPreview({
 						</div>
 					</div>
 
-					<div className="px-6 gap-8 pt-6 grid grid-cols-2">
+					<div className="gap-4 md:gap-6 grid grid-cols-2">
 						<SmallDetailsCard
 							title="Amount to Invest"
 							value={
@@ -118,14 +112,14 @@ function CreateSafelockPreview({
 						/>
 					</div>
 
-					<div className="w-full relative flex flex-col justify-center items-start space-y-2 p-6">
+					<div className="w-full relative flex flex-col justify-center items-start space-y-4">
 						<SwitchField
 							handleChange={(v) => {
 								setAcceptTerms(v);
 							}}
 							color="#8d4000"
 						/>
-						<p className="text-[--text] font-medium text-sm text-left">
+						<p className="text-[--text] font-medium text-left">
 							I hereby acknowledge and authorize SafeHome to invest my funds
 							into the designated property. This authorization signifies my
 							approval for SafeHome to proceed with the investment on my behalf,
@@ -139,7 +133,7 @@ function CreateSafelockPreview({
 						)}
 					</div>
 
-					<div className="pt-4  px-6  flex flex-col justify-center items-center space-y-4  mx-auto">
+					<div className="flex flex-col justify-center items-center space-y-4 pb-10">
 						<button
 							disabled={!acceptTerms || isLoading}
 							onClick={onCreateLockClick}

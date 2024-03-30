@@ -4,28 +4,28 @@ import Switch from "react-switch";
 import { useState } from "react";
 
 function SwitchField({
-  handleChange,
-  defaultChecked = false,
-  color,
-  ...props
+	handleChange,
+	defaultChecked = false,
+	color,
+	...props
 }) {
-  const [checked, setChecked] = useState(defaultChecked);
+	const [checked, setChecked] = useState(defaultChecked);
 
-  function _handleChange(v) {
-    setChecked(v);
+	function _handleChange(v) {
+		setChecked(v);
 
-    if (typeof handleChange === "function") handleChange(v);
-  }
-  return (
-    <Switch
-      onColor={color || "#ff9100"}
-      onChange={_handleChange}
-      checked={checked}
-      checkedIcon={false}
-      uncheckedIcon={false}
-      {...props}
-    />
-  );
+		if (typeof handleChange === "function") handleChange(v);
+	}
+	return (
+		<Switch
+			onColor={color || "#ff9100"}
+			onChange={_handleChange}
+			checked={checked}
+			checkedIcon={false}
+			uncheckedIcon={false}
+			{...props}
+		/>
+	);
 }
 
 export default SwitchField;

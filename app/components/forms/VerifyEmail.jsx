@@ -193,7 +193,7 @@ function VerifyEmail({ email }) {
 						<button
 							onClick={resendCode}
 							disabled={disableResend || !codeSent}
-							className="text-[--header] disabled:pointer-events-none disabled:opacity-60 block  border-b border-[--color-brand] pb-1 hover:text-[--color-brand-hover] transitioning  text-center"
+							className="text-[--header] disabled:pointer-events-none disabled:opacity-60 block  border-b border-[--button] pb-1 hover:text-[--color-brand-hover] transitioning  text-center"
 						>
 							Resend Verification Code
 						</button>
