@@ -73,22 +73,22 @@ function CreateSafelock2({
 					"w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40 "
 				}
 			>
-				<div className="flex p-6 flex-row justify-end items-center">
+				<div className="flex popup-px py-6 flex-row justify-end items-center">
 					<div
 						onClick={toggleShow}
 						className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
 					>
-						<BiX className="text-[--primary] text-3xl" />
+						<BiX className="text-3xl" />
 					</div>
 				</div>
 
-				<div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8">
-					<div className="px-6">
-						<h1 className="font-bold  text-[--header] text-lg md:text-xl">
+				<div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8 popup-px">
+					<div className="pb-2">
+						<h1 className="popup-header">
 							Invest for {formData.lockDurationInMonths}{" "}
 							{formData.lockDurationInMonths > 1 ? "months" : "month"}
 						</h1>
-						<p className="text-[--primary] font-medium text-sm pt-2">
+						<p className="font-medium pt-2">
 							Create an Investment Savings for {formData.lockDurationInMonths}{" "}
 							{formData.lockDurationInMonths > 1 ? "months" : "month"}
 						</p>
@@ -122,12 +122,9 @@ function CreateSafelock2({
 					>
 						{({ isValid, values, setFieldValue, errors }) => {
 							return (
-								<Form className="space-y-6 px-6 pt-6  ">
+								<Form className="space-y-6 pt-6  ">
 									<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-										<label
-											htmlFor="investibleAsset"
-											className="text-[--text] font-medium text-sm text-left"
-										>
+										<label htmlFor="investibleAsset" className="form-label">
 											Property you are locking for
 										</label>
 
@@ -153,10 +150,7 @@ function CreateSafelock2({
 									</div>
 
 									<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-										<label
-											htmlFor="amountToLock"
-											className="text-[--text] font-medium text-sm text-left"
-										>
+										<label htmlFor="amountToLock" className="form-label">
 											Amount to Invest (Price of 1 unit of chosen property)
 										</label>
 
@@ -179,10 +173,7 @@ function CreateSafelock2({
 									</div>
 
 									<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-										<label
-											htmlFor="paymentMode"
-											className="text-[--text] font-medium text-sm text-left"
-										>
+										<label htmlFor="paymentMode" className="form-label">
 											How do you prefer to save?
 										</label>
 
@@ -211,10 +202,7 @@ function CreateSafelock2({
 									</div>
 
 									<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-										<label
-											htmlFor="savingPreference"
-											className="text-[--text] font-medium text-sm text-left"
-										>
+										<label htmlFor="savingPreference" className="form-label">
 											Payment Method
 										</label>
 
@@ -238,10 +226,7 @@ function CreateSafelock2({
 									</div>
 
 									<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-										<label
-											htmlFor="preferredInterval"
-											className="text-[--text] font-medium text-sm text-left"
-										>
+										<label htmlFor="preferredInterval" className="form-label">
 											Preferred Interval
 										</label>
 

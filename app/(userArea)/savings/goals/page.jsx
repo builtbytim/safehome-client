@@ -106,7 +106,7 @@ function Page({ authenticatedUser, authenticationToken }) {
 								setTabState={setStatusTab1}
 								tabState={statusTab1}
 								tabItems={tabItemsArr[0]}
-								extraClasses="text-[--text-brand-2]  border-[--text-brand-2]"
+								extraClasses="text-[--text-brand-2]  text-[--button]"
 							/>
 
 							<div onClick={toggleGoalCreationF1} className="hidden md:block ">

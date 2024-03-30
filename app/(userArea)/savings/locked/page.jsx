@@ -90,23 +90,25 @@ function Page({ authenticatedUser, authenticationToken }) {
 				<HeaderSavings
 					user={authenticatedUser}
 					title="Investment Savings"
-					extraClasses="text-[--header] border-[--color-brand]"
+					extraClasses="text-[--header] border-[--button]"
 				/>
 
 				<main className=" space-y-2 md:space-y-10">
 					<section className="bg-white  rounded-brand  pt-8  md:p-8 space-y-4">
-						<div className="flex flex-row justify-between items-center space-x-8">
-							<TabSwitch
-								tabItems={tabItemsArr[0]}
-								tabState={tab2}
-								setTabState={setTab2}
-								extraClasses="text-[--header]  border-[--color-brand]"
-							/>
+						<div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+							<div className="col-span-2 flex items-end">
+								<TabSwitch
+									tabItems={tabItemsArr[0]}
+									tabState={tab2}
+									setTabState={setTab2}
+									extraClasses="text-[--header]border-[--button]"
+								/>
+							</div>
 
-							<div className="hidden md:block ">
+							<div className="hidden lg:flex lg:justify-end col-span-1">
 								<button
 									onClick={toggleCreateLockF1}
-									className="btn-3 bg-[#8d4000] hover:bg-[#8d4000]/80 px-6 whitespace-nowrap "
+									className="btn-1 px-7 w-auto"
 								>
 									Invest your funds
 								</button>
@@ -181,10 +183,7 @@ function Page({ authenticatedUser, authenticationToken }) {
 								</div>
 							</div>
 							<div className="col-span-5 md:hidden py-3">
-								<button
-									onClick={toggleCreateLockF1}
-									className="btn-3 bg-[#8d4000] hover:bg-[#8d4000]/80  "
-								>
+								<button onClick={toggleCreateLockF1} className="btn-1">
 									Invest your funds{" "}
 								</button>
 							</div>
@@ -196,7 +195,7 @@ function Page({ authenticatedUser, authenticationToken }) {
 							tabItems={tabItemsArr[1]}
 							tabState={tab}
 							setTabState={setTab}
-							extraClasses="text-[--header]  border-[--color-brand]"
+							extraClasses="text-[--header]  border-[--button]"
 						/>
 
 						<LockedSavingsGridList

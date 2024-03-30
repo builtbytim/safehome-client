@@ -167,12 +167,12 @@ const AddBank = ({ closeFunc, token }) => {
 									<div className="space-y-4 w-full pt-8 pb-3">
 										<button
 											disabled={!isValid || addBankLoading}
-											className="btn-1 block w-full py-3 px-5 rounded text-white bg-[--color-brand] border border-[--color-brand]"
+											className="btn-1 block w-full py-3 px-5 rounded text-white bg-[--button] border border-[--button]"
 										>
 											{addBankLoading ? <Spinner /> : "Add Bank"}
 										</button>
 										<button
-											className="btn-2 block w-full py-3 px-5 rounded text-[--header] border border-[--color-brand]"
+											className="btn-2 block w-full py-3 px-5 rounded text-[--header] border border-[--button]"
 											onClick={() => closeFunc()}
 										>
 											Close

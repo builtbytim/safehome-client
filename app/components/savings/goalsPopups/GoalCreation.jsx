@@ -118,7 +118,7 @@ function GoalCreation({
 			<section
 				ref={ref}
 				className={
-					"w-full md:max-w-[493px]  bg-white  md:h-[100vh] h-[100vh] z-40 px-6 py-6"
+					"w-full md:max-w-[493px]  bg-white  md:h-[100vh] h-[100vh] z-40 popup-px py-6"
 				}
 			>
 				<div className="flex flex-row justify-end items-center">
@@ -131,11 +131,8 @@ function GoalCreation({
 				</div>
 
 				<div className="space-y-4 mt-6 max-h-[85vh] md:max-h-[85vh] overflow-y-scroll no-scrollbar pb-16">
-					<h1 className="text-[--text-brand-2] text-lg md:text-xl lg:text-2xl font-semibold">
-						{" "}
-						Create a Goal{" "}
-					</h1>
-					<p className="font-medium text-[--primary] text-sm md:text-base">
+					<h1 className="popup-header"> Create a Goal </h1>
+					<p className="form-label">
 						Reach yours personal goals faster
 						<span className="text-xs block text-[--placeholder]">
 							Max. 2MB. JPG or PNG.
@@ -224,10 +221,7 @@ function GoalCreation({
 								return (
 									<Form className="space-y-6">
 										<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-											<label
-												htmlFor="goalTitle"
-												className="text-[--text] font-medium text-sm text-left"
-											>
+											<label htmlFor="goalTitle" className="form-label">
 												Goal Title
 											</label>
 
@@ -246,10 +240,7 @@ function GoalCreation({
 										</div>
 
 										<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-											<label
-												htmlFor="goalPurpose"
-												className="text-[--text] font-medium text-sm text-left"
-											>
+											<label htmlFor="goalPurpose" className="form-label">
 												Purpose of Goal
 											</label>
 
@@ -268,10 +259,7 @@ function GoalCreation({
 										</div>
 
 										<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-											<label
-												htmlFor="goalAmount"
-												className="text-[--text] font-medium text-sm text-left"
-											>
+											<label htmlFor="goalAmount" className="form-label">
 												Overall Goal Amount
 											</label>
 
@@ -293,10 +281,7 @@ function GoalCreation({
 										</div>
 
 										<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-											<label
-												htmlFor="paymentMode"
-												className="text-[--text] font-medium text-sm text-left"
-											>
+											<label htmlFor="paymentMode" className="form-label">
 												How do you prefer to save?
 											</label>
 
@@ -329,10 +314,7 @@ function GoalCreation({
 										</div>
 
 										<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-											<label
-												htmlFor="savingPreference"
-												className="text-[--text] font-medium text-sm text-left"
-											>
+											<label htmlFor="savingPreference" className="form-label">
 												Payment Method
 											</label>
 
@@ -359,14 +341,14 @@ function GoalCreation({
 											<button
 												disabled={!isValid}
 												type="submit"
-												className="btn-1 bg-[--text-brand-2] hover:bg-[--text-brand-2-hover] "
+												className="btn-1"
 											>
 												Next
 											</button>
 											<button
 												type="button"
 												onClick={toggleShow}
-												className="btn-2 text-[--text-brand-2] border-[--text-brand-2] hover:bg-[#ff9100]/10"
+												className="btn-2"
 											>
 												Cancel
 											</button>

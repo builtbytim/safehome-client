@@ -75,10 +75,7 @@ export function AmountPerIntervalFieldForLock({
 
 	return (
 		<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-			<label
-				htmlFor="amountToSaveOnDailyBasis"
-				className="text-[--text] font-medium text-sm text-left"
-			>
+			<label htmlFor="amountToSaveOnDailyBasis" className="form-label">
 				Preferred amount to save on interval basis
 			</label>
 

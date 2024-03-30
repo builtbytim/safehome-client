@@ -34,13 +34,13 @@ const Authenticator = ({ saveFunc, closeFunc }) => {
 			/>
 			<div className="space-y-3 w-full pt-8 pb-3">
 				<button
-					className="block w-full py-3 px-5 rounded text-white bg-[--color-brand] border border-[--color-brand]"
+					className="block w-full py-3 px-5 rounded text-white bg-[--button] border border-[--button]"
 					onClick={() => saveFunc()}
 				>
 					Save
 				</button>
 				<button
-					className="block w-full py-3 px-5 rounded text-[--header] border border-[--color-brand]"
+					className="block w-full py-3 px-5 rounded text-[--header] border border-[--button]"
 					onClick={() => closeFunc()}
 				>
 					Close

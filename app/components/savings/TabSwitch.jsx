@@ -5,7 +5,7 @@ function TabSwitch({ tabItems, tabState, setTabState, extraClasses = "" }) {
 		return tabId === tabState;
 	}
 	return (
-		<div className="border-b flex  flex-no-wrap items-center scrollbar-fix text-center filter-container no-scrollbar max-w-[99%] font-semibold overflow-x-scroll">
+		<div className="border-b flex  flex-no-wrap items-center scrollbar-fix text-center filter-container no-scrollbar max-w-[99%] font-semibold overflow-x-scroll overflow-y-hidden">
 			{tabItems.map((v, i) => {
 				return (
 					<div

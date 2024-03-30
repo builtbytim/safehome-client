@@ -17,7 +17,7 @@ import { SlSocialLinkedin } from "react-icons/sl";
 const InfoCard = ({ icon, text }) => (
 	<div className="flex flex-row justify-start space-x-8  border border-[--lines] px-6 py-6  rounded md:rounded-xl items-center">
 		<div className="self-center">
-			<div className="border border-[--color-brand] text-2xl md:text-3xl md:text-white` rounded-full w-[50px] h-[50px] md:w-[70px] md:h-[70px] flex items-center justify-center">
+			<div className="border border-[--button] text-2xl md:text-3xl md:text-white` rounded-full w-[50px] h-[50px] md:w-[70px] md:h-[70px] flex items-center justify-center">
 				{icon}
 			</div>
 		</div>

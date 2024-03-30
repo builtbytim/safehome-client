@@ -50,7 +50,7 @@ function LockableAssetsOverview({
 					<div className="space-y-2 ">
 						<div className="flex flex-row justify-between items-center">
 							<div className=" flex flex-row justify-start space-x-4 lg:space-x-6 items-center">
-								<h1 className="font-bold whitespace-nowrap  text-[--header] text-lg md:text-xl">
+								<h1 className="font-bold whitespace-nowrap popup-miniheader">
 									Choose property
 								</h1>
 							</div>
@@ -80,7 +80,7 @@ function LockableAssetsOverview({
 									className={cn({
 										" text-sm whitespace-nowrap  font-medium transitioning capitalize ": true,
 
-										" text-[--header] border-[--color-brand] ": active,
+										" text-[--header] border-[--button] ": active,
 										" text-[--placeholder] border-transparent hover:text-stone-500 ": !active,
 									})}
 								>

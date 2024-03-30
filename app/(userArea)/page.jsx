@@ -112,7 +112,7 @@ function Page({ authenticatedUser, authenticationToken }) {
 									desc="Instantly add funds to this savings Goal."
 								/>
 							</div>
-							<div className="pt-6 h-full">
+							<div className="pt-6">
 								<Topup
 									token={authenticationToken}
 									closeSelf={() => setShowTopup(false)}

@@ -133,7 +133,7 @@ function GoalCreation2({
 			<section
 				ref={ref}
 				className={
-					"w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40 px-6 py-6"
+					"w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40 popup-px py-6"
 				}
 			>
 				<div className="flex flex-row justify-end items-center">
@@ -146,12 +146,8 @@ function GoalCreation2({
 				</div>
 
 				<div className="space-y-4 mt-6 max-h-[85vh] md:max-h-[85vh] overflow-y-scroll no-scrollbar pb-16">
-					<h1 className="text-[--text-brand-2] text-lg md:text-xl lg:text-2xl font-semibold">
-						Final Setup Stage
-					</h1>
-					<p className="font-medium text-[--primary] text-sm md:text-base">
-						Finalize your goal settings
-					</p>
+					<h1 className="popup-header">Final Setup Stage</h1>
+					<p className="form-label">Finalize your goal settings</p>
 
 					{/* Form now  */}
 
@@ -184,10 +180,7 @@ function GoalCreation2({
 								return (
 									<Form className="space-y-6">
 										<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-											<label
-												htmlFor="preferredInterval"
-												className="text-[--text] font-medium text-sm text-left"
-											>
+											<label htmlFor="preferredInterval" className="form-label">
 												Preferred Interval
 											</label>
 
@@ -211,10 +204,7 @@ function GoalCreation2({
 										</div>
 
 										<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-											<label
-												htmlFor="startDate"
-												className="text-[--text] font-medium text-sm text-left"
-											>
+											<label htmlFor="startDate" className="form-label">
 												Set Start Date
 											</label>
 
@@ -233,10 +223,7 @@ function GoalCreation2({
 										</div>
 
 										<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-											<label
-												htmlFor="withdrawalDate"
-												className="text-[--text] font-medium text-sm text-left"
-											>
+											<label htmlFor="withdrawalDate" className="form-label">
 												Set Withdrawal Date
 											</label>
 
@@ -268,10 +255,7 @@ function GoalCreation2({
 													setFieldValue("acceptTerms", value, true);
 												}}
 											/>
-											<label
-												htmlFor="acceptTerms"
-												className="text-[--text] font-medium text-sm text-left"
-											>
+											<label htmlFor="acceptTerms" className="form-label">
 												I acknowledge and agree that in the event I do not
 												achieve the Goal amount of{" "}
 												<NumericFormat
@@ -299,14 +283,11 @@ function GoalCreation2({
 											<button
 												disabled={!isValid || isLoading}
 												type="submit"
-												className="btn-1 bg-[--text-brand-2] hover:bg-[--text-brand-2-hover] "
+												className="btn-1"
 											>
 												{isLoading ? <Spinner /> : "Create Goal"}
 											</button>
-											<button
-												onClick={goBack}
-												className="btn-2 text-[--text-brand-2] border-[--text-brand-2] hover:bg-[#ff9100]/10"
-											>
+											<button onClick={goBack} className="btn-2">
 												Back
 											</button>
 										</div>

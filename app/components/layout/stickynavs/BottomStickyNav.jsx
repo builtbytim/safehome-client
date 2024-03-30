@@ -73,7 +73,7 @@ function BottomStickyNav() {
 												<Icon
 													fill={cn({
 														"#c7c7cd": !routeIsActive(item.link),
-														"#8d4000": routeIsActive(item.link),
+														"#1e0700": routeIsActive(item.link),
 													})}
 												/>
 											</div>

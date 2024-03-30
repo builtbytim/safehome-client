@@ -376,7 +376,7 @@ function SignUp() {
 									onClick={toPrev}
 									type="button"
 									role="button"
-									className="btn-1 self-stretch px-0 bg-white hover:bg-white  border-[--color-brand] rounded-r-none  inline-flex justify-start  items-center"
+									className="btn-1 self-stretch px-0 bg-white hover:bg-white  border-[--button] rounded-r-none  inline-flex justify-start  items-center"
 								>
 									<BsArrowLeftShort className="text-[--button] hover:text-[--color-brand-hover] text-3xl transitioning border rounded-full" />
 								</button>

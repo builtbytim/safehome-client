@@ -126,7 +126,7 @@ function Page({ authenticatedUser, authenticationToken: token }) {
 							<button
 								disabled={data.referralBonus <= 0}
 								onClick={handleWithdrawClick}
-								className="btn-1 max-w-[150px] bg-[--color-brand] flex text-white text-center justify-center items-center py-3 px-6 rounded-lg  space-x-2"
+								className="btn-1 max-w-[150px] bg-[--button] flex text-white text-center justify-center items-center py-3 px-6 rounded-lg  space-x-2"
 							>
 								<FaMoneyBill className="text-white text-2xl" />
 								<span>Withdraw</span>
