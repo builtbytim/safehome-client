@@ -68,7 +68,7 @@ export default function MembershipFeePrompt() {
 						</div>
 					)}
 
-					<p className="text-[--primary] mt-3  text-sm md:text-base first-letter:uppercase">
+					<p className="text-[--text] mt-3  text-sm md:text-base first-letter:uppercase">
 						Hello there! We are glad you signed up for SafeHome. However, you
 						must pay a one-time membership fee of{" "}
 						<span className="font-semibold">₦5,000</span> to complete your

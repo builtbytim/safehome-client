@@ -126,7 +126,7 @@ function GoalCreation({
 						onClick={toggleShow}
 						className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
 					>
-						<BiX className="text-[--primary] text-3xl" />
+						<BiX className="text-[--text] text-3xl" />
 					</div>
 				</div>
 

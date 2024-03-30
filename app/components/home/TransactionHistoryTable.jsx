@@ -133,7 +133,7 @@ function TransactionHistoryTable({ token, params, setPageFilter }) {
 											{shortenTextToEllipses(v.reference, 16)}
 										</span>
 										<span className=" text-sm capitalize truncate">
-											<span className={" text-[--primary]  truncate"}>
+											<span className={" text-[--text]  truncate"}>
 												{v.description}
 											</span>
 										</span>

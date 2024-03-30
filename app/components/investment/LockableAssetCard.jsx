@@ -20,9 +20,9 @@ const LockableAssetCard = ({ investibleAsset, onSelect }) => {
 		<div
 			onClick={onSelect}
 			assetName="Click to view more details"
-			className="relative  rounded-[16px]  border overflow-hidden text-[--text] text-left grid grid-cols-5 md:grid-cols-5 hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm self-stretch cursor-pointer"
+			className="relative  rounded-[10px] lg:rounded-[16px]  border overflow-hidden text-[--text] text-left grid grid-cols-5 md:grid-cols-5 hover:ring-2 hover:ring-[--lines] hover:ring-offset-2 transitioning w-full group text-sm self-stretch cursor-pointer p-1 lg:p-0"
 		>
-			<div className=" h-full min-h-[150px] relative rounded-l-[16px] col-span-2 md:col-span-2 overflow-hidden">
+			<div className=" h-full min-h-[150px] relative rounded-[10px] lg:rounded-r-none lg:rounded-l-[16px] col-span-2 md:col-span-2 overflow-hidden">
 				<Image
 					src={
 						ownerClub === "land_owners_club"
@@ -33,7 +33,7 @@ const LockableAssetCard = ({ investibleAsset, onSelect }) => {
 					}
 					alt={assetName}
 					fill
-					className="object-cover absolute rounded-l-[16px]  group-hover:scale-110 transform transition-all duration-1000 ease-in-out "
+					className="object-cover absolute  rounded-[10px] lg:rounded-l-[16px] lg:rounded-r-none  group-hover:scale-110 transform transition-all duration-1000 ease-in-out "
 				/>
 			</div>
 			<div className="px-4 pt-2 pb-8 md:px-4 xl:px-6 col-span-3 md:col-span-3 space-y-1">

@@ -54,7 +54,7 @@ const AddCard = ({ closeFunc, token }) => {
 		}
 	}
 	return (
-		<div className="px-8 pb-5 space-y-5 text-[--primary]">
+		<div className="px-8 pb-5 space-y-5 text-[--text]">
 			<Formik
 				onSubmit={handleSubmit}
 				initialValues={{

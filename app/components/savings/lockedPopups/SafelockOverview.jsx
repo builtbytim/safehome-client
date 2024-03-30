@@ -29,20 +29,20 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
 			<section
 				ref={ref}
 				className={
-					"w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40  "
+					"w-full md:max-w-[493px] bg-white h-[100vh] z-40 overflow-scroll pb-10"
 				}
 			>
-				<div className="flex p-6 flex-row justify-end items-center">
+				<div className="flex popup-px py-6 flex-row justify-end items-center">
 					<div
 						onClick={closeSelf}
 						className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
 					>
-						<BiX className="text-[--primary] text-3xl" />
+						<BiX className="text-[--text] text-3xl" />
 					</div>
 				</div>
 
-				<div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-8">
-					<div className="px-6">
+				<div className="pb-8 popup-px space-y-7">
+					<div className="">
 						<div className={"relative h-[210px] truncate  w-full "}>
 							<Image
 								src={assetInfo.coverImageUrl || GoalImage}
@@ -51,14 +51,14 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
 								className="object-cover  h-[210px] w-full"
 							/>
 							<div className="absolute bg-black/60  inset-0  flex flex-col justify-center items-center truncate">
-								<h1 className="text-white capitalize   truncate text-xl md:text-2xl xl:text-3xl text-center">
+								<h1 className="text-white capitalize   truncate text-xl md:text-2xl xl:text-3xl text-center font-semibold">
 									{lockName}
 								</h1>
 							</div>
 						</div>
 					</div>
 
-					<div className="px-6 gap-4 pt-6 grid grid-cols-2">
+					<div className="gap-4 grid grid-cols-2">
 						<SmallDetailsCard
 							title="Amount to Invest"
 							value={
@@ -110,8 +110,8 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
 						/>
 					</div>
 
-					<div className="pt-6">
-						<p className="text-[--header] text-lg md:text-xl font-bold text-center">
+					<div className="">
+						<p className="text-[--header] text-lg md:text-xl font-semibold text-center">
 							{completed
 								? "Savings is Completed"
 								: readyForInvestment
@@ -121,7 +121,7 @@ function SafelockOverview({ closeSelf, plan, handleAddFund }) {
 					</div>
 				</div>
 
-				<div className=" space-y-4 px-6 pt-4  flex flex-col justify-center items-center  mx-auto">
+				<div className=" space-y-4 flex flex-col justify-center items-center  mx-auto popup-px">
 					{!completed && !readyForInvestment && (
 						<button
 							onClick={handleAddFund}

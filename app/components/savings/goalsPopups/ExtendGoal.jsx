@@ -15,7 +15,7 @@ function ExtendGoal({ closeSelf }) {
 						onClick={closeSelf}
 						className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
 					>
-						<BiX className="text-[--primary] text-3xl" />
+						<BiX className="text-[--text] text-3xl" />
 					</div>
 				</div>
 
@@ -24,7 +24,7 @@ function ExtendGoal({ closeSelf }) {
 						<h1 className="font-bold  text-[--text-brand-2] text-lg md:text-xl">
 							Extend Goal Amount
 						</h1>
-						<p className="text-[--primary] font-medium text-sm pt-2">
+						<p className="text-[--text] font-medium text-sm pt-2">
 							You can now extend your Goal amount. More options coming soon.
 						</p>
 					</div>
