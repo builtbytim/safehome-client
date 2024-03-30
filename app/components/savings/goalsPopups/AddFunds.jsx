@@ -140,24 +140,22 @@ function AddFunds({ closeAll, closeSelf, token, selectedGoal }) {
 		<Overlay2 z={3}>
 			<section
 				className={
-					"w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40 "
+					"w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40 popup-px"
 				}
 			>
-				<div className="flex p-6 flex-row justify-end items-center">
+				<div className="flex py-6 flex-row justify-end items-center">
 					<div
 						onClick={closeSelf}
 						className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
 					>
-						<BiX className="text-[--primary] text-3xl" />
+						<BiX className="text-[--text] text-3xl" />
 					</div>
 				</div>
 
 				<div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-32">
-					<div className="px-6">
-						<h1 className="font-bold  text-[--text-brand-2] text-lg md:text-xl">
-							Add Funds
-						</h1>
-						<p className="text-[--primary] font-medium text-sm pt-2">
+					<div className="pb-6">
+						<h1 className="popup-header">Add Funds</h1>
+						<p className="font-medium pt-2">
 							Instantly add funds to this savings goal
 						</p>
 					</div>
@@ -186,12 +184,9 @@ function AddFunds({ closeAll, closeSelf, token, selectedGoal }) {
 					>
 						{({ isValid, setFieldValue }) => {
 							return (
-								<Form className="space-y-6 p-6  ">
+								<Form className="space-y-6 py-6  ">
 									<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-										<label
-											htmlFor="amountToAdd"
-											className="text-[--text] font-medium text-sm text-left"
-										>
+										<label htmlFor="amountToAdd" className="form-label">
 											Amount to add
 										</label>
 
@@ -225,10 +220,7 @@ function AddFunds({ closeAll, closeSelf, token, selectedGoal }) {
 									</div>
 
 									<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-										<label
-											htmlFor="fundingSource"
-											className="text-[--text] font-medium text-sm text-left"
-										>
+										<label htmlFor="fundingSource" className="form-label">
 											Funding Source
 										</label>
 
@@ -251,11 +243,11 @@ function AddFunds({ closeAll, closeSelf, token, selectedGoal }) {
 										/>
 									</div>
 
-									<div className="absolute w-[90%]  inset-x-0 bottom-4  flex flex-col justify-center items-center  mx-auto">
+									<div className="absolute w-[90%]  inset-x-0 bottom-[25px] flex flex-col justify-center items-center  mx-auto">
 										<button
 											type="submit"
 											disabled={!isValid || isLoading}
-											className="btn-1 w-full bg-[--text-brand-2] hover:bg-[--text-brand-2-hover] "
+											className="btn-1"
 										>
 											{isLoading ? <Spinner /> : "Add Funds"}
 										</button>

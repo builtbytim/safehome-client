@@ -10,7 +10,7 @@ function ProgressBar({ percentage = 0, variant = 0 }) {
 				className={
 					"absolute  h-full rounded-brand border-transparent  " +
 					cn({
-						"bg-[--text-brand-2]": variant === 0,
+						"bg-[--highlight]": variant === 0,
 						"bg-[--button]": variant === 1,
 
 						"bg-[#FFD600]": variant === 2,

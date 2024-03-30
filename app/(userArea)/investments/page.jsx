@@ -118,7 +118,7 @@ function Page({ authenticationToken, authenticatedUser }) {
 			<HeaderInvestments
 				token={authenticationToken}
 				title="Investments"
-				extraClasses="text-[--primary]"
+				extraClasses="text-[--text]"
 			/>
 
 			<OverviewCard token={authenticationToken} />

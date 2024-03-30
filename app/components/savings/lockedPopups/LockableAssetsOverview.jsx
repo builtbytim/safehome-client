@@ -66,7 +66,7 @@ function LockableAssetsOverview({
 							>
 								<BsX
 									role="button"
-									className="text-2xl lg:text-2xl  rounded-full text-[--primary] transitioning"
+									className="text-2xl lg:text-2xl  rounded-full text-[--text] transitioning"
 								/>
 							</div>
 						</div>

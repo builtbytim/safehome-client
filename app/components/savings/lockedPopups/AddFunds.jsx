@@ -143,24 +143,22 @@ function AddFunds({ closeSelf, closeAll, token, selectedLockedPlan }) {
 		<Overlay2 z={3}>
 			<section
 				className={
-					"w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40 "
+					"w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40 popup-px"
 				}
 			>
-				<div className="flex p-6 flex-row justify-end items-center">
+				<div className="flex flex-row justify-end items-center py-6">
 					<div
 						onClick={closeSelf}
 						className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
 					>
-						<BiX className="text-[--primary] text-3xl" />
+						<BiX className="text-3xl" />
 					</div>
 				</div>
 
 				<div className="overflow-y-auto  scroll-fix max-h-[90vh] md:max-h-[85vh] pb-32">
-					<div className="px-6">
-						<h1 className="font-bold  text-[--header] text-lg md:text-xl">
-							Add Funds
-						</h1>
-						<p className="text-[--primary] font-medium text-sm pt-2">
+					<div className="pb-6">
+						<h1 className="popup-header">Add Funds</h1>
+						<p className="font-medium pt-2">
 							Instantly add funds to this savings goal
 						</p>
 					</div>
@@ -189,12 +187,9 @@ function AddFunds({ closeSelf, closeAll, token, selectedLockedPlan }) {
 					>
 						{({ isValid, setFieldValue }) => {
 							return (
-								<Form className="space-y-6 p-6  ">
+								<Form className="space-y-6">
 									<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-										<label
-											htmlFor="amountToAdd"
-											className="text-[--text] font-medium text-sm text-left"
-										>
+										<label htmlFor="amountToAdd" className="form-label">
 											Amount to add
 										</label>
 
@@ -254,11 +249,11 @@ function AddFunds({ closeSelf, closeAll, token, selectedLockedPlan }) {
 										/>
 									</div>
 
-									<div className="absolute w-[90%]  inset-x-0 bottom-4  flex flex-col justify-center items-center  mx-auto">
+									<div className="absolute w-[90%] inset-x-0 bottom-[25px]  flex flex-col justify-center items-center  mx-auto">
 										<button
 											type="submit"
 											disabled={!isValid || isLoading}
-											className="btn-1 w-full bg-[--button]  "
+											className="btn-1"
 										>
 											{isLoading ? <Spinner /> : "Add Funds"}
 										</button>

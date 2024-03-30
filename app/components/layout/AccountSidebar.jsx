@@ -56,8 +56,8 @@ function AccountSidebar() {
 				<div className="  self-start px-4  bottom-[5vh] flex flex-col justify-start items-start space-y-4  ">
 					<Link href="/account/guidelines" className="py-2 block  w-full">
 						<div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
-							<RiGuideLine className="text-xl text-[--primary]" />
-							<span className="text-[--primary] font-medium"> Guidelines </span>
+							<RiGuideLine className="text-xl text-[--text]" />
+							<span className="text-[--text] font-medium"> Guidelines </span>
 						</div>
 					</Link>
 					<a
@@ -66,8 +66,8 @@ function AccountSidebar() {
 						className="py-2 block w-full"
 					>
 						<div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
-							<BiLinkExternal className="text-xl text-[--primary]" />
-							<span className="text-[--primary] font-medium"> Partners </span>
+							<BiLinkExternal className="text-xl text-[--text]" />
+							<span className="text-[--text] font-medium"> Partners </span>
 						</div>
 					</a>
 

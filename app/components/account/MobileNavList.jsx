@@ -56,14 +56,14 @@ function MobileNavList() {
 
 				<Link href="/account/guidelines">
 					<div className="px-4 py-2   flex flex-row space-x-4 justify-start items-center hover:cursor-pointer w-full">
-						<RiGuideLine className="text-2xl text-[--primary]" />
-						<span className="text-[--primary] font-medium"> Guidelines </span>
+						<RiGuideLine className="text-2xl text-[--text]" />
+						<span className="text-[--text] font-medium"> Guidelines </span>
 					</div>
 				</Link>
 				<a target="_blank" href={config.urlMaps.affiliate}>
 					<div className="px-4 py-2   flex flex-row space-x-4 justify-start items-center hover:cursor-pointer w-full">
-						<BiLinkExternal className="text-2xl text-[--primary]" />
-						<span className="text-[--primary] font-medium"> Partners </span>
+						<BiLinkExternal className="text-2xl text-[--text]" />
+						<span className="text-[--text] font-medium"> Partners </span>
 					</div>
 				</a>
 

@@ -27,7 +27,7 @@ const InvestmentInfo = ({ data, showAboutFunction, investNowFunction }) => {
 						<p className="text-lg leading-[1.6rem] max-h-[3.2rem] font-medium capitalize truncate text-[--text]">
 							{data.assetName}
 						</p>
-						<p className="text-sm text-[--primary] pt-2">{data.location}</p>
+						<p className="text-sm text-[--text] pt-2">{data.location}</p>
 					</div>
 					<div className="text-right">
 						<p className="text-[--text-brand] font-bold  text-xl md:text-2xl">

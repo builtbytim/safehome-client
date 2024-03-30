@@ -73,7 +73,7 @@ const AddBank = ({ closeFunc, token }) => {
 	}
 
 	return (
-		<div className="px-8 pb-5 space-y-5 text-[--primary]">
+		<div className="px-8 pb-5 space-y-5 text-[--text]">
 			{getSupportedBanksLoading && (
 				<div className="flex h-[50vh] justify-center items-center  w-full">
 					<LoadingView />

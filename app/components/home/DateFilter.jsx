@@ -120,7 +120,7 @@ function DateFilter({ setDateFilter }) {
 											: "From"}
 									</span>
 
-									<MdOutlineCalendarMonth className="text-xl text-[--primary]" />
+									<MdOutlineCalendarMonth className="text-xl text-[--text]" />
 								</div>
 
 								<div
@@ -137,7 +137,7 @@ function DateFilter({ setDateFilter }) {
 											: "To"}{" "}
 									</span>
 
-									<MdOutlineCalendarMonth className="text-xl text-[--primary]" />
+									<MdOutlineCalendarMonth className="text-xl text-[--text]" />
 								</div>
 							</div>
 							<div className="pt-2">

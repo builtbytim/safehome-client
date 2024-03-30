@@ -6,7 +6,7 @@ import { IoCopySharp } from "react-icons/io5";
 
 const Authenticator = ({ saveFunc, closeFunc }) => {
 	return (
-		<div className="px-8 py-5 flex flex-col gap-5 items-center text-[--primary]">
+		<div className="px-8 py-5 flex flex-col gap-5 items-center text-[--text]">
 			<div className="w-[220px] h-[220px]">
 				<Image
 					src={hash}

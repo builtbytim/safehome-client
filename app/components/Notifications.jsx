@@ -145,7 +145,7 @@ export default function Notifications() {
 								}}
 								disabled={isFetching || isLoadingMarkAllAsRead}
 								type="button"
-								className="text-[--text-danger] transitioning hover:cursor-pointer text-sm  hover:text-[--primary] rounded-brand p-1  disabled:opacity-20 disabled:pointer-events-none "
+								className="text-[--text-danger] transitioning hover:cursor-pointer text-sm  hover:text-[--text] rounded-brand p-1  disabled:opacity-20 disabled:pointer-events-none "
 							>
 								{isLoadingMarkAllAsRead ? "Marking..." : "Mark all as read"}
 							</button>
