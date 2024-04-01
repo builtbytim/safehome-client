@@ -117,7 +117,7 @@ function CreateSafelockPreview({
 							handleChange={(v) => {
 								setAcceptTerms(v);
 							}}
-							color="#1e0700"
+							color="#ff9100"
 						/>
 						<p className="text-[--text] font-medium text-left">
 							I hereby acknowledge and authorize SafeHome to invest my funds
