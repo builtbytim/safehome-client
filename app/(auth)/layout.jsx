@@ -10,7 +10,7 @@ import Pattern from "../../assets/images/pattern.png";
 
 export default function Layout({ children }) {
 	return (
-		<main className="relative bg-white  sm:bg-gradient-to-b from-[#8D4000]  to-[#1E0700] flex flex-col justify-center items-center  w-full min-h-screen">
+		<main className="relative bg-white  sm:bg-gradient-to-b from-[#ff9100]  to-[#1E0700] flex flex-col justify-center items-center  w-full min-h-screen">
 			<Image
 				src={Pattern}
 				alt="pattern"

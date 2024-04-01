@@ -181,10 +181,7 @@ function KYCForm({ user, token }) {
 						<BarLoader v={0} active={isLoading} />
 
 						<div className="w-full  relative flex flex-col justify-center items-start space-y-2">
-							<label
-								htmlFor="residentialAddress"
-								className="text-[--text] text-sm text-left"
-							>
+							<label htmlFor="residentialAddress" className="form-text">
 								Residential Address
 							</label>
 							<Field
@@ -202,10 +199,7 @@ function KYCForm({ user, token }) {
 						</div>
 
 						<div className="w-full  relative flex flex-col justify-center items-start space-y-2">
-							<label
-								htmlFor="state"
-								className="text-[--text] text-sm text-left"
-							>
+							<label htmlFor="state" className="form-text">
 								State
 							</label>
 							<GenericSelectFieldVariant1
@@ -227,10 +221,7 @@ function KYCForm({ user, token }) {
 						</div>
 
 						<div className="w-full  relative flex flex-col justify-center items-start space-y-2">
-							<label
-								htmlFor="documentType"
-								className="text-[--text] text-sm text-left"
-							>
+							<label htmlFor="documentType" className="form-text">
 								Select Document Type
 							</label>
 							<GenericSelectFieldVariant1
@@ -251,10 +242,7 @@ function KYCForm({ user, token }) {
 						</div>
 
 						<div className="w-full  relative flex flex-col justify-center items-start space-y-2">
-							<label
-								htmlFor="IDNumber"
-								className="text-[--text] text-sm text-left"
-							>
+							<label htmlFor="IDNumber" className="form-text">
 								ID Number
 							</label>
 							<Field
@@ -272,7 +260,7 @@ function KYCForm({ user, token }) {
 						</div>
 
 						<div className="w-full  relative flex flex-col justify-center items-start space-y-2">
-							<label htmlFor="BVN" className="text-[--text] text-sm text-left">
+							<label htmlFor="BVN" className="form-text">
 								BVN
 							</label>
 							<Field
@@ -289,7 +277,7 @@ function KYCForm({ user, token }) {
 							/>
 						</div>
 
-						<div className="pt-4 ">
+						<div className="pt-4">
 							<button
 								type="submit"
 								disabled={!isValid || isLoading}

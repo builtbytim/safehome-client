@@ -19,11 +19,9 @@ function Page({ authenticatedUser, authenticationToken }) {
 	const [showAddBank, setShowAddBank] = useState(false);
 
 	return (
-		<main className=" space-y-8 lg:space-y-8 text-[--text] border border-[--lines] p-5 h-full min-h-[80vh] rounded-2xl">
+		<main className=" space-y-8 lg:space-y-8 text-[--text] border border-[--lines] account-p h-full min-h-[80vh] rounded-2xl">
 			<div className="pb-3 space-y-2">
-				<h3 className="text-2xl md:text-3xl text-[--header] font-semibold">
-					Card & Bank Settings
-				</h3>
+				<h3 className="popup-header">Card & Bank Settings</h3>
 				<p>Enter your card details to easily add funds to your account.</p>
 			</div>
 
@@ -60,7 +58,7 @@ function Page({ authenticatedUser, authenticationToken }) {
 					{tabState === 0 ? (
 						<div className="py-10 text-center">
 							<button
-								className="btn-1 w-full max-w-[400px]  text-white bg-[--button] rounded text-lg"
+								className="btn-1 max-w-[400px]"
 								onClick={() => setShowAddCard(true)}
 							>
 								Add New Card
@@ -69,7 +67,7 @@ function Page({ authenticatedUser, authenticationToken }) {
 					) : tabState == 1 ? (
 						<div className="py-10 text-center">
 							<button
-								className="btn-1 w-full max-w-[400px]  text-white bg-[--button] rounded text-lg"
+								className="btn-1 max-w-[400px]"
 								onClick={() => setShowAddBank(true)}
 							>
 								Add New Bank

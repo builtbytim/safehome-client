@@ -98,9 +98,9 @@ function Page({ authenticatedUser, authenticationToken: token }) {
 	}
 
 	return (
-		<main className=" space-y-2 lg:space-y-3 text-[--text] border border-[--lines] p-5 h-full min-h-[80vh] rounded-2xl">
-			<div className="pb-3 space-y-2">
-				<h3 className="text-3xl text-[--header] font-semibold">Referrals</h3>
+		<main className=" space-y-2 lg:space-y-3 text-[--text] border border-[--lines] account-p h-full min-h-[80vh] rounded-2xl">
+			<div className="pb-0 space-y-1">
+				<h3 className="popup-header">Referrals</h3>
 				<p>Refer and earn ₦2,000 per referral.</p>
 			</div>
 
@@ -137,14 +137,14 @@ function Page({ authenticatedUser, authenticationToken: token }) {
 						<div className="md:hidden pb-1 flex flex-row justify-end items-center space-x-1 px-2">
 							<ScrollLink
 								containerId="refer-scroll-indicators"
-								activeClass="inline-block rounded-full  w-[8px] bg-[--text-brand] p-1"
-								className="inline-block rounded-full border p-1 "
+								activeClass="scroll-link-active"
+								className="scroll-link"
 								to="total-balance"
 							></ScrollLink>
 							<ScrollLink
 								containerId="refer-scroll-indicators"
-								activeClass="inline-block rounded-full  w-[8px] bg-[--text-brand] p-1"
-								className="inline-block rounded-full border p-1 "
+								activeClass="scroll-link-active"
+								className="scroll-link"
 								to="referrals"
 							></ScrollLink>
 						</div>
@@ -157,10 +157,10 @@ function Page({ authenticatedUser, authenticationToken: token }) {
 								className="w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] self-stretch flex flex-col justify-between p-6 bg-[--card-bg-1] rounded-xl space-y-6"
 							>
 								<span>
-									<PiMoneyDuotone className="text-[--text] text-lg" />
+									<PiMoneyDuotone className="text-[--text] text-4xl" />
 								</span>
-								<p className="text-sm">Total Earned</p>
-								<p className="text-xl font-semibold">
+								<p className="text-base">Total Earned</p>
+								<p className="text-2xl font-bold">
 									<NumericFormat
 										value={data.referralBonus}
 										displayType={"text"}
@@ -175,10 +175,10 @@ function Page({ authenticatedUser, authenticationToken: token }) {
 								className="w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] self-stretch flex flex-col justify-between p-6 bg-[--card-bg-1] rounded-xl space-y-6"
 							>
 								<span>
-									<HiOutlineUsers className="text-[--text] text-lg" />
+									<HiOutlineUsers className="text-[--text] text-4xl" />
 								</span>
-								<p className="text-sm">Referrals</p>
-								<p className="text-xl font-semibold">
+								<p className="text-base">Referrals</p>
+								<p className="text-2xl font-bold">
 									<NumericFormat
 										value={data.referralCount}
 										displayType={"text"}

@@ -125,7 +125,7 @@ export default function Notifications() {
 					<div className="  flex md:hidden  flex-row justify-end items-center w-full">
 						<BsX
 							role="button"
-							className="text-3xl text-[#8d4000] hover:text-[#8d4000]/80 transition-flow"
+							className="text-3xl text-[#ff9100] hover:text-[#ff9100]/80 transition-flow"
 							onClick={closeSelf}
 						/>
 					</div>

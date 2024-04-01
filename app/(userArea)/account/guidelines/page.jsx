@@ -3,16 +3,16 @@ import SecureRoute from "../../../components/SecureRoute";
 
 function Page() {
 	return (
-		<div className="min-h-screen   w-full">
-			<h1 className="self-center text-[--text] capitalize text-lg sm:text-xl md:text-2xl lg:text-3xl  font-semibold">
-				Guidelines
-			</h1>
-
-			<div className="text-base space-y-6   text-[--text]  font-normal  ">
-				<p className="pt-2">
+		<main className=" space-y-6 text-[--text] border border-[--lines] account-p h-full min-h-[80vh] rounded-2xl">
+			<div className="pb-0 space-y-1">
+				<h3 className="popup-header">Guidelines</h3>
+				<p>
 					You must adhere to these rules in order to use SafeHome&apos;s
 					services:
 				</p>
+			</div>
+
+			<div className="text-base space-y-6   text-[--text]  font-normal  ">
 				<div className="space-y-2">
 					<p>
 						1. Complete your KYC (Know Your Customer) verification to be able to
@@ -47,7 +47,7 @@ function Page() {
 					</p>
 				</div>
 			</div>
-		</div>
+		</main>
 	);
 }
 

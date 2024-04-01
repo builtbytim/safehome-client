@@ -11,11 +11,9 @@ function ProfileInformationArea({
 	const { tab: tabState, setTab: setTabState } = useTabParam("tab", 0);
 
 	return (
-		<main className=" space-y-8 lg:space-y-10 text-[--text] border border-[--lines] p-5 h-full rounded-2xl">
-			<div className="pb-3 space-y-2">
-				<h3 className="text-2xl md:text-3xl text-[--header] font-semibold">
-					Account Settings
-				</h3>
+		<main className=" space-y-8 lg:space-y-10 text-[--text] border border-[--lines] account-p h-full rounded-2xl">
+			<div className="pb-3 space-y-1">
+				<h3 className="popup-header">Account Settings</h3>
 				<p>
 					Simply fill and upload the required information below, and we’ll take
 					it from here

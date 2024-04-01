@@ -103,7 +103,7 @@ function OverviewCard({ setShowTopup, setShowWithdraw, token }) {
 				>
 					<div
 						id="my-funds"
-						className="bg-[#8d4000]/10 w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6"
+						className="bg-[#ff9100]/10 w-full min-w-[100%] sm:min-w-[60%] lg:min-w-[344px] rounded-brand p-6 flex flex-col justify-center items-start space-y-6"
 					>
 						<div>
 							<Image src={FundsImage} alt="my funds" width="48" />

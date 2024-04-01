@@ -54,7 +54,7 @@ const AddCard = ({ closeFunc, token }) => {
 		}
 	}
 	return (
-		<div className="px-8 pb-5 space-y-5 text-[--text]">
+		<div className="popup-px pb-5 space-y-5 text-[--text]">
 			<Formik
 				onSubmit={handleSubmit}
 				initialValues={{
@@ -129,14 +129,11 @@ const AddCard = ({ closeFunc, token }) => {
 								<button
 									type="submit"
 									disabled={!isValid || addCardLoading}
-									className="btn-1 block w-full py-3 px-5 rounded text-white bg-[--button] border border-[--button]"
+									className="btn-1"
 								>
 									{addCardLoading ? <Spinner /> : "Add Card"}
 								</button>
-								<button
-									className="btn-2 block w-full py-3 px-5 rounded text-[--header] border border-[--button]"
-									onClick={() => closeFunc()}
-								>
+								<button className="btn-2" onClick={() => closeFunc()}>
 									Close
 								</button>
 							</div>
