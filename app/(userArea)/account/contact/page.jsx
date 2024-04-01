@@ -64,15 +64,19 @@ function Page() {
 			</div>
 			<div className="space-y-4  border border-[--lines] rounded md:rounded-xl p-7 text-center">
 				<div className="flex justify-center space-x-6 md:space-x-10 items-center">
-					<a href="https://x.com/safehomecoop?s=21">
+					<a href="https://twitter.com/safehomecoop">
 						<PiTwitterLogo className="text-[--text] text-2xl md:text-3xl" />
 					</a>
 
-					<a href="https://instagram.com/safehomecoop?igshid=MmVlMjlkMTBhMg==">
+					<a href="https://www.instagram.com/safehomecoop/">
 						<PiInstagramLogo className="text-[--text] text-2xl md:text-3xl" />
 					</a>
-					<RiFacebookFill className="text-[--text] text-2xl md:text-3xl" />
-					<SlSocialLinkedin className="text-[--text] text-2xl md:text-3xl" />
+					<a href="https://web.facebook.com/safehomecoop/">
+						<RiFacebookFill className="text-[--text] text-2xl md:text-3xl" />
+					</a>
+					<a href="https://www.linkedin.com/in/safe-home/">
+						<SlSocialLinkedin className="text-[--text] text-2xl md:text-3xl" />
+					</a>
 
 					<a href="http://wa.me/2348129940741">
 						<PiWhatsappLogo className="text-[--text] text-2xl md:text-3xl" />
