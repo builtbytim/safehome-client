@@ -25,7 +25,7 @@ const MyInvestmentCard = ({ investment, openInfo }) => {
 				})
 			}
 		>
-			<div className="relative h-full min-h-[150px] col-span-2 md:col-span-2 overflow-hidden rounded-[10px] lg:rounded-l-[16px] lg:rounded-r-none">
+			<div className="relative h-full min-h-[135px] col-span-2 md:col-span-2 overflow-hidden rounded-[10px] lg:rounded-l-[16px] lg:rounded-r-none">
 				<Image
 					src={
 						ownerClub === "land_owners_club"
