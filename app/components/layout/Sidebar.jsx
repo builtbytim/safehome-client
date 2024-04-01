@@ -87,7 +87,7 @@ function Sidebar() {
 												<Icon
 													fill={cn({
 														"#FFFFFF": routeIsActive(item.link),
-														"#162f43AA": !routeIsActive(item.link),
+														"#1e0700": !routeIsActive(item.link),
 													})}
 												/>
 											</div>
@@ -99,7 +99,7 @@ function Sidebar() {
 													" transitioning  text-base " +
 													cn({
 														" text-white ": routeIsActive(item.link),
-														" text-[#162f43]/80 ": !routeIsActive(item.link),
+														" text-[#1e0700]/80 ": !routeIsActive(item.link),
 													})
 												}
 											>
