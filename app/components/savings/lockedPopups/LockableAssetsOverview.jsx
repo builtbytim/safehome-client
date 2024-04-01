@@ -48,26 +48,21 @@ function LockableAssetsOverview({
 			>
 				<div className="h-full pb-8 space-y-2  max-w-full">
 					<div className="space-y-2 ">
-						<div className="flex flex-row justify-between items-center">
-							<div className=" flex flex-row justify-start space-x-4 lg:space-x-6 items-center">
-								<h1 className="font-bold whitespace-nowrap popup-miniheader">
-									Choose property
-								</h1>
-							</div>
-
-							{/* <input
-                  type="text"
-                  className="hidden px-2 w-[40vw] transitioning text-stone-500 max-w-[30%] pl-4 text-sm outline-none focus:border-[--invert] placeholder:text-[--placeholder] rounded-brand py-2 border self-center"
-                  placeholder="Search assets..."
-                /> */}
+						<div className="flex flex-col md:flex-row justify-between items-center gap-1">
 							<div
-								className="p-1 border  rounded-full hover:bg-[--b1] cursor-pointer"
+								className="p-[0.35rem] border  rounded-full hover:bg-[--b1] cursor-pointer self-end md:order-2"
 								onClick={goBack}
 							>
 								<BsX
 									role="button"
 									className="text-2xl lg:text-2xl  rounded-full text-[--text] transitioning"
 								/>
+							</div>
+
+							<div className="self-start">
+								<h1 className="font-bold whitespace-nowrap popup-miniheader">
+									Choose property
+								</h1>
 							</div>
 						</div>
 						<ClubOwnersFilter
