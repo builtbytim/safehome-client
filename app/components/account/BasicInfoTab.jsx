@@ -147,15 +147,15 @@ const BasicInfoTab = ({ user, token }) => {
 								<div className="pb-4">
 									<Link
 										href="/kyc"
-										className=" ring-1 hover:ring-[--primary] font-normal ring-offset-2 bg-[--primary] text-white  transitioning  rounded-brand text-xs md:text-sm px-2 lg:px-2 items-center py-1"
+										className=" ring-1 ring-[--button] hover:ring-[--highlight] font-normal ring-offset-2 bg-[--button] text-white  transitioning  rounded-brand text-xs md:text-sm px-2 lg:px-2 items-center py-1"
 									>
 										Go to KYC
 									</Link>
 								</div>
 							)}
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-x-5 md:gap-y-7">
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-x-5 md:gap-y-7 pt-4">
 								<div className="relative">
-									<p className="account-form-text">First Name</p>
+									<p className="form-text">First Name</p>
 									<Field
 										type="text"
 										disabled={disableForm}
@@ -171,7 +171,7 @@ const BasicInfoTab = ({ user, token }) => {
 									/>
 								</div>
 								<div className="relative">
-									<p className="account-form-text">Surname</p>
+									<p className="form-text">Surname</p>
 									<Field
 										disabled={disableForm}
 										type="text"
@@ -187,7 +187,7 @@ const BasicInfoTab = ({ user, token }) => {
 								</div>
 
 								<div className="relative">
-									<p className="account-form-text">Gender</p>
+									<p className="form-text">Gender</p>
 									<GenericSelectField
 										disabled={disableForm}
 										items={[
@@ -213,7 +213,7 @@ const BasicInfoTab = ({ user, token }) => {
 								</div>
 
 								<div className="relative">
-									<p className="account-form-text"> Date of Birth</p>
+									<p className="form-text"> Date of Birth</p>
 									<Field
 										disabled={disableForm}
 										name="dateOfBirth"
@@ -229,7 +229,7 @@ const BasicInfoTab = ({ user, token }) => {
 								</div>
 
 								<div className="relative">
-									<p className="account-form-text">Email</p>
+									<p className="form-text">Email</p>
 									<Field
 										disabled
 										type="email"
@@ -244,7 +244,7 @@ const BasicInfoTab = ({ user, token }) => {
 									/>
 								</div>
 								<div className="relative">
-									<p className="account-form-text">Telephone</p>
+									<p className="form-text">Telephone</p>
 									<Field
 										type="text"
 										disabled={disableForm}
@@ -261,7 +261,7 @@ const BasicInfoTab = ({ user, token }) => {
 								</div>
 
 								<div className="relative">
-									<p className="account-form-text">Address</p>
+									<p className="form-text">Address</p>
 									<Field
 										type="text"
 										disabled={disableForm}
@@ -277,7 +277,7 @@ const BasicInfoTab = ({ user, token }) => {
 								</div>
 
 								<div className="relative">
-									<p className="account-form-text">State of Residence</p>
+									<p className="form-text">State of Residence</p>
 									<GenericSelectField
 										handleChange={({ selectedItem }) => {
 											setFieldValue("state", selectedItem.value);

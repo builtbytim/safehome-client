@@ -124,11 +124,9 @@ function Page({ authenticationToken }) {
 	}, [preferences]);
 
 	return (
-		<main className=" space-y-8 lg:space-y-8 text-[--text] border border-[--lines]  h-full min-h-[80vh] rounded-2xl">
-			<div className="p-6 pb-0  space-y-2">
-				<h3 className="text-2xl md:text-3xl text-[--header] font-semibold">
-					Notification
-				</h3>
+		<main className="space-y-4 lg:space-y-5 text-[--text] border border-[--lines]  h-full rounded-2xl overflow-hidden">
+			<div className="account-p pb-0  space-y-1">
+				<h3 className="popup-header">Notification</h3>
 				<p>Manage your notification settings</p>
 			</div>
 			{isError && (
@@ -145,7 +143,7 @@ function Page({ authenticationToken }) {
 				</div>
 			)}
 			{isSuccess && data && (
-				<div className="space-y-8 ">
+				<div className="">
 					<ToggleCard
 						heading="Email Alerts"
 						text="Get notifications via your registered email."

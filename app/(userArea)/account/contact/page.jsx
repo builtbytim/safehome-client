@@ -15,13 +15,15 @@ import { RiFacebookFill } from "react-icons/ri";
 import { SlSocialLinkedin } from "react-icons/sl";
 
 const InfoCard = ({ icon, text }) => (
-	<div className="flex flex-row justify-start space-x-8  border border-[--lines] px-6 py-6  rounded md:rounded-xl items-center">
-		<div className="self-center">
-			<div className="border border-[--button] text-2xl md:text-3xl md:text-white` rounded-full w-[50px] h-[50px] md:w-[70px] md:h-[70px] flex items-center justify-center">
+	<div className="flex flex-row justify-start  border border-[--lines] p-4 md:p-6 gap-4 md:gap-6 rounded md:rounded-xl items-center">
+		<div className="self-start md:self-center w-[50px]">
+			<div className="border border-[--button] text-2xl md:text-2xl md:text-white` rounded-full w-[50px] h-[50px] flex items-center justify-center">
 				{icon}
 			</div>
 		</div>
-		<p className="self-center break-words  ">{text}</p>
+		<p className="self-start md:self-center overflow-ellipsis break-words">
+			{text}
+		</p>
 	</div>
 );
 
@@ -33,11 +35,9 @@ function Page() {
 		fileRef.current.click();
 	};
 	return (
-		<main className=" space-y-8 lg:space-y-8 text-[--text] border border-[--lines] p-5 h-full min-h-[80vh] rounded-2xl">
-			<div className="pb-3 space-y-2">
-				<h3 className="text-2xl md:text-3xl text-[--header] font-semibold">
-					Contact Us
-				</h3>
+		<main className=" space-y-8 lg:space-y-8 text-[--text] border border-[--lines] account-p h-full min-h-[80vh] rounded-2xl">
+			<div className="pb-0 space-y-1">
+				<h3 className="popup-header">Contact Us</h3>
 				<p>
 					You can reach us via our phone numbers, social media profile, email
 					etc.
@@ -62,7 +62,7 @@ function Page() {
 					}
 				/>
 			</div>
-			<div className="space-x-6  border border-[--lines] rounded md:rounded-xl px-7 py-9 text-center">
+			<div className="space-y-4  border border-[--lines] rounded md:rounded-xl p-7 text-center">
 				<div className="flex justify-center space-x-6 md:space-x-10 items-center">
 					<a href="https://x.com/safehomecoop?s=21">
 						<PiTwitterLogo className="text-[--text] text-2xl md:text-3xl" />
@@ -78,7 +78,7 @@ function Page() {
 						<PiWhatsappLogo className="text-[--text] text-2xl md:text-3xl" />
 					</a>
 				</div>
-				<p className="py-4">
+				<p className="">
 					Follow us on social media for updates, news, and more.
 				</p>
 			</div>

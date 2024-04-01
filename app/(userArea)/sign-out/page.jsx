@@ -4,7 +4,7 @@ import SecureRoute from "../../components/SecureRoute";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import cn from "classnames";
-import SafeHomeLogo from "../../../assets/images/logo_brand.png";
+import SafeHomeLogo from "../../../assets/images/logo_alt1.svg";
 import Spinner from "../../components/Spinner";
 import useSignOut from "../../utils/hooks/useSignOut";
 
@@ -31,20 +31,22 @@ function Page({ authenticatedUser, authenticationToken, signOut }) {
 
 	return (
 		<>
-			<div className=" min-h-screen p-3  xl:p-6">
+			<div className=" min-h-[80vh] p-3  xl:p-6 flex items-center justify-center">
 				<div className="flex flex-col space-y-12 justify-center items-center">
-					<Image
-						width={120}
-						height={100}
-						src={SafeHomeLogo}
-						priority
-						alt="SafeHome logo"
-						className=""
-					/>
+					<div>
+						<Image
+							width={120}
+							height={100}
+							src={SafeHomeLogo}
+							priority
+							alt="SafeHome logo"
+							className="object-contain w-full h-full"
+						/>
+					</div>
 
-					<div className="flex flex-col justify-center items-center  space-y-2 lg:space-y-8 border w-[90%] max-w-md   border-[#8d4000]/30  rounded-brand px-6 py-6 ">
+					<div className="flex flex-col justify-center items-center gap-2 border w-[90%] max-w-md border-[#ff9100]/30  rounded-brand account-p">
 						<div className="w-full">
-							<p className=" text-sm lg:text-xl  font-normal text-center  py-2  text-[--text]">
+							<p className="lg:text-xl  font-normal text-center py-2  text-[--text] leading-[115%]">
 								Are you sure you want to sign out of{" "}
 								<span className="font-medium">{authenticatedUser.email}</span>?
 							</p>

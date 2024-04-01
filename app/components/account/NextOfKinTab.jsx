@@ -173,7 +173,7 @@ const NextOfKinTab = ({ token }) => {
 							<Form className="w-full">
 								<div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-x-5 md:gap-y-7">
 									<div className="relative">
-										<p className="account-form-text">First Name</p>
+										<p className="form-text">First Name</p>
 										<Field
 											type="text"
 											name="firstName"
@@ -189,7 +189,7 @@ const NextOfKinTab = ({ token }) => {
 										/>
 									</div>
 									<div className="relative">
-										<p className="account-form-text">Last Name</p>
+										<p className="form-text">Last Name</p>
 										<Field
 											name="lastName"
 											type="text"
@@ -204,7 +204,7 @@ const NextOfKinTab = ({ token }) => {
 										/>
 									</div>
 									<div className="relative">
-										<p className="account-form-text">Relationship</p>
+										<p className="form-text">Relationship</p>
 										<GenericSelectField
 											disabled={disableForm}
 											defaultSelectedItem={
@@ -224,7 +224,7 @@ const NextOfKinTab = ({ token }) => {
 										/>
 									</div>
 									<div className="relative">
-										<p className="account-form-text">Email</p>
+										<p className="form-text">Email</p>
 										<Field
 											disabled={disableForm}
 											name="email"
@@ -240,7 +240,7 @@ const NextOfKinTab = ({ token }) => {
 										/>
 									</div>
 									<div className="relative">
-										<p className="account-form-text">Telephone</p>
+										<p className="form-text">Telephone</p>
 										<Field
 											name="phone"
 											type="text"
@@ -259,10 +259,10 @@ const NextOfKinTab = ({ token }) => {
 
 									{data && (
 										<div className="mt-4">
-											<p className="account-form-text"> Allow Edits </p>
+											<p className="form-text"> Allow Edits </p>
 											<div className="">
 												<SwitchField
-													color="#8d4000"
+													color="#ff9100"
 													defaultChecked={values.allowEdits}
 													handleChange={(v) => setFieldValue("allowEdits", v)}
 												/>

@@ -73,7 +73,7 @@ const AddBank = ({ closeFunc, token }) => {
 	}
 
 	return (
-		<div className="px-8 pb-5 space-y-5 text-[--text]">
+		<div className="popup-px pb-5 space-y-5 text-[--text]">
 			{getSupportedBanksLoading && (
 				<div className="flex h-[50vh] justify-center items-center  w-full">
 					<LoadingView />
@@ -164,17 +164,14 @@ const AddBank = ({ closeFunc, token }) => {
 										</div>
 									)}
 
-									<div className="space-y-4 w-full pt-8 pb-3">
+									<div className="space-y-3 w-full pt-8 pb-3">
 										<button
 											disabled={!isValid || addBankLoading}
-											className="btn-1 block w-full py-3 px-5 rounded text-white bg-[--button] border border-[--button]"
+											className="btn-1"
 										>
 											{addBankLoading ? <Spinner /> : "Add Bank"}
 										</button>
-										<button
-											className="btn-2 block w-full py-3 px-5 rounded text-[--header] border border-[--button]"
-											onClick={() => closeFunc()}
-										>
+										<button className="btn-2" onClick={() => closeFunc()}>
 											Close
 										</button>
 									</div>

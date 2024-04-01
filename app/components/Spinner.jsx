@@ -18,7 +18,7 @@ const Spinner = ({ size = "mini", invert = false }) => {
 						" h-6 w-6 border-2 ": mini,
 						" h-4 w-4 border-2 ": tiny,
 						" border-t-[--color-brand] border-r-[--color-brand] border-b-white border-l-white text-[--header] ": invert,
-						" text-white border-t-white  border-b-[--color-brand] border-l-[--color-brand] border-r-white": !invert,
+						" text-white border-t-white  border-b-[--highlight] border-l-[--highlight] border-r-white": !invert,
 					})
 				}
 			></div>

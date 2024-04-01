@@ -47,18 +47,16 @@ function Page({ signOut, authenticationToken, authenticatedUser }) {
 	}, [showPasswordTab, showSecurityQuestionTab, showSecurityQuestion]);
 
 	return (
-		<main className=" space-y-8 lg:space-y-8 text-[--text] border border-[--lines] pt-8  h-full min-h-[80vh] rounded-2xl">
-			<div className="px-6 md:pb-3 space-y-4">
-				<h3 className="text-2xl md:text-3xl text-[--header] font-semibold">
-					Security
-				</h3>
-				<p className="text-sm md:text-lg">
+		<main className="space-y-4 lg:space-y-5 text-[--text] border border-[--lines]  h-full rounded-2xl overflow-hidden">
+			<div className="account-p pb-0  space-y-1">
+				<h3 className="popup-header">Security</h3>
+				<p className="">
 					Enable any at least any security options of your choice to protect
 					your SafeHome account.
 				</p>
 			</div>
 
-			<div className="space-y-6">
+			<div className="">
 				<ToggleCard
 					heading="Email Verification"
 					text="Receive a six digit code sent to your registered Email Address to verify important account actions."

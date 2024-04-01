@@ -32,7 +32,7 @@ function MobileNavList() {
 											<div className="text-xl">
 												<Icon
 													fill={`${
-														pathname === item.link ? "#FF9100" : "#1a374d"
+														pathname === item.link ? "#FF9100" : "#1e0700"
 													}`}
 												/>
 											</div>
@@ -41,7 +41,7 @@ function MobileNavList() {
 										<div className="text-[--text-primary] text-sm font-medium">
 											<span
 												className={`transitioning  text-base ${
-													pathname === item.link && "text-[--text-brand-2]"
+													pathname === item.link && "text-[--button]"
 												}`}
 											>
 												{item.name}
