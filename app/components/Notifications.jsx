@@ -1,6 +1,7 @@
 "use client";
 
 import { BsX } from "react-icons/bs";
+import { BiX } from "react-icons/bi";
 import Overlay from "./Overlay";
 import { FcEmptyFilter } from "react-icons/fc";
 import { useUiStore } from "../utils/store";
@@ -121,20 +122,18 @@ export default function Notifications() {
 					"fixed  inset-y-0  bg-white mx-auto flex flex-col lg:justify-center items-center w-full lg:w-[80%] max-w-lg inset-x-0  md:right-auto md:left-0  z-40"
 				}
 			>
-				<div className="w-full h-full bg-white mt-4  px-4  space-y-4 relative">
-					<div className="  flex md:hidden  flex-row justify-end items-center w-full">
-						<BsX
-							role="button"
-							className="text-3xl text-[#ff9100] hover:text-[#ff9100]/80 transition-flow"
+				<div className="w-full h-full bg-white mt-4  popup-px  space-y-4 relative">
+					<div className="flex flex-row justify-end items-center py-6">
+						<div
 							onClick={closeSelf}
-						/>
+							className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
+						>
+							<BiX className="text-3xl" />
+						</div>
 					</div>
 
-					<div className="flex flex-row justify-between items-center ">
-						<p className="text-[--header] font-bold text-lg    capitalize">
-							{" "}
-							Notifications
-						</p>
+					<div className="flex flex-row justify-between items-end ">
+						<p className="popup-miniheader"> Notifications</p>
 
 						{isSuccess && data && data.numItems > 0 && readCount > 0 && (
 							<button
@@ -243,7 +242,7 @@ export default function Notifications() {
 
 									mutateClearAll();
 								}}
-								className="btn-2 text-[--color-brand-2] font-medium border-[--color-brand-2] hover:bg-[#1E0700]/10 capitalize"
+								className="btn-2"
 							>
 								{isLoadingClearAll ? "Clearing..." : "Clear all"}
 							</button>
