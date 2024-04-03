@@ -256,6 +256,7 @@ p, div, label{
     @apply btn-1 bg-[--button] hover:bg-[--button-hover];
   }
 
+  /* hover:bg-[#1E0700]/10 */
   .btn-2 {
     @apply hover:bg-[#ff9100]/10 disabled:pointer-events-none disabled:opacity-60  transitioning  bg-white border border-[--button] text-[--header] rounded-[4px] p-2 w-full;
   }
