@@ -15,19 +15,24 @@ function Page() {
 			<div className="text-base space-y-6   text-[--text]  font-normal  ">
 				<div className="space-y-2">
 					<p>
-						1. Complete your KYC (Know Your Customer) verification to be able to
+						1. The ₦5,000 cooperative membership registration fee is a once of
+						non refundable fee paid to become a registered member of the
+						SafeHome Cooperative
+					</p>
+					<p>
+						2. Complete your KYC (Know Your Customer) verification to be able to
 						save and invest on our platform.
 					</p>
 					<p>
-						2. Save at least 5,000 naira every month. This is a compulsory
+						3. Save at least 5,000 naira every month. This is a compulsory
 						monthly savings plan.
 					</p>{" "}
 					<p>
-						3. You will be charged a penalty fee if you break your goal savings
+						4. You will be charged a penalty fee if you break your goal savings
 						before the maturity date.
 					</p>{" "}
 					<p>
-						4. You will be charged a penalty fee, if you do not complete your
+						5. You will be charged a penalty fee, if you do not complete your
 						investment savings before the maturity date
 					</p>{" "}
 					<p className="pt-4">
