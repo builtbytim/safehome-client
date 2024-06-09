@@ -21,7 +21,7 @@ function Reviewing() {
 			<div>
 				<Image
 					src={KycSuccess}
-					alt="reviewing"
+					alt="reviewing kyc"
 					priority
 					width="300"
 					height="300"
