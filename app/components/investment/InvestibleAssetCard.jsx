@@ -41,7 +41,7 @@ const InvestibleAssetCard = ({ investibleAsset, openInfo }) => {
       <div className="px-4 pt-2 pb-8 md:px-4 xl:px-6 col-span-3 md:col-span-3 space-y-1">
         <h2 className="capitalize font-semibold text-base md:text-lg text-left truncate space-x-4 flex flex-row justify-start items-center">
           <span>{assetName}</span>
-          <span className="text-xs lowercase rounded-2xl text-black px-1 bg-gray-300">
+          <span className="text-xs font-normal lowercase rounded-2xl text-black p-1 bg-gray-300">
             {ownerClub.split("_").join(" ")}
           </span>
         </h2>
