@@ -99,11 +99,7 @@ export const navItems = [
     icon: AccountSettingsSVG,
     link: "/account/profile",
   },
-  // {
-  //   name: "Update Profile",
-  //   icon: UpdateProfileSVG,
-  //   link: "/account/update",
-  // },
+
   {
     name: "Notifications",
     icon: NotificationSVG,
