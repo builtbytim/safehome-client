@@ -82,18 +82,24 @@ function CreateGoalManager({ showForm1, toggleForm1, token }) {
   function handleSubmitForm2(values) {
     const data = { ...formData, ...values };
 
-    mutate({
+    const body = {
       goalName: data.goalTitle,
       goalAmount: data.goalAmount,
       goalImageUrl: data.goalImageUrl,
-      goalDescription: data.goalPurpose,
+      // goalDescription: data.goalPurpose,
       fundSource: data.savingsPreference,
       interval: data.preferredInterval,
       paymentMode: data.paymentMode,
       startDate: new Date(data.startDate).getTime() / 1000,
       endDate: new Date(data.withdrawalDate).getTime() / 1000,
       amountToSaveAtInterval: data.amountToSaveOnIntervalBasis,
-    });
+    };
+
+    if (values.goalPurpose) {
+      body.goalDescription = values.goalPurpose;
+    }
+
+    mutate(body);
   }
 
   return (

@@ -11,295 +11,295 @@ import * as Yup from "yup";
 import { NumericFormat } from "react-number-format";
 import Spinner from "../../Spinner";
 import {
-	timeIntervals as intervals,
-	timeIntervalsToSeconds,
+  timeIntervals as intervals,
+  timeIntervalsToSeconds,
 } from "../../../utils/constants";
 import { AmountPerIntervalField } from "../AmountPerIntervalField";
 
 function GoalCreation2({
-	show = false,
-	toggleShow,
-	goBack,
-	formData,
-	handleSubmit,
-	isLoading,
+  show = false,
+  toggleShow,
+  goBack,
+  formData,
+  handleSubmit,
+  isLoading,
 }) {
-	const validationSchema = Yup.object().shape({
-		preferredInterval: Yup.string()
-			.required("Required")
-			.oneOf(
-				intervals.map((interval) => interval.value),
-				"Invalid interval"
-			),
+  const validationSchema = Yup.object().shape({
+    preferredInterval: Yup.string()
+      .required("Required")
+      .oneOf(
+        intervals.map((interval) => interval.value),
+        "Invalid interval"
+      ),
 
-		amountToSaveOnIntervalBasis: Yup.number()
-			.required("Required")
-			.min(1, "Amount must be greater than 0")
-			.typeError("Invalid amount")
-			.test(
-				"must-be-less-than-goal-amount",
-				"Amount must be less than goal amount",
-				(value) => {
-					const goalAmount = formData.goalAmount;
-					return value < goalAmount;
-				}
-			),
+    amountToSaveOnIntervalBasis: Yup.number()
+      .required("Required")
+      .min(1, "Amount must be greater than 0")
+      .typeError("Invalid amount")
+      .test(
+        "must-be-less-than-goal-amount",
+        "Amount must be less than goal amount",
+        (value) => {
+          const goalAmount = formData.goalAmount;
+          return value < goalAmount;
+        }
+      ),
 
-		startDate: Yup.date()
-			.required("Required")
-			.test("is-today-or-later", "Must be today or later", (value) => {
-				const now = new Date();
-				now.setHours(0, 0, 0, 0);
-				const startDate = new Date(value);
+    startDate: Yup.date()
+      .required("Required")
+      .test("is-today-or-later", "Must be today or later", (value) => {
+        const now = new Date(Date.now());
+        now.setHours(0, 0, 0, 0);
+        const startDate = new Date(value);
 
-				return startDate.getTime() >= now.getTime();
-			}),
+        return startDate.getTime() >= now.getTime();
+      }),
 
-		withdrawalDate: Yup.date()
-			.required("Required")
-			.test("is-in-future", "Must be in the future", (value) => {
-				const now = new Date();
+    withdrawalDate: Yup.date()
+      .required("Required")
+      .test("is-in-future", "Must be in the future", (value) => {
+        const now = new Date(Date.now());
 
-				const withdrawalDate = new Date(value);
+        const withdrawalDate = new Date(value);
 
-				return withdrawalDate.getTime() > now.getTime();
-			})
-			.test(
-				"is-greater-than-start-date-by-at-least-seven-days",
-				"Must be later than the start date by at least 7 days",
-				(value, context) => {
-					const startDate = context.parent.startDate;
-					const withdrawalDate = value;
+        return withdrawalDate.getTime() > now.getTime();
+      })
+      .test(
+        "is-greater-than-start-date-by-at-least-seven-days",
+        "Must be later than the start date by at least 7 days",
+        (value, context) => {
+          const startDate = context.parent.startDate;
+          const withdrawalDate = value;
 
-					if (!startDate || !withdrawalDate) return true;
+          if (!startDate || !withdrawalDate) return true;
 
-					const startDateObj = new Date(startDate);
-					const withdrawalDateObj = new Date(withdrawalDate);
+          const startDateObj = new Date(startDate);
+          const withdrawalDateObj = new Date(withdrawalDate);
 
-					withdrawalDateObj.setHours(0, 0, 0, 0);
-					startDateObj.setHours(0, 0, 0, 0);
+          withdrawalDateObj.setHours(0, 0, 0, 0);
+          startDateObj.setHours(0, 0, 0, 0);
 
-					const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
+          const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
 
-					return (
-						withdrawalDateObj.getTime() - startDateObj.getTime() >= SEVEN_DAYS
-					);
-				}
-			)
-			.test(
-				"time-diff-is-at-least-two-cycles-of-preferred-interval",
-				"Duration between start and withdrawal dates be at least 2 cycles of preferred interval ( e.g. 2 weeks for a preferred interval of weekly ) ",
-				(value, context) => {
-					const startDate = context.parent.startDate;
-					const withdrawalDate = value;
+          return (
+            withdrawalDateObj.getTime() - startDateObj.getTime() >= SEVEN_DAYS
+          );
+        }
+      )
+      .test(
+        "time-diff-is-at-least-two-cycles-of-preferred-interval",
+        "Duration between start and withdrawal dates be at least 2 cycles of preferred interval ( e.g. 2 weeks for a preferred interval of weekly ) ",
+        (value, context) => {
+          const startDate = context.parent.startDate;
+          const withdrawalDate = value;
 
-					if (
-						!startDate ||
-						!withdrawalDate ||
-						!context.parent.preferredInterval
-					)
-						return true;
+          if (
+            !startDate ||
+            !withdrawalDate ||
+            !context.parent.preferredInterval
+          )
+            return true;
 
-					const startDateObj = new Date(startDate);
-					const withdrawalDateObj = new Date(withdrawalDate);
+          const startDateObj = new Date(startDate);
+          const withdrawalDateObj = new Date(withdrawalDate);
 
-					const timeDiff = withdrawalDateObj.getTime() - startDateObj.getTime();
+          const timeDiff = withdrawalDateObj.getTime() - startDateObj.getTime();
 
-					const preferredInterval = context.parent.preferredInterval;
+          const preferredInterval = context.parent.preferredInterval;
 
-					const preferredIntervalInSeconds =
-						timeIntervalsToSeconds[preferredInterval];
+          const preferredIntervalInSeconds =
+            timeIntervalsToSeconds[preferredInterval];
 
-					return timeDiff >= 2 * preferredIntervalInSeconds * 1000;
-				}
-			),
+          return timeDiff >= 2 * preferredIntervalInSeconds * 1000;
+        }
+      ),
 
-		acceptTerms: Yup.boolean().isTrue(
-			"You must accept the terms and conditions to continue"
-		),
-	});
-	const ref = useRef(null);
+    acceptTerms: Yup.boolean().isTrue(
+      "You must accept the terms and conditions to continue"
+    ),
+  });
+  const ref = useRef(null);
 
-	useOutsideClickDetector(ref, () => {
-		if (show) toggleShow();
-	});
+  useOutsideClickDetector(ref, () => {
+    if (show) toggleShow();
+  });
 
-	function handleFormSubmit(values) {
-		handleSubmit(values);
-	}
+  function handleFormSubmit(values) {
+    handleSubmit(values);
+  }
 
-	return (
-		<Overlay2 z={3}>
-			<section
-				ref={ref}
-				className={
-					"w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40 popup-px py-6"
-				}
-			>
-				<div className="flex flex-row justify-end items-center">
-					<div
-						onClick={toggleShow}
-						className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
-					>
-						<BiX className="text-[--text] text-3xl" />
-					</div>
-				</div>
+  return (
+    <Overlay2 z={3}>
+      <section
+        ref={ref}
+        className={
+          "w-full md:max-w-[493px] bg-white md:h-[100vh] h-[100vh] z-40 popup-px py-6"
+        }
+      >
+        <div className="flex flex-row justify-end items-center">
+          <div
+            onClick={toggleShow}
+            className="border rounded-full p-1 border-[--lines] hover:cursor-pointer hover:bg-[--b1] transitioning"
+          >
+            <BiX className="text-[--text] text-3xl" />
+          </div>
+        </div>
 
-				<div className="space-y-4 mt-6 max-h-[85vh] md:max-h-[85vh] overflow-y-scroll no-scrollbar pb-16">
-					<h1 className="popup-header">Final Setup Stage</h1>
-					<p className="form-label">Finalize your goal settings</p>
+        <div className="space-y-4 mt-6 max-h-[85vh] md:max-h-[85vh] overflow-y-scroll no-scrollbar pb-16">
+          <h1 className="popup-header">Final Setup Stage</h1>
+          <p className="form-label">Finalize your goal settings</p>
 
-					{/* Form now  */}
+          {/* Form now  */}
 
-					<div>
-						<Formik
-							validationSchema={validationSchema}
-							initialValues={{
-								preferredInterval:
-									formData.preferredInterval || intervals[0].value,
+          <div>
+            <Formik
+              validationSchema={validationSchema}
+              initialValues={{
+                preferredInterval:
+                  formData.preferredInterval || intervals[0].value,
 
-								amountToSaveOnIntervalBasis:
-									formData.amountToSaveOnIntervalBasis || "",
+                amountToSaveOnIntervalBasis:
+                  formData.amountToSaveOnIntervalBasis || "",
 
-								startDate:
-									formData.startDate || new Date().toISOString().split("T")[0],
-								withdrawalDate:
-									formData.withdrawalDate ||
-									new Date().toISOString().split("T")[0],
-								acceptTerms: formData.acceptTerms || false,
-							}}
-							initialTouched={{
-								acceptTerms: true,
-								preferredInterval: true,
-								startDate: true,
-								withdrawalDate: true,
-							}}
-							onSubmit={handleFormSubmit}
-						>
-							{({ isValid, setFieldValue, values, errors }) => {
-								return (
-									<Form className="space-y-6">
-										<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-											<label htmlFor="preferredInterval" className="form-label">
-												Preferred Interval
-											</label>
+                startDate:
+                  formData.startDate || new Date().toISOString().split("T")[0],
+                withdrawalDate:
+                  formData.withdrawalDate ||
+                  new Date().toISOString().split("T")[0],
+                acceptTerms: formData.acceptTerms || false,
+              }}
+              initialTouched={{
+                acceptTerms: true,
+                preferredInterval: true,
+                startDate: true,
+                withdrawalDate: true,
+              }}
+              onSubmit={handleFormSubmit}
+            >
+              {({ isValid, setFieldValue, values, errors }) => {
+                return (
+                  <Form className="space-y-6">
+                    <div className="w-full relative flex flex-col justify-center items-start space-y-2">
+                      <label htmlFor="preferredInterval" className="form-label">
+                        Preferred Interval
+                      </label>
 
-											<GenericSelectFieldVariant1
-												defaultSelectedItem={intervals[0]}
-												handleChange={({ selectedItem }) => {
-													setFieldValue(
-														"preferredInterval",
-														selectedItem.value,
-														true
-													);
-												}}
-												items={intervals}
-											/>
+                      <GenericSelectFieldVariant1
+                        defaultSelectedItem={intervals[0]}
+                        handleChange={({ selectedItem }) => {
+                          setFieldValue(
+                            "preferredInterval",
+                            selectedItem.value,
+                            true
+                          );
+                        }}
+                        items={intervals}
+                      />
 
-											<ErrorMessage
-												name="preferredInterval"
-												component="div"
-												className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
-											/>
-										</div>
+                      <ErrorMessage
+                        name="preferredInterval"
+                        component="div"
+                        className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
+                      />
+                    </div>
 
-										<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-											<label htmlFor="startDate" className="form-label">
-												Set Start Date
-											</label>
+                    <div className="w-full relative flex flex-col justify-center items-start space-y-2">
+                      <label htmlFor="startDate" className="form-label">
+                        Set Start Date
+                      </label>
 
-											<Field
-												name="startDate"
-												type="date"
-												className="field-1"
-												placeholder=""
-											/>
+                      <Field
+                        name="startDate"
+                        type="date"
+                        className="field-1"
+                        placeholder=""
+                      />
 
-											<ErrorMessage
-												name="startDate"
-												component="div"
-												className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
-											/>
-										</div>
+                      <ErrorMessage
+                        name="startDate"
+                        component="div"
+                        className="absolute -bottom-[25%] left-0 text-[--text-danger] text-xs text-left"
+                      />
+                    </div>
 
-										<div className="w-full relative flex flex-col justify-center items-start space-y-2">
-											<label htmlFor="withdrawalDate" className="form-label">
-												Set Withdrawal Date
-											</label>
+                    <div className="w-full relative flex flex-col justify-center items-start space-y-2">
+                      <label htmlFor="withdrawalDate" className="form-label">
+                        Set Withdrawal Date
+                      </label>
 
-											<Field
-												name="withdrawalDate"
-												type="date"
-												className="field-1"
-												placeholder=""
-											/>
+                      <Field
+                        name="withdrawalDate"
+                        type="date"
+                        className="field-1"
+                        placeholder=""
+                      />
 
-											<ErrorMessage
-												name="withdrawalDate"
-												component="div"
-												className="  left-0 text-[--text-danger] text-xs text-left "
-											/>
-										</div>
+                      <ErrorMessage
+                        name="withdrawalDate"
+                        component="div"
+                        className="  left-0 text-[--text-danger] text-xs text-left "
+                      />
+                    </div>
 
-										<AmountPerIntervalField
-											preferredInterval={values.preferredInterval}
-											startDate={values.startDate}
-											withdrawalDate={values.withdrawalDate}
-											errors={errors}
-											goalAmount={formData.goalAmount}
-										/>
+                    <AmountPerIntervalField
+                      preferredInterval={values.preferredInterval}
+                      startDate={values.startDate}
+                      withdrawalDate={values.withdrawalDate}
+                      errors={errors}
+                      goalAmount={formData.goalAmount}
+                    />
 
-										<div className="w-full pt-2 relative flex flex-col justify-center items-start space-y-2 ">
-											<SwitchField
-												handleChange={(value) => {
-													setFieldValue("acceptTerms", value, true);
-												}}
-											/>
-											<label htmlFor="acceptTerms" className="form-label">
-												I acknowledge and agree that in the event I do not
-												achieve the Goal amount of{" "}
-												<NumericFormat
-													value={formData.goalAmount}
-													prefix="₦ "
-													displayType={"text"}
-													thousandSeparator={true}
-												/>{" "}
-												by the set withdrawal date, I will forfeit the interest
-												accrued on this goal savings. Additionally, I understand
-												that breaking the goal before the withdrawal date will
-												result in the loss of all accrued interest and I will be
-												responsible for bearing the payment gateway charge for
-												processing my deposits into this goal.
-											</label>
+                    <div className="w-full pt-2 relative flex flex-col justify-center items-start space-y-2 ">
+                      <SwitchField
+                        handleChange={(value) => {
+                          setFieldValue("acceptTerms", value, true);
+                        }}
+                      />
+                      <label htmlFor="acceptTerms" className="form-label">
+                        I acknowledge and agree that in the event I do not
+                        achieve the Goal amount of{" "}
+                        <NumericFormat
+                          value={formData.goalAmount}
+                          prefix="₦ "
+                          displayType={"text"}
+                          thousandSeparator={true}
+                        />{" "}
+                        by the set withdrawal date, I will forfeit the interest
+                        accrued on this goal savings. Additionally, I understand
+                        that breaking the goal before the withdrawal date will
+                        result in the loss of all accrued interest and I will be
+                        responsible for bearing the payment gateway charge for
+                        processing my deposits into this goal.
+                      </label>
 
-											<ErrorMessage
-												name="acceptTerms"
-												component="div"
-												className=" left-0 text-[--text-danger] text-xs text-left"
-											/>
-										</div>
+                      <ErrorMessage
+                        name="acceptTerms"
+                        component="div"
+                        className=" left-0 text-[--text-danger] text-xs text-left"
+                      />
+                    </div>
 
-										<div className="pt-4 flex flex-col justify-center items-center space-y-4">
-											<button
-												disabled={!isValid || isLoading}
-												type="submit"
-												className="btn-1"
-											>
-												{isLoading ? <Spinner /> : "Create Goal"}
-											</button>
-											<button onClick={goBack} className="btn-2">
-												Back
-											</button>
-										</div>
-									</Form>
-								);
-							}}
-						</Formik>
-					</div>
-				</div>
-			</section>
-		</Overlay2>
-	);
+                    <div className="pt-4 flex flex-col justify-center items-center space-y-4">
+                      <button
+                        disabled={!isValid || isLoading}
+                        type="submit"
+                        className="btn-1"
+                      >
+                        {isLoading ? <Spinner /> : "Create Goal"}
+                      </button>
+                      <button onClick={goBack} className="btn-2">
+                        Back
+                      </button>
+                    </div>
+                  </Form>
+                );
+              }}
+            </Formik>
+          </div>
+        </div>
+      </section>
+    </Overlay2>
+  );
 }
 
 export default GoalCreation2;

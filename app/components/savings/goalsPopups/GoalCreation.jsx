@@ -28,7 +28,7 @@ const validationSchema = Yup.object().shape({
 		.min(3, "Too short")
 		.max(64, "Too long"),
 	goalPurpose: Yup.string()
-		.required("Required")
+		// .required("Required")
 		.min(8, "Too short")
 		.max(256, "Too long"),
 	goalAmount: Yup.number()
