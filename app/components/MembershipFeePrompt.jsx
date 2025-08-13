@@ -50,6 +50,8 @@ export default function MembershipFeePrompt() {
 		}
 	}
 
+	return null;
+
 	if (user && !user.hasPaidMembershipFee && !payMembershipFeeSuccess) {
 		return (
 			<Overlay z={4}>
@@ -62,26 +64,18 @@ export default function MembershipFeePrompt() {
 
 					{payMembershipFeeError && (
 						<div className="mt-2">
-							<p className="text-sm text-[--text-danger]">
-								{payMembershipFeeErrorData?.message}
-							</p>
+							<p className="text-sm text-[--text-danger]">{payMembershipFeeErrorData?.message}</p>
 						</div>
 					)}
 
 					<p className="text-[--text] mt-3  text-sm md:text-base first-letter:uppercase">
-						Hello there! We are glad you signed up for SafeHome. However, you
-						must pay a one-time membership fee of{" "}
-						<span className="font-semibold">₦5,000</span> to complete your
-						membership process. You will be able to use all of SafeHome&apos;s
-						features after you make the payment.
+						Hello there! We are glad you signed up for SafeHome. However, you must pay a one-time membership fee of{" "}
+						<span className="font-semibold">₦5,000</span> to complete your membership process. You will be able to use
+						all of SafeHome&apos;s features after you make the payment.
 					</p>
 
 					<div className="mt-4 flex flex-row justify-end items-center w-full">
-						<button
-							onClick={handlePayClick}
-							disabled={payMembershipFeeLoading}
-							className="btn-1 "
-						>
+						<button onClick={handlePayClick} disabled={payMembershipFeeLoading} className="btn-1 ">
 							{payMembershipFeeLoading ? <Spinner /> : "Pay Now"}
 						</button>
 					</div>
