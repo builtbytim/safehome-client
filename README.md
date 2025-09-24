@@ -3,7 +3,9 @@
 
 SafeHome aims to provide a secure environment for your home, ensuring your peace of mind and safety.
 
-## Technologies Used
+
+
+## Technologies 
 
 The following technologies and libraries/frameworks are used in this project:
 
