@@ -144,7 +144,7 @@ const DebitCardTab = ({ token }) => {
       {getDebitCardsSuccess && getDebitCardsData.numItems === 0 && (
         <div className="flex flex-col justify-center items-center py-16 space-y-4">
           <p className="text-[#C4C4C4] text-sm lg:text-lg">
-            You have no debit cards linked to your SafeHome
+            You have no debit cards linked to your Propvest
           </p>
         </div>
       )}

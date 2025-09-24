@@ -3,7 +3,7 @@ import config from "../utils/config";
 import BottomStickyNav from "../components/layout/stickynavs/BottomStickyNav";
 
 export const metadata = {
-	name: "SafeHome",
+	name: "Propvest",
 	description: config.app.description,
 };
 

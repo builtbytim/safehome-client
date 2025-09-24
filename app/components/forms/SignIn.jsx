@@ -138,7 +138,7 @@ function SignIn() {
 						</legend>
 						<p className="text-center text-xs text-[--highlight]">
 							{" "}
-							Securely log in to your SafeHome{" "}
+							Securely log in to your Propvest{" "}
 						</p>
 					</div>
 

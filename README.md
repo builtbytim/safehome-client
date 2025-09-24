@@ -1,7 +1,7 @@
 
 ## Introduction
 
-SafeHome aims to provide a secure environment for your home, ensuring your peace of mind and safety.
+Propvest aims to provide a secure environment for your home, ensuring your peace of mind and safety.
 
 
 
@@ -28,7 +28,7 @@ Before you begin, ensure you have the following prerequisites:
 
 ### Installation
 
-To get started with SafeHome, follow these steps:
+To get started with Propvest, follow these steps:
 
 1. Clone the repository:
    
@@ -38,7 +38,7 @@ To get started with SafeHome, follow these steps:
 
 ## Usage
 
-To use SafeHome, follow these steps:
+To use Propvest, follow these steps:
 
 1. Start the development server:
 
@@ -54,11 +54,11 @@ The project structure is organized as follows:
 
 ## Data Fetching
 
-Data fetching in SafeHome is handled using React Query, ensuring efficient and reliable data retrieval.
+Data fetching in Propvest is handled using React Query, ensuring efficient and reliable data retrieval.
 
 ## State Management
 
-SafeHome utilizes Zustand for state management.
+Propvest utilizes Zustand for state management.
 
 
 

@@ -22,7 +22,7 @@ const CashoutInvestment = ({
 		setNotify({
 			show: true,
 			content:
-				"Disbursement will be processed automatically into your SafeHome wallet soon.",
+				"Disbursement will be processed automatically into your Propvest wallet soon.",
 		});
 	}
 

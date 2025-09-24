@@ -7,7 +7,7 @@ function Page() {
 			<div className="pb-0 space-y-1">
 				<h3 className="popup-header">Guidelines</h3>
 				<p>
-					You must adhere to these rules in order to use SafeHome&apos;s
+					You must adhere to these rules in order to use Propvest&apos;s
 					services:
 				</p>
 			</div>
@@ -17,7 +17,7 @@ function Page() {
 					<p>
 						1. The ₦5,000 cooperative membership registration fee is a once of
 						non refundable fee paid to become a registered member of the
-						SafeHome Cooperative
+						Propvest Cooperative
 					</p>
 					<p>
 						2. Complete your KYC (Know Your Customer) verification to be able to

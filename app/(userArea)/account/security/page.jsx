@@ -52,7 +52,7 @@ function Page({ signOut, authenticationToken, authenticatedUser }) {
 				<h3 className="popup-header">Security</h3>
 				<p className="">
 					Enable any at least any security options of your choice to protect
-					your SafeHome account.
+					your Propvest account.
 				</p>
 			</div>
 
@@ -71,13 +71,13 @@ function Page({ signOut, authenticationToken, authenticatedUser }) {
 				/>
 				<ToggleCard
 					heading="Change Password"
-					text="Change the password to your SafeHome account"
+					text="Change the password to your Propvest account"
 					recommended="no"
 					handleClick={() => setShowPasswordTab(true)}
 				/>
 				<ToggleCard
 					heading="Security Question"
-					text="Set a security Question to provide more security for your SafeHome account."
+					text="Set a security Question to provide more security for your Propvest account."
 					recommended="no"
 					handleClick={() => setShowSecurityQuestionTab(true)}
 				/>

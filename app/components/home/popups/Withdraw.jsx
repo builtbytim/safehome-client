@@ -150,7 +150,7 @@ const Withdraw = ({ token, closeSelf }) => {
 				getBankAccountsData.length == 0 && (
 					<div className="flex h-[50vh] justify-center items-center  w-full">
 						<ErrorMessageView
-							message="You have no bank account linked to your SafeHome. Please add a bank account"
+							message="You have no bank account linked to your Propvest. Please add a bank account"
 							refetch={navigateToBankAccount}
 							buttonText="Add Bank Account"
 						/>

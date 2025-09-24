@@ -69,9 +69,9 @@ export default function MembershipFeePrompt() {
 					)}
 
 					<p className="text-[--text] mt-3  text-sm md:text-base first-letter:uppercase">
-						Hello there! We are glad you signed up for SafeHome. However, you must pay a one-time membership fee of{" "}
+						Hello there! We are glad you signed up for Propvest. However, you must pay a one-time membership fee of{" "}
 						<span className="font-semibold">₦5,000</span> to complete your membership process. You will be able to use
-						all of SafeHome&apos;s features after you make the payment.
+						all of Propvest&apos;s features after you make the payment.
 					</p>
 
 					<div className="mt-4 flex flex-row justify-end items-center w-full">

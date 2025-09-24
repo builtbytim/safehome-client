@@ -13,11 +13,11 @@ const config = {
     affiliate: AFFILIATE_APP_URL,
   },
   app: {
-    name: process.env.appName || "SafeHome",
+    name: process.env.appName || "Propvest",
     description:
-      "SafeHome estates is a real estate company that provides affordable housing for all",
+      "Propvest estates is a real estate company that provides affordable housing for all",
     keywords:
-      "real estate, housing, affordable housing, SafeHome estates, SafeHome",
+      "real estate, housing, affordable housing, Propvest estates, Propvest",
   },
 
   apiPaths: {

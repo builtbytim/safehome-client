@@ -151,7 +151,7 @@ function SignUp() {
 							</legend>
 							<p className="text-center text-xs text-[--highlight]">
 								{" "}
-								Securely sign up for SafeHome{" "}
+								Securely sign up for Propvest{" "}
 							</p>
 						</div>
 

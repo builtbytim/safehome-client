@@ -120,9 +120,9 @@ function CreateSafelockPreview({
 							color="#ff9100"
 						/>
 						<p className="text-[--text] font-medium text-left">
-							I hereby acknowledge and authorize SafeHome to invest my funds
+							I hereby acknowledge and authorize Propvest to invest my funds
 							into the designated property. This authorization signifies my
-							approval for SafeHome to proceed with the investment on my behalf,
+							approval for Propvest to proceed with the investment on my behalf,
 							adhering to the agreed terms and conditions.
 						</p>
 

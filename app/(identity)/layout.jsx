@@ -2,7 +2,7 @@ import CancelButton from "../components/CancelButton";
 import config from "../utils/config";
 
 export const metadata = {
-  name: "Verification | SafeHome",
+  name: "Verification | Propvest",
   description: config.app.description,
 };
 
