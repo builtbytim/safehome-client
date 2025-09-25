@@ -17,22 +17,22 @@ const items = [
 		icon: HomeSVG,
 		link: "/",
 	},
-	{
-		name: "Savings",
-		icon: SavingsSVG,
-		link: "/savings",
-	},
+	// {
+	// 	name: "Savings",
+	// 	icon: SavingsSVG,
+	// 	link: "/savings",
+	// },
 	{
 		name: "Investment",
 		icon: InvestmentSVG,
 		link: "/investments",
 	},
 
-	{
-		name: "Loan",
-		icon: LoanSVG,
-		link: "/loans",
-	},
+	// {
+	// 	name: "Loan",
+	// 	icon: LoanSVG,
+	// 	link: "/loans",
+	// },
 	{
 		name: "Account",
 		icon: AccountSVG,

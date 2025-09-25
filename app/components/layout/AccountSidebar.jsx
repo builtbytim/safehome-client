@@ -54,7 +54,7 @@ function AccountSidebar() {
 				})}
 
 				<div className="  self-start px-4  bottom-[5vh] flex flex-col justify-start items-start space-y-4  ">
-					<Link href="/account/guidelines" className="py-2 block  w-full">
+					{/* <Link href="/account/guidelines" className="py-2 block  w-full">
 						<div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
 							<RiGuideLine
 								className={`transitioning  text-xl ${
@@ -70,8 +70,8 @@ function AccountSidebar() {
 								Guidelines{" "}
 							</span>
 						</div>
-					</Link>
-					<a
+					</Link> */}
+					{/* <a
 						target="_blank"
 						href={config.urlMaps.affiliate}
 						className="py-2 block w-full"
@@ -91,7 +91,7 @@ function AccountSidebar() {
 								Partners{" "}
 							</span>
 						</div>
-					</a>
+					</a> */}
 
 					<Link href="/sign-out" as="/sign-out" className="py-2 block w-full">
 						<div className=" flex flex-row space-x-4 justify-start items-center hover:cursor-pointer">
