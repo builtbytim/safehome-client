@@ -121,11 +121,11 @@ export const navItems = [
     icon: ReferEarnSVG,
     link: "/account/refer",
   },
-  {
-    name: "Contact Us",
-    icon: ContactSVG,
-    link: "/account/contact",
-  },
+  // {
+  //   name: "Contact Us",
+  //   icon: ContactSVG,
+  //   link: "/account/contact",
+  // },
 ];
 
 export const kycModesOfIdentification = [
